@@ -73,8 +73,9 @@ _________________________________________________________ -->
                             </div>
 
                             <div class="login">
-                                <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in</span></a>
+                                <a sec:authorize="isAnonymous()" href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in</span></a>
                                 <a sec:authorize="isAnonymous()" th:href="@{/login}"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Sign up</span></a>
+                                <a sec:authorize="isAuthenticated()" th:href="@{/logout}"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Log out</span></a>
                             </div>
 
                         </div>
@@ -424,6 +425,7 @@ _________________________________________________________ -->
                         <h4 class="modal-title" id="Login">Customer login</h4>
                     </div>
                     <div class="modal-body">
+                    	<div th:if="${param.error != null}" style="color:red;">Incorrect username or password.</div>
                         <form th:action="@{/login}" method="post">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="name" required="required" id="username" name="username">

@@ -508,9 +508,9 @@ _________________________________________________________ -->
 
                             <hr>
 							<div th:if="${param.error != null}" style="color:red;">Incorrect username or password.</div>
-                            <form action="customer-orders.html" method="post">
+                            <form th:action="@{/login}" method="post">
                                 <div class="form-group">
-                                    <label for="email">Name</label>
+                                    <label for="username">Name</label>
                                      <input required="required" type="text" class="form-control"
 												id="username" name="username" />
                                 </div>

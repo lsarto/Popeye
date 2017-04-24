@@ -53,7 +53,7 @@ public class HomeController {
 	@RequestMapping("/login")
 	public String login(Model model) {
 		model.addAttribute("classActiveLogin", true);
-		return "home";
+		return "customer-register";
 	}
 
 	/*@RequestMapping("/forgetPassword")
@@ -144,7 +144,7 @@ public class HomeController {
 		
 		model.addAttribute("emailSent", "true");
 		
-		return "customer-register";
+		return "index5";
 	}
 	
 
