@@ -33,15 +33,15 @@
 <![endif]-->
 
     <!-- Favicon and apple touch icons-->
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="57x57" href="img/apple-touch-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="img/apple-touch-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="img/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="img/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="img/apple-touch-icon-152x152.png" />
+    <link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="image/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="image/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="image/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="image/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="image/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="image/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="image/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="image/apple-touch-icon-152x152.png" />
     <!-- owl carousel css -->
 
     <link href="css/owl.carousel.css" rel="stylesheet">
@@ -73,8 +73,7 @@ _________________________________________________________ -->
                             </div>
 
                             <div class="login">
-                                <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in</span></a>
-                                <a href="customer-register.html"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Sign up</span></a>
+                                <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Log out</span></a>
                             </div>
 
                         </div>
@@ -95,8 +94,8 @@ _________________________________________________________ -->
                         <div class="navbar-header">
 
                             <a class="navbar-brand home" href="index.html">
-                                <img src="img/logo.png" alt="Universal logo" class="hidden-xs hidden-sm">
-                                <img src="img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Universal - go to homepage</span>
+                                <img src="image/logo.png" alt="Universal logo" class="hidden-xs hidden-sm">
+                                <img src="image/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Universal - go to homepage</span>
                             </a>
                             <div class="navbar-buttons">
                                 <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
@@ -132,7 +131,7 @@ _________________________________________________________ -->
                                             <div class="yamm-content">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <img src="img/template-easy-customize.png" class="img-responsive hidden-xs" alt="">
+                                                        <img src="image/template-easy-customize.png" class="img-responsive hidden-xs" alt="">
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <h5>Shortcodes</h5>
@@ -178,7 +177,7 @@ _________________________________________________________ -->
                                             <div class="yamm-content">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <img src="img/template-homepage.png" class="img-responsive hidden-xs" alt="">
+                                                        <img src="image/template-homepage.png" class="img-responsive hidden-xs" alt="">
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <h5>Portfolio</h5>
@@ -424,12 +423,12 @@ _________________________________________________________ -->
                         <h4 class="modal-title" id="Login">Customer login</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="customer-orders.html" method="post">
+                        <form th:action="@{/login}" method="post">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="email_modal" placeholder="email">
+                                <input type="text" class="form-control" placeholder="name" required="required" id="username" name="username">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="password_modal" placeholder="password">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="password">
                             </div>
 
                             <p class="text-center">
@@ -448,216 +447,492 @@ _________________________________________________________ -->
 
         <!-- *** LOGIN MODAL END *** -->
 
-        <section class="no-mb">
-            <!-- *** JUMBOTRON ***
+        <section>
+            <!-- *** HOMEPAGE CAROUSEL ***
  _________________________________________________________ -->
 
-            <div class="jumbotron">
+            <div class="home-carousel">
 
                 <div class="dark-mask"></div>
 
                 <div class="container">
-                    <div class="row mb-small">
-                        <div class="col-sm-12 text-center">
-                            <h1>Universal is great</h1>
-                            <h2>Last week more than 100 companies signed up to help them in their projects.</h2>
+                    <div class="homepage owl-carousel">
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-sm-5 right">
+                                    <p>
+                                        <img src="image/logo.png" alt="">
+                                    </p>
+                                    <h1>Multipurpose responsive theme</h1>
+                                    <p>Business. Corporate. Agency.
+                                        <br />Portfolio. Blog. E-commerce.</p>
+                                </div>
+                                <div class="col-sm-7">
+                                    <img class="img-responsive" src="image/template-homepage.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+
+                                <div class="col-sm-7 text-center">
+                                    <img class="img-responsive" src="image/template-mac.png" alt="">
+                                </div>
+
+                                <div class="col-sm-5">
+                                    <h2>46 HTML pages full of features</h2>
+                                    <ul class="list-style-none">
+                                        <li>Sliders and carousels</li>
+                                        <li>4 Header variations</li>
+                                        <li>Google maps, Forms, Megamenu, CSS3 Animations and much more</li>
+                                        <li>+ 11 extra pages showing template features</li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-sm-5 right">
+                                    <h1>Design</h1>
+                                    <ul class="list-style-none">
+                                        <li>Clean and elegant design</li>
+                                        <li>Full width and boxed mode</li>
+                                        <li>Easily readable Roboto font and awesome icons</li>
+                                        <li>7 preprepared colour variations</li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-7">
+                                    <img class="img-responsive" src="image/template-easy-customize.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <img class="img-responsive" src="image/template-easy-code.png" alt="">
+                                </div>
+                                <div class="col-sm-5">
+                                    <h1>Easy to customize</h1>
+                                    <ul class="list-style-none">
+                                        <li>7 preprepared colour variations.</li>
+                                        <li>Easily to change fonts</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-sm-6 mb-small">
-                            <img class="img-responsive" src="img/template-mac.png" alt="">
-                        </div>
-
-                        <div class="col-sm-6 text-center-xs">
-                            <p class="text-uppercase">Business. Corporate. Agency.
-                                <br />Portfolio. Blog. E-commerce.
-                                <br />We have covered everything.</p>
-                            <p>See our current packages comparison
-                                <br />to choose the right one for you.</p>
-                            <p><a href="#packages" class="scroll-to btn btn-template-transparent-black">See packages</a>
-                            </p>
-
-                        </div>
-                    </div>
+                    <!-- /.project owl-slider -->
                 </div>
             </div>
 
-            <!-- *** JUMBOTRON END *** -->
+            <!-- *** HOMEPAGE CAROUSEL END *** -->
         </section>
 
-        <section class="bar background-gray no-mb padding-big text-center-sm">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h2 class="text-uppercase">Everything you need</h2>
-                        <p class="lead mb-small">40+ prepared HTML templates</p>
-                        <p class="mb-small">We have prepared literally <strong>everything you would possibly need building corporate, e-commerce or portfolio website</strong>. If you still miss something, let us know and we will try to include it in theme's future updates.</p>
-
-                        <p><a href="#" class="btn btn-template-main">Read more</a>
-                        </p>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <img src="img/template-easy-customize.png" alt="" class="img-responsive">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="bar no-mb color-white padding-big text-center-sm">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 text-center">
-                        <img src="img/template-easy-code.png" alt="" class="img-responsive">
-                    </div>
-                    <div class="col-md-6">
-                        <h2 class="text-uppercase">Clean, valid and documented code &amp; support</h2>
-                        <p class="lead mb-small">We made our best to help you</p>
-                        <p class="mb-small">Everything in this template is properly named and categorized. In case you don't find in the documentation answer to your question, our support is here to help!</p>
-
-                        <p><a href="#" class="btn btn-template-transparent-primary">Read more</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="bar background-gray no-mb padding-big text-center-sm">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h2 class="text-uppercase">Easy to customize</h2>
-                        <p class="mb-small">We have made this template with focus on future client customization. You get <strong>40+ prepared HTML templates</strong>, many <strong>reusable components</strong> and <strong>LESS files</strong> for even easier template customization.</p>
-
-                        <p><a href="#" class="btn btn-template-main">Read more</a>
-                        </p>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <img src="img/template-easy-customize.png" alt="" class="img-responsive">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="bar background-white no-mb" id="packages">
+        <section class="bar background-white no-mb">
             <div class="container" data-animate="fadeInUp">
                 <div class="row">
                     <div class="col-md-12">
+
                         <div class="heading text-center">
-                            <h2>Packages we offer</h2>
+                            <h2>Featured project</h2>
                         </div>
 
-                        <p class="lead">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-
-                        <div class="row packages">
-
-                            <div class="col-md-3">
-                                <div class="package ">
-                                    <div class="package-header light-gray">
-                                        <h5>Basic</h5>
-                                    </div>
-                                    <div class="price">
-                                        <div class="price-container">
-                                            <h4><span class="currency">$</span>7</h4>
-                                            <span class="period">
-
-			/ month
-
-		    </span>
-                                        </div>
-                                    </div>
-                                    <ul>
-                                        <li><i class="fa fa-check"></i>100GB Storage</li>
-                                        <li><i class="fa fa-check"></i>Own config file</li>
-                                        <li><i class="fa fa-times"></i>Sharing Tools</li>
-                                        <li><i class="fa fa-times"></i>Auto Backup</li>
-                                        <li><i class="fa fa-times"></i>Extended Security</li>
-                                    </ul>
-                                    <a href="#" class="btn btn-template-main">
-
-		Sign Up </a>
-                                </div>
-                            </div>
-                            <!-- / END FIRST PACKAGE -->
-
-                            <div class="col-md-3">
-                                <div class="package ">
-                                    <div class="package-header light-gray">
-                                        <h5>Standard</h5>
-                                    </div>
-                                    <div class="price">
-                                        <div class="price-container">
-                                            <h4><span class="currency">$</span>21 </h4>
-                                            <span class="period">/ month</span>
-                                        </div>
-                                    </div>
-                                    <ul>
-                                        <li><i class="fa fa-check"></i>100GB Storage</li>
-                                        <li><i class="fa fa-check"></i>Own config file</li>
-                                        <li><i class="fa fa-times"></i>Sharing Tools</li>
-                                        <li><i class="fa fa-times"></i>Auto Backup</li>
-                                        <li><i class="fa fa-times"></i>Extended Security</li>
-                                    </ul>
-                                    <a href="#" class="btn btn-template-main">
-
-		Sign Up </a>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="best-value">
-                                    <div class="package">
-                                        <div class="package-header">
-                                            <h5>Premium</h5>
-                                            <div class="meta-text">
-                                                Best Value
-                                            </div>
-                                        </div>
-                                        <div class="price">
-                                            <h4><span class="currency">$</span>53</h4>
-                                            <span class="period">/ month</span>
-                                        </div>
-                                        <ul>
-                                            <li><i class="fa fa-check"></i>100GB Storage</li>
-                                            <li><i class="fa fa-check"></i>Own config file</li>
-                                            <li><i class="fa fa-times"></i>Sharing Tools</li>
-                                            <li><i class="fa fa-times"></i>Auto Backup</li>
-                                            <li><i class="fa fa-times"></i>Extended Security</li>
-                                        </ul>
-                                        <a href="#" class="btn btn-template-main">
-
-		    Sign Up </a>
+                        <div class="row">
+                            <div class="portfolio-showcase clearfix">
+                                <div class="col-sm-6">
+                                    <div class="image">
+                                        <img src="image/portfolio-4.jpg" alt="" class="img-responsive">
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-3">
-                                <div class="package">
-                                    <div class="package-header light-gray">
-                                        <h5>Ultimate</h5>
-                                    </div>
-                                    <div class="price">
-                                        <h4><span class="currency">$</span>99 </h4>
-                                        <span class="period">/ month</span>
-                                    </div>
-                                    <ul>
-                                        <li><i class="fa fa-check"></i>100GB Storage</li>
-                                        <li><i class="fa fa-check"></i>Own config file</li>
-                                        <li><i class="fa fa-times"></i>Sharing Tools</li>
-                                        <li><i class="fa fa-times"></i>Auto Backup</li>
-                                        <li><i class="fa fa-times"></i>Extended Security</li>
-                                    </ul>
-                                    <a href="#" class="btn btn-template-main">
-
-		Sign Up </a>
+                                <div class="col-sm-6">
+                                    <h3><a href="portfolio-detail.html">Portfolio item</a></h3>
+                                    <p class="lead">This is the lead paragraph of the article. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget.</p>
+                                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
+                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                                    <p class="buttons">
+                                        <a href="portfolio-detail.html" class="btn btn-template-main">View</a>
+                                        <a href="#" class="btn btn-template-main">Visit website</a>
+                                    </p>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="heading text-center">
+                            <h3>Latest from our workshop</h3>
+                        </div>
+
+                        <div class="row portfolio no-space">
+                            <div class="col-sm-4">
+                                <div class="box-image">
+                                    <div class="image">
+                                        <img src="image/portfolio-1.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="bg"></div>
+                                    <div class="name">
+                                        <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    </div>
+                                    <div class="text">
+                                        <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
+                                        <p class="buttons">
+                                            <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                            <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- /.box-image -->
+
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="box-image">
+                                    <div class="image">
+                                        <img src="image/portfolio-2.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="bg"></div>
+                                    <div class="name">
+                                        <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    </div>
+                                    <div class="text">
+                                        <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
+                                        <p class="buttons">
+                                            <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                            <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- /.box-image -->
+
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="box-image">
+                                    <div class="image">
+                                        <img src="image/portfolio-3.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="bg"></div>
+                                    <div class="name">
+                                        <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    </div>
+                                    <div class="text">
+                                        <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
+                                        <p class="buttons">
+                                            <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                            <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- /.box-image -->
+
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="box-image">
+                                    <div class="image">
+                                        <img src="image/portfolio-4.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="bg"></div>
+                                    <div class="name">
+                                        <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    </div>
+                                    <div class="text">
+                                        <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
+                                        <p class="buttons">
+                                            <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                            <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- /.box-image -->
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="box-image">
+                                    <div class="image">
+                                        <img src="image/portfolio-5.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="bg"></div>
+                                    <div class="name">
+                                        <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    </div>
+                                    <div class="text">
+                                        <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
+                                        <p class="buttons">
+                                            <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                            <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- /.box-image -->
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="box-image">
+                                    <div class="image">
+                                        <img src="image/portfolio-6.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="bg"></div>
+                                    <div class="name">
+                                        <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    </div>
+                                    <div class="text">
+                                        <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
+                                        <p class="buttons">
+                                            <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                            <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- /.box-image -->
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="box-image">
+                                    <div class="image">
+                                        <img src="image/portfolio-7.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="bg"></div>
+                                    <div class="name">
+                                        <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    </div>
+                                    <div class="text">
+                                        <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
+                                        <p class="buttons">
+                                            <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                            <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- /.box-image -->
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="box-image">
+                                    <div class="image">
+                                        <img src="image/portfolio-9.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="bg"></div>
+                                    <div class="name">
+                                        <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    </div>
+                                    <div class="text">
+                                        <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
+                                        <p class="buttons">
+                                            <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                            <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- /.box-image -->
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="box-image">
+                                    <div class="image">
+                                        <img src="image/portfolio-8.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="bg"></div>
+                                    <div class="name">
+                                        <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    </div>
+                                    <div class="text">
+                                        <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
+                                        <p class="buttons">
+                                            <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                            <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- /.box-image -->
+                            </div>
+                        </div>
+
+                        <div class="see-more">
+                            <a href="portfolio-4.html" class="btn btn-template-main">See more of our work</a>
                         </div>
 
                     </div>
+
                 </div>
             </div>
         </section>
+
+        <section class="bar background-pentagon no-mb">
+            <div class="container">
+                <div class="row showcase">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="item">
+                            <div class="icon"><i class="fa fa-align-justify"></i>
+                            </div>
+                            <h4><span class="counter">580</span><br>
+
+		Websites</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="item">
+                            <div class="icon"><i class="fa fa-users"></i>
+                            </div>
+                            <h4><span class="counter">100</span><br>
+
+		Satisfied Clients</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="item">
+                            <div class="icon"><i class="fa fa-copy"></i>
+                            </div>
+                            <h4><span class="counter">320</span><br>
+
+		Projects</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="item">
+                            <div class="icon"><i class="fa fa-font"></i>
+                            </div>
+                            <h4><span class="counter">923</span><br> 
+
+		Magazines and Brochures</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </section>
+        <!-- /.bar -->
+
+        <section class="bar background-white no-mb">
+            <div class="container">
+
+                <div class="col-md-12">
+                    <div class="heading text-center">
+                        <h2>From our blog</h2>
+                    </div>
+
+                    <p class="lead">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
+                        mi vitae est. Mauris placerat eleifend leo. <span class="accent">Check our blog!</span>
+                    </p>
+
+                    <!-- *** BLOG HOMEPAGE ***
+_________________________________________________________ -->
+
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="box-image-text blog">
+                                <div class="top">
+                                    <div class="image">
+                                        <img src="image/portfolio-4.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="bg"></div>
+                                    <div class="text">
+                                        <p class="buttons">
+                                            <a href="blog-post.html" class="btn btn-template-transparent-primary"><i class="fa fa-link"></i> Read more</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <h4><a href="blog-post.html">Fashion now</a></h4>
+                                    <p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
+                                    </p>
+                                    <p class="intro">Fifth abundantly made Give sixth hath. Cattle creature i be don't them behold green moved fowl Moved life us beast good yielding. Have bring.</p>
+                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- /.box-image-text -->
+
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                            <div class="box-image-text blog">
+                                <div class="top">
+                                    <div class="image">
+                                        <img src="image/portfolio-3.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="bg"></div>
+                                    <div class="text">
+                                        <p class="buttons">
+                                            <a href="blog-post.html" class="btn btn-template-transparent-primary"><i class="fa fa-link"></i> Read more</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <h4><a href="blog-post.html">Fashion now</a></h4>
+                                    <p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
+                                    </p>
+                                    <p class="intro">Fifth abundantly made Give sixth hath. Cattle creature i be don't them behold green moved fowl Moved life us beast good yielding. Have bring.</p>
+                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- /.box-image-text -->
+
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                            <div class="box-image-text blog">
+                                <div class="top">
+                                    <div class="image">
+                                        <img src="image/portfolio-5.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="bg"></div>
+                                    <div class="text">
+                                        <p class="buttons">
+                                            <a href="blog-post.html" class="btn btn-template-transparent-primary"><i class="fa fa-link"></i> Read more</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <h4><a href="blog-post.html">What to do</a></h4>
+                                    <p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
+                                    </p>
+                                    <p class="intro">Fifth abundantly made Give sixth hath. Cattle creature i be don't them behold green moved fowl Moved life us beast good yielding. Have bring.</p>
+                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- /.box-image-text -->
+
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                            <div class="box-image-text blog">
+                                <div class="top">
+                                    <div class="image">
+                                        <img src="image/portfolio-6.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="bg"></div>
+                                    <div class="text">
+                                        <p class="buttons">
+                                            <a href="blog-post.html" class="btn btn-template-transparent-primary"><i class="fa fa-link"></i> Read more</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <h4><a href="blog-post.html">5 ways to look awesome</a></h4>
+                                    <p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
+                                    </p>
+                                    <p class="intro">Am terminated it excellence invitation projection as. She graceful shy believed distance use nay. Lively is people.</p>
+                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- /.box-image-text -->
+
+                        </div>
+
+                    </div>
+                    <!-- /.row -->
+
+                    <!-- *** BLOG HOMEPAGE END *** -->
+
+                </div>
+
+            </div>
+            <!-- /.container -->
+        </section>
+        <!-- /.bar -->
 
         <section class="bar background-gray no-mb">
             <div class="container">
@@ -665,43 +940,25 @@ _________________________________________________________ -->
                     <div class="col-md-12">
                         <ul class="owl-carousel customers">
                             <li class="item">
-                                <img src="img/customer-1.png" alt="" class="img-responsive">
+                                <img src="image/customer-1.png" alt="" class="img-responsive">
                             </li>
                             <li class="item">
-                                <img src="img/customer-2.png" alt="" class="img-responsive">
+                                <img src="image/customer-2.png" alt="" class="img-responsive">
                             </li>
                             <li class="item">
-                                <img src="img/customer-3.png" alt="" class="img-responsive">
+                                <img src="image/customer-3.png" alt="" class="img-responsive">
                             </li>
                             <li class="item">
-                                <img src="img/customer-4.png" alt="" class="img-responsive">
+                                <img src="image/customer-4.png" alt="" class="img-responsive">
                             </li>
                             <li class="item">
-                                <img src="img/customer-5.png" alt="" class="img-responsive">
+                                <img src="image/customer-5.png" alt="" class="img-responsive">
                             </li>
                             <li class="item">
-                                <img src="img/customer-6.png" alt="" class="img-responsive">
+                                <img src="image/customer-6.png" alt="" class="img-responsive">
                             </li>
                         </ul>
                         <!-- /.owl-carousel -->
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <section class="bar background-image-fixed-2 no-mb color-white text-center">
-            <div class="dark-mask"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="icon icon-lg"><i class="fa fa-file-code-o"></i>
-                        </div>
-                        <h1>Do you want to see more?</h1>
-                        <p class="lead">We have prepared for you more than 40 different HTML pages, including 5 variations of homepage.</p>
-                        <p class="text-center">
-                            <a href="index3.html" class="btn btn-template-transparent-black btn-lg">Check other homepage</a>
-                        </p>
                     </div>
 
                 </div>
@@ -768,7 +1025,7 @@ _________________________________________________________ -->
                         <div class="item same-height-row clearfix">
                             <div class="image same-height-always">
                                 <a href="#">
-                                    <img class="img-responsive" src="img/detailsquare.jpg" alt="">
+                                    <img class="img-responsive" src="image/detailsquare.jpg" alt="">
                                 </a>
                             </div>
                             <div class="name same-height-always">
@@ -779,7 +1036,7 @@ _________________________________________________________ -->
                         <div class="item same-height-row clearfix">
                             <div class="image same-height-always">
                                 <a href="#">
-                                    <img class="img-responsive" src="img/detailsquare.jpg" alt="">
+                                    <img class="img-responsive" src="image/detailsquare.jpg" alt="">
                                 </a>
                             </div>
                             <div class="name same-height-always">
@@ -790,7 +1047,7 @@ _________________________________________________________ -->
                         <div class="item same-height-row clearfix">
                             <div class="image same-height-always">
                                 <a href="#">
-                                    <img class="img-responsive" src="img/detailsquare.jpg" alt="">
+                                    <img class="img-responsive" src="image/detailsquare.jpg" alt="">
                                 </a>
                             </div>
                             <div class="name same-height-always">
@@ -833,32 +1090,32 @@ _________________________________________________________ -->
                     <div class="photostream">
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare.jpg" class="img-responsive" alt="#">
+                                <img src="image/detailsquare.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare2.jpg" class="img-responsive" alt="#">
+                                <img src="image/detailsquare2.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare3.jpg" class="img-responsive" alt="#">
+                                <img src="image/detailsquare3.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare3.jpg" class="img-responsive" alt="#">
+                                <img src="image/detailsquare3.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare2.jpg" class="img-responsive" alt="#">
+                                <img src="image/detailsquare2.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare.jpg" class="img-responsive" alt="#">
+                                <img src="image/detailsquare.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                     </div>

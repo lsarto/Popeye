@@ -33,15 +33,15 @@
 <![endif]-->
 
     <!-- Favicon and apple touch icons-->
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="57x57" href="img/apple-touch-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="img/apple-touch-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="img/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="img/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="img/apple-touch-icon-152x152.png" />
+    <link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="image/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="image/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="image/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="image/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="image/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="image/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="image/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="image/apple-touch-icon-152x152.png" />
     <!-- owl carousel css -->
 
     <link href="css/owl.carousel.css" rel="stylesheet">
@@ -74,7 +74,7 @@ _________________________________________________________ -->
 
                             <div class="login">
                                 <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in</span></a>
-                                <a href="customer-register.html"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Sign up</span></a>
+                                <a sec:authorize="isAnonymous()" th:href="@{/login}"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Sign up</span></a>
                             </div>
 
                         </div>
@@ -95,8 +95,8 @@ _________________________________________________________ -->
                         <div class="navbar-header">
 
                             <a class="navbar-brand home" href="index.html">
-                                <img src="img/logo.png" alt="Universal logo" class="hidden-xs hidden-sm">
-                                <img src="img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Universal - go to homepage</span>
+                                <img src="image/logo.png" alt="Universal logo" class="hidden-xs hidden-sm">
+                                <img src="image/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Universal - go to homepage</span>
                             </a>
                             <div class="navbar-buttons">
                                 <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
@@ -132,7 +132,7 @@ _________________________________________________________ -->
                                             <div class="yamm-content">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <img src="img/template-easy-customize.png" class="img-responsive hidden-xs" alt="">
+                                                        <img src="image/template-easy-customize.png" class="img-responsive hidden-xs" alt="">
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <h5>Shortcodes</h5>
@@ -178,7 +178,7 @@ _________________________________________________________ -->
                                             <div class="yamm-content">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <img src="img/template-homepage.png" class="img-responsive hidden-xs" alt="">
+                                                        <img src="image/template-homepage.png" class="img-responsive hidden-xs" alt="">
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <h5>Portfolio</h5>
@@ -424,12 +424,12 @@ _________________________________________________________ -->
                         <h4 class="modal-title" id="Login">Customer login</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="customer-orders.html" method="post">
+                        <form th:action="@{/login}" method="post">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="email_modal" placeholder="email">
+                                <input type="text" class="form-control" placeholder="name" required="required" id="username" name="username">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="password_modal" placeholder="password">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="password">
                             </div>
 
                             <p class="text-center">
@@ -462,14 +462,14 @@ _________________________________________________________ -->
                             <div class="row">
                                 <div class="col-sm-5 right">
                                     <p>
-                                        <img src="img/logo.png" alt="">
+                                        <img src="image/logo.png" alt="">
                                     </p>
                                     <h1>Multipurpose responsive theme</h1>
                                     <p>Business. Corporate. Agency.
                                         <br />Portfolio. Blog. E-commerce.</p>
                                 </div>
                                 <div class="col-sm-7">
-                                    <img class="img-responsive" src="img/template-homepage.png" alt="">
+                                    <img class="img-responsive" src="image/template-homepage.png" alt="">
                                 </div>
                             </div>
                         </div>
@@ -477,7 +477,7 @@ _________________________________________________________ -->
                             <div class="row">
 
                                 <div class="col-sm-7 text-center">
-                                    <img class="img-responsive" src="img/template-mac.png" alt="">
+                                    <img class="img-responsive" src="image/template-mac.png" alt="">
                                 </div>
 
                                 <div class="col-sm-5">
@@ -504,14 +504,14 @@ _________________________________________________________ -->
                                     </ul>
                                 </div>
                                 <div class="col-sm-7">
-                                    <img class="img-responsive" src="img/template-easy-customize.png" alt="">
+                                    <img class="img-responsive" src="image/template-easy-customize.png" alt="">
                                 </div>
                             </div>
                         </div>
                         <div class="item">
                             <div class="row">
                                 <div class="col-sm-7">
-                                    <img class="img-responsive" src="img/template-easy-code.png" alt="">
+                                    <img class="img-responsive" src="image/template-easy-code.png" alt="">
                                 </div>
                                 <div class="col-sm-5">
                                     <h1>Easy to customize</h1>
@@ -543,7 +543,7 @@ _________________________________________________________ -->
                             <div class="portfolio-showcase clearfix">
                                 <div class="col-sm-6">
                                     <div class="image">
-                                        <img src="img/portfolio-4.jpg" alt="" class="img-responsive">
+                                        <img src="image/portfolio-4.jpg" alt="" class="img-responsive">
                                     </div>
                                 </div>
 
@@ -568,7 +568,7 @@ _________________________________________________________ -->
                             <div class="col-sm-4">
                                 <div class="box-image">
                                     <div class="image">
-                                        <img src="img/portfolio-1.jpg" alt="" class="img-responsive">
+                                        <img src="image/portfolio-1.jpg" alt="" class="img-responsive">
                                     </div>
                                     <div class="bg"></div>
                                     <div class="name">
@@ -589,7 +589,7 @@ _________________________________________________________ -->
                             <div class="col-sm-4">
                                 <div class="box-image">
                                     <div class="image">
-                                        <img src="img/portfolio-2.jpg" alt="" class="img-responsive">
+                                        <img src="image/portfolio-2.jpg" alt="" class="img-responsive">
                                     </div>
                                     <div class="bg"></div>
                                     <div class="name">
@@ -610,7 +610,7 @@ _________________________________________________________ -->
                             <div class="col-sm-4">
                                 <div class="box-image">
                                     <div class="image">
-                                        <img src="img/portfolio-3.jpg" alt="" class="img-responsive">
+                                        <img src="image/portfolio-3.jpg" alt="" class="img-responsive">
                                     </div>
                                     <div class="bg"></div>
                                     <div class="name">
@@ -631,7 +631,7 @@ _________________________________________________________ -->
                             <div class="col-sm-4">
                                 <div class="box-image">
                                     <div class="image">
-                                        <img src="img/portfolio-4.jpg" alt="" class="img-responsive">
+                                        <img src="image/portfolio-4.jpg" alt="" class="img-responsive">
                                     </div>
                                     <div class="bg"></div>
                                     <div class="name">
@@ -651,7 +651,7 @@ _________________________________________________________ -->
                             <div class="col-sm-4">
                                 <div class="box-image">
                                     <div class="image">
-                                        <img src="img/portfolio-5.jpg" alt="" class="img-responsive">
+                                        <img src="image/portfolio-5.jpg" alt="" class="img-responsive">
                                     </div>
                                     <div class="bg"></div>
                                     <div class="name">
@@ -671,7 +671,7 @@ _________________________________________________________ -->
                             <div class="col-sm-4">
                                 <div class="box-image">
                                     <div class="image">
-                                        <img src="img/portfolio-6.jpg" alt="" class="img-responsive">
+                                        <img src="image/portfolio-6.jpg" alt="" class="img-responsive">
                                     </div>
                                     <div class="bg"></div>
                                     <div class="name">
@@ -691,7 +691,7 @@ _________________________________________________________ -->
                             <div class="col-sm-4">
                                 <div class="box-image">
                                     <div class="image">
-                                        <img src="img/portfolio-7.jpg" alt="" class="img-responsive">
+                                        <img src="image/portfolio-7.jpg" alt="" class="img-responsive">
                                     </div>
                                     <div class="bg"></div>
                                     <div class="name">
@@ -710,7 +710,7 @@ _________________________________________________________ -->
                             <div class="col-sm-4">
                                 <div class="box-image">
                                     <div class="image">
-                                        <img src="img/portfolio-9.jpg" alt="" class="img-responsive">
+                                        <img src="image/portfolio-9.jpg" alt="" class="img-responsive">
                                     </div>
                                     <div class="bg"></div>
                                     <div class="name">
@@ -729,7 +729,7 @@ _________________________________________________________ -->
                             <div class="col-sm-4">
                                 <div class="box-image">
                                     <div class="image">
-                                        <img src="img/portfolio-8.jpg" alt="" class="img-responsive">
+                                        <img src="image/portfolio-8.jpg" alt="" class="img-responsive">
                                     </div>
                                     <div class="bg"></div>
                                     <div class="name">
@@ -823,7 +823,7 @@ _________________________________________________________ -->
                             <div class="box-image-text blog">
                                 <div class="top">
                                     <div class="image">
-                                        <img src="img/portfolio-4.jpg" alt="" class="img-responsive">
+                                        <img src="image/portfolio-4.jpg" alt="" class="img-responsive">
                                     </div>
                                     <div class="bg"></div>
                                     <div class="text">
@@ -849,7 +849,7 @@ _________________________________________________________ -->
                             <div class="box-image-text blog">
                                 <div class="top">
                                     <div class="image">
-                                        <img src="img/portfolio-3.jpg" alt="" class="img-responsive">
+                                        <img src="image/portfolio-3.jpg" alt="" class="img-responsive">
                                     </div>
                                     <div class="bg"></div>
                                     <div class="text">
@@ -875,7 +875,7 @@ _________________________________________________________ -->
                             <div class="box-image-text blog">
                                 <div class="top">
                                     <div class="image">
-                                        <img src="img/portfolio-5.jpg" alt="" class="img-responsive">
+                                        <img src="image/portfolio-5.jpg" alt="" class="img-responsive">
                                     </div>
                                     <div class="bg"></div>
                                     <div class="text">
@@ -901,7 +901,7 @@ _________________________________________________________ -->
                             <div class="box-image-text blog">
                                 <div class="top">
                                     <div class="image">
-                                        <img src="img/portfolio-6.jpg" alt="" class="img-responsive">
+                                        <img src="image/portfolio-6.jpg" alt="" class="img-responsive">
                                     </div>
                                     <div class="bg"></div>
                                     <div class="text">
@@ -941,22 +941,22 @@ _________________________________________________________ -->
                     <div class="col-md-12">
                         <ul class="owl-carousel customers">
                             <li class="item">
-                                <img src="img/customer-1.png" alt="" class="img-responsive">
+                                <img src="image/customer-1.png" alt="" class="img-responsive">
                             </li>
                             <li class="item">
-                                <img src="img/customer-2.png" alt="" class="img-responsive">
+                                <img src="image/customer-2.png" alt="" class="img-responsive">
                             </li>
                             <li class="item">
-                                <img src="img/customer-3.png" alt="" class="img-responsive">
+                                <img src="image/customer-3.png" alt="" class="img-responsive">
                             </li>
                             <li class="item">
-                                <img src="img/customer-4.png" alt="" class="img-responsive">
+                                <img src="image/customer-4.png" alt="" class="img-responsive">
                             </li>
                             <li class="item">
-                                <img src="img/customer-5.png" alt="" class="img-responsive">
+                                <img src="image/customer-5.png" alt="" class="img-responsive">
                             </li>
                             <li class="item">
-                                <img src="img/customer-6.png" alt="" class="img-responsive">
+                                <img src="image/customer-6.png" alt="" class="img-responsive">
                             </li>
                         </ul>
                         <!-- /.owl-carousel -->
@@ -1026,7 +1026,7 @@ _________________________________________________________ -->
                         <div class="item same-height-row clearfix">
                             <div class="image same-height-always">
                                 <a href="#">
-                                    <img class="img-responsive" src="img/detailsquare.jpg" alt="">
+                                    <img class="img-responsive" src="image/detailsquare.jpg" alt="">
                                 </a>
                             </div>
                             <div class="name same-height-always">
@@ -1037,7 +1037,7 @@ _________________________________________________________ -->
                         <div class="item same-height-row clearfix">
                             <div class="image same-height-always">
                                 <a href="#">
-                                    <img class="img-responsive" src="img/detailsquare.jpg" alt="">
+                                    <img class="img-responsive" src="image/detailsquare.jpg" alt="">
                                 </a>
                             </div>
                             <div class="name same-height-always">
@@ -1048,7 +1048,7 @@ _________________________________________________________ -->
                         <div class="item same-height-row clearfix">
                             <div class="image same-height-always">
                                 <a href="#">
-                                    <img class="img-responsive" src="img/detailsquare.jpg" alt="">
+                                    <img class="img-responsive" src="image/detailsquare.jpg" alt="">
                                 </a>
                             </div>
                             <div class="name same-height-always">
@@ -1091,32 +1091,32 @@ _________________________________________________________ -->
                     <div class="photostream">
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare.jpg" class="img-responsive" alt="#">
+                                <img src="image/detailsquare.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare2.jpg" class="img-responsive" alt="#">
+                                <img src="image/detailsquare2.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare3.jpg" class="img-responsive" alt="#">
+                                <img src="image/detailsquare3.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare3.jpg" class="img-responsive" alt="#">
+                                <img src="image/detailsquare3.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare2.jpg" class="img-responsive" alt="#">
+                                <img src="image/detailsquare2.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare.jpg" class="img-responsive" alt="#">
+                                <img src="image/detailsquare.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                     </div>
