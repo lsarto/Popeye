@@ -144,7 +144,7 @@ public class HomeController {
 		
 		model.addAttribute("emailSent", "true");
 		
-		return "index5";
+		return "customer-register";
 	}
 	
 
