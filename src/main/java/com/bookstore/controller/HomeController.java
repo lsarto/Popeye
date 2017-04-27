@@ -56,7 +56,7 @@ public class HomeController {
 		return "customer-register";
 	}
 
-	/*@RequestMapping("/forgetPassword")
+	@RequestMapping("/forgetPassword")
 	public String forgetPassword(
 			HttpServletRequest request,
 			@ModelAttribute("email") String email,
@@ -66,10 +66,11 @@ public class HomeController {
 		model.addAttribute("classActiveForgetPassword", true);
 		
 		User user = userService.findByEmail(email);
+
 		
 		if (user == null) {
 			model.addAttribute("emailNotExist", true);
-			return "blog";
+			return "customer-register";
 		}
 		
 		String password = SecurityUtility.randomPassword();
@@ -91,8 +92,8 @@ public class HomeController {
 		model.addAttribute("forgetPasswordEmailSent", "true");
 		
 		
-		return "blog";
-	}*/
+		return "customer-register";
+	}
 	
 	@RequestMapping(value="/newUser", method = RequestMethod.POST)
 	public String newUserPost(

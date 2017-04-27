@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
 <head th:replace="common/header :: common-header" />
+<meta charset="UTF-8">
 
 <body>
 	<div id="all">
 		<div th:replace="common/header :: navbar"></div>
+
+
 
 		<div id="heading-breadcrumbs">
 			<div class="container">
@@ -98,7 +101,12 @@
 										<i class="fa fa-sign-in"></i> Log in
 									</button>
 								</div>
+								<div class="login" align="center" style="padding-top: 10px">
+									<a href="#" data-toggle="modal" data-target="#reset-modal">
+										Password dimenticata?</a>
+								</div>
 							</form>
+
 						</div>
 					</div>
 
@@ -303,6 +311,49 @@ _________________________________________________________ -->
 		<!-- *** COPYRIGHT END *** -->
 
 
+		<!-- *** RESET PASSWORD *** 
+_________________________________________________________-->
+
+		<div class="modal fade" id="reset-modal" tabindex="-1" role="dialog"
+			aria-labelledby="Login" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="Login">Recupera password</h4>
+					</div>
+					<div class="modal-body">
+						<div th:if="${param.error != null}" style="color: red;">Incorrect
+							username or password.</div>
+						<div th:if="${emailNotExist}" class="alert alert-danger">Email
+							non esistente</div>
+						<div th:if="${forgetPasswordEmailSent}"
+							class="alert alert-success">Email inviata</div>
+						<form th:action="@{/forgetPassword}" method="post">
+							<div class="form-group">
+								<input type="text" class="form-control"
+									placeholder="Indirizzo e-mail" required="required"
+									id="recoverEmail" name="email">
+
+								<p class="text-center">
+									<button class="btn btn-small btn-template-main"
+										style="margin-top: 15px">Invia</button>
+								</p>
+						</form>
+
+						<p class="text-center text-muted">Inserisci il tuo indirizzo
+							e-mail. Sarà inviata una password di recupero al tuo indirizzo
+							e-mail</p>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- *** RESET PASSWORD END *** -->
+
 
 	</div>
 	<!-- /#all -->
@@ -311,6 +362,26 @@ _________________________________________________________ -->
 	<!-- #### JAVASCRIPT FILES ### -->
 
 	<div th:replace="common/header :: body-bottom-scripts"></div>
+
+	<div th:if="${classActiveForgetPassword}">
+		<script>
+			$('#reset-modal').on('shown.bs.modal', function() {
+				$("#txtname").focus();
+			});
+
+			// show the modal onload
+			$('#reset-modal').modal({
+				show : true
+			});
+
+			// everytime the button is pushed, open the modal, and trigger the shown.bs.modal event
+			$('#openBtn').click(function() {
+				$('#reset-modal').modal({
+					show : true
+				});
+			});
+		</script>
+	</div>
 
 </body>
 
