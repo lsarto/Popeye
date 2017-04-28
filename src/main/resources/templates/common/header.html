@@ -98,11 +98,10 @@ ________________________________________________________ -->
 									class="hidden-xs text-uppercase">Sign in</span></a> <a
 									sec:authorize="isAnonymous()" th:href="@{/login}"><i
 									class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Sign
-										up</span></a> <a sec:authorize="isAuthenticated()" th:href="@{/logout}"><i
+										up</span></a><label>Benvenuto, </label> <b><label style="margin-right:25px"class="hidden-xs text-uppercase" sec:authentication="name"></label></b> <a sec:authorize="isAuthenticated()" th:href="@{/logout}"><i
 									class="fa fa-sign-in"></i> <span
 									class="hidden-xs text-uppercase">Log out</span></a>
 							</div>
-
 						</div>
 					</div>
 				</div>
