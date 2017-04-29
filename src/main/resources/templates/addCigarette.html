@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+
+	<div class="container">
+		<div class="row">
+			<form class="form-horizontal" th:action="@{/cigarette/add}" method="post"
+				enctype="multipart/form-data">
+				<fieldset>
+					<legend class="center-block">
+						New Cigarette Information<span style="font-size: small"> * is a
+							required field</span>
+					</legend>
+
+
+					<!-- name -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="name">* Nome</label>
+
+						<div class="col-md-8">
+							<input type="text" name="name" class="form-control" id="name"
+								th:value="${cigarette.name}" required="required" placeholder="nome" />
+							<span class="help-block">Nome della sigaretta</span>
+						</div>
+					</div>
+
+					<!-- model -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="model">*
+							Modello</label>
+						<div class="col-md-8">
+							<input type="text" name="model" class="form-control" id="model"
+								th:value="${cigarette.model}" required="required"
+								placeholder="Modello" /> <span class="help-block">Modello della sigaretta</span>
+						</div>
+					</div>
+
+					<!-- brand -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="publisher">Marca</label>
+						<div class="col-md-8">
+							<input type="text" name="brand" class="form-control"
+								id="brand" th:value="${cigarette.brand}"
+								placeholder="Marca" /> <span class="help-block">Marca della sigaretta</span>
+						</div>
+					</div>
+
+					<!-- typeOfPuff -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="typeOfPuff">Tipo di tiro</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" id="publicationDate"
+								name="typeOfPuff" th:value="${cigarette.typeOfPuff}"
+								placeholder="Tipo di tiro" /> <span class="help-block">Tipo di tiro</span>
+						</div>
+					</div>
+
+					<!-- technology -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="mode">Tecnologia</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" id="technology"
+								name="technology" th:value="${cigarette.technology}"
+								placeholder="Tecnologia" /> <span class="help-block">Tecnologia</span>
+						</div>
+					</div>
+
+					<!-- subOhm -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="mode">subOhm</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" id="subOhm"
+								name="subOhm" th:value="${cigarette.subOhm}"
+								placeholder="subOhm" /> <span class="help-block">subOhm</span>
+						</div>
+					</div>
+
+					<!-- category -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="category">*
+							Marca</label>
+						<div class="col-md-8">
+							<select th:value="${cigarette.brand}" id="category" name="category"
+								class="form-control">
+								<option value="" selected="selected" disabled="disabled">Please
+									select an option...</option>
+								<option value="Aspire"
+									th:selected="(${cigarette.brand}=='Aspire')">Aspire</option>
+								<option value="Innokin"
+									th:selected="(${cigarette.brand}=='Innokin')">Innokin</option>
+								<option value="Smok"
+									th:selected="(${cigarette.brand}=='Smok')">Smok</option>
+								<option value="Xtar"
+									th:selected="(${cigarette.brand}=='Xtar')">Xtar</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- shipping weight -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="shippingWeight">Shipping
+							Weight</label>
+						<div class="col-md-8">
+							<div class="input-group">
+								<input th:value="${cigarette.shippingWeight}" type="number"
+									name="shippingWeight" class="form-control" id="shippingWeight"
+									placeholder="Shipping Weight" /> <span
+									class="input-group-addon">Ounces</span>
+							</div>
+							<span class="help-block">Shipping Weight of the cigarette</span>
+						</div>
+					</div>
+
+					<!-- list price -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="listPrice">List
+							Price</label>
+						<div class="col-md-8">
+							<div class="input-group">
+								<span class="input-group-addon">$</span> <input
+									th:value="${cigarette.listPrice}" type="number" name="listPrice"
+									class="form-control" id="listPrice" placeholder="List Price" />
+							</div>
+							<span class="help-block">List price of the cigarette</span>
+						</div>
+					</div>
+
+					<!-- our price -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="ourPrice">Our
+							Price</label>
+						<div class="col-md-8">
+							<div class="input-group">
+								<span class="input-group-addon">$</span> <input
+									th:value="${cigarette.ourPrice}" type="number" name="ourPrice"
+									class="form-control" id="ourPrice" placeholder="Our Price" />
+							</div>
+							<span class="help-block">Our price of the cigarette</span>
+						</div>
+					</div>
+
+					<!-- in stock number -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="inStockNumber">Number
+							in stock</label>
+						<div class="col-md-8">
+							<input th:value="${cigarette.inStockNumber}" type="number"
+								name="inStockNumber" class="form-control" id="inStockNumber"
+								placeholder="Number of in-stock copies" /> <span
+								class="help-block">Number of in-stock copies</span>
+						</div>
+					</div>
+
+					<!-- status of cigarette -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="status">Status</label>
+						<div class="col-md-8">
+							<label><input value="true" type="radio" name="active"
+								checked="checked" /> Active </label> <label><input
+								value="false" type="radio" name="active" />
+								Inactive </label> <span class="help-block">Whether the cigarette is
+								active or inactive</span>
+						</div>
+					</div>
+
+					<!-- description -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="description">Description</label>
+						<div class="col-md-8">
+							<textarea name="description" rows="5" class="form-control"
+								id="description" th:value="${cigarette.description}"
+								placeholder="Description" />
+							<span class="help-block">Description of the cigarette</span>
+						</div>
+					</div>
+
+					<!-- upload image -->
+					<div class="form-group">
+						<div class="col-md-2">
+							<label for="cigaretteImage">Upload cigarette image</label>
+						</div>
+						<div class="col-md-8">
+							<input id="cigaretteImage" type="file" name="cigaretteImage"
+								th:value="${cigarette.cigaretteImage}" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<button type="submit" class="btn btn-success">Add Cigarette</button>
+							<a class="btn btn-danger" th:href="@{/}">Cancel</a>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+</body>
+</html>

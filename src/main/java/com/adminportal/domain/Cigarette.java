@@ -9,21 +9,20 @@ import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
-@Entity
-public class Book {
 
+@Entity
+public class Cigarette {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	private String title;
-	private String author;
-	private String publisher;
-	private String publicationDate;
-	private String language;
+	private String name;
+	private String model;
+	private String brand;
+	private String typeOfPuff;
+	private String technology;
+	private String subOhm;
 	private String category;
-	private int numberOfPages;
-	private String format;
-	private int isbn;
 	private double shippingWeight;
 	private double listPrice;
 	private double ourPrice;
@@ -34,7 +33,7 @@ public class Book {
 	private int inStockNumber;
 	
 	@Transient
-	private MultipartFile bookImage;
+	private MultipartFile cigaretteImage;
 
 	public Long getId() {
 		return id;
@@ -44,44 +43,52 @@ public class Book {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getAuthor() {
-		return author;
+	public String getModel() {
+		return model;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setModel(String model) {
+		this.model = model;
 	}
 
-	public String getPublisher() {
-		return publisher;
+	public String getBrand() {
+		return brand;
 	}
 
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
-	public String getPublicationDate() {
-		return publicationDate;
+	public String getTypeOfPuff() {
+		return typeOfPuff;
 	}
 
-	public void setPublicationDate(String publicationDate) {
-		this.publicationDate = publicationDate;
+	public void setTypeOfPuff(String typeOfPuff) {
+		this.typeOfPuff = typeOfPuff;
 	}
 
-	public String getLanguage() {
-		return language;
+	public String getTechnology() {
+		return technology;
 	}
 
-	public void setLanguage(String language) {
-		this.language = language;
+	public void setTechnology(String technology) {
+		this.technology = technology;
+	}
+
+	public String getSubOhm() {
+		return subOhm;
+	}
+
+	public void setSubOhm(String subOhm) {
+		this.subOhm = subOhm;
 	}
 
 	public String getCategory() {
@@ -90,30 +97,6 @@ public class Book {
 
 	public void setCategory(String category) {
 		this.category = category;
-	}
-
-	public int getNumberOfPages() {
-		return numberOfPages;
-	}
-
-	public void setNumberOfPages(int numberOfPages) {
-		this.numberOfPages = numberOfPages;
-	}
-
-	public String getFormat() {
-		return format;
-	}
-
-	public void setFormat(String format) {
-		this.format = format;
-	}
-
-	public int getIsbn() {
-		return isbn;
-	}
-
-	public void setIsbn(int isbn) {
-		this.isbn = isbn;
 	}
 
 	public double getShippingWeight() {
@@ -164,13 +147,14 @@ public class Book {
 		this.inStockNumber = inStockNumber;
 	}
 
-	public MultipartFile getBookImage() {
-		return bookImage;
+	public MultipartFile getCigaretteImage() {
+		return cigaretteImage;
 	}
 
-	public void setBookImage(MultipartFile bookImage) {
-		this.bookImage = bookImage;
+	public void setCigaretteImage(MultipartFile cigaretteImage) {
+		this.cigaretteImage = cigaretteImage;
 	}
-	
+
+
 	
 }
