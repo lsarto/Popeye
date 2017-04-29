@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+<meta charset="UTF-8">
+
+<body>
+	<div id="all">
+		<div th:replace="common/header :: navbar"></div>
+
+
+
+		<div id="heading-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-7">
+						<h1>New account / Sign in</h1>
+					</div>
+					<div class="col-md-5">
+						<ul class="breadcrumb">
+							<li><a href="index.html">Home</a></li>
+							<li>New account / Sign in</li>
+						</ul>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content">
+			<div class="container">
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="box">
+							<h2 class="text-uppercase">New account</h2>
+
+							<p class="lead">Not our registered customer yet?</p>
+							<p>With registration with us new world of fashion, fantastic
+								discounts and much more opens to you! The whole process will not
+								take you more than a minute!</p>
+							<p class="text-muted">
+								If you have any questions, please feel free to <a
+									href="contact.html">contact us</a>, our customer service center
+								is working for you 24/7.
+							</p>
+
+							<hr>
+							<div class="alert alert-info" th:if="${emailSent}">An email
+								has been sent to the email address you just registered. Please
+								validate your email address and update your password
+								information.</div>
+							<form th:action="@{/newUser}" method="post">
+								<div class="form-group">
+									<label for="name-login">Name</label>&nbsp;<span
+										style="color: red;" th:if="${usernameExists}">Username
+										already exists. Choose a different one.</span> <input
+										required="required" type="text" class="form-control"
+										id="name-login" name="name-login" />
+								</div>
+								<div class="form-group">
+									<label for="email-login">Email</label><span style="color: red;"
+										th:if="${emailExists}">Email already exists. Choose a
+										different one.</span> <input required="required" type="text"
+										class="form-control" id="email-login" name="email-login" />
+								</div>
+								<div class="text-center">
+									<button type="submit" class="btn btn-template-main">
+										<i class="fa fa-user-md"></i> Register
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="box">
+							<h2 class="text-uppercase">Login</h2>
+
+							<p class="lead">Already our customer?</p>
+							<p class="text-muted">Pellentesque habitant morbi tristique
+								senectus et netus et malesuada fames ac turpis egestas.
+								Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor
+								sit amet, ante. Donec eu libero sit amet quam egestas semper.
+								Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+
+							<hr>
+							<div th:if="${param.error != null}" style="color: red;">
+								Incorrect username or password.</div>
+							<form th:action="@{/login}" method="post">
+								<div class="form-group">
+									<label for="username">Name</label> <input required="required"
+										type="text" class="form-control" id="username" name="username" />	
+								</div>
+								
+								<div class="form-group">
+									<label for="password">Password</label> <input
+										required="required" type="password" class="form-control"
+										id="password" name="password" />
+								</div>
+								<div class="text-center">
+									<button type="submit" class="btn btn-template-main">
+										<i class="fa fa-sign-in"></i> Log in
+									</button>
+								</div>
+								<div class="login" align="center" style="padding-top: 10px">
+									<a href="#" data-toggle="modal" data-target="#reset-modal">
+										Password dimenticata?</a>
+								</div>
+							</form>
+
+						</div>
+					</div>
+
+				</div>
+				<!-- /.row -->
+
+			</div>
+			<!-- /.container -->
+		</div>
+		<!-- /#content -->
+
+
+		<!-- *** GET IT ***
+_________________________________________________________ -->
+
+		<div id="get-it">
+			<div class="container">
+				<div class="col-md-8 col-sm-12">
+					<h3>Do you want cool website like this one?</h3>
+				</div>
+				<div class="col-md-4 col-sm-12">
+					<a href="#" class="btn btn-template-transparent-primary">Buy
+						this template now</a>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- *** GET IT END *** -->
+
+
+		<!-- *** FOOTER ***
+_________________________________________________________ -->
+
+		<footer id="footer">
+			<div class="container">
+				<div class="col-md-3 col-sm-6">
+					<h4>About us</h4>
+
+					<p>Pellentesque habitant morbi tristique senectus et netus et
+						malesuada fames ac turpis egestas.</p>
+
+					<hr>
+
+					<h4>Join our monthly newsletter</h4>
+
+					<form>
+						<div class="input-group">
+
+							<input type="text" class="form-control"> <span
+								class="input-group-btn">
+
+								<button class="btn btn-default" type="button">
+									<i class="fa fa-send"></i>
+								</button>
+
+							</span>
+
+						</div>
+						<!-- /input-group -->
+					</form>
+
+					<hr class="hidden-md hidden-lg hidden-sm">
+
+				</div>
+				<!-- /.col-md-3 -->
+
+				<div class="col-md-3 col-sm-6">
+
+					<h4>Blog</h4>
+
+					<div class="blog-entries">
+						<div class="item same-height-row clearfix">
+							<div class="image same-height-always">
+								<a href="#"> <img class="img-responsive"
+									src="image/detailsquare.jpg" alt="">
+								</a>
+							</div>
+							<div class="name same-height-always">
+								<h5>
+									<a href="#">Blog post name</a>
+								</h5>
+							</div>
+						</div>
+
+						<div class="item same-height-row clearfix">
+							<div class="image same-height-always">
+								<a href="#"> <img class="img-responsive"
+									src="image/detailsquare.jpg" alt="">
+								</a>
+							</div>
+							<div class="name same-height-always">
+								<h5>
+									<a href="#">Blog post name</a>
+								</h5>
+							</div>
+						</div>
+
+						<div class="item same-height-row clearfix">
+							<div class="image same-height-always">
+								<a href="#"> <img class="img-responsive"
+									src="image/detailsquare.jpg" alt="">
+								</a>
+							</div>
+							<div class="name same-height-always">
+								<h5>
+									<a href="#">Very very long blog post name</a>
+								</h5>
+							</div>
+						</div>
+					</div>
+
+					<hr class="hidden-md hidden-lg">
+
+				</div>
+				<!-- /.col-md-3 -->
+
+				<div class="col-md-3 col-sm-6">
+
+					<h4>Contact</h4>
+
+					<p>
+						<strong>Universal Ltd.</strong> <br>13/25 New Avenue <br>Newtown
+						upon River <br>45Y 73J <br>England <br> <strong>Great
+							Britain</strong>
+					</p>
+
+					<a href="contact.html" class="btn btn-small btn-template-main">Go
+						to contact page</a>
+
+					<hr class="hidden-md hidden-lg hidden-sm">
+
+				</div>
+				<!-- /.col-md-3 -->
+
+
+
+				<div class="col-md-3 col-sm-6">
+
+					<h4>Photostream</h4>
+
+					<div class="photostream">
+						<div>
+							<a href="#"> <img src="image/detailsquare.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+						<div>
+							<a href="#"> <img src="image/detailsquare2.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+						<div>
+							<a href="#"> <img src="image/detailsquare3.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+						<div>
+							<a href="#"> <img src="image/detailsquare3.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+						<div>
+							<a href="#"> <img src="image/detailsquare2.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+						<div>
+							<a href="#"> <img src="image/detailsquare.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+					</div>
+
+				</div>
+				<!-- /.col-md-3 -->
+			</div>
+			<!-- /.container -->
+		</footer>
+		<!-- /#footer -->
+
+		<!-- *** FOOTER END *** -->
+
+		<!-- *** COPYRIGHT ***
+_________________________________________________________ -->
+
+		<div id="copyright">
+			<div class="container">
+				<div class="col-md-12">
+					<p class="pull-left">&copy; 2015. Your company / name goes here</p>
+					<p class="pull-right">
+						Template by <a href="https://bootstrapious.com">Bootstrapious</a>
+						& <a href="https://remoteplease.com">Remote Please</a>
+						<!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
+					</p>
+
+				</div>
+			</div>
+		</div>
+		<!-- /#copyright -->
+
+		<!-- *** COPYRIGHT END *** -->
+
+
+		<!-- *** RESET PASSWORD *** 
+_________________________________________________________-->
+
+		<div class="modal fade" id="reset-modal" tabindex="-1" role="dialog"
+			aria-labelledby="Login" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="Login">Recupera password</h4>
+					</div>
+					<div class="modal-body">
+						<div th:if="${param.error != null}" style="color: red;">Incorrect
+							username or password.</div>
+						<div th:if="${emailNotExist}" class="alert alert-danger">Email
+							non esistente</div>
+						<div th:if="${forgetPasswordEmailSent}"
+							class="alert alert-success">Email inviata</div>
+						<form th:action="@{/forgetPassword}" method="post">
+							<div class="form-group">
+								<input type="text" class="form-control"
+									placeholder="Indirizzo e-mail" required="required"
+									id="recoverEmail" name="email">
+
+								<p class="text-center">
+									<button class="btn btn-small btn-template-main"
+										style="margin-top: 15px">Invia</button>
+								</p>
+						</form>
+
+						<p class="text-center text-muted">Inserisci il tuo indirizzo
+							e-mail. Sarà inviata una password di recupero al tuo indirizzo
+							e-mail</p>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- *** RESET PASSWORD END *** -->
+
+
+	</div>
+	<!-- /#all -->
+
+
+	<!-- #### JAVASCRIPT FILES ### -->
+
+	<div th:replace="common/header :: body-bottom-scripts"></div>
+
+	<div th:if="${classActiveForgetPassword}">
+		<script>
+			$('#reset-modal').on('shown.bs.modal', function() {
+				$("#txtname").focus();
+			});
+
+			// show the modal onload
+			$('#reset-modal').modal({
+				show : true
+			});
+
+			// everytime the button is pushed, open the modal, and trigger the shown.bs.modal event
+			$('#openBtn').click(function() {
+				$('#reset-modal').modal({
+					show : true
+				});
+			});
+		</script>
+	</div>
+
+</body>
+
+</html>
