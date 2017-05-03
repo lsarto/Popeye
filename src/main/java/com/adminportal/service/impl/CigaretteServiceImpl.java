@@ -1,5 +1,7 @@
 package com.adminportal.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +17,10 @@ public class CigaretteServiceImpl implements CigaretteService{
 	
 	public Cigarette save(Cigarette cigarette) {
 		return cigaretteRepository.save(cigarette);
+	}
+
+	@Override
+	public List<Cigarette> findAll() {
+		return (List<Cigarette>) cigaretteRepository.findAll();
 	}
 }

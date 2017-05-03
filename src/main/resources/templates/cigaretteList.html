@@ -1,11 +1,52 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
 <head th:replace="common/header :: common-header" />
 
 <body>
 	<div th:replace="common/header :: navbar" />
-	<h1>Cigarette List Page</h1>
+	
+	<div class="container">
+		<div class="table-responsive">
+			<table id="cigaretteListTable" class="table table-bordered table-hover table-striped">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Modello</th>
+						<th>Marca</th>
+						<th>Tipo di Tiro</th>
+						<th>Tecnologia</th>
+						<th>subOhm</th>
+						<th>category</th>
+						<th>shippingWeight</th>
+						<th>List Price</th>
+						<th>Our Price</th>
+						<th>Active?</th>
+						<th>Operation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="cigarette : ${cigaretteList}">
+						<!-- <td><input hidden="hidden" name="id" th:value="${cigarette.id}" /></td> -->
+						<td th:text="${cigarette.name}"></td>
+						<td th:text="${cigarette.model}"></td>
+						<td th:text="${cigarette.brand}"></td>
+						<td th:text="${cigarette.typeOfPuff}"></td>
+						<td th:text="${cigarette.technology}"></td>
+						<td th:text="${cigarette.subOhm}"></td>
+						<td th:text="${cigarette.category}"></td>
+						<td th:text="${cigarette.shippingWeight}"></td>
+						<td th:text="${cigarette.listPrice}"></td>
+						<td th:text="${cigarette.ourPrice}"></td>
+						<td th:text="${cigarette.active}"></td>
+						<td>delete</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	
+	</div>
+	
+	
 	<div th:replace="common/header :: body-bottom-scripts" />
 </body>
 </html>

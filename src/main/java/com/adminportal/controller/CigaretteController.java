@@ -3,6 +3,7 @@ package com.adminportal.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -53,8 +54,8 @@ public class CigaretteController {
 	
 	@RequestMapping("/cigaretteList")
 	public String cigaretteList(Model model) {
-		/*List<Cigarette> cigaretteList = cigaretteService.findAll();*/
-		
+		List<Cigarette> cigaretteList = cigaretteService.findAll();
+		model.addAttribute("cigaretteList", cigaretteList);		
 		return "cigaretteList";
 		
 	}
