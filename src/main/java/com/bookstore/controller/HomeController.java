@@ -55,6 +55,11 @@ public class HomeController {
 		model.addAttribute("classActiveLogin", true);
 		return "customer-register";
 	}
+	
+	@RequestMapping("/shop-category")
+	public String shopCategory(Model model) {
+		return "shop-category";
+	}
 
 	@RequestMapping("/forgetPassword")
 	public String forgetPassword(
@@ -63,6 +68,7 @@ public class HomeController {
 			Model model
 			) {
 
+		
 		model.addAttribute("classActiveForgetPassword", true);
 		
 		User user = userService.findByEmail(email);
