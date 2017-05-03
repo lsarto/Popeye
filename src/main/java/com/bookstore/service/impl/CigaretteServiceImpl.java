@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.bookstore.domain.Cigarette;
 import com.bookstore.repository.CigaretteRepository;
+import com.bookstore.service.CigaretteService;
 
 @Service
-public class CigaretteServiceImpl {
+public class CigaretteServiceImpl implements CigaretteService{
 	@Autowired
 	private CigaretteRepository cigaretteRepository;
 	
