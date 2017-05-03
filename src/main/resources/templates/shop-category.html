@@ -54,12 +54,14 @@
 										</div>
 										<!-- /.image -->
 										<div class="text">
-											<h3>
-												<a href="shop-detail.html">White Blouse Armani</a>
+											<h3 th:text="cigarette.model">
+												<a href="shop-detail.html"></a>
 											</h3>
 											<p class="price">
-												<del><span th:text="${#numbers.formatDecimal(cigarette.listPrice, 0 , 'COMMA', 2, 'POINT')}">$</span></del>
-												<span th:text="${#strings.abbreviate(cigarette.description, 500)}">$</span>
+												<del>$<span
+														th:text="${#numbers.formatDecimal(cigarette.listPrice, 0 , 'COMMA', 2, 'POINT')}"></span>
+												</del> $<span
+													th:text="${#strings.abbreviate(cigarette.ourPrice, 500)}"></span>
 											</p>
 											<p class="buttons">
 												<a href="shop-detail.html" class="btn btn-default">View
@@ -70,7 +72,7 @@
 										</div>
 										<!-- /.text -->
 
-										<div class="ribbon sale">
+										<div th:if="cigarette.ourPrice" class="ribbon sale">
 											<div class="theribbon">SALE</div>
 											<div class="ribbon-background"></div>
 										</div>
@@ -85,402 +87,402 @@
 									<!-- /.product -->
 								</div>
 							</div>
-							
-
-							<div class="pages">
-
-								<ul class="pagination">
-									<li><a href="#">&laquo;</a></li>
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">&raquo;</a></li>
-								</ul>
-							</div>
-
-
 						</div>
-						<!-- /.col-md-9 -->
 
-						<!-- *** LEFT COLUMN END *** -->
 
-						<!-- *** RIGHT COLUMN ***
+						<div class="pages">
+
+							<ul class="pagination">
+								<li><a href="#">&laquo;</a></li>
+								<li class="active"><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">&raquo;</a></li>
+							</ul>
+						</div>
+
+
+					</div>
+					<!-- /.col-md-9 -->
+
+					<!-- *** LEFT COLUMN END *** -->
+
+					<!-- *** RIGHT COLUMN ***
 			_________________________________________________________ -->
 
-						<div class="col-sm-3">
+					<div class="col-sm-3">
 
-							<!-- *** MENUS AND FILTERS ***
+						<!-- *** MENUS AND FILTERS ***
  _________________________________________________________ -->
-							<div class="panel panel-default sidebar-menu">
+						<div class="panel panel-default sidebar-menu">
 
-								<div class="panel-heading">
-									<h3 class="panel-title">Categories</h3>
-								</div>
-
-								<div class="panel-body">
-									<ul class="nav nav-pills nav-stacked category-menu">
-										<li><a href="shop-category.html">Men <span
-												class="badge pull-right">42</span></a>
-											<ul>
-												<li><a href="shop-category.html">T-shirts</a></li>
-												<li><a href="shop-category.html">Shirts</a></li>
-												<li><a href="shop-category.html">Pants</a></li>
-												<li><a href="shop-category.html">Accessories</a></li>
-											</ul></li>
-										<li class="active"><a href="shop-category.html">Ladies
-												<span class="badge pull-right">123</span>
-										</a>
-											<ul>
-												<li><a href="shop-category.html">T-shirts</a></li>
-												<li><a href="shop-category.html">Skirts</a></li>
-												<li><a href="shop-category.html">Pants</a></li>
-												<li><a href="shop-category.html">Accessories</a></li>
-											</ul></li>
-										<li><a href="shop-category.html">Kids <span
-												class="badge pull-right">11</span></a>
-											<ul>
-												<li><a href="shop-category.html">T-shirts</a></li>
-												<li><a href="shop-category.html">Skirts</a></li>
-												<li><a href="shop-category.html">Pants</a></li>
-												<li><a href="shop-category.html">Accessories</a></li>
-											</ul></li>
-
-									</ul>
-
-								</div>
+							<div class="panel-heading">
+								<h3 class="panel-title">Categories</h3>
 							</div>
 
-							<div class="panel panel-default sidebar-menu">
+							<div class="panel-body">
+								<ul class="nav nav-pills nav-stacked category-menu">
+									<li><a href="shop-category.html">Men <span
+											class="badge pull-right">42</span></a>
+										<ul>
+											<li><a href="shop-category.html">T-shirts</a></li>
+											<li><a href="shop-category.html">Shirts</a></li>
+											<li><a href="shop-category.html">Pants</a></li>
+											<li><a href="shop-category.html">Accessories</a></li>
+										</ul></li>
+									<li class="active"><a href="shop-category.html">Ladies
+											<span class="badge pull-right">123</span>
+									</a>
+										<ul>
+											<li><a href="shop-category.html">T-shirts</a></li>
+											<li><a href="shop-category.html">Skirts</a></li>
+											<li><a href="shop-category.html">Pants</a></li>
+											<li><a href="shop-category.html">Accessories</a></li>
+										</ul></li>
+									<li><a href="shop-category.html">Kids <span
+											class="badge pull-right">11</span></a>
+										<ul>
+											<li><a href="shop-category.html">T-shirts</a></li>
+											<li><a href="shop-category.html">Skirts</a></li>
+											<li><a href="shop-category.html">Pants</a></li>
+											<li><a href="shop-category.html">Accessories</a></li>
+										</ul></li>
 
-								<div class="panel-heading">
-									<h3 class="panel-title">Brands</h3>
-									<a class="btn btn-xs btn-danger pull-right" href="#"><i
-										class="fa fa-times-circle"></i> <span class="hidden-sm">Clear</span></a>
-								</div>
+								</ul>
 
-								<div class="panel-body">
-
-									<form>
-										<div class="form-group">
-											<div class="checkbox">
-												<label> <input type="checkbox">Armani (10)
-												</label>
-											</div>
-											<div class="checkbox">
-												<label> <input type="checkbox">Versace (12)
-												</label>
-											</div>
-											<div class="checkbox">
-												<label> <input type="checkbox">Carlo Bruni
-													(15)
-												</label>
-											</div>
-											<div class="checkbox">
-												<label> <input type="checkbox">Jack Honey
-													(14)
-												</label>
-											</div>
-										</div>
-
-										<button class="btn btn-default btn-sm btn-template-main">
-											<i class="fa fa-pencil"></i> Apply
-										</button>
-
-									</form>
-
-								</div>
 							</div>
-
-							<div class="panel panel-default sidebar-menu">
-
-								<div class="panel-heading">
-									<h3 class="panel-title clearfix">Colours</h3>
-									<a class="btn btn-xs btn-danger pull-right" href="#"><i
-										class="fa fa-times-circle"></i> <span class="hidden-sm">Clear</span></a>
-								</div>
-
-								<div class="panel-body">
-
-									<form>
-										<div class="form-group">
-											<div class="checkbox">
-												<label> <input type="checkbox"> <span
-													class="colour white"></span> White (14)
-												</label>
-											</div>
-											<div class="checkbox">
-												<label> <input type="checkbox"> <span
-													class="colour blue"></span> Blue (10)
-												</label>
-											</div>
-											<div class="checkbox">
-												<label> <input type="checkbox"> <span
-													class="colour green"></span> Green (20)
-												</label>
-											</div>
-											<div class="checkbox">
-												<label> <input type="checkbox"> <span
-													class="colour yellow"></span> Yellow (13)
-												</label>
-											</div>
-											<div class="checkbox">
-												<label> <input type="checkbox"> <span
-													class="colour red"></span> Red (10)
-												</label>
-											</div>
-										</div>
-
-										<button class="btn btn-default btn-sm btn-template-main">
-											<i class="fa fa-pencil"></i> Apply
-										</button>
-
-									</form>
-
-								</div>
-							</div>
-							
-							
-
-							<!-- *** MENUS AND FILTERS END *** -->
-
-							<div class="banner">
-								<a href="shop-category.html"> <img src="image/banner.jpg"
-									alt="sales 2014" class="img-responsive">
-								</a>
-							</div>
-							<!-- /.banner -->
-
 						</div>
-						<!-- /.col-md-3 -->
 
-						<!-- *** RIGHT COLUMN END *** -->
+						<div class="panel panel-default sidebar-menu">
 
-					</div>
+							<div class="panel-heading">
+								<h3 class="panel-title">Brands</h3>
+								<a class="btn btn-xs btn-danger pull-right" href="#"><i
+									class="fa fa-times-circle"></i> <span class="hidden-sm">Clear</span></a>
+							</div>
 
-				</div>
-				<!-- /.container -->
-			</div>
-			<!-- /#content -->
+							<div class="panel-body">
 
+								<form>
+									<div class="form-group">
+										<div class="checkbox">
+											<label> <input type="checkbox">Armani (10)
+											</label>
+										</div>
+										<div class="checkbox">
+											<label> <input type="checkbox">Versace (12)
+											</label>
+										</div>
+										<div class="checkbox">
+											<label> <input type="checkbox">Carlo Bruni
+												(15)
+											</label>
+										</div>
+										<div class="checkbox">
+											<label> <input type="checkbox">Jack Honey
+												(14)
+											</label>
+										</div>
+									</div>
 
-			<!-- *** GET IT ***
-_________________________________________________________ -->
-
-			<div id="get-it">
-				<div class="container">
-					<div class="col-md-8 col-sm-12">
-						<h3>Do you want cool website like this one?</h3>
-					</div>
-					<div class="col-md-4 col-sm-12">
-						<a href="#" class="btn btn-template-transparent-primary">Buy
-							this template now</a>
-					</div>
-				</div>
-			</div>
-
-
-			<!-- *** GET IT END *** -->
-
-
-			<!-- *** FOOTER ***
-_________________________________________________________ -->
-
-			<footer id="footer">
-				<div class="container">
-					<div class="col-md-3 col-sm-6">
-						<h4>About us</h4>
-
-						<p>Pellentesque habitant morbi tristique senectus et netus et
-							malesuada fames ac turpis egestas.</p>
-
-						<hr>
-
-						<h4>Join our monthly newsletter</h4>
-
-						<form>
-							<div class="input-group">
-
-								<input type="text" class="form-control"> <span
-									class="input-group-btn">
-
-									<button class="btn btn-default" type="button">
-										<i class="fa fa-send"></i>
+									<button class="btn btn-default btn-sm btn-template-main">
+										<i class="fa fa-pencil"></i> Apply
 									</button>
 
-								</span>
+								</form>
 
-							</div>
-							<!-- /input-group -->
-						</form>
-
-						<hr class="hidden-md hidden-lg hidden-sm">
-
-					</div>
-					<!-- /.col-md-3 -->
-
-					<div class="col-md-3 col-sm-6">
-
-						<h4>Blog</h4>
-
-						<div class="blog-entries">
-							<div class="item same-height-row clearfix">
-								<div class="image same-height-always">
-									<a href="#"> <img class="img-responsive"
-										src="image/detailsquare.jpg" alt="">
-									</a>
-								</div>
-								<div class="name same-height-always">
-									<h5>
-										<a href="#">Blog post name</a>
-									</h5>
-								</div>
-							</div>
-
-							<div class="item same-height-row clearfix">
-								<div class="image same-height-always">
-									<a href="#"> <img class="img-responsive"
-										src="image/detailsquare.jpg" alt="">
-									</a>
-								</div>
-								<div class="name same-height-always">
-									<h5>
-										<a href="#">Blog post name</a>
-									</h5>
-								</div>
-							</div>
-
-							<div class="item same-height-row clearfix">
-								<div class="image same-height-always">
-									<a href="#"> <img class="img-responsive"
-										src="image/detailsquare.jpg" alt="">
-									</a>
-								</div>
-								<div class="name same-height-always">
-									<h5>
-										<a href="#">Very very long blog post name</a>
-									</h5>
-								</div>
 							</div>
 						</div>
 
-						<hr class="hidden-md hidden-lg">
+						<div class="panel panel-default sidebar-menu">
 
-					</div>
-					<!-- /.col-md-3 -->
-
-					<div class="col-md-3 col-sm-6">
-
-						<h4>Contact</h4>
-
-						<p>
-							<strong>Universal Ltd.</strong> <br>13/25 New Avenue <br>Newtown
-							upon River <br>45Y 73J <br>England <br> <strong>Great
-								Britain</strong>
-						</p>
-
-						<a href="contact.html" class="btn btn-small btn-template-main">Go
-							to contact page</a>
-
-						<hr class="hidden-md hidden-lg hidden-sm">
-
-					</div>
-					<!-- /.col-md-3 -->
-
-
-
-					<div class="col-md-3 col-sm-6">
-
-						<h4>Photostream</h4>
-
-						<div class="photostream">
-							<div>
-								<a href="#"> <img src="image/detailsquare.jpg"
-									class="img-responsive" alt="#">
-								</a>
+							<div class="panel-heading">
+								<h3 class="panel-title clearfix">Colours</h3>
+								<a class="btn btn-xs btn-danger pull-right" href="#"><i
+									class="fa fa-times-circle"></i> <span class="hidden-sm">Clear</span></a>
 							</div>
-							<div>
-								<a href="#"> <img src="image/detailsquare2.jpg"
-									class="img-responsive" alt="#">
-								</a>
-							</div>
-							<div>
-								<a href="#"> <img src="image/detailsquare3.jpg"
-									class="img-responsive" alt="#">
-								</a>
-							</div>
-							<div>
-								<a href="#"> <img src="image/detailsquare3.jpg"
-									class="img-responsive" alt="#">
-								</a>
-							</div>
-							<div>
-								<a href="#"> <img src="image/detailsquare2.jpg"
-									class="img-responsive" alt="#">
-								</a>
-							</div>
-							<div>
-								<a href="#"> <img src="image/detailsquare.jpg"
-									class="img-responsive" alt="#">
-								</a>
+
+							<div class="panel-body">
+
+								<form>
+									<div class="form-group">
+										<div class="checkbox">
+											<label> <input type="checkbox"> <span
+												class="colour white"></span> White (14)
+											</label>
+										</div>
+										<div class="checkbox">
+											<label> <input type="checkbox"> <span
+												class="colour blue"></span> Blue (10)
+											</label>
+										</div>
+										<div class="checkbox">
+											<label> <input type="checkbox"> <span
+												class="colour green"></span> Green (20)
+											</label>
+										</div>
+										<div class="checkbox">
+											<label> <input type="checkbox"> <span
+												class="colour yellow"></span> Yellow (13)
+											</label>
+										</div>
+										<div class="checkbox">
+											<label> <input type="checkbox"> <span
+												class="colour red"></span> Red (10)
+											</label>
+										</div>
+									</div>
+
+									<button class="btn btn-default btn-sm btn-template-main">
+										<i class="fa fa-pencil"></i> Apply
+									</button>
+
+								</form>
+
 							</div>
 						</div>
 
+
+
+						<!-- *** MENUS AND FILTERS END *** -->
+
+						<div class="banner">
+							<a href="shop-category.html"> <img src="image/banner.jpg"
+								alt="sales 2014" class="img-responsive">
+							</a>
+						</div>
+						<!-- /.banner -->
+
 					</div>
 					<!-- /.col-md-3 -->
+
+					<!-- *** RIGHT COLUMN END *** -->
+
 				</div>
-				<!-- /.container -->
-			</footer>
-			<!-- /#footer -->
 
-			<!-- *** FOOTER END *** -->
+			</div>
+			<!-- /.container -->
+		</div>
+		<!-- /#content -->
 
-			<!-- *** COPYRIGHT ***
+
+		<!-- *** GET IT ***
 _________________________________________________________ -->
 
-			<div id="copyright">
-				<div class="container">
-					<div class="col-md-12">
-						<p class="pull-left">&copy; 2015. Your company / name goes
-							here</p>
-						<p class="pull-right">
-							Template by <a href="https://bootstrapious.com">Bootstrapious</a>
-							& <a href="https://remoteplease.com">Remote Please</a>
-							<!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
-						</p>
-
-					</div>
+		<div id="get-it">
+			<div class="container">
+				<div class="col-md-8 col-sm-12">
+					<h3>Do you want cool website like this one?</h3>
+				</div>
+				<div class="col-md-4 col-sm-12">
+					<a href="#" class="btn btn-template-transparent-primary">Buy
+						this template now</a>
 				</div>
 			</div>
-			<!-- /#copyright -->
-
-			<!-- *** COPYRIGHT END *** -->
-
-
 		</div>
-		<!-- /#all -->
 
 
-		<!-- #### JAVASCRIPT FILES ### -->
+		<!-- *** GET IT END *** -->
 
-		<div th:replace="common/header :: body-bottom-scripts"></div>
 
-		<script
-			src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script>
-			window.jQuery
-					|| document
-							.write('<script src="js/jquery-1.11.0.min.js"><\/script>')
-		</script>
-		<script
-			src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<!-- *** FOOTER ***
+_________________________________________________________ -->
 
-		<script src="js/jquery.cookie.js"></script>
-		<script src="js/waypoints.min.js"></script>
-		<script src="js/jquery.counterup.min.js"></script>
-		<script src="js/jquery.parallax-1.1.3.js"></script>
-		<script src="js/front.js"></script>
+		<footer id="footer">
+			<div class="container">
+				<div class="col-md-3 col-sm-6">
+					<h4>About us</h4>
+
+					<p>Pellentesque habitant morbi tristique senectus et netus et
+						malesuada fames ac turpis egestas.</p>
+
+					<hr>
+
+					<h4>Join our monthly newsletter</h4>
+
+					<form>
+						<div class="input-group">
+
+							<input type="text" class="form-control"> <span
+								class="input-group-btn">
+
+								<button class="btn btn-default" type="button">
+									<i class="fa fa-send"></i>
+								</button>
+
+							</span>
+
+						</div>
+						<!-- /input-group -->
+					</form>
+
+					<hr class="hidden-md hidden-lg hidden-sm">
+
+				</div>
+				<!-- /.col-md-3 -->
+
+				<div class="col-md-3 col-sm-6">
+
+					<h4>Blog</h4>
+
+					<div class="blog-entries">
+						<div class="item same-height-row clearfix">
+							<div class="image same-height-always">
+								<a href="#"> <img class="img-responsive"
+									src="image/detailsquare.jpg" alt="">
+								</a>
+							</div>
+							<div class="name same-height-always">
+								<h5>
+									<a href="#">Blog post name</a>
+								</h5>
+							</div>
+						</div>
+
+						<div class="item same-height-row clearfix">
+							<div class="image same-height-always">
+								<a href="#"> <img class="img-responsive"
+									src="image/detailsquare.jpg" alt="">
+								</a>
+							</div>
+							<div class="name same-height-always">
+								<h5>
+									<a href="#">Blog post name</a>
+								</h5>
+							</div>
+						</div>
+
+						<div class="item same-height-row clearfix">
+							<div class="image same-height-always">
+								<a href="#"> <img class="img-responsive"
+									src="image/detailsquare.jpg" alt="">
+								</a>
+							</div>
+							<div class="name same-height-always">
+								<h5>
+									<a href="#">Very very long blog post name</a>
+								</h5>
+							</div>
+						</div>
+					</div>
+
+					<hr class="hidden-md hidden-lg">
+
+				</div>
+				<!-- /.col-md-3 -->
+
+				<div class="col-md-3 col-sm-6">
+
+					<h4>Contact</h4>
+
+					<p>
+						<strong>Universal Ltd.</strong> <br>13/25 New Avenue <br>Newtown
+						upon River <br>45Y 73J <br>England <br> <strong>Great
+							Britain</strong>
+					</p>
+
+					<a href="contact.html" class="btn btn-small btn-template-main">Go
+						to contact page</a>
+
+					<hr class="hidden-md hidden-lg hidden-sm">
+
+				</div>
+				<!-- /.col-md-3 -->
+
+
+
+				<div class="col-md-3 col-sm-6">
+
+					<h4>Photostream</h4>
+
+					<div class="photostream">
+						<div>
+							<a href="#"> <img src="image/detailsquare.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+						<div>
+							<a href="#"> <img src="image/detailsquare2.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+						<div>
+							<a href="#"> <img src="image/detailsquare3.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+						<div>
+							<a href="#"> <img src="image/detailsquare3.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+						<div>
+							<a href="#"> <img src="image/detailsquare2.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+						<div>
+							<a href="#"> <img src="image/detailsquare.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+					</div>
+
+				</div>
+				<!-- /.col-md-3 -->
+			</div>
+			<!-- /.container -->
+		</footer>
+		<!-- /#footer -->
+
+		<!-- *** FOOTER END *** -->
+
+		<!-- *** COPYRIGHT ***
+_________________________________________________________ -->
+
+		<div id="copyright">
+			<div class="container">
+				<div class="col-md-12">
+					<p class="pull-left">&copy; 2015. Your company / name goes here</p>
+					<p class="pull-right">
+						Template by <a href="https://bootstrapious.com">Bootstrapious</a>
+						& <a href="https://remoteplease.com">Remote Please</a>
+						<!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
+					</p>
+
+				</div>
+			</div>
+		</div>
+		<!-- /#copyright -->
+
+		<!-- *** COPYRIGHT END *** -->
+
+
+	</div>
+	<!-- /#all -->
+
+
+	<!-- #### JAVASCRIPT FILES ### -->
+
+	<div th:replace="common/header :: body-bottom-scripts"></div>
+
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="js/jquery-1.11.0.min.js"><\/script>')
+	</script>
+	<script
+		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+	<script src="js/jquery.cookie.js"></script>
+	<script src="js/waypoints.min.js"></script>
+	<script src="js/jquery.counterup.min.js"></script>
+	<script src="js/jquery.parallax-1.1.3.js"></script>
+	<script src="js/front.js"></script>
 </body>
 
 </html>
