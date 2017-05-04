@@ -17,4 +17,9 @@ public class CigaretteServiceImpl implements CigaretteService{
 	public List<Cigarette> findAll(){
 		return (List<Cigarette>) cigaretteRepository.findAll();
 	}
+
+	@Override
+	public Cigarette findOne(Long id) {
+		return cigaretteRepository.findOne(id);
+	}
 }
