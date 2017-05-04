@@ -9,4 +9,6 @@ public interface CigaretteService {
 	Cigarette save(Cigarette cigarette);
 
 	List<Cigarette> findAll();
+	
+	Cigarette findOne(Long id);
 }

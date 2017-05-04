@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+	
+	<div class="container">
+		<div>
+			<ol class="breadcrumb">
+				<li><a th:href="@{/cigarette/cigaretteList}"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>Go back</a></li>
+				<li><a th:href="@{/cigarette/updateCigarette?id=}+${cigarette.id}">Edit</a></li>
+			</ol>
+			
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-3">
+				<div class="panel panel-default">
+				<div class="panel-body">
+					<img th:src="@{/image/cigarette/}+${cigarette.id}+'.png'" class="img-responsive center-block" />
+				</div>
+				</div>
+			</div>
+			<div class="col-xs-9">
+				<h3 th:text="${cigarette.name}"></h3>
+				<div class="row">
+					<div class="col-xs-6">
+						<p><strong>Nome: </strong><span th:text="${cigarette.name}"></span></p>
+						<p><strong>Modello: </strong><span th:text="${cigarette.model}"></span></p>
+						<p><strong>Marca: </strong><span th:text="${cigarette.brand}"></span></p>
+						<p><strong>Tipo di tiro: </strong><span th:text="${cigarette.typeOfPuff}"></span></p>
+						<p><strong>Tecnologia: </strong><span th:text="${cigarette.technology}"></span></p>
+						<p><strong>SubOhm: </strong><span th:text="${cigarette.subOhm}"></span></p>
+						<p><strong>Categoria: </strong><span th:text="${cigarette.category}"></span></p>
+					</div>
+					<div class="col-xs-6">
+						<p><strong>Peso di spedzione: </strong><span th:text="${cigarette.shippingWeight}"></span></p>
+						<p><strong>Prezzo di listino: </strong><span th:text="${cigarette.listPrice}"></span></p>
+						<p><strong>Nostro prezzo: </strong><span th:text="${cigarette.ourPrice}"></span></p>
+						<p><strong>Number in Stock: </strong><span th:text="${cigarette.inStockNumber}"></span></p>
+					</div>
+				</div>
+				<br />
+				<p><Strong>Descrizione: </Strong><span th:text="${cigarette.description}"></span></p>
+			</div>
+			
+		</div>
+	</div>
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+</body>
+</html>

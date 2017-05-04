@@ -4,10 +4,11 @@
 
 <body>
 	<div th:replace="common/header :: navbar" />
-	
+
 	<div class="container">
 		<div class="table-responsive">
-			<table id="cigaretteListTable" class="table table-bordered table-hover table-striped">
+			<table id="cigaretteListTable"
+				class="table table-bordered table-hover table-striped">
 				<thead>
 					<tr>
 						<th>Nome</th>
@@ -27,7 +28,8 @@
 				<tbody>
 					<tr data-th-each="cigarette : ${cigaretteList}">
 						<!-- <td><input hidden="hidden" name="id" th:value="${cigarette.id}" /></td> -->
-						<td th:text="${cigarette.name}"></td>
+						<td><a th:href="@{/cigarette/cigaretteInfo(id=${cigarette.id})}"><span
+								th:text="${cigarette.name}"></span></a></td>
 						<td th:text="${cigarette.model}"></td>
 						<td th:text="${cigarette.brand}"></td>
 						<td th:text="${cigarette.typeOfPuff}"></td>
@@ -43,10 +45,10 @@
 				</tbody>
 			</table>
 		</div>
-	
+
 	</div>
-	
-	
+
+
 	<div th:replace="common/header :: body-bottom-scripts" />
 </body>
 </html>

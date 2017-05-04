@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.adminportal.domain.Cigarette;
@@ -58,6 +59,14 @@ public class CigaretteController {
 		model.addAttribute("cigaretteList", cigaretteList);		
 		return "cigaretteList";
 		
+	}
+	
+	@RequestMapping("/cigaretteInfo")
+	public String cigaretteInfo(@RequestParam("id") Long id, Model model) {
+		Cigarette cigarette = cigaretteService.findOne(id);
+		model.addAttribute("cigarette", cigarette);
+		
+		return "cigaretteInfo";
 	}
 
 }
