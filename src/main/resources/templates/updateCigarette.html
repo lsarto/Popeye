@@ -8,12 +8,15 @@
 
 	<div class="container">
 		<div class="row">
-			<form class="form-horizontal" th:action="@{/cigarette/add}" method="post"
+			<form class="form-horizontal"
+				th:action="@{/cigarette/updateCigarette}" method="post"
 				enctype="multipart/form-data">
 				<fieldset>
 					<legend class="center-block">
-						Nuovo prodotto<span style="font-size: small"> * Campo obbligatorio</span>
+						Aggiorna le informazioni del prodotto<span style="font-size: small">* campo obbligatorio</span>
 					</legend>
+
+					<input hidden="hidden" name="id" th:value="${cigarette.id}" />
 
 
 					<!-- name -->
@@ -22,8 +25,9 @@
 
 						<div class="col-md-8">
 							<input type="text" name="name" class="form-control" id="name"
-								th:value="${cigarette.name}" required="required" placeholder="nome" />
-							<span class="help-block">Nome della sigaretta</span>
+								th:value="${cigarette.name}" required="required"
+								placeholder="nome" /> <span class="help-block">Nome
+								della sigaretta</span>
 						</div>
 					</div>
 
@@ -34,7 +38,8 @@
 						<div class="col-md-8">
 							<input type="text" name="model" class="form-control" id="model"
 								th:value="${cigarette.model}" required="required"
-								placeholder="Modello" /> <span class="help-block">Modello della sigaretta</span>
+								placeholder="Modello" /> <span class="help-block">Modello
+								della sigaretta</span>
 						</div>
 					</div>
 
@@ -42,19 +47,21 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="publisher">Marca</label>
 						<div class="col-md-8">
-							<input type="text" name="brand" class="form-control"
-								id="brand" th:value="${cigarette.brand}"
-								placeholder="Marca" /> <span class="help-block">Marca della sigaretta</span>
+							<input type="text" name="brand" class="form-control" id="brand"
+								th:value="${cigarette.brand}" placeholder="Marca" /> <span
+								class="help-block">Marca della sigaretta</span>
 						</div>
 					</div>
 
 					<!-- typeOfPuff -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="typeOfPuff">Tipo di tiro</label>
+						<label class="col-md-2 control-label" for="typeOfPuff">Tipo
+							di tiro</label>
 						<div class="col-md-8">
 							<input type="text" class="form-control" id="publicationDate"
 								name="typeOfPuff" th:value="${cigarette.typeOfPuff}"
-								placeholder="Tipo di tiro" /> <span class="help-block">Tipo di tiro</span>
+								placeholder="Tipo di tiro" /> <span class="help-block">Tipo
+								di tiro</span>
 						</div>
 					</div>
 
@@ -72,9 +79,9 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="mode">subOhm</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" id="subOhm"
-								name="subOhm" th:value="${cigarette.subOhm}"
-								placeholder="subOhm" /> <span class="help-block">subOhm</span>
+							<input type="text" class="form-control" id="subOhm" name="subOhm"
+								th:value="${cigarette.subOhm}" placeholder="subOhm" /> <span
+								class="help-block">subOhm</span>
 						</div>
 					</div>
 
@@ -83,18 +90,16 @@
 						<label class="col-md-2 control-label" for="category">*
 							Marca</label>
 						<div class="col-md-8">
-							<select th:value="${cigarette.brand}" id="category" name="category"
-								class="form-control">
+							<select th:value="${cigarette.brand}" id="category"
+								name="category" class="form-control">
 								<option value="" selected="selected" disabled="disabled">Please
 									select an option...</option>
 								<option value="Aspire"
 									th:selected="(${cigarette.brand}=='Aspire')">Aspire</option>
 								<option value="Innokin"
 									th:selected="(${cigarette.brand}=='Innokin')">Innokin</option>
-								<option value="Smok"
-									th:selected="(${cigarette.brand}=='Smok')">Smok</option>
-								<option value="Xtar"
-									th:selected="(${cigarette.brand}=='Xtar')">Xtar</option>
+								<option value="Smok" th:selected="(${cigarette.brand}=='Smok')">Smok</option>
+								<option value="Xtar" th:selected="(${cigarette.brand}=='Xtar')">Xtar</option>
 							</select>
 						</div>
 					</div>
@@ -121,8 +126,9 @@
 						<div class="col-md-8">
 							<div class="input-group">
 								<span class="input-group-addon">$</span> <input
-									th:value="${cigarette.listPrice}" type="number" name="listPrice"
-									class="form-control" id="listPrice" placeholder="List Price" />
+									th:value="${cigarette.listPrice}" type="number"
+									name="listPrice" class="form-control" id="listPrice"
+									placeholder="List Price" />
 							</div>
 							<span class="help-block">List price of the cigarette</span>
 						</div>
@@ -160,9 +166,9 @@
 						<div class="col-md-8">
 							<label><input value="true" type="radio" name="active"
 								checked="checked" /> Active </label> <label><input
-								value="false" type="radio" name="active" />
-								Inactive </label> <span class="help-block">Whether the cigarette is
-								active or inactive</span>
+								value="false" type="radio" name="active" /> Inactive </label> <span
+								class="help-block">Whether the cigarette is active or
+								inactive</span>
 						</div>
 					</div>
 
@@ -191,8 +197,9 @@
 					<div class="form-group">
 						<div class="col-md-2"></div>
 						<div class="col-md-8">
-							<button type="submit" class="btn btn-success">Add Cigarette</button>
-							<a class="btn btn-danger" th:href="@{/}">Cancel</a>
+							<button type="submit" class="btn btn-success">Update</button>
+							<a class="btn btn-danger"
+								th:href="@{/cigarette/cigaretteInfo(id=${cigarette.id})}">Cancel</a>
 						</div>
 					</div>
 				</fieldset>

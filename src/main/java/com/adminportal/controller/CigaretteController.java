@@ -3,6 +3,8 @@ package com.adminportal.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -68,5 +70,42 @@ public class CigaretteController {
 		
 		return "cigaretteInfo";
 	}
+	
+	
+	@RequestMapping("/updateCigarette")
+	public String updateCigarette(@RequestParam("id") Long id, Model model) {
+		Cigarette cigarette = cigaretteService.findOne(id);
+		model.addAttribute("cigarette", cigarette);
+		
+		return "updateCigarette";
+	}
+	
+	
 
+	@RequestMapping(value="/updateCigarette", method=RequestMethod.POST)
+	public String updateCigarettePost(@ModelAttribute("cigarette") Cigarette cigarette, HttpServletRequest request) {
+		cigaretteService.save(cigarette);
+		
+		MultipartFile cigaretteImage = cigarette.getCigaretteImage();
+		
+		if(!cigaretteImage.isEmpty()) {
+			try {
+				byte[] bytes = cigaretteImage.getBytes();
+				String name = cigarette.getId() + ".png";
+				
+				Files.delete(Paths.get("src/main/resources/static/image/cigarette/"+name));
+				
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(new File("src/main/resources/static/image/cigarette/" + name)));
+				stream.write(bytes);
+				stream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return "redirect:/cigarette/cigaretteInfo?id="+cigarette.getId();
+	}
+	
+	
 }
