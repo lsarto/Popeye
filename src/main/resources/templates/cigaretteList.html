@@ -17,11 +17,10 @@
 						<th>Tipo di Tiro</th>
 						<th>Tecnologia</th>
 						<th>subOhm</th>
-						<th>category</th>
 						<th>shippingWeight</th>
 						<th>List Price</th>
 						<th>Our Price</th>
-						<th>Active?</th>
+						<th>Active</th>
 						<th>Operation</th>
 					</tr>
 				</thead>
@@ -35,7 +34,6 @@
 						<td th:text="${cigarette.typeOfPuff}"></td>
 						<td th:text="${cigarette.technology}"></td>
 						<td th:text="${cigarette.subOhm}"></td>
-						<td th:text="${cigarette.category}"></td>
 						<td th:text="${cigarette.shippingWeight}"></td>
 						<td th:text="${cigarette.listPrice}"></td>
 						<td th:text="${cigarette.ourPrice}"></td>
@@ -50,5 +48,16 @@
 
 
 	<div th:replace="common/header :: body-bottom-scripts" />
+	
+	<script>
+		$(document).ready(function() {
+			$("#cigaretteListTable").DataTable({
+				"lengthMenu": [[5,10,15,20,-1],[5,10,15,20,"All"]],
+				"ordering": false,
+				stateSave: true
+			});
+		});
+	</script>
+	
 </body>
 </html>
