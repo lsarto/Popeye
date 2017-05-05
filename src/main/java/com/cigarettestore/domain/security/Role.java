@@ -1,4 +1,4 @@
-package com.bookstore.domain.security;
+package com.cigarettestore.domain.security;
 
 import java.util.HashSet;
 import java.util.Set;

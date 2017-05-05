@@ -1,4 +1,4 @@
-package com.bookstore.domain.security;
+package com.cigarettestore.domain.security;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.bookstore.domain.User;
+import com.cigarettestore.domain.User;
 
 @Entity
 @Table(name="user_role")

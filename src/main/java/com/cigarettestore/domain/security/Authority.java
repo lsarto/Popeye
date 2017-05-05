@@ -1,4 +1,4 @@
-package com.bookstore.domain.security;
+package com.cigarettestore.domain.security;
 
 import org.springframework.security.core.GrantedAuthority;
 

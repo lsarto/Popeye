@@ -1,8 +1,8 @@
-package com.bookstore.service;
+package com.cigarettestore.service;
 
 import java.util.List;
 
-import com.bookstore.domain.Cigarette;
+import com.cigarettestore.domain.Cigarette;
 
 public interface CigaretteService {
 	List<Cigarette> findAll();

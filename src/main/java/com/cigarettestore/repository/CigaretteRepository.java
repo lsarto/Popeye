@@ -1,8 +1,8 @@
-package com.bookstore.repository;
+package com.cigarettestore.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.bookstore.domain.Cigarette;
+import com.cigarettestore.domain.Cigarette;
 
 public interface CigaretteRepository extends CrudRepository<Cigarette, Long> {
 	

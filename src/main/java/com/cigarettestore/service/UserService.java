@@ -1,10 +1,10 @@
-package com.bookstore.service;
+package com.cigarettestore.service;
 
 import java.util.Set;
 
-import com.bookstore.domain.User;
-import com.bookstore.domain.security.PasswordResetToken;
-import com.bookstore.domain.security.UserRole;
+import com.cigarettestore.domain.User;
+import com.cigarettestore.domain.security.PasswordResetToken;
+import com.cigarettestore.domain.security.UserRole;
 
 public interface UserService {
 	PasswordResetToken getPasswordResetToken(final String token);

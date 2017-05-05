@@ -1,4 +1,4 @@
-package com.bookstore.controller;
+package com.cigarettestore.controller;
 
 import java.security.Principal;
 import java.util.Arrays;
@@ -25,16 +25,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.bookstore.domain.Cigarette;
-import com.bookstore.domain.User;
-import com.bookstore.domain.security.PasswordResetToken;
-import com.bookstore.domain.security.Role;
-import com.bookstore.domain.security.UserRole;
-import com.bookstore.service.CigaretteService;
-import com.bookstore.service.UserService;
-import com.bookstore.service.impl.UserSecurityService;
-import com.bookstore.utility.MailConstructor;
-import com.bookstore.utility.SecurityUtility;
+import com.cigarettestore.domain.Cigarette;
+import com.cigarettestore.domain.User;
+import com.cigarettestore.domain.security.PasswordResetToken;
+import com.cigarettestore.domain.security.Role;
+import com.cigarettestore.domain.security.UserRole;
+import com.cigarettestore.service.CigaretteService;
+import com.cigarettestore.service.UserService;
+import com.cigarettestore.service.impl.UserSecurityService;
+import com.cigarettestore.utility.MailConstructor;
+import com.cigarettestore.utility.SecurityUtility;
 
 @Controller
 public class HomeController {

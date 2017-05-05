@@ -1,4 +1,4 @@
-package com.bookstore.domain;
+package com.cigarettestore.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
