@@ -65,6 +65,12 @@ public class HomeController {
 		return "customer-register";
 	}
 	
+	@RequestMapping("/myAccount")
+	public String myAccount(Model model) {
+		model.addAttribute("myAccount", true);
+		return "customer-account";
+	}
+	
 	@RequestMapping("/shop-category")
 	public String shopCategory(Model model) {
 		List<Cigarette> cigaretteList = cigaretteService.findAll();
