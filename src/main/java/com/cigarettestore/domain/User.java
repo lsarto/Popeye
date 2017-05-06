@@ -1,5 +1,6 @@
 package com.cigarettestore.domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -119,6 +120,23 @@ public class User implements UserDetails{
 	@Override
 	public boolean isEnabled() {
 		return enabled;
+	}
+	
+	public void setShoppingCart(ShoppingCart shoppingCart) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setUserShippingList(ArrayList<UserShipping> arrayList) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setUserPaymentList(ArrayList<UserPayment> arrayList) {
+		// TODO Auto-generated method stub
+		
+	}
+	public ShoppingCart getShoppingCart() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
