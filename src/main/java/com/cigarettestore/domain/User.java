@@ -1,5 +1,6 @@
 package com.cigarettestore.domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -51,6 +53,9 @@ public class User implements UserDetails{
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnore
 	private Set<UserRole> userRoles = new HashSet<>();
+	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+	private ShoppingCart shoppingCart;
 	
 	public Long getId() {
 		return id;
@@ -145,6 +150,23 @@ public class User implements UserDetails{
 	@Override
 	public boolean isEnabled() {
 		return enabled;
+	}
+	
+	public void setShoppingCart(ShoppingCart shoppingCart) {
+		this.shoppingCart = shoppingCart;
+	}
+	
+	public void setUserShippingList(ArrayList<UserShipping> arrayList) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setUserPaymentList(ArrayList<UserPayment> arrayList) {
+		// TODO Auto-generated method stub
+		
+	}
+	public ShoppingCart getShoppingCart() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
