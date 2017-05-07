@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -41,6 +42,9 @@ public class User implements UserDetails{
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnore
 	private Set<UserRole> userRoles = new HashSet<>();
+	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+	private ShoppingCart shoppingCart;
 	
 	public Long getId() {
 		return id;
@@ -123,9 +127,9 @@ public class User implements UserDetails{
 	}
 	
 	public void setShoppingCart(ShoppingCart shoppingCart) {
-		// TODO Auto-generated method stub
-		
+		this.shoppingCart = shoppingCart;
 	}
+	
 	public void setUserShippingList(ArrayList<UserShipping> arrayList) {
 		// TODO Auto-generated method stub
 		

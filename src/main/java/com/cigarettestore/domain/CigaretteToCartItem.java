@@ -16,7 +16,7 @@ public class CigaretteToCartItem {
 	
 	@ManyToOne
 	@JoinColumn(name="cigarette_id")
-	private Cigarette book;
+	private Cigarette cigarette;
 	
 	@ManyToOne
 	@JoinColumn(name="cart_item_id")
@@ -30,12 +30,12 @@ public class CigaretteToCartItem {
 		this.id = id;
 	}
 
-	public Cigarette getBook() {
-		return book;
+	public Cigarette getCigarette() {
+		return cigarette;
 	}
 
-	public void setBook(Cigarette book) {
-		this.book = book;
+	public void setCigarette(Cigarette cigarette) {
+		this.cigarette = cigarette;
 	}
 
 	public CartItem getCartItem() {
