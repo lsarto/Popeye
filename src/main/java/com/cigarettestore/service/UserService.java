@@ -2,6 +2,7 @@ package com.cigarettestore.service;
 
 import java.util.Set;
 
+import com.cigarettestore.domain.UserShipping;
 import com.cigarettestore.domain.User;
 import com.cigarettestore.domain.UserBilling;
 import com.cigarettestore.domain.UserPayment;
@@ -24,5 +25,7 @@ public interface UserService {
 	void updateUserBilling(UserBilling userBilling, UserPayment userPayment, User user);
 
 	void setUserDefaultPayment(Long defaultPaymentId, User user);
+	
+	void updateUserShipping(UserShipping userShipping, User user);
 	
 }

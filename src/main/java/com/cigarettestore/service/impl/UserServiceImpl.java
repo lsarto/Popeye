@@ -118,4 +118,12 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
+	@Override
+	public void updateUserShipping(UserShipping userShipping, User user) {
+		userShipping.setUser(user);
+		userShipping.setUserShippingDefault(true);
+		user.getUserShippingList().add(userShipping);
+		save(user);
+	}
+
 }

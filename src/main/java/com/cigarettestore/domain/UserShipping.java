@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.cigarettestore.domain.User;
+
 @Entity
 public class UserShipping {
 	@Id
@@ -19,6 +21,7 @@ public class UserShipping {
 	private String userShippingState;
 	private String userShippingCountry;
 	private String userShippingZipcode;
+	private boolean userShippingDefault;
 	
 	
 	@ManyToOne
@@ -113,6 +116,16 @@ public class UserShipping {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+
+	public boolean isUserShippingDefault() {
+		return userShippingDefault;
+	}
+
+
+	public void setUserShippingDefault(boolean userShippingDefault) {
+		this.userShippingDefault = userShippingDefault;
 	}
 	
 	
