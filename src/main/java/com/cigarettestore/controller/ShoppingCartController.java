@@ -59,6 +59,11 @@ public class ShoppingCartController {
 		User user = userService.findByUsername(principal.getName());
 		cigarette = cigaretteService.findOne(cigarette.getId());
 		
+		if (cigarette.getInStockNumber() < 1) {
+			model.addAttribute("notEnoughStock", true);
+			return "forward:/shop-detail?id="+cigarette.getId();
+		}
+		
 		CartItem cartItem = cartItemService.addCigaretteToCartItem(cigarette, user, 1);
 		cartItem.setQty(1);
 		cartItemService.updateCartItem(cartItem);
