@@ -7,12 +7,14 @@ import com.cigarettestore.domain.Cigarette;
 import com.cigarettestore.domain.ShoppingCart;
 import com.cigarettestore.domain.User;
 
-
-
 public interface CartItemService {
 	List<CartItem> findByShoppingCart(ShoppingCart shoppingCart);
-	
+
 	CartItem updateCartItem(CartItem cartItem);
 
 	CartItem addCigaretteToCartItem(Cigarette cigarette, User user, int parseInt);
+
+	CartItem findById(Long id);
+
+	void removeCartItem(CartItem cartItem);
 }

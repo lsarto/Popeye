@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cigarettestore.domain.Cigarette;
 import com.cigarettestore.domain.CartItem;
@@ -59,8 +60,29 @@ public class ShoppingCartController {
 		cigarette = cigaretteService.findOne(cigarette.getId());
 		
 		CartItem cartItem = cartItemService.addCigaretteToCartItem(cigarette, user, 1);
+		cartItem.setQty(1);
+		cartItemService.updateCartItem(cartItem);
 		model.addAttribute("addCigaretteSuccess", true);
 		
-		return "forward:/shop-detail?id="+cigarette.getId();
+		return "forward:/shoppingCart/cart";
+	}
+	
+	@RequestMapping("/updateCartItem")
+	public String updateShoppingCart(
+			@ModelAttribute("id") Long cartItemId,
+			@ModelAttribute("qty") int qty
+			) {
+		CartItem cartItem = cartItemService.findById(cartItemId);
+		cartItem.setQty(qty);
+		cartItemService.updateCartItem(cartItem);
+		
+		return "forward:/shoppingCart/cart";
+	}
+	
+	@RequestMapping("/removeItem")
+	public String removeItem(@RequestParam("id") Long id) {
+		cartItemService.removeCartItem(cartItemService.findById(id));
+		
+		return "forward:/shoppingCart/cart";
 	}
 }

@@ -165,8 +165,7 @@ public class User implements UserDetails{
 		
 	}
 	public ShoppingCart getShoppingCart() {
-		// TODO Auto-generated method stub
-		return null;
+		return shoppingCart;
 	}
 	
 	
