@@ -6,429 +6,394 @@
 <body>
 
 
-    <div id="all">
-    
-        <div th:replace="common/header :: navbar" ></div>
+	<div id="all">
 
-        <div id="heading-breadcrumbs">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h1>Shopping cart</h1>
-                    </div>
-                    <div class="col-md-6">
-                        <ul class="breadcrumb">
-                            <li><a href="index.html">Home</a>
-                            </li>
-                            <li>Shopping cart</li>
-                        </ul>
+		<div th:replace="common/header :: navbar"></div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
+		<div id="heading-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<h1>Carrello</h1>
+					</div>
+					<div class="col-md-6">
+						<ul class="breadcrumb">
+							<li><a href="index.html">Home</a></li>
+							<li>Shopping cart</li>
+						</ul>
 
-        <div id="content">
-            <div class="container">
+					</div>
+				</div>
+			</div>
+		</div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <p class="text-muted lead">You currently have 3 item(s) in your cart.</p>
-                    </div>
+		<div id="content">
+			<div class="container">
 
-
-                    <div class="col-md-9 clearfix" id="basket">
-
-                        <div class="box">
-
-                            <form method="post" action="shop-checkout1.html">
-
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="2">Product</th>
-                                                <th>Quantity</th>
-                                                <th>Unit price</th>
-                                                <th>Discount</th>
-                                                <th colspan="2">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <a href="#">
-                                                        <img src="image/detailsquare.jpg" alt="White Blouse Armani">
-                                                    </a>
-                                                </td>
-                                                <td><a href="#">White Blouse Armani</a>
-                                                </td>
-                                                <td>
-                                                    <input type="number" value="2" class="form-control">
-                                                </td>
-                                                <td>$123.00</td>
-                                                <td>$0.00</td>
-                                                <td>$246.00</td>
-                                                <td><a href="#"><i class="fa fa-trash-o"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="#">
-                                                        <img src="image/basketsquare.jpg" alt="Black Blouse Armani">
-                                                    </a>
-                                                </td>
-                                                <td><a href="#">Black Blouse Armani</a>
-                                                </td>
-                                                <td>
-                                                    <input type="number" value="1" class="form-control">
-                                                </td>
-                                                <td>$200.00</td>
-                                                <td>$0.00</td>
-                                                <td>$200.00</td>
-                                                <td><a href="#"><i class="fa fa-trash-o"></i></a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th colspan="5">Total</th>
-                                                <th colspan="2">$446.00</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-
-                                </div>
-                                <!-- /.table-responsive -->
-
-                                <div class="box-footer">
-                                    <div class="pull-left">
-                                        <a href="shop-category.html" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continue shopping</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <button class="btn btn-default"><i class="fa fa-refresh"></i> Update cart</button>
-                                        <button type="submit" class="btn btn-template-main">Proceed to checkout <i class="fa fa-chevron-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </form>
-
-                        </div>
-                        <!-- /.box -->
-
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="box text-uppercase">
-                                    <h3>You may also like these products</h3>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="product">
-                                    <div class="image">
-                                        <a href="shop-detail.html">
-                                            <img src="image/product2.jpg" alt="" class="img-responsive image1">
-                                        </a>
-                                    </div>
-                                    <div class="text">
-                                        <h3><a href="shop-detail.html">Fur coat</a></h3>
-                                        <p class="price">$143</p>
-
-                                    </div>
-                                </div>
-                                <!-- /.product -->
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="product">
-                                    <div class="image">
-                                        <a href="shop-detail.html">
-                                            <img src="image/product3.jpg" alt="" class="img-responsive image1">
-                                        </a>
-                                    </div>
-                                    <div class="text">
-                                        <h3><a href="shop-detail.html">Fur coat</a></h3>
-                                        <p class="price">$143</p>
-                                    </div>
-                                </div>
-                                <!-- /.product -->
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="product">
-                                    <div class="image">
-                                        <a href="shop-detail.html">
-                                            <img src="image/product1.jpg" alt="" class="img-responsive image1">
-                                        </a>
-                                    </div>
-                                    <div class="text">
-                                        <h3><a href="shop-detail.html">Fur coat</a></h3>
-                                        <p class="price">$143</p>
-                                    </div>
-                                </div>
-                                <!-- /.product -->
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <!-- /.col-md-9 -->
-
-                    <div class="col-md-3">
-                        <div class="box" id="order-summary">
-                            <div class="box-header">
-                                <h3>Order summary</h3>
-                            </div>
-                            <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
-
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td>Order subtotal</td>
-                                            <th>$446.00</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Shipping and handling</td>
-                                            <th>$10.00</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Tax</td>
-                                            <th>$0.00</th>
-                                        </tr>
-                                        <tr class="total">
-                                            <td>Total</td>
-                                            <th>$456.00</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
+				<div class="row">
+					<div class="col-md-12">
+						<p class="text-muted lead">You currently have 3 item(s) in
+							your cart.</p>
+					</div>
 
 
-                        <div class="box">
-                            <div class="box-header">
-                                <h4>Coupon code</h4>
-                            </div>
-                            <p class="text-muted">If you have a coupon code, please enter it in the box below.</p>
-                            <form>
-                                <div class="input-group">
+					<div class="col-md-9 clearfix" id="basket">
 
-                                    <input type="text" class="form-control">
+						<div class="box">
+							<form th:action="@{/shoppingCart/updateCartItem}" method="post">
 
-                                    <span class="input-group-btn">
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+											<tr>
+												<th colspan="2">Prodotto</th>
+												<th>Quantità</th>
+												<th>Prezzo Lista</th>
+												<th>Prezzo Scontato</th>
+												<th colspan="2">Totale</th>
+											</tr>
+										</thead>
+										<tbody th:each="cartItem : ${cartItemList}">
+											<tr>
+												<td><a
+													th:href="@{shop-detail(id=${cartItem.cigarette.id})}">
+														<img
+														th:src="#{adminPath}+@{/image/cigarette/}+
+														${cartItem.cigarette.id}+'.png'">
+												</a></td>
+												<td><a
+													th:href="@{/shop-detail?id=}+${cartItem.cigarette.id}"><span
+														th:text="${cartItem.cigarette.name}"></span></a></td>
+												<td><input hidden="hidden" name="id"
+													th:value="${cartItem.id}" /> <input type="number"
+													class="form-control" th:id="${cartItem.id}" th:name="qty"
+													th:disabled="${cartItem.cigarette.inStockNumber==0}"
+													th:value="${cartItem.qty}" min="1" max="9" /></td>
+												<td>$ <span th:text="${cartItem.cigarette.listPrice}"></span></td>
+												<td>$ <span th:text="${cartItem.cigarette.ourPrice}"></span></td>
+												<td>$ <span th:text="${shoppingCart.grandTotal}"></span></td>
+												<td><a
+													th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}"><i
+														class="fa fa-trash-o"></i></a></td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th colspan="5">Totale</th>
+												<th colspan="2">$ <span
+													th:text="${shoppingCart.grandTotal}"></span></th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
 
-					    <button class="btn btn-template-main" type="button"><i class="fa fa-gift"></i></button>
+								<!-- /.table-responsive -->
 
-					</span>
-                                </div>
-                                <!-- /input-group -->
-                            </form>
-                        </div>
+								<div class="box-footer">
+									<div class="pull-left">
+										<a th:href="@{/shop-category}" class="btn btn-default"><i
+											class="fa fa-chevron-left"></i> Torna al negozio</a>
+									</div>
+									<div class="pull-right">
+										<button class="btn btn-default">
+											<i class="fa fa-refresh"></i> Aggiorna Carrello
+										</button>
+										<button type="submit" class="btn btn-template-main">
+											Checkout <i class="fa fa-chevron-right"></i>
+										</button>
+									</div>
+								</div>
 
-                    </div>
-                    <!-- /.col-md-3 -->
+							</form>
 
-                </div>
+						</div>
+						<!-- /.box -->
 
-            </div>
-            <!-- /.container -->
-        </div>
-        <!-- /#content -->
+					</div>
+					<!-- /.col-md-9 -->
+
+					<div class="col-md-3">
+						<div class="box" id="order-summary">
+							<div class="box-header">
+								<h3>Order summary</h3>
+							</div>
+							<p class="text-muted">Shipping and additional costs are
+								calculated based on the values you have entered.</p>
+
+							<div class="table-responsive">
+								<table class="table">
+									<tbody>
+										<tr>
+											<td>Order subtotal</td>
+											<th>$446.00</th>
+										</tr>
+										<tr>
+											<td>Shipping and handling</td>
+											<th>$10.00</th>
+										</tr>
+										<tr>
+											<td>Tax</td>
+											<th>$0.00</th>
+										</tr>
+										<tr class="total">
+											<td>Total</td>
+											<th>$456.00</th>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+						</div>
 
 
-        <!-- *** GET IT ***
+						<div class="box">
+							<div class="box-header">
+								<h4>Coupon code</h4>
+							</div>
+							<p class="text-muted">If you have a coupon code, please enter
+								it in the box below.</p>
+							<form>
+								<div class="input-group">
+
+									<input type="text" class="form-control"> <span
+										class="input-group-btn">
+
+										<button class="btn btn-template-main" type="button">
+											<i class="fa fa-gift"></i>
+										</button>
+
+									</span>
+								</div>
+								<!-- /input-group -->
+							</form>
+						</div>
+
+					</div>
+					<!-- /.col-md-3 -->
+
+				</div>
+
+			</div>
+			<!-- /.container -->
+		</div>
+		<!-- /#content -->
+
+
+		<!-- *** GET IT ***
 _________________________________________________________ -->
 
-        <div id="get-it">
-            <div class="container">
-                <div class="col-md-8 col-sm-12">
-                    <h3>Do you want cool website like this one?</h3>
-                </div>
-                <div class="col-md-4 col-sm-12">
-                    <a href="#" class="btn btn-template-transparent-primary">Buy this template now</a>
-                </div>
-            </div>
-        </div>
+		<div id="get-it">
+			<div class="container">
+				<div class="col-md-8 col-sm-12">
+					<h3>Do you want cool website like this one?</h3>
+				</div>
+				<div class="col-md-4 col-sm-12">
+					<a href="#" class="btn btn-template-transparent-primary">Buy
+						this template now</a>
+				</div>
+			</div>
+		</div>
 
 
-        <!-- *** GET IT END *** -->
+		<!-- *** GET IT END *** -->
 
 
-        <!-- *** FOOTER ***
+		<!-- *** FOOTER ***
 _________________________________________________________ -->
 
-        <footer id="footer">
-            <div class="container">
-                <div class="col-md-3 col-sm-6">
-                    <h4>About us</h4>
+		<footer id="footer">
+			<div class="container">
+				<div class="col-md-3 col-sm-6">
+					<h4>About us</h4>
 
-                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+					<p>Pellentesque habitant morbi tristique senectus et netus et
+						malesuada fames ac turpis egestas.</p>
 
-                    <hr>
+					<hr>
 
-                    <h4>Join our monthly newsletter</h4>
+					<h4>Join our monthly newsletter</h4>
 
-                    <form>
-                        <div class="input-group">
+					<form>
+						<div class="input-group">
 
-                            <input type="text" class="form-control">
+							<input type="text" class="form-control"> <span
+								class="input-group-btn">
 
-                            <span class="input-group-btn">
+								<button class="btn btn-default" type="button">
+									<i class="fa fa-send"></i>
+								</button>
 
-                        <button class="btn btn-default" type="button"><i class="fa fa-send"></i></button>
+							</span>
 
-                    </span>
+						</div>
+						<!-- /input-group -->
+					</form>
 
-                        </div>
-                        <!-- /input-group -->
-                    </form>
+					<hr class="hidden-md hidden-lg hidden-sm">
 
-                    <hr class="hidden-md hidden-lg hidden-sm">
+				</div>
+				<!-- /.col-md-3 -->
 
-                </div>
-                <!-- /.col-md-3 -->
+				<div class="col-md-3 col-sm-6">
 
-                <div class="col-md-3 col-sm-6">
+					<h4>Blog</h4>
 
-                    <h4>Blog</h4>
+					<div class="blog-entries">
+						<div class="item same-height-row clearfix">
+							<div class="image same-height-always">
+								<a href="#"> <img class="img-responsive"
+									src="/image/detailsquare.jpg" alt="">
+								</a>
+							</div>
+							<div class="name same-height-always">
+								<h5>
+									<a href="#">Blog post name</a>
+								</h5>
+							</div>
+						</div>
 
-                    <div class="blog-entries">
-                        <div class="item same-height-row clearfix">
-                            <div class="image same-height-always">
-                                <a href="#">
-                                    <img class="img-responsive" src="image/detailsquare.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="name same-height-always">
-                                <h5><a href="#">Blog post name</a></h5>
-                            </div>
-                        </div>
+						<div class="item same-height-row clearfix">
+							<div class="image same-height-always">
+								<a href="#"> <img class="img-responsive"
+									src="/image/detailsquare.jpg" alt="">
+								</a>
+							</div>
+							<div class="name same-height-always">
+								<h5>
+									<a href="#">Blog post name</a>
+								</h5>
+							</div>
+						</div>
 
-                        <div class="item same-height-row clearfix">
-                            <div class="image same-height-always">
-                                <a href="#">
-                                    <img class="img-responsive" src="image/detailsquare.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="name same-height-always">
-                                <h5><a href="#">Blog post name</a></h5>
-                            </div>
-                        </div>
+						<div class="item same-height-row clearfix">
+							<div class="image same-height-always">
+								<a href="#"> <img class="img-responsive"
+									src="/image/detailsquare.jpg" alt="">
+								</a>
+							</div>
+							<div class="name same-height-always">
+								<h5>
+									<a href="#">Very very long blog post name</a>
+								</h5>
+							</div>
+						</div>
+					</div>
 
-                        <div class="item same-height-row clearfix">
-                            <div class="image same-height-always">
-                                <a href="#">
-                                    <img class="img-responsive" src="image/detailsquare.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="name same-height-always">
-                                <h5><a href="#">Very very long blog post name</a></h5>
-                            </div>
-                        </div>
-                    </div>
+					<hr class="hidden-md hidden-lg">
 
-                    <hr class="hidden-md hidden-lg">
+				</div>
+				<!-- /.col-md-3 -->
 
-                </div>
-                <!-- /.col-md-3 -->
+				<div class="col-md-3 col-sm-6">
 
-                <div class="col-md-3 col-sm-6">
+					<h4>Contact</h4>
 
-                    <h4>Contact</h4>
+					<p>
+						<strong>Universal Ltd.</strong> <br>13/25 New Avenue <br>Newtown
+						upon River <br>45Y 73J <br>England <br> <strong>Great
+							Britain</strong>
+					</p>
 
-                    <p><strong>Universal Ltd.</strong>
-                        <br>13/25 New Avenue
-                        <br>Newtown upon River
-                        <br>45Y 73J
-                        <br>England
-                        <br>
-                        <strong>Great Britain</strong>
-                    </p>
+					<a href="contact.html" class="btn btn-small btn-template-main">Go
+						to contact page</a>
 
-                    <a href="contact.html" class="btn btn-small btn-template-main">Go to contact page</a>
+					<hr class="hidden-md hidden-lg hidden-sm">
 
-                    <hr class="hidden-md hidden-lg hidden-sm">
-
-                </div>
-                <!-- /.col-md-3 -->
+				</div>
+				<!-- /.col-md-3 -->
 
 
 
-                <div class="col-md-3 col-sm-6">
+				<div class="col-md-3 col-sm-6">
 
-                    <h4>Photostream</h4>
+					<h4>Photostream</h4>
 
-                    <div class="photostream">
-                        <div>
-                            <a href="#">
-                                <img src="image/detailsquare.jpg" class="img-responsive" alt="#">
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <img src="image/detailsquare2.jpg" class="img-responsive" alt="#">
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <img src="image/detailsquare3.jpg" class="img-responsive" alt="#">
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <img src="image/detailsquare3.jpg" class="img-responsive" alt="#">
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <img src="image/detailsquare2.jpg" class="img-responsive" alt="#">
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <img src="image/detailsquare.jpg" class="img-responsive" alt="#">
-                            </a>
-                        </div>
-                    </div>
+					<div class="photostream">
+						<div>
+							<a href="#"> <img src="/image/detailsquare.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+						<div>
+							<a href="#"> <img src="/image/detailsquare2.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+						<div>
+							<a href="#"> <img src="/image/detailsquare3.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+						<div>
+							<a href="#"> <img src="/image/detailsquare3.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+						<div>
+							<a href="#"> <img src="/image/detailsquare2.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+						<div>
+							<a href="#"> <img src="/image/detailsquare.jpg"
+								class="img-responsive" alt="#">
+							</a>
+						</div>
+					</div>
 
-                </div>
-                <!-- /.col-md-3 -->
-            </div>
-            <!-- /.container -->
-        </footer>
-        <!-- /#footer -->
+				</div>
+				<!-- /.col-md-3 -->
+			</div>
+			<!-- /.container -->
+		</footer>
+		<!-- /#footer -->
 
-        <!-- *** FOOTER END *** -->
+		<!-- *** FOOTER END *** -->
 
-        <!-- *** COPYRIGHT ***
+		<!-- *** COPYRIGHT ***
 _________________________________________________________ -->
 
-        <div id="copyright">
-            <div class="container">
-                <div class="col-md-12">
-                    <p class="pull-left">&copy; 2015. Your company / name goes here</p>
-                    <p class="pull-right">Template by <a href="https://bootstrapious.com">Bootstrapious</a> & <a href="https://remoteplease.com">Remote Please</a>
-                         <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
-                    </p>
+		<div id="copyright">
+			<div class="container">
+				<div class="col-md-12">
+					<p class="pull-left">&copy; 2015. Your company / name goes here</p>
+					<p class="pull-right">
+						Template by <a href="https://bootstrapious.com">Bootstrapious</a>
+						& <a href="https://remoteplease.com">Remote Please</a>
+						<!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
+					</p>
 
-                </div>
-            </div>
-        </div>
-        <!-- /#copyright -->
+				</div>
+			</div>
+		</div>
+		<!-- /#copyright -->
 
-        <!-- *** COPYRIGHT END *** -->
+		<!-- *** COPYRIGHT END *** -->
 
 
 
-    </div>
-    <!-- /#all -->
+	</div>
+	<!-- /#all -->
 
-    <!-- #### JAVASCRIPT FILES ### -->
-	<div th:replace="common/header :: body-bottom-scripts" ></div>
-	
+	<!-- #### JAVASCRIPT FILES ### -->
+	<div th:replace="common/header :: body-bottom-scripts"></div>
+
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="js/jquery-1.11.0.min.js"><\/script>')
+	</script>
+	<script
+		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+	<script src="js/jquery.cookie.js"></script>
+	<script src="js/waypoints.min.js"></script>
+	<script src="js/jquery.counterup.min.js"></script>
+	<script src="js/jquery.parallax-1.1.3.js"></script>
+	<script src="js/front.js"></script>
+
 
 </body>
 
