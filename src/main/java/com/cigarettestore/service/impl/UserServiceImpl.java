@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cigarettestore.domain.ShoppingCart;
 import com.cigarettestore.domain.User;
+import com.cigarettestore.domain.UserBilling;
 import com.cigarettestore.domain.UserPayment;
 import com.cigarettestore.domain.UserShipping;
 import com.cigarettestore.domain.security.PasswordResetToken;
@@ -85,6 +86,16 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User save(User user) {
 		return userRepository.save(user);
+	}
+
+	@Override
+	public void updateUserBilling(UserBilling userBilling, UserPayment userPayment, User user) {
+		userPayment.setUser(user);
+		userPayment.setUserBilling(userBilling);
+		userPayment.setDefaultPayment(true);
+		userBilling.setUserPayment(userPayment);
+		user.getUserPaymentList().add(userPayment);
+		save(user);
 	}
 
 }
