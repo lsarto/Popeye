@@ -41,7 +41,8 @@
 <![endif]-->
 
 <!-- Favicon and apple touch icons-->
-<link rel="shortcut icon" href="//image/favicon.ico" type="/image/x-icon" />
+<link rel="shortcut icon" href="//image/favicon.ico"
+	type="/image/x-icon" />
 <link rel="apple-touch-icon" href="//image/apple-touch-icon.png" />
 <link rel="apple-touch-icon" sizes="57x57"
 	href="//image/apple-touch-icon-57x57.png" />
@@ -103,9 +104,14 @@ ________________________________________________________ -->
 									style="margin-right: 25px" class="hidden-xs text-uppercase"
 									sec:authentication="name"></label></b> <a th:href="@{/myProfile}"
 									href="#" sec:authorize="isAuthenticated()"><i
-									class="fa fa-user"></i> <span
-									class="hidden-xs text-uppercase">Il mio Account</span> </a> <a
-									sec:authorize="isAuthenticated()" th:href="@{/logout}"><i
+									class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Il
+										mio Account</span> </a> <a th:href="@{/shop-basket}" href="#"
+									sec:authorize="isAuthenticated()"><button type="button"
+										class="btn btn-default" aria-label="Left Align"
+										style="background-color: #555555; border: #555555">
+										<span class="glyphicon glyphicon-shopping-cart"
+											aria-hidden="false" style="color: white"></span>
+									</button> </a> <a sec:authorize="isAuthenticated()" th:href="@{/logout}"><i
 									class="fa fa-sign-in"></i> <span
 									class="hidden-xs text-uppercase">Log out</span></a>
 							</div>
