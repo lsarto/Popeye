@@ -47,6 +47,21 @@ public class CheckoutController {
 	@Autowired
 	private PaymentService paymentService;
 	
+	@RequestMapping("/shop-checkout2")
+	public String ShopCheckout2() {
+		return "shop-checkout2";
+	}
+	
+	@RequestMapping("/shop-checkout3")
+	public String ShopCheckout3() {
+		return "shop-checkout3";
+	}
+	
+	@RequestMapping("/shop-checkout4")
+	public String ShopCheckout4() {
+		return "shop-checkout4";
+	}
+	
 	@RequestMapping("/checkout")
 	public String checkout(
 			@RequestParam("id") Long cartId,
@@ -56,7 +71,7 @@ public class CheckoutController {
 		User user = userService.findByUsername(principal.getName());
 		
 		if(cartId != user.getShoppingCart().getId()) {
-			return "badRequestPage";
+			return "404";
 		}
 		
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
@@ -122,7 +137,7 @@ public class CheckoutController {
 			model.addAttribute("missingRequiredField", true);
 		}
 		
-		return "checkout";
+		return "shop-checkout1";
 		
 	}
 }
