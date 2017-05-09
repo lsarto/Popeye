@@ -70,7 +70,7 @@ public class CartItem {
 		this.cigarette = cigarette;
 	}
 
-	public List<CigaretteToCartItem> getcigaretteToCartItemList() {
+	public List<CigaretteToCartItem> getCigaretteToCartItemList() {
 		return cigaretteToCartItemList;
 	}
 
