@@ -40,72 +40,77 @@
 					<div class="col-md-9 clearfix" id="basket">
 
 						<div class="box">
-							<form th:action="@{/shoppingCart/updateCartItem}" method="post">
-
-								<div class="table-responsive">
-									<table class="table">
-										<thead>
-											<tr>
-												<th colspan="2">Prodotto</th>
-												<th>Quantità</th>
-												<th>Prezzo Lista</th>
-												<th>Prezzo Scontato</th>
-												<th colspan="2">Totale</th>
-											</tr>
-										</thead>
-										<tbody th:each="cartItem : ${cartItemList}">
-											<tr>
-												<td><a
-													th:href="@{shop-detail(id=${cartItem.cigarette.id})}">
-														<img
-														th:src="#{adminPath}+@{/image/cigarette/}+
+							<div th:each="cartItem : ${cartItemList}">
+								<form th:action="@{/shoppingCart/updateCartItem}" method="post"
+									th:id="'update-item-'+${cartItem.id}"></form>
+							</div>
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th colspan="2">Prodotto</th>
+											<th>Quantità</th>
+											<th>Prezzo Lista</th>
+											<th>Prezzo Scontato</th>
+											<th colspan="2">Totale</th>
+										</tr>
+									</thead>
+									<tbody th:each="cartItem : ${cartItemList}">
+										<tr>
+											<td><a
+												th:href="@{shop-detail(id=${cartItem.cigarette.id})}"> <img
+													th:src="#{adminPath}+@{/image/cigarette/}+
 														${cartItem.cigarette.id}+'.png'">
-												</a></td>
-												<td><a
-													th:href="@{/shop-detail?id=}+${cartItem.cigarette.id}"><span
-														th:text="${cartItem.cigarette.name}"></span></a></td>
-												<td><input hidden="hidden" name="id"
-													th:value="${cartItem.id}" /> <input type="number"
-													class="form-control" th:id="${cartItem.id}" th:name="qty"
-													th:disabled="${cartItem.cigarette.inStockNumber==0}"
-													th:value="${cartItem.qty}" min="1" max="9" /></td>
-												<td>$ <span th:text="${cartItem.cigarette.listPrice}"></span></td>
-												<td>$ <span th:text="${cartItem.cigarette.ourPrice}"></span></td>
-												<td>$ <span th:text="${shoppingCart.grandTotal}"></span></td>
-												<td><a
-													th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}"><i
-														class="fa fa-trash-o"></i></a></td>
-											</tr>
-										</tbody>
-										<tfoot>
-											<tr>
-												<th colspan="5">Totale</th>
-												<th colspan="2">$ <span
-													th:text="${shoppingCart.grandTotal}"></span></th>
-											</tr>
-										</tfoot>
-									</table>
+											</a></td>
+											<td><input hidden="hidden" name="id"
+												th:value="${cartItem.id}"
+												th:form="'update-item-'+${cartItem.id}" /> <input
+												type="number" class="form-control" th:id="${cartItem.id}"
+												th:name="qty"
+												th:disabled="${cartItem.cigarette.inStockNumber==0}"
+												th:value="${cartItem.qty}" min="1" max="9"
+												th:form="'update-item-'+${cartItem.id}" /></td>
+											<td><a
+												th:href="@{/shop-detail?id=}+${cartItem.cigarette.id}"><span
+													th:text="${cartItem.cigarette.name}"></span></a></td>
+											<td>$ <span th:text="${cartItem.cigarette.listPrice}"></span></td>
+											<td>$ <span th:text="${cartItem.cigarette.ourPrice}"></span></td>
+											<td>$ <span th:text="${shoppingCart.grandTotal}"></span></td>
+											<td><a
+												th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}"><i
+													class="fa fa-trash-o"></i></a></td>
+											<td><button class="btn btn-default"
+													th:form="'update-item-'+${cartItem.id}" type="submit">
+													<i class="fa fa-refresh"></i>
+												</button></td>
+										</tr>
+									</tbody>
+									<tfoot>
+										<tr>
+											<th colspan="5">Totale</th>
+											<th colspan="2">$ <span
+												th:text="${shoppingCart.grandTotal}"></span></th>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+
+							<!-- /.table-responsive -->
+
+							<div class="box-footer">
+								<div class="pull-left">
+									<a th:href="@{/shop-category}" class="btn btn-default"><i
+										class="fa fa-chevron-left"></i> Torna al negozio</a>
 								</div>
-
-								<!-- /.table-responsive -->
-
-								<div class="box-footer">
-									<div class="pull-left">
-										<a th:href="@{/shop-category}" class="btn btn-default"><i
-											class="fa fa-chevron-left"></i> Torna al negozio</a>
-									</div>
-									<div class="pull-right">
-										<button class="btn btn-default">
-											<i class="fa fa-refresh"></i> Aggiorna Carrello
-										</button>
-										<button type="submit" class="btn btn-template-main">
-											Checkout <i class="fa fa-chevron-right"></i>
-										</button>
-									</div>
+								<div class="pull-right">
+									<button class="btn btn-default" type="submit">
+										<i class="fa fa-refresh"></i> Aggiorna Carrello
+									</button>
+									<button type="submit" class="btn btn-template-main">
+										Checkout <i class="fa fa-chevron-right"></i>
+									</button>
 								</div>
-
-							</form>
-
+							</div>
 						</div>
 						<!-- /.box -->
 
