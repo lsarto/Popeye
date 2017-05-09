@@ -47,6 +47,11 @@ public class CheckoutController {
 	@Autowired
 	private PaymentService paymentService;
 	
+	@RequestMapping("/shop-checkout1")
+	public String ShopCheckout1() {
+		return "shop-checkout1";
+	}
+	
 	@RequestMapping("/shop-checkout2")
 	public String ShopCheckout2() {
 		return "shop-checkout2";
