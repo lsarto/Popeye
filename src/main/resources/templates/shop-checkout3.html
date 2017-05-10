@@ -35,18 +35,30 @@
 					<div class="col-md-9 clearfix" id="checkout">
 
 						<div class="box">
-							<form method="post" action="shop-checkout4.html">
+							<form method="post" th:action="@{/shop-checkout4}">
 								<ul class="nav nav-pills nav-justified">
 									<li><a href="shop-checkout1.html"><i
 											class="fa fa-map-marker"></i><br>Address</a></li>
 									<li><a href="shop-checkout2.html"><i
 											class="fa fa-truck"></i><br>Delivery Method</a></li>
-									<li class="active"><a href="#"><i class="fa fa-money"></i><br>Payment
-											Method</a></li>
-									<li class="disabled"><a href="shop-checkout4.html"><i
-											class="fa fa-eye"></i><br>Order Review</a></li>
+									<li class="active"><a href="shop-checkout3.html"><i
+											class="fa fa-money"></i><br>Payment Method</a></li>
+									<li class="disabled"><a href="#" data-toggle="collapse"><i
+											class="fa fa-money"></i><br>Payment Information</a></li>
+									<li class="disabled"><a href="#"><i class="fa fa-eye"></i><br>Order
+											Review</a></li>
 								</ul>
-
+								
+								<input hidden="hidden" name="firstname" th:value="${firstname}" />
+								<input hidden="hidden" name="lastname" th:value="${lastname}" />
+								<input hidden="hidden" name="company" th:value="${company}" /> <input
+									hidden="hidden" name="street" th:value="${street}" /> <input
+									hidden="hidden" name="city" th:value="${city}" /> <input
+									hidden="hidden" name="zip" th:value="${zip}" /> <input
+									hidden="hidden" name="state" th:value="${state}" /> <input
+									hidden="hidden" name="country" th:value="${country}" /> <input
+									hidden="hidden" name="phone" th:value="${phone}" /> <input
+									hidden="hidden" name="email" th:value="${email}" />
 								<div class="content">
 									<div class="row">
 										<div class="col-sm-6">
@@ -101,8 +113,7 @@
 											class="fa fa-chevron-left"></i>Back to Shipping method</a>
 									</div>
 									<div class="pull-right">
-										<button th: href="${/shop-checkout4}"
-											class="btn btn-template-main">
+										<button class="btn btn-template-main">
 											Continue to Order review<i class="fa fa-chevron-right"></i>
 										</button>
 									</div>
