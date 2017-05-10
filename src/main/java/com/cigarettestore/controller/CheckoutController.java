@@ -52,7 +52,11 @@ public class CheckoutController {
 	private PaymentService paymentService;
 	
 	@RequestMapping("/shop-checkout1")
-	public String ShopCheckout1() {
+	public String ShopCheckout1(
+			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart
+			) {
+		
+		
 		return "shop-checkout1";
 	}
 	
@@ -87,6 +91,7 @@ public class CheckoutController {
 	
 	@RequestMapping("/shop-checkout3")
 	public String ShopCheckout3(
+			/*
 			@ModelAttribute("firstname") String firstname,
 			@ModelAttribute("lastname") String lastname,
 			@ModelAttribute("company") String company,
@@ -97,9 +102,10 @@ public class CheckoutController {
 			@ModelAttribute("country") String country,
 			@ModelAttribute("phone") String phone,
 			@ModelAttribute("email") String email,
-			@ModelAttribute("payment") String payment,
+			*/
+			@ModelAttribute("shippingMethod") String shippingMethod,
 			Principal principal, Model model) {
-		
+		/*
 		model.addAttribute("firstname", firstname);
 		model.addAttribute("lastname", lastname);
 		model.addAttribute("company", company);
@@ -110,7 +116,8 @@ public class CheckoutController {
 		model.addAttribute("country", country);
 		model.addAttribute("phone", phone);
 		model.addAttribute("email", email);
-		model.addAttribute("payment", payment);
+		*/
+		model.addAttribute("shippingMethod", shippingMethod);
 		
 		return "shop-checkout3";
 	}
@@ -118,6 +125,7 @@ public class CheckoutController {
 	
 	@RequestMapping("/shop-checkout4")
 	public String ShopCheckout4(
+			/*
 			@RequestParam("id") Long CartId,
 			@ModelAttribute("firstname") String firstname,
 			@ModelAttribute("lastname") String lastname,
@@ -129,9 +137,11 @@ public class CheckoutController {
 			@ModelAttribute("country") String country,
 			@ModelAttribute("phone") String phone,
 			@ModelAttribute("email") String email,
+			*/
+			
 			@ModelAttribute("payment") String payment,
 			Principal principal, Model model) {
-		
+		/*
 		model.addAttribute("firstname", firstname);
 		model.addAttribute("lastname", lastname);
 		model.addAttribute("company", company);
@@ -142,7 +152,11 @@ public class CheckoutController {
 		model.addAttribute("country", country);
 		model.addAttribute("phone", phone);
 		model.addAttribute("email", email);
+		*/
+		
 		model.addAttribute("payment", payment); 
+		
+		
 
 		
 		User user = userService.findByUsername(principal.getName());
