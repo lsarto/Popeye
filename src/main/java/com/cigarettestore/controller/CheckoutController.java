@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,12 +55,101 @@ public class CheckoutController {
 	
 	@RequestMapping("/shop-checkout1")
 	public String ShopCheckout1(
+			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart,
+			Model model, Principal principal
+			) {
+		
+		UserBilling userBilling = new UserBilling();
+		model.addAttribute("userBilling", userBilling);
+		List<String> stateList = USConstants.listOfUSStatesCode;
+		Collections.sort(stateList);
+		model.addAttribute("stateList", stateList);
+		
+		return "shop-checkout1";
+	}
+	
+	@RequestMapping("/shop-checkout2")
+	public String ShopCheckout2(
 			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart
 			) {
 		
 		
-		return "shop-checkout1";
+		return "shop-checkout2";
 	}
+	
+	@RequestMapping("/shop-checkout3")
+	public String ShopCheckout3(
+			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart
+			) {
+		
+		
+		return "shop-checkout3";
+	}
+	
+	@RequestMapping("/shop-checkout4")
+	public String ShopCheckout4(
+			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart
+			) {
+		
+		
+		return "shop-checkout4";
+	}
+	
+	@RequestMapping("/paymentWithCreditCard")
+	public String listOfCreditCards(
+			Model model, Principal principal, HttpServletRequest request
+			) {
+		User user = userService.findByUsername(principal.getName());
+		model.addAttribute("user", user);
+		model.addAttribute("userPaymentList", user.getUserPaymentList());
+		model.addAttribute("userShippingList", user.getUserShippingList());
+		/*model.addAttribute("orderList", user.orderList());*/
+		
+		model.addAttribute("listOfCreditCards", true);
+		model.addAttribute("classActiveBilling", true);
+		model.addAttribute("listOfShippingAddresses", true);
+				
+		return "shop-checkout4";
+	}
+	
+	@RequestMapping("/paymentWithNewCreditCard")
+	public String addNewCreditCard(
+			Model model, Principal principal
+			){
+		User user = userService.findByUsername(principal.getName());
+		model.addAttribute("user", user);
+		
+		model.addAttribute("addNewCreditCard", true);
+		model.addAttribute("classActiveShipping", true);
+		model.addAttribute("listOfShippingAddresses", true);
+		model.addAttribute("classActiveBilling", true);
+		
+		UserShipping userShipping = new UserShipping();
+		
+		UserBilling userBilling = new UserBilling();
+		UserPayment userPayment = new UserPayment();
+		
+	
+			
+		model.addAttribute("userShipping", userShipping);
+		model.addAttribute("userBilling", userBilling);
+		model.addAttribute("userPayment", userPayment);
+		
+		List<String> stateList = USConstants.listOfUSStatesCode;
+		Collections.sort(stateList);
+		/*model.addAttribute("orderList", user.orderList());*/
+		
+//		List<String> stateList = USConstants.listOfUSStatesCode;
+//			Collections.sort(stateList);
+			model.addAttribute("stateList", stateList);
+			model.addAttribute("userPaymentList", user.getUserPaymentList());
+			model.addAttribute("userShippingList", user.getUserShippingList());
+			/*model.addAttribute("orderList", user.orderList());*/
+		
+		return "shop-checkout4";
+	}
+	
+	
 	
 	@RequestMapping(value="/shop-checkout2", method=RequestMethod.POST)
 	public String ShopCheckout2(
@@ -89,7 +180,7 @@ public class CheckoutController {
 		return "shop-checkout2";
 	}
 	
-	@RequestMapping("/shop-checkout3")
+	@RequestMapping(value="/shop-checkout3", method=RequestMethod.POST)
 	public String ShopCheckout3(
 			/*
 			@ModelAttribute("firstname") String firstname,
@@ -123,7 +214,7 @@ public class CheckoutController {
 	}
 	
 	
-	@RequestMapping("/shop-checkout4")
+	@RequestMapping(value="/shop-checkout4", method=RequestMethod.POST)
 	public String ShopCheckout4(
 			/*
 			@RequestParam("id") Long CartId,
@@ -184,7 +275,7 @@ public class CheckoutController {
 		return "shop-checkout4";
 	}
 	
-	@RequestMapping("/shop-checkout5")
+	@RequestMapping(value="/shop-checkout5", method=RequestMethod.POST)
 	public String ShopCheckout5() {
 		return "shop-checkout5";
 	}
@@ -199,7 +290,7 @@ public class CheckoutController {
 		User user = userService.findByUsername(principal.getName());
 		
 		if(cartId != user.getShoppingCart().getId()) {
-			return "404";
+			return "badRequestPage";
 		}
 		
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
@@ -265,7 +356,7 @@ public class CheckoutController {
 			model.addAttribute("missingRequiredField", true);
 		}
 		
-		return "shop-checkout1";
+		return "checkout";
 		
 	}
 }
