@@ -59,7 +59,7 @@
 						</div>
 
 						<div class="box" th:if="${listOfCreditCards}">
-							<form th:action="" method="post">
+							<form th:action="@{/checkout}" method="post">
 								<table class="table">
 									<thead>
 										<tr>
@@ -92,7 +92,7 @@
 						</div>
 
 						<div class="box" th:if="${addNewCreditCard}">
-							<form method="post" th:action="">
+							<form method="post" th:action="@{/checkout}"">
 
 								<!-- Billing Address -->
 								<hr />
