@@ -39,14 +39,40 @@ public class CigaretteController {
 	public String addCigarettePost(@ModelAttribute("cigarette") Cigarette cigarette, HttpServletRequest request) {
 		cigaretteService.save(cigarette);
 
-		MultipartFile cigaretteImage = cigarette.getCigaretteImage();
+		MultipartFile cigaretteCategory = cigarette.getCigaretteCategory();
+		MultipartFile cigaretteDetail1 = cigarette.getCigaretteDetail1();
+		MultipartFile cigaretteDetail2 = cigarette.getCigaretteDetail2();
+		MultipartFile cigaretteDetail3 = cigarette.getCigaretteDetail3();
 
 		try {
-			byte[] bytes = cigaretteImage.getBytes();
-			String name = cigarette.getId() + ".png";
-			BufferedOutputStream stream = new BufferedOutputStream(
+			byte[] bytes;
+			BufferedOutputStream stream;
+			String name;
+			
+			bytes = cigaretteCategory.getBytes();
+			name = cigarette.getId() + "-1.png";
+			stream = new BufferedOutputStream(
 					new FileOutputStream(new File("src/main/resources/static/image/cigarette/" + name)));
 			stream.write(bytes);
+			
+		    bytes = cigaretteDetail1.getBytes();
+			name = cigarette.getId() + "-2.png";
+			stream = new BufferedOutputStream(
+					new FileOutputStream(new File("src/main/resources/static/image/cigarette/" + name)));
+			stream.write(bytes);
+			
+			bytes = cigaretteDetail2.getBytes();
+			name = cigarette.getId() + "-3.png";
+			stream = new BufferedOutputStream(
+					new FileOutputStream(new File("src/main/resources/static/image/cigarette/" + name)));
+			stream.write(bytes);
+			
+			bytes = cigaretteDetail3.getBytes();
+			name = cigarette.getId() + "-4.png";
+			stream = new BufferedOutputStream(
+					new FileOutputStream(new File("src/main/resources/static/image/cigarette/" + name)));
+			stream.write(bytes);
+			
 			stream.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,11 +112,62 @@ public class CigaretteController {
 	public String updateCigarettePost(@ModelAttribute("cigarette") Cigarette cigarette, HttpServletRequest request) {
 		cigaretteService.save(cigarette);
 		
-		MultipartFile cigaretteImage = cigarette.getCigaretteImage();
+		MultipartFile cigaretteCategory = cigarette.getCigaretteCategory();
+		MultipartFile cigaretteDetail1 = cigarette.getCigaretteDetail1();
+		MultipartFile cigaretteDetail2 = cigarette.getCigaretteDetail2();
+		MultipartFile cigaretteDetail3 = cigarette.getCigaretteDetail3();
 		
-		if(!cigaretteImage.isEmpty()) {
+		if(!cigaretteCategory.isEmpty()) {
 			try {
-				byte[] bytes = cigaretteImage.getBytes();
+				byte[] bytes = cigaretteCategory.getBytes();
+				String name = cigarette.getId() + ".png";
+				
+				Files.delete(Paths.get("src/main/resources/static/image/cigarette/"+name));
+				
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(new File("src/main/resources/static/image/cigarette/" + name)));
+				stream.write(bytes);
+				stream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(!cigaretteDetail1.isEmpty()) {
+			try {
+				byte[] bytes = cigaretteDetail1.getBytes();
+				String name = cigarette.getId() + ".png";
+				
+				Files.delete(Paths.get("src/main/resources/static/image/cigarette/"+name));
+				
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(new File("src/main/resources/static/image/cigarette/" + name)));
+				stream.write(bytes);
+				stream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(!cigaretteDetail2.isEmpty()) {
+			try {
+				byte[] bytes = cigaretteDetail2.getBytes();
+				String name = cigarette.getId() + ".png";
+				
+				Files.delete(Paths.get("src/main/resources/static/image/cigarette/"+name));
+				
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(new File("src/main/resources/static/image/cigarette/" + name)));
+				stream.write(bytes);
+				stream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(!cigaretteDetail3.isEmpty()) {
+			try {
+				byte[] bytes = cigaretteDetail3.getBytes();
 				String name = cigarette.getId() + ".png";
 				
 				Files.delete(Paths.get("src/main/resources/static/image/cigarette/"+name));

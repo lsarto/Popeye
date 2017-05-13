@@ -33,8 +33,15 @@ public class Cigarette {
 	private int inStockNumber;
 	
 	@Transient
-	private MultipartFile cigaretteImage;
+	private MultipartFile cigaretteCategory;
+	@Transient
+	private MultipartFile cigaretteDetail1;
+	@Transient
+	private MultipartFile cigaretteDetail2;
+	@Transient
+	private MultipartFile cigaretteDetail3;
 
+	
 	public Long getId() {
 		return id;
 	}
@@ -147,12 +154,36 @@ public class Cigarette {
 		this.inStockNumber = inStockNumber;
 	}
 
-	public MultipartFile getCigaretteImage() {
-		return cigaretteImage;
+	public MultipartFile getCigaretteCategory() {
+		return cigaretteCategory;
 	}
 
-	public void setCigaretteImage(MultipartFile cigaretteImage) {
-		this.cigaretteImage = cigaretteImage;
+	public void setCigaretteCategory(MultipartFile cigaretteCategory) {
+		this.cigaretteCategory = cigaretteCategory;
+	}
+
+	public MultipartFile getCigaretteDetail1() {
+		return cigaretteDetail1;
+	}
+
+	public void setCigaretteDetail1(MultipartFile cigaretteDetail1) {
+		this.cigaretteDetail1 = cigaretteDetail1;
+	}
+
+	public MultipartFile getCigaretteDetail2() {
+		return cigaretteDetail2;
+	}
+
+	public void setCigaretteDetail2(MultipartFile cigaretteDetail2) {
+		this.cigaretteDetail2 = cigaretteDetail2;
+	}
+
+	public MultipartFile getCigaretteDetail3() {
+		return cigaretteDetail3;
+	}
+
+	public void setCigaretteDetail3(MultipartFile cigaretteDetail3) {
+		this.cigaretteDetail3 = cigaretteDetail3;
 	}
 
 

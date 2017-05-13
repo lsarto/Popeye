@@ -106,23 +106,21 @@
 
 					<!-- shipping weight -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="shippingWeight">Shipping
-							Weight</label>
+						<label class="col-md-2 control-label" for="shippingWeight">Peso spedizione</label>
 						<div class="col-md-8">
 							<div class="input-group">
 								<input th:value="${cigarette.shippingWeight}" type="number"
 									name="shippingWeight" class="form-control" id="shippingWeight"
 									placeholder="Shipping Weight" /> <span
-									class="input-group-addon">Ounces</span>
+									class="input-group-addon">Chili</span>
 							</div>
-							<span class="help-block">Shipping Weight of the cigarette</span>
+							<span class="help-block">Peso spedizione della sigaretta</span>
 						</div>
 					</div>
 
 					<!-- list price -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="listPrice">List
-							Price</label>
+						<label class="col-md-2 control-label" for="listPrice">Prezzo Lista</label>
 						<div class="col-md-8">
 							<div class="input-group">
 								<span class="input-group-addon">$</span> <input
@@ -130,63 +128,60 @@
 									name="listPrice" class="form-control" id="listPrice"
 									placeholder="List Price" />
 							</div>
-							<span class="help-block">List price of the cigarette</span>
+							<span class="help-block">Prezzo Lista della sigaretta</span>
 						</div>
 					</div>
 
 					<!-- our price -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="ourPrice">Our
-							Price</label>
+						<label class="col-md-2 control-label" for="ourPrice">Nostro Prezzo</label>
 						<div class="col-md-8">
 							<div class="input-group">
 								<span class="input-group-addon">$</span> <input
 									th:value="${cigarette.ourPrice}" type="number" name="ourPrice"
 									class="form-control" id="ourPrice" placeholder="Our Price" />
 							</div>
-							<span class="help-block">Our price of the cigarette</span>
+							<span class="help-block">Nostro prezzo della sigaretta</span>
 						</div>
 					</div>
 
 					<!-- in stock number -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="inStockNumber">Number
-							in stock</label>
+						<label class="col-md-2 control-label" for="inStockNumber">SKU</label>
 						<div class="col-md-8">
 							<input th:value="${cigarette.inStockNumber}" type="number"
 								name="inStockNumber" class="form-control" id="inStockNumber"
 								placeholder="Number of in-stock copies" /> <span
-								class="help-block">Number of in-stock copies</span>
+								class="help-block">Numero di copie nello stock del magazzino</span>
 						</div>
 					</div>
 
 					<!-- status of cigarette -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="status">Status</label>
+						<label class="col-md-2 control-label" for="status">Stato</label>
 						<div class="col-md-8">
 							<label><input value="true" type="radio" name="active"
-								checked="checked" /> Active </label> <label><input
-								value="false" type="radio" name="active" /> Inactive </label> <span
-								class="help-block">Whether the cigarette is active or
-								inactive</span>
+								checked="checked" /> Attivo </label> <label><input
+								value="false" type="radio" name="active" /> Inattivo </label> <span
+								class="help-block">Settare lo stato della sigaretta</span>
 						</div>
 					</div>
 
 					<!-- description -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="description">Description</label>
+						<label class="col-md-2 control-label" for="description">Descrizione</label>
 						<div class="col-md-8">
 							<textarea name="description" rows="5" class="form-control"
 								id="description" th:value="${cigarette.description}"
 								placeholder="Description" />
-							<span class="help-block">Description of the cigarette</span>
+							<span class="help-block">Descrizione della sigaretta</span>
 						</div>
 					</div>
 
 					<!-- upload image -->
 					<div class="form-group">
 						<div class="col-md-2">
-							<label for="cigaretteImage">Upload cigarette image</label>
+							<label for="cigaretteImage">Aggiorna immagine</label>
 						</div>
 						<div class="col-md-8">
 							<input id="cigaretteImage" type="file" name="cigaretteImage"
@@ -197,9 +192,9 @@
 					<div class="form-group">
 						<div class="col-md-2"></div>
 						<div class="col-md-8">
-							<button type="submit" class="btn btn-success">Update</button>
+							<button type="submit" class="btn btn-success">Aggiorna</button>
 							<a class="btn btn-danger"
-								th:href="@{/cigarette/cigaretteInfo(id=${cigarette.id})}">Cancel</a>
+								th:href="@{/cigarette/cigaretteInfo(id=${cigarette.id})}">Cancella</a>
 						</div>
 					</div>
 				</fieldset>
