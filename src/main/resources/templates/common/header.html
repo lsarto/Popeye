@@ -105,14 +105,8 @@ ________________________________________________________ -->
 									sec:authentication="name"></label></b> <a th:href="@{/myProfile}"
 									href="#" sec:authorize="isAuthenticated()"><i
 									class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Il
-										mio Account</span> </a> <a th:href="@{/shoppingCart/cart}" href="#"
-									sec:authorize="isAuthenticated()"><button type="button"
-										class="btn btn-default" aria-label="Left Align"
-										style="background-color: #555555; border: #555555">
-										<span class="glyphicon glyphicon-shopping-cart"
-											aria-hidden="false" style="color: white"> <span>Carrello</span> </span>
-									</button> </a> <a sec:authorize="isAuthenticated()" th:href="@{/logout}"><i
-									class="fa fa-sign-in"></i> <span
+										mio Account</span> </a><a sec:authorize="isAuthenticated()"
+									th:href="@{/logout}"><i class="fa fa-sign-in"></i> <span
 									class="hidden-xs text-uppercase">Log out</span></a>
 							</div>
 						</div>
@@ -155,15 +149,18 @@ ________________________________________________________ -->
 
 							<ul class="nav navbar-nav navbar-right">
 								<li class="dropdown"><a href="#" class="dropdown-toggle"
-									th:href="@{/}">Home</a></li>
+									th:href="@{/}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 								<li class="dropdown use-yamm yamm-fw"><a
-									class="dropdown-toggle" th:href="@{/shop-category}">Negozio</a></li>
+									class="dropdown-toggle" th:href="@{/shop-category}"><span class="glyphicon glyphicon-gift"></span> Negozio</a></li>
 
 
 								<!-- ========== FULL WIDTH MEGAMENU END ================== -->
 
+								<li class="dropdown" ><a th:href="@{/shoppingCart/cart}"
+									href="#" class="dropdown-toggle"
+									sec:authorize="isAuthenticated()"><span class="glyphicon glyphicon-shopping-cart"></span> Carrello</a></li>
 								<li class="dropdown"><a th:href="@{/}"
-									class="dropdown-toggle">Contatti<b class="caret"></b></a></li>
+									class="dropdown-toggle"><span class="glyphicon glyphicon-envelope"></span> Contatti<b class="caret"></b></a></li>
 							</ul>
 
 						</div>
