@@ -5,6 +5,8 @@
 
 <body>
 
+<div th:replace="common/header :: navbar"></div>
+
 	<div class="container">
 		<div class="row" style="margin-bottom: -100px;">
 			<div class="col-xs-8">
@@ -38,7 +40,7 @@
 					<div class="col-xs-2"></div>
 					<div class="col-xs-2">
 
-						<a th:href="@{/cigaretteDetail(id=${cartItem.cigarette.id})}"> <img
+						<a th:href="@{/shop-detail(id=${cartItem.cigarette.id})}"> <img
 							class="img-responsive shelf-cigarette"
 							th:src="#{adminPath}+@{/image/cigarette/}+${cartItem.cigarette.id}+'.png'"
 							style="width: 70px;" />
@@ -46,7 +48,7 @@
 					</div>
 					<div class="col-xs-6">
 						<div style="margin-left: 50px;">
-							<a th:href="@{/cigaretteDetail?id=}+${cartItem.cigarette.id}"><h4
+							<a th:href="@{/shop-detail?id=}+${cartItem.cigarette.id}"><h4
 									th:text="${cartItem.cigarette.name}"></h4></a>
 						</div>
 					</div>
