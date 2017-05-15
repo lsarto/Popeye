@@ -126,6 +126,8 @@ public class CheckoutController {
 		model.addAttribute("listOfCreditCards", true);
 		model.addAttribute("classActiveBilling", true);
 		model.addAttribute("listOfShippingAddresses", true);
+		model.addAttribute("shippingAddress", shippingAddress);
+		model.addAttribute("billingAddress", billingAddress);
 				
 		return "shop-checkout4";
 	}
@@ -141,20 +143,39 @@ public class CheckoutController {
 		model.addAttribute("classActiveShipping", true);
 		model.addAttribute("listOfShippingAddresses", true);
 		model.addAttribute("classActiveBilling", true);
+		model.addAttribute("shippingAddress", shippingAddress);
+		model.addAttribute("billingAddress", billingAddress);
 		
 		UserShipping userShipping = new UserShipping();
+		
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
+		List<UserShipping> userShippingList = user.getUserShippingList();
+		List<UserPayment> userPaymentList = user.getUserPaymentList();
+		
+		model.addAttribute("userShippingList", userShippingList);
+		model.addAttribute("userPaymentList", userPaymentList);
 		
 		UserBilling userBilling = new UserBilling();
 		UserPayment userPayment = new UserPayment();
 		
-	
+		model.addAttribute("shippingAddress", shippingAddress);
+		model.addAttribute("payment", payment);
+		model.addAttribute("billingAddress", billingAddress);
+		model.addAttribute("cartItemList", cartItemList);
+		model.addAttribute("shoppingCart", user.getShoppingCart());
+		
+		List<String> stateList = USConstants.listOfUSStatesCode;
+		Collections.sort(stateList);
+		model.addAttribute("stateList", stateList);
+		
+		model.addAttribute("classActiveShipping", true);
 			
 		model.addAttribute("userShipping", userShipping);
 		model.addAttribute("userBilling", userBilling);
 		model.addAttribute("userPayment", userPayment);
+		model.addAttribute("payment", payment);
+		paymentService.setByUserPayment(userPayment, payment);
 		
-		List<String> stateList = USConstants.listOfUSStatesCode;
-		Collections.sort(stateList);
 		/*model.addAttribute("orderList", user.orderList());*/
 		
 //		List<String> stateList = USConstants.listOfUSStatesCode;
@@ -200,7 +221,7 @@ public class CheckoutController {
 	
 	@RequestMapping(value="/shop-checkout3", method=RequestMethod.POST)
 	public String ShopCheckout3(
-			/*
+			
 			@ModelAttribute("firstname") String firstname,
 			@ModelAttribute("lastname") String lastname,
 			@ModelAttribute("company") String company,
@@ -211,10 +232,10 @@ public class CheckoutController {
 			@ModelAttribute("country") String country,
 			@ModelAttribute("phone") String phone,
 			@ModelAttribute("email") String email,
-			*/
+			
 			@ModelAttribute("shippingMethod") String shippingMethod,
 			Principal principal, Model model) {
-		/*
+		
 		model.addAttribute("firstname", firstname);
 		model.addAttribute("lastname", lastname);
 		model.addAttribute("company", company);
@@ -225,7 +246,7 @@ public class CheckoutController {
 		model.addAttribute("country", country);
 		model.addAttribute("phone", phone);
 		model.addAttribute("email", email);
-		*/
+		
 		model.addAttribute("shippingMethod", shippingMethod);
 		
 		return "shop-checkout3";
@@ -234,8 +255,7 @@ public class CheckoutController {
 	
 	@RequestMapping(value="/shop-checkout4", method=RequestMethod.POST)
 	public String ShopCheckout4(
-			/*
-			@RequestParam("id") Long CartId,
+			
 			@ModelAttribute("firstname") String firstname,
 			@ModelAttribute("lastname") String lastname,
 			@ModelAttribute("company") String company,
@@ -246,11 +266,11 @@ public class CheckoutController {
 			@ModelAttribute("country") String country,
 			@ModelAttribute("phone") String phone,
 			@ModelAttribute("email") String email,
-			*/
+			
 			
 			@ModelAttribute("payment") String payment,
 			Principal principal, Model model) {
-		/*
+		
 		model.addAttribute("firstname", firstname);
 		model.addAttribute("lastname", lastname);
 		model.addAttribute("company", company);
@@ -261,10 +281,11 @@ public class CheckoutController {
 		model.addAttribute("country", country);
 		model.addAttribute("phone", phone);
 		model.addAttribute("email", email);
-		*/
+		
 		
 		model.addAttribute("payment", payment); 
-		
+		model.addAttribute("shippingAddress", shippingAddress);
+		model.addAttribute("billingAddress", billingAddress);
 		
 
 		
@@ -281,6 +302,7 @@ public class CheckoutController {
 		
 		List<String> stateList = USConstants.listOfUSStatesCode;
 		Collections.sort(stateList);
+		model.addAttribute("stateList", stateList);
 		/*model.addAttribute("orderList", user.orderList());*/
 		
 //		List<String> stateList = USConstants.listOfUSStatesCode;
@@ -382,7 +404,19 @@ public class CheckoutController {
 	public String checkoutPost(@ModelAttribute("shippingAddress") ShippingAddress shippingAddress,
 			@ModelAttribute("billingAddress") BillingAddress billingAddress, @ModelAttribute("payment") Payment payment,
 			@ModelAttribute("billingSameAsShipping") String billingSameAsShipping,
-			@ModelAttribute("shippingMethod") String shippingMethod, Principal principal, Model model) {
+			@ModelAttribute("shippingMethod") String shippingMethod,
+			@ModelAttribute("firstname") String firstname,
+			@ModelAttribute("lastname") String lastname,
+			@ModelAttribute("company") String company,
+			@ModelAttribute("street") String street,
+			@ModelAttribute("city") String city,
+			@ModelAttribute("zip") String zip,
+			@ModelAttribute("state") String state,
+			@ModelAttribute("country") String country,
+			@ModelAttribute("phone") String phone,
+			@ModelAttribute("email") String email,
+
+			Principal principal, Model model) {
 		ShoppingCart shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
 
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
