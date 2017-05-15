@@ -19,6 +19,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -455,6 +456,79 @@ public class HomeController {
 		model.addAttribute("user", user);
 
 		model.addAttribute("classActiveEdit", true);
-		return "blog";
+		return "redirect:/myProfile";
+	}
+	
+	@RequestMapping(value="/updateUserInfo", method=RequestMethod.POST)
+	public String updateUserInfo(
+			@ModelAttribute("user") User user,
+			@ModelAttribute("newPassword") String newPassword,
+			Model model
+			) throws Exception {
+		User currentUser = userService.findById(user.getId());
+		
+		if(currentUser == null) {
+			throw new Exception ("User not found");
+		}
+		
+		/*verifica se l'email è già esistente*/
+		if (userService.findByEmail(user.getEmail())!=null) {
+			if(userService.findByEmail(user.getEmail()).getId() != currentUser.getId()) {
+				model.addAttribute("emailExists", true);
+				return "customer-account";
+			}
+		}
+		
+		/*verifica se l'username è già esistente*/
+		if (userService.findByUsername(user.getUsername())!=null) {
+			if(userService.findByUsername(user.getUsername()).getId() != currentUser.getId()) {
+				model.addAttribute("usernameExists", true);
+				return "customer-account";
+			}
+		}
+		
+//		update password
+		if (newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")){
+			BCryptPasswordEncoder passwordEncoder = SecurityUtility.passwordEncoder();
+			String dbPassword = currentUser.getPassword();
+			if(passwordEncoder.matches(user.getPassword(), dbPassword)){
+				currentUser.setPassword(passwordEncoder.encode(newPassword));
+			} else {
+				model.addAttribute("incorrectPassword", true);
+				
+				return "customer-account";
+			}
+		}
+		
+		if(user.getFirstName() != null){
+			currentUser.setFirstName(user.getFirstName());
+		}
+		
+		if(user.getLastName() != null){
+			currentUser.setLastName(user.getLastName());
+		}
+		
+		if(user.getUsername() != null){
+			currentUser.setUsername(user.getUsername());
+		}
+		
+		if(user.getEmail() != null){
+			currentUser.setEmail(user.getEmail());
+		}
+		
+		userService.save(currentUser);
+		
+		model.addAttribute("updateSuccess", true);
+		model.addAttribute("user", currentUser);
+		model.addAttribute("classActiveEdit", true);
+		
+		UserDetails userDetails = userSecurityService.loadUserByUsername(currentUser.getUsername());
+
+		Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),
+				userDetails.getAuthorities());
+		
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		
+		return "customer-account";
 	}
 }

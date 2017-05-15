@@ -213,8 +213,6 @@ _________________________________________________________ -->
 						<h4 class="modal-title" id="Login">Customer login</h4>
 					</div>
 					<div class="modal-body">
-						<div th:if="${param.error != null}" style="color: red;">Incorrect
-							username or password.</div>
 						<form th:action="@{/login}" method="post">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="name"
@@ -263,8 +261,8 @@ _________________________________________________________ -->
 		<script src="/js/jquery.counterup.min.js"></script>
 		<script src="/js/jquery.parallax-1.1.3.js"></script>
 		<script src="/js/front.js"></script>
-
-
+		<script th:src="@{/js/scripts.js}"></script>
+	
 
 		<!-- owl carousel -->
 		<script src="/js/owl.carousel.min.js"></script>

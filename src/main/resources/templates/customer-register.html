@@ -84,8 +84,8 @@
 								Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
 
 							<hr>
-							<div th:if="${param.error != null}" style="color: red;">
-								Incorrect username or password.</div>
+							<div class="alert alert-danger" role="alert" th:if="${param.error != null}" style="color: red;">
+								Username o password non corretti</div>
 							<form th:action="@{/login}" method="post">
 								<div class="form-group">
 									<label for="username">Name</label> <input required="required"
@@ -326,8 +326,6 @@ _________________________________________________________-->
 						<h4 class="modal-title" id="Login">Recupera password</h4>
 					</div>
 					<div class="modal-body">
-						<div th:if="${param.error != null}" style="color: red;">Incorrect
-							username or password.</div>
 						<div th:if="${emailNotExist}" class="alert alert-danger">Email
 							non esistente</div>
 						<div th:if="${forgetPasswordEmailSent}"

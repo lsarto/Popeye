@@ -27,5 +27,7 @@ public interface UserService {
 	void setUserDefaultPayment(Long defaultPaymentId, User user);
 	
 	void updateUserShipping(UserShipping userShipping, User user);
+
+	User findById(Long id);
 	
 }
