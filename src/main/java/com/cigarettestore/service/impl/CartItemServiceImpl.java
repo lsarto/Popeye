@@ -77,4 +77,9 @@ public class CartItemServiceImpl implements CartItemService{
 		cigaretteToCartItemRepository.deleteByCartItem(cartItem);
 		cartItemRepository.delete(cartItem);
 	}
+	
+	
+	public CartItem save(CartItem cartItem) {
+		return cartItemRepository.save(cartItem);
+	}
 }
