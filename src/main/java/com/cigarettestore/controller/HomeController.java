@@ -493,6 +493,7 @@ public class HomeController {
 			String dbPassword = currentUser.getPassword();
 			if(passwordEncoder.matches(user.getPassword(), dbPassword)){
 				currentUser.setPassword(passwordEncoder.encode(newPassword));
+				model.addAttribute("passwordChanged", true);
 			} else {
 				model.addAttribute("incorrectPassword", true);
 				
