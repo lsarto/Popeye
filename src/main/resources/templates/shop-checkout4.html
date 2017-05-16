@@ -59,19 +59,6 @@
 						</div>
 
 						<div class="box" th:if="${listOfCreditCards}">
-							<form th:action="@{/checkout}" method="post">
-							
-							<input hidden="hidden" name="firstname" th:value="${firstname}" />
-								<input hidden="hidden" name="lastname" th:value="${lastname}" />
-								<input hidden="hidden" name="company" th:value="${company}" /> <input
-									hidden="hidden" name="street" th:value="${street}" /> <input
-									hidden="hidden" name="city" th:value="${city}" /> <input
-									hidden="hidden" name="zip" th:value="${zip}" /> <input
-									hidden="hidden" name="state" th:value="${state}" /> <input
-									hidden="hidden" name="country" th:value="${country}" /> <input
-									hidden="hidden" name="phone" th:value="${phone}" /> <input
-									hidden="hidden" name="email" th:value="${email}" />
-							
 								<table class="table">
 										<thead>
 											<tr>
@@ -82,28 +69,17 @@
 										<tbody>
 											<tr th:each="userPayment : ${userPaymentList}">
 												<td th:text="${userPayment.cardName}"></td>
-												<td><button class="btn btn-template-main"
+												<td><a class="btn btn-template-main"
 													th:href="@{/setPaymentMethod(userPaymentId=${userPayment.id})}">use
-														this payment</button></td>
+														this payment</a></td>
 											</tr>
 										</tbody>
 									</table>
-							</form>
 						</div>
 
 						<div class="box" th:if="${addNewCreditCard}">
 							<form  th:action="@{/checkout}" method="post">
 
-								<input hidden="hidden" name="firstname" th:value="${firstname}" />
-								<input hidden="hidden" name="lastname" th:value="${lastname}" />
-								<input hidden="hidden" name="company" th:value="${company}" /> <input
-									hidden="hidden" name="street" th:value="${street}" /> <input
-									hidden="hidden" name="city" th:value="${city}" /> <input
-									hidden="hidden" name="zip" th:value="${zip}" /> <input
-									hidden="hidden" name="state" th:value="${state}" /> <input
-									hidden="hidden" name="country" th:value="${country}" /> <input
-									hidden="hidden" name="phone" th:value="${phone}" /> <input
-									hidden="hidden" name="email" th:value="${email}" />
 
 								<!-- Billing Address -->
 								<hr />
