@@ -105,6 +105,12 @@ public class CheckoutController {
 
 		return "shop-checkout4";
 	}
+	
+	@RequestMapping("/shop-checkout5")
+	public String ShopCheckout5(@ModelAttribute("shoppingCart") ShoppingCart shoppingCart) {
+
+		return "shop-checkout5";
+	}
 
 	@RequestMapping("/paymentWithCreditCard")
 	public String listOfCreditCards(Model model, Principal principal, HttpServletRequest request) {
