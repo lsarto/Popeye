@@ -83,64 +83,75 @@ _________________________________________________________ -->
 					<div class="col-md-9 clearfix" id="checkout">
 
 						<div class="box">
-							<form th:action="@{/checkout}" method="post">
+							<form method="post" action="checkout">
 								<ul class="nav nav-pills nav-justified">
 									<li><a href="shop-checkout1.html"><i
 											class="fa fa-map-marker"></i><br>Address</a></li>
 									<li><a href="shop-checkout2.html"><i
 											class="fa fa-truck"></i><br>Delivery Method</a></li>
 									<li><a href="shop-checkout3.html"><i
-											class="fa fa-money"></i><br>Payment Method</a></li>
-									<li class="disabled"><a href="shop-checkout5.html" data-toggle="collapse"><i
+											class="glyphicon glyphicon-euro""></i><br>Payment Method</a></li>
+									<li class="disabled"><a href="#" data-toggle="collapse"><i
 											class="fa fa-money"></i><br>Payment Information</a></li>
-									<li class="active"><a href="#"><i class="fa fa-eye"></i><br>Order
+									<li class=""><a href="#"><i class="fa fa-eye"></i><br>Order
 											Review</a></li>
 								</ul>
 
-								<div class="content">
-									<div class="table-responsive">
-										<table class="table">
-											<thead>
-												<tr>
-													<th colspan="2">Product</th>
-													<th>Quantity</th>
-													<th>Unit price</th>
-													<th>Discount</th>
-													<th>Total</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td><a href="#"> <img src="img/detailsquare.jpg"
-															alt="White Blouse Armani">
-													</a></td>
-													<td><a href="#">White Blouse Armani</a></td>
-													<td>2</td>
-													<td>$123.00</td>
-													<td>$0.00</td>
-													<td>$246.00</td>
-												</tr>
-												<tr>
-													<td><a href="#"> <img src="img/basketsquare.jpg"
-															alt="Black Blouse Armani">
-													</a></td>
-													<td><a href="#">Black Blouse Armani</a></td>
-													<td>1</td>
-													<td>$200.00</td>
-													<td>$0.00</td>
-													<td>$200.00</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<th colspan="5">Total</th>
-													<th>$446.00</th>
-												</tr>
-											</tfoot>
-										</table>
-
-									</div>
-									<!-- /.table-responsive -->
+								<div th:each="cartItem : ${cartItemList}">
+									<form th:action="@{/shoppingCart/updateCartItem}" method="post"
+										th:id="'update-item-'+${cartItem.id}"></form>
+								</div>
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+											<tr>
+												<th colspan="2">Prodotto</th>
+												<th>Quantità</th>
+												<th>Prezzo Lista</th>
+												<th>Prezzo Scontato</th>
+												<th colspan="2">Totale</th>
+											</tr>
+										</thead>
+										<tbody th:each="cartItem : ${cartItemList}">
+											<tr>
+												<td><a
+													th:href="@{shop-detail(id=${cartItem.cigarette.id})}">
+														<img
+														th:src="#{adminPath}+@{/image/cigarette/}+
+														${cartItem.cigarette.id}+'-1.png'">
+												</a></td>
+												<td><a
+													th:href="@{/shop-detail?id=}+${cartItem.cigarette.id}"><span
+														th:text="${cartItem.cigarette.name}"></span></a></td>
+												<td><input hidden="hidden" name="id"
+													th:value="${cartItem.id}"
+													th:form="'update-item-'+${cartItem.id}" /> <input
+													type="number" class="form-control" th:id="${cartItem.id}"
+													th:name="qty"
+													th:disabled="${cartItem.cigarette.inStockNumber==0}"
+													th:value="${cartItem.qty}" min="1" max="9"
+													th:form="'update-item-'+${cartItem.id}" /></td>
+												<td>$ <span th:text="${cartItem.cigarette.listPrice}"></span></td>
+												<td>$ <span th:text="${cartItem.cigarette.ourPrice}"></span></td>
+												<td>$ <span
+													th:text="${cartItem.qty * cartItem.cigarette.ourPrice}"></span></td>
+												<td><a
+													th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}"><i
+														class="fa fa-trash-o"></i></a></td>
+												<td><button class="btn btn-default"
+														th:form="'update-item-'+${cartItem.id}" type="submit">
+														<i class="fa fa-refresh"></i>
+													</button></td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th colspan="5">Totale</th>
+												<th colspan="2">$ <span
+													th:text="${shoppingCart.grandTotal}"></span></th>
+											</tr>
+										</tfoot>
+									</table>
 								</div>
 								<!-- /.content -->
 
@@ -165,37 +176,7 @@ _________________________________________________________ -->
 
 					<div class="col-md-3">
 
-						<div class="box" id="order-summary">
-							<div class="box-header">
-								<h3>Order summary</h3>
-							</div>
-							<p class="text-muted">Shipping and additional costs are
-								calculated based on the values you have entered.</p>
-
-							<div class="table-responsive">
-								<table class="table">
-									<tbody>
-										<tr>
-											<td>Order subtotal</td>
-											<th>$446.00</th>
-										</tr>
-										<tr>
-											<td>Shipping and handling</td>
-											<th>$10.00</th>
-										</tr>
-										<tr>
-											<td>Tax</td>
-											<th>$0.00</th>
-										</tr>
-										<tr class="total">
-											<td>Total</td>
-											<th>$456.00</th>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-
-						</div>
+						<!-- <div th:replace="common/orderSummary :: orderSummary"></div>  -->
 
 					</div>
 					<!-- /.col-md-3 -->
