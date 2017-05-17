@@ -245,6 +245,11 @@ public class HomeController {
 	public String setDefaultPayment(
 			@ModelAttribute("defaultUserPaymentId") Long defaultPaymentId, Principal principal, Model model
 			) {
+		if(defaultPaymentId == null || defaultPaymentId == 0){
+			model.addAttribute("emptyPaymentId", true);
+			return "forward:myProfile";
+		}
+		
 		User user = userService.findByUsername(principal.getName());
 		userService.setUserDefaultPayment(defaultPaymentId, user);
 		
