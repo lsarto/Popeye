@@ -85,15 +85,15 @@ _________________________________________________________ -->
 						<div class="box">
 							<form method="post" action="checkout">
 								<ul class="nav nav-pills nav-justified">
-									<li><a href="shop-checkout1.html"><i
+									<li><a th:href="@{/shop-checkout1}"><i
 											class="fa fa-map-marker"></i><br>Address</a></li>
-									<li><a href="shop-checkout2.html"><i
+									<li><a th:href="@{/shop-checkout2}"><i
 											class="fa fa-truck"></i><br>Delivery Method</a></li>
-									<li><a href="shop-checkout3.html"><i
+									<li class=""><a th:href="@{/shop-checkout3}"><i
 											class="glyphicon glyphicon-euro""></i><br>Payment Method</a></li>
-									<li class="disabled"><a href="#" data-toggle="collapse"><i
+									<li class=""><a th:href="@{/shop-checkout4}" data-toggle="collapse"><i
 											class="fa fa-money"></i><br>Payment Information</a></li>
-									<li class=""><a href="#"><i class="fa fa-eye"></i><br>Order
+									<li class="active"><a href="#"><i class="fa fa-eye"></i><br>Order
 											Review</a></li>
 								</ul>
 
@@ -148,7 +148,7 @@ _________________________________________________________ -->
 											<tr>
 												<th colspan="5">Totale</th>
 												<th colspan="2">$ <span
-													th:text="${shoppingCart.grandTotal}"></span></th>
+													th:text="${session.shoppingCart.grandTotal}"></span></th>
 											</tr>
 										</tfoot>
 									</table>

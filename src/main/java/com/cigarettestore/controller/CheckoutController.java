@@ -64,7 +64,7 @@ public class CheckoutController {
 
 	@Autowired
 	private UserShippingService userShippingService;
-	
+
 	@Autowired
 	private ShoppingCartService shoppingCartService;
 
@@ -81,9 +81,12 @@ public class CheckoutController {
 	private PaymentService paymentService;
 
 	@RequestMapping("/shop-checkout1")
-	public String ShopCheckout1(@ModelAttribute("shoppingCart") ShoppingCart shoppingCart, Model model,
+	public String ShopCheckout1(
+			HttpSession session,
+			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart, Model model,
 			Principal principal) {
 
+		session.setAttribute("shoppingCart", shoppingCart);
 		UserBilling userBilling = new UserBilling();
 		model.addAttribute("userBilling", userBilling);
 		List<String> stateList = USConstants.listOfUSStatesCode;
@@ -110,7 +113,7 @@ public class CheckoutController {
 
 		return "shop-checkout4";
 	}
-	
+
 	@RequestMapping("/shop-checkout5")
 	public String ShopCheckout5(@ModelAttribute("shoppingCart") ShoppingCart shoppingCart) {
 
@@ -189,16 +192,13 @@ public class CheckoutController {
 	}
 
 	@RequestMapping(value = "/shop-checkout2", method = RequestMethod.POST)
-	public String ShopCheckout2(
-			HttpSession session,
-			@ModelAttribute("firstname") String firstname,
+	public String ShopCheckout2(HttpSession session, @ModelAttribute("firstname") String firstname,
 			@ModelAttribute("lastname") String lastname, @ModelAttribute("company") String company,
 			@ModelAttribute("street") String street, @ModelAttribute("city") String city,
 			@ModelAttribute("zip") String zip, @ModelAttribute("state") String state,
 			@ModelAttribute("country") String country, @ModelAttribute("phone") String phone,
 			@ModelAttribute("email") String email, Principal principal, Model model) {
 
-		
 		session.setAttribute("firstname", firstname);
 		session.setAttribute("lastname", lastname);
 		session.setAttribute("company", company);
@@ -214,9 +214,8 @@ public class CheckoutController {
 	}
 
 	@RequestMapping(value = "/shop-checkout3", method = RequestMethod.POST)
-	public String ShopCheckout3(
-			@ModelAttribute("shippingMethod") String shippingMethod, Principal principal, Model model) {
-
+	public String ShopCheckout3(@ModelAttribute("shippingMethod") String shippingMethod, Principal principal,
+			Model model) {
 
 		model.addAttribute("shippingMethod", shippingMethod);
 
@@ -224,9 +223,8 @@ public class CheckoutController {
 	}
 
 	@RequestMapping(value = "/shop-checkout4", method = RequestMethod.POST)
-	public String ShopCheckout4(
-			HttpSession session,
-			@ModelAttribute("payment") String payment, Principal principal, Model model) {
+	public String ShopCheckout4(HttpSession session, @ModelAttribute("payment") String payment, Principal principal,
+			Model model) {
 
 		session.setAttribute("payment", payment);
 		session.setAttribute("shippingAddress", shippingAddress);
@@ -238,6 +236,7 @@ public class CheckoutController {
 		UserShipping userShipping = new UserShipping();
 		UserPayment userPayment = new UserPayment();
 
+		session.setAttribute("existingCard", "false");
 		session.setAttribute("userShipping", userShipping);
 		session.setAttribute("userBilling", userBilling);
 		session.setAttribute("userPayment", userPayment);
@@ -258,80 +257,142 @@ public class CheckoutController {
 	}
 
 	@RequestMapping(value = "/shop-checkout5", method = RequestMethod.POST)
-	public String ShopCheckout5() {
+	public String ShopCheckout5(@ModelAttribute("shippingAddress") ShippingAddress shippingAddress,
+			@ModelAttribute("payment") Payment payment,
+			@ModelAttribute("shippingMethod") String shippingMethod,
+			@ModelAttribute("billingAddress") BillingAddress billingAddress,
+			HttpSession session) {
+		
+		session.setAttribute("billingAddress", billingAddress);
+		session.setAttribute("payment", payment);
+		session.setAttribute("shippingMethod", shippingMethod);
+		session.setAttribute("shippingAddress", shippingAddress);
+
+		
 		return "shop-checkout5";
 	}
 
-
 	@RequestMapping(value = "/checkout", method = RequestMethod.POST)
-	public String checkoutPost(
-			HttpSession session,
-			@ModelAttribute("shippingMethod") String shippingMethod, 
-			Principal principal, Model model) {
+	public String checkoutPost(HttpSession session, @ModelAttribute("billingAddress") BillingAddress billingAddress,
+			@ModelAttribute("payment") Payment payment,
+			@ModelAttribute("shippingAddress") ShippingAddress shippingAddress,
+			@ModelAttribute("billingSameAsShipping") String billingSameAsShipping,
+			@ModelAttribute("shippingMethod") String shippingMethod, Principal principal, Model model) {
 		ShoppingCart shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
 
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 		model.addAttribute("cartItemList", cartItemList);
 
-		UserShipping userShipping = (UserShipping) session.getAttribute("userShipping");
-		BillingAddress billingAddress = (BillingAddress) session.getAttribute("billingAddress");
-		Payment payment = (Payment) session.getAttribute("payment");
-		/*
-		 * if (billingSameAsShipping.equals("true")) {
-		 * billingAddress.setBillingAddressName(shippingAddress.
-		 * getShippingAddressName());
-		 * billingAddress.setBillingAddressStreet1(shippingAddress.
-		 * getShippingAddressStreet1());
-		 * billingAddress.setBillingAddressStreet2(shippingAddress.
-		 * getShippingAddressStreet2());
-		 * billingAddress.setBillingAddressCity(shippingAddress.
-		 * getShippingAddressCity());
-		 * billingAddress.setBillingAddressState(shippingAddress.
-		 * getShippingAddressState());
-		 * billingAddress.setBillingAddressCountry(shippingAddress.
-		 * getShippingAddressCountry());
-		 * billingAddress.setBillingAddressZipcode(shippingAddress.
-		 * getShippingAddressZipcode()); }
-		 */
+		if (session.getAttribute("existingCard").equals("true")) {
 
-		if (userShipping.getUserShippingStreet1().isEmpty() || userShipping.getUserShippingCity().isEmpty()
-				|| userShipping.getUserShippingState().isEmpty()
-				|| userShipping.getUserShippingName().isEmpty()
-				|| userShipping.getUserShippingZipcode().isEmpty() || payment.getCardNumber().isEmpty()
-				|| payment.getCvc() == 0 || billingAddress.getBillingAddressStreet1().isEmpty()
-				|| billingAddress.getBillingAddressCity().isEmpty() || billingAddress.getBillingAddressState().isEmpty()
-				|| billingAddress.getBillingAddressName().isEmpty()
-				|| billingAddress.getBillingAddressZipcode().isEmpty())
-			return "redirect:/checkout?id=" + shoppingCart.getId() + "&missingRequiredField=true";
+			UserShipping userShipping = (UserShipping) session.getAttribute("userShipping");
+			billingAddress = (BillingAddress) session.getAttribute("billingAddress");
+			payment = (Payment) session.getAttribute("payment");
 
-		User user = userService.findByUsername(principal.getName());
+			if (userShipping.getUserShippingStreet1().isEmpty() || userShipping.getUserShippingCity().isEmpty()
+					|| userShipping.getUserShippingState().isEmpty() || userShipping.getUserShippingName().isEmpty()
+					|| userShipping.getUserShippingZipcode().isEmpty() || payment.getCardNumber().isEmpty()
+					|| payment.getCvc() == 0 || billingAddress.getBillingAddressStreet1().isEmpty()
+					|| billingAddress.getBillingAddressCity().isEmpty()
+					|| billingAddress.getBillingAddressState().isEmpty()
+					|| billingAddress.getBillingAddressName().isEmpty()
+					|| billingAddress.getBillingAddressZipcode().isEmpty())
+				return "redirect:/checkout?id=" + shoppingCart.getId() + "&missingRequiredField=true";
 
-		Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, payment, shippingMethod,
-				user);
+			shippingAddress.setShippingAddressName(userShipping.getUserShippingName());
+			shippingAddress.setShippingAddressStreet1(userShipping.getUserShippingStreet1());
+			shippingAddress.setShippingAddressStreet2(userShipping.getUserShippingStreet2());
+			shippingAddress.setShippingAddressCity(userShipping.getUserShippingCity());
+			shippingAddress.setShippingAddressState(userShipping.getUserShippingState());
+			shippingAddress.setShippingAddressCountry(userShipping.getUserShippingCountry());
+			shippingAddress.setShippingAddressZipcode(userShipping.getUserShippingZipcode());
+			
+			User user = userService.findByUsername(principal.getName());
 
-		mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ENGLISH));
+			Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, payment,
+					shippingMethod, user);
 
-		shoppingCartService.clearShoppingCart(shoppingCart);
+			mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ENGLISH));
 
-		LocalDate today = LocalDate.now();
-		LocalDate estimatedDeliveryDate;
+			shoppingCartService.clearShoppingCart(shoppingCart);
 
-		if (shippingMethod.equals("groundShipping")) {
-			estimatedDeliveryDate = today.plusDays(5);
+			LocalDate today = LocalDate.now();
+			LocalDate estimatedDeliveryDate;
+
+			if (shippingMethod.equals("groundShipping")) {
+				estimatedDeliveryDate = today.plusDays(5);
+			} else {
+				estimatedDeliveryDate = today.plusDays(3);
+			}
+
+			model.addAttribute("estimatedDeliveryDate", estimatedDeliveryDate);
+
+			return "orderSubmittedPage";
+
 		} else {
-			estimatedDeliveryDate = today.plusDays(3);
+			session.setAttribute("existingCard", "false");
+			shippingAddress = (ShippingAddress) session.getAttribute("shippingAddress");
+			payment = (Payment) session.getAttribute("payment");
+			shippingMethod = (String) session.getAttribute("shippingMethod");
+			billingAddress = (BillingAddress) session.getAttribute("billingAddress");
+			
+			/*
+			 * if (billingSameAsShipping.equals("true")) {
+			 * billingAddress.setBillingAddressName(shippingAddress.
+			 * getShippingAddressName());
+			 * billingAddress.setBillingAddressStreet1(shippingAddress.
+			 * getShippingAddressStreet1());
+			 * billingAddress.setBillingAddressStreet2(shippingAddress.
+			 * getShippingAddressStreet2());
+			 * billingAddress.setBillingAddressCity(shippingAddress.
+			 * getShippingAddressCity());
+			 * billingAddress.setBillingAddressState(shippingAddress.
+			 * getShippingAddressState());
+			 * billingAddress.setBillingAddressCountry(shippingAddress.
+			 * getShippingAddressCountry());
+			 * billingAddress.setBillingAddressZipcode(shippingAddress.
+			 * getShippingAddressZipcode()); }
+			 */
+
+			if (shippingAddress.getShippingAddressStreet1().isEmpty()
+					|| shippingAddress.getShippingAddressCity().isEmpty()
+					|| shippingAddress.getShippingAddressState().isEmpty()
+					|| shippingAddress.getShippingAddressName().isEmpty()
+					|| shippingAddress.getShippingAddressZipcode().isEmpty() || payment.getCardNumber().isEmpty()
+					|| payment.getCvc() == 0 || billingAddress.getBillingAddressStreet1().isEmpty()
+					|| billingAddress.getBillingAddressCity().isEmpty()
+					|| billingAddress.getBillingAddressState().isEmpty()
+					|| billingAddress.getBillingAddressName().isEmpty()
+					|| billingAddress.getBillingAddressZipcode().isEmpty())
+				return "redirect:/checkout?id=" + shoppingCart.getId() + "&missingRequiredField=true";
+
+			User user = userService.findByUsername(principal.getName());
+
+			Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, payment,
+					shippingMethod, user);
+
+			mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ENGLISH));
+
+			shoppingCartService.clearShoppingCart(shoppingCart);
+
+			LocalDate today = LocalDate.now();
+			LocalDate estimatedDeliveryDate;
+
+			if (shippingMethod.equals("groundShipping")) {
+				estimatedDeliveryDate = today.plusDays(5);
+			} else {
+				estimatedDeliveryDate = today.plusDays(3);
+			}
+
+			model.addAttribute("estimatedDeliveryDate", estimatedDeliveryDate);
+
+			return "orderSubmittedPage";
 		}
-
-		model.addAttribute("estimatedDeliveryDate", estimatedDeliveryDate);
-
-		return "orderSubmittedPage";
 	}
 
 	@RequestMapping("/setPaymentMethod")
-	public String setPaymentMethod(
-			HttpSession session,
-			@RequestParam("userPaymentId") Long userPaymentId, Principal principal,
-			Model model) {
+	public String setPaymentMethod(HttpSession session, @RequestParam("userPaymentId") Long userPaymentId,
+			Principal principal, Model model) {
 		User user = userService.findByUsername(principal.getName());
 		UserPayment userPayment = userPaymentService.findById(userPaymentId);
 		UserBilling userBilling = userPayment.getUserBilling();
@@ -345,9 +406,8 @@ public class CheckoutController {
 			List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
 
 			billingAddressService.setByUserBilling(userBilling, billingAddress);
-			
-			
-			
+
+			session.setAttribute("existingCard", "true");
 			session.setAttribute("userShipping", userShipping);
 			session.setAttribute("payment", payment);
 			session.setAttribute("billingAddress", billingAddress);
