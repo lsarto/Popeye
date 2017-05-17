@@ -36,7 +36,7 @@ import com.cigarettestore.service.ShoppingCartService;
 import com.cigarettestore.service.UserPaymentService;
 import com.cigarettestore.service.UserService;
 import com.cigarettestore.utility.MailConstructor;
-import com.cigarettestore.utility.USConstants;
+import com.cigarettestore.utility.ITConstants;
 
 @Controller
 public class CheckoutController {
@@ -81,7 +81,7 @@ public class CheckoutController {
 
 		UserBilling userBilling = new UserBilling();
 		model.addAttribute("userBilling", userBilling);
-		List<String> stateList = USConstants.listOfUSStatesCode;
+		List<String> stateList = ITConstants.listOfITStatesCode;
 		Collections.sort(stateList);
 		model.addAttribute("stateList", stateList);
 
@@ -159,7 +159,7 @@ public class CheckoutController {
 		model.addAttribute("cartItemList", cartItemList);
 		model.addAttribute("shoppingCart", user.getShoppingCart());
 
-		List<String> stateList = USConstants.listOfUSStatesCode;
+		List<String> stateList = ITConstants.listOfITStatesCode;
 		Collections.sort(stateList);
 		model.addAttribute("stateList", stateList);
 
@@ -268,7 +268,7 @@ public class CheckoutController {
 		model.addAttribute("userBilling", userBilling);
 		model.addAttribute("userPayment", userPayment);
 
-		List<String> stateList = USConstants.listOfUSStatesCode;
+		List<String> stateList = ITConstants.listOfITStatesCode;
 		Collections.sort(stateList);
 		model.addAttribute("stateList", stateList);
 		/* model.addAttribute("orderList", user.orderList()); */
@@ -351,7 +351,7 @@ public class CheckoutController {
 		model.addAttribute("cartItemList", cartItemList);
 		model.addAttribute("shoppingCart", user.getShoppingCart());
 
-		List<String> stateList = USConstants.listOfUSStatesCode;
+		List<String> stateList = ITConstants.listOfITStatesCode;
 		Collections.sort(stateList);
 		model.addAttribute("stateList", stateList);
 
@@ -455,7 +455,7 @@ public class CheckoutController {
 			model.addAttribute("cartItemList", cartItemList);
 			model.addAttribute("shoppingCart", user.getShoppingCart());
 
-			List<String> stateList = USConstants.listOfUSStatesCode;
+			List<String> stateList = ITConstants.listOfITStatesCode;
 			Collections.sort(stateList);
 			model.addAttribute("stateList", stateList);
 
