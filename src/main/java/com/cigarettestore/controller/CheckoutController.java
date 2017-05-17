@@ -38,7 +38,7 @@ import com.cigarettestore.service.UserPaymentService;
 import com.cigarettestore.service.UserService;
 import com.cigarettestore.service.UserShippingService;
 import com.cigarettestore.utility.MailConstructor;
-import com.cigarettestore.utility.USConstants;
+import com.cigarettestore.utility.ITConstants;
 
 @Controller
 public class CheckoutController {
@@ -80,16 +80,19 @@ public class CheckoutController {
 	@Autowired
 	private PaymentService paymentService;
 
+	
 	@RequestMapping("/shop-checkout1")
 	public String ShopCheckout1(
 			HttpSession session,
 			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart, Model model,
 			Principal principal) {
 
+		User user = userService.findByUsername(principal.getName());
+		model.addAttribute("user", user);
 		session.setAttribute("shoppingCart", shoppingCart);
 		UserBilling userBilling = new UserBilling();
 		model.addAttribute("userBilling", userBilling);
-		List<String> stateList = USConstants.listOfUSStatesCode;
+		List<String> stateList = ITConstants.listOfITStatesName;
 		Collections.sort(stateList);
 		model.addAttribute("stateList", stateList);
 
@@ -101,6 +104,29 @@ public class CheckoutController {
 
 		return "shop-checkout2";
 	}
+	
+	@RequestMapping(value = "/shop-checkout2", method = RequestMethod.POST)
+	public String ShopCheckout2(HttpSession session, @ModelAttribute("firstname") String firstname,
+			@ModelAttribute("lastname") String lastname, @ModelAttribute("phone") String phone,
+			@ModelAttribute("email") String email, Principal principal, Model model) {
+
+		session.setAttribute("firstname", firstname);
+		session.setAttribute("lastname", lastname);
+		session.setAttribute("phone", phone);
+		session.setAttribute("email", email);
+
+		return "shop-checkout2";
+	}
+
+	@RequestMapping(value = "/shop-checkout3", method = RequestMethod.POST)
+	public String ShopCheckout3(@ModelAttribute("shippingMethod") String shippingMethod, Principal principal,
+			Model model) {
+
+		model.addAttribute("shippingMethod", shippingMethod);
+
+		return "shop-checkout3";
+	}
+
 
 	@RequestMapping("/shop-checkout3")
 	public String ShopCheckout3(@ModelAttribute("shoppingCart") ShoppingCart shoppingCart) {
@@ -113,10 +139,60 @@ public class CheckoutController {
 
 		return "shop-checkout4";
 	}
+	
+	@RequestMapping(value = "/shop-checkout4", method = RequestMethod.POST)
+	public String ShopCheckout4(HttpSession session, @ModelAttribute("payment") String payment, Principal principal,
+			Model model) {
+
+		session.setAttribute("payment", payment);
+		session.setAttribute("shippingAddress", shippingAddress);
+		session.setAttribute("billingAddress", billingAddress);
+
+		User user = userService.findByUsername(principal.getName());
+
+		UserBilling userBilling = new UserBilling();
+		UserShipping userShipping = new UserShipping();
+		UserPayment userPayment = new UserPayment();
+
+		session.setAttribute("existingCard", "false");
+		session.setAttribute("userShipping", userShipping);
+		session.setAttribute("userBilling", userBilling);
+		session.setAttribute("userPayment", userPayment);
+
+		List<String> stateList = ITConstants.listOfITStatesName;
+		Collections.sort(stateList);
+		model.addAttribute("stateList", stateList);
+		/* model.addAttribute("orderList", user.orderList()); */
+
+		// List<String> stateList = USConstants.listOfUSStatesCode;
+		// Collections.sort(stateList);
+		model.addAttribute("stateList", stateList);
+		model.addAttribute("userPaymentList", user.getUserPaymentList());
+		model.addAttribute("userShippingList", user.getUserShippingList());
+		/* model.addAttribute("orderList", user.orderList()); */
+
+		return "shop-checkout4";
+	}
 
 	@RequestMapping("/shop-checkout5")
 	public String ShopCheckout5(@ModelAttribute("shoppingCart") ShoppingCart shoppingCart) {
 
+		return "shop-checkout5";
+	}
+	
+	@RequestMapping(value = "/shop-checkout5", method = RequestMethod.POST)
+	public String ShopCheckout5(@ModelAttribute("shippingAddress") ShippingAddress shippingAddress,
+			@ModelAttribute("payment") Payment payment,
+			@ModelAttribute("shippingMethod") String shippingMethod,
+			@ModelAttribute("billingAddress") BillingAddress billingAddress,
+			HttpSession session) {
+		
+		session.setAttribute("billingAddress", billingAddress);
+		session.setAttribute("payment", payment);
+		session.setAttribute("shippingMethod", shippingMethod);
+		session.setAttribute("shippingAddress", shippingAddress);
+
+		
 		return "shop-checkout5";
 	}
 
@@ -167,7 +243,7 @@ public class CheckoutController {
 		model.addAttribute("cartItemList", cartItemList);
 		model.addAttribute("shoppingCart", user.getShoppingCart());
 
-		List<String> stateList = USConstants.listOfUSStatesCode;
+		List<String> stateList = ITConstants.listOfITStatesName;
 		Collections.sort(stateList);
 		model.addAttribute("stateList", stateList);
 
@@ -189,87 +265,6 @@ public class CheckoutController {
 		/* model.addAttribute("orderList", user.orderList()); */
 
 		return "shop-checkout4";
-	}
-
-	@RequestMapping(value = "/shop-checkout2", method = RequestMethod.POST)
-	public String ShopCheckout2(HttpSession session, @ModelAttribute("firstname") String firstname,
-			@ModelAttribute("lastname") String lastname, @ModelAttribute("company") String company,
-			@ModelAttribute("street") String street, @ModelAttribute("city") String city,
-			@ModelAttribute("zip") String zip, @ModelAttribute("state") String state,
-			@ModelAttribute("country") String country, @ModelAttribute("phone") String phone,
-			@ModelAttribute("email") String email, Principal principal, Model model) {
-
-		session.setAttribute("firstname", firstname);
-		session.setAttribute("lastname", lastname);
-		session.setAttribute("company", company);
-		session.setAttribute("street", street);
-		session.setAttribute("city", city);
-		session.setAttribute("zip", zip);
-		session.setAttribute("state", state);
-		session.setAttribute("country", country);
-		session.setAttribute("phone", phone);
-		session.setAttribute("email", email);
-
-		return "shop-checkout2";
-	}
-
-	@RequestMapping(value = "/shop-checkout3", method = RequestMethod.POST)
-	public String ShopCheckout3(@ModelAttribute("shippingMethod") String shippingMethod, Principal principal,
-			Model model) {
-
-		model.addAttribute("shippingMethod", shippingMethod);
-
-		return "shop-checkout3";
-	}
-
-	@RequestMapping(value = "/shop-checkout4", method = RequestMethod.POST)
-	public String ShopCheckout4(HttpSession session, @ModelAttribute("payment") String payment, Principal principal,
-			Model model) {
-
-		session.setAttribute("payment", payment);
-		session.setAttribute("shippingAddress", shippingAddress);
-		session.setAttribute("billingAddress", billingAddress);
-
-		User user = userService.findByUsername(principal.getName());
-
-		UserBilling userBilling = new UserBilling();
-		UserShipping userShipping = new UserShipping();
-		UserPayment userPayment = new UserPayment();
-
-		session.setAttribute("existingCard", "false");
-		session.setAttribute("userShipping", userShipping);
-		session.setAttribute("userBilling", userBilling);
-		session.setAttribute("userPayment", userPayment);
-
-		List<String> stateList = USConstants.listOfUSStatesCode;
-		Collections.sort(stateList);
-		model.addAttribute("stateList", stateList);
-		/* model.addAttribute("orderList", user.orderList()); */
-
-		// List<String> stateList = USConstants.listOfUSStatesCode;
-		// Collections.sort(stateList);
-		model.addAttribute("stateList", stateList);
-		model.addAttribute("userPaymentList", user.getUserPaymentList());
-		model.addAttribute("userShippingList", user.getUserShippingList());
-		/* model.addAttribute("orderList", user.orderList()); */
-
-		return "shop-checkout4";
-	}
-
-	@RequestMapping(value = "/shop-checkout5", method = RequestMethod.POST)
-	public String ShopCheckout5(@ModelAttribute("shippingAddress") ShippingAddress shippingAddress,
-			@ModelAttribute("payment") Payment payment,
-			@ModelAttribute("shippingMethod") String shippingMethod,
-			@ModelAttribute("billingAddress") BillingAddress billingAddress,
-			HttpSession session) {
-		
-		session.setAttribute("billingAddress", billingAddress);
-		session.setAttribute("payment", payment);
-		session.setAttribute("shippingMethod", shippingMethod);
-		session.setAttribute("shippingAddress", shippingAddress);
-
-		
-		return "shop-checkout5";
 	}
 
 	@RequestMapping(value = "/checkout", method = RequestMethod.POST)
@@ -385,6 +380,16 @@ public class CheckoutController {
 			}
 
 			model.addAttribute("estimatedDeliveryDate", estimatedDeliveryDate);
+			
+			session.removeAttribute("billingAddress");
+			session.removeAttribute("payment");
+			session.removeAttribute("shippingMethod");
+			session.removeAttribute("shippingAddress");
+			session.removeAttribute("userShipping");
+			session.removeAttribute("userBilling");
+			session.removeAttribute("userPayment");
+			session.removeAttribute("shoppingCart");
+
 
 			return "orderSubmittedPage";
 		}
@@ -414,7 +419,7 @@ public class CheckoutController {
 			session.setAttribute("cartItemList", cartItemList);
 			session.setAttribute("shoppingCart", user.getShoppingCart());
 
-			List<String> stateList = USConstants.listOfUSStatesCode;
+			List<String> stateList = ITConstants.listOfITStatesName;
 			Collections.sort(stateList);
 			model.addAttribute("stateList", stateList);
 
