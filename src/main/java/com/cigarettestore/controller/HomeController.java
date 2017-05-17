@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cigarettestore.utility.USConstants;
+import com.cigarettestore.utility.ITConstants;
 import com.cigarettestore.domain.UserBilling;
 import com.cigarettestore.domain.UserPayment;
 import com.cigarettestore.service.UserPaymentService;
@@ -93,7 +93,7 @@ public class HomeController {
 		model.addAttribute("listOfCreditCards", true);
 		model.addAttribute("listOfShippingAddresses", true);
 		
-		List<String> stateList = USConstants.listOfUSStatesCode;
+		List<String> stateList = ITConstants.listOfITStatesCode;
 		Collections.sort(stateList);
 		model.addAttribute("stateList", stateList);
 		model.addAttribute("classActiveEdit", true);
@@ -222,7 +222,7 @@ public class HomeController {
 			model.addAttribute("userBilling", userBilling);
 			model.addAttribute("userShipping", userShipping);
 			
-			List<String> stateList = USConstants.listOfUSStatesCode;
+			List<String> stateList = ITConstants.listOfITStatesCode;
 			Collections.sort(stateList);
 			model.addAttribute("stateList", stateList);
 			
@@ -311,7 +311,7 @@ public class HomeController {
 		model.addAttribute("userBilling", userBilling);
 		model.addAttribute("userPayment", userPayment);
 		
-		List<String> stateList = USConstants.listOfUSStatesCode;
+		List<String> stateList = ITConstants.listOfITStatesCode;
 		Collections.sort(stateList);
 		/*model.addAttribute("orderList", user.orderList());*/
 		
@@ -369,7 +369,7 @@ public class HomeController {
 		
 		model.addAttribute("userShipping", userShipping);
 		
-		List<String> stateList = USConstants.listOfUSStatesCode;
+		List<String> stateList = ITConstants.listOfITStatesCode;
 		Collections.sort(stateList);
 		model.addAttribute("stateList", stateList);
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
