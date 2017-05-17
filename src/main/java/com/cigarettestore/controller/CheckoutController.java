@@ -88,6 +88,7 @@ public class CheckoutController {
 			Principal principal) {
 
 		User user = userService.findByUsername(principal.getName());
+		session.setAttribute("user", user);
 		model.addAttribute("user", user);
 		session.setAttribute("shoppingCart", shoppingCart);
 		UserBilling userBilling = new UserBilling();
@@ -106,14 +107,15 @@ public class CheckoutController {
 	}
 	
 	@RequestMapping(value = "/shop-checkout2", method = RequestMethod.POST)
-	public String ShopCheckout2(HttpSession session, @ModelAttribute("firstname") String firstname,
-			@ModelAttribute("lastname") String lastname, @ModelAttribute("phone") String phone,
-			@ModelAttribute("email") String email, Principal principal, Model model) {
+	public String ShopCheckout2(HttpSession session, 
+			@RequestParam("firstname") String firstname,
+			@RequestParam("lastname") String lastname,
+			@RequestParam("phone") String phone,
+			Principal principal, Model model) {
 
 		session.setAttribute("firstname", firstname);
 		session.setAttribute("lastname", lastname);
 		session.setAttribute("phone", phone);
-		session.setAttribute("email", email);
 
 		return "shop-checkout2";
 	}
@@ -278,6 +280,16 @@ public class CheckoutController {
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 		model.addAttribute("cartItemList", cartItemList);
 
+		User currentUser = userService.findByUsername(principal.getName());
+		String firstnameUser = (String) session.getAttribute("firstname");
+		currentUser.setFirstName(firstnameUser);
+		String lastnameUser = (String) session.getAttribute("lastname");
+		currentUser.setLastName(lastnameUser);
+		String phone = (String) session.getAttribute("phone");
+		currentUser.setPhone(phone);
+		userService.save(currentUser);
+		
+		//Existing card
 		if (session.getAttribute("existingCard").equals("true")) {
 
 			UserShipping userShipping = (UserShipping) session.getAttribute("userShipping");
@@ -324,7 +336,9 @@ public class CheckoutController {
 
 			return "orderSubmittedPage";
 
-		} else {
+		}//// end existing card
+		
+		else {
 			session.setAttribute("existingCard", "false");
 			shippingAddress = (ShippingAddress) session.getAttribute("shippingAddress");
 			payment = (Payment) session.getAttribute("payment");

@@ -37,7 +37,7 @@
 					<div class="col-md-9 clearfix" id="checkout">
 
 						<div class="box">
-							<form method="post" th:action="@{/shop-checkout2}">
+							<form th:action="@{/shop-checkout2}"  method="post">
 
 								<ul class="nav nav-pills nav-justified">
 									<li class="active" data-toggle="collapse"><a
@@ -47,7 +47,7 @@
 										data-toggle="collapse" data-parent="#accordion" href="#"><i
 											class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
 									<li class="disabled"><a href="#" data-toggle="collapse"><i
-											class="glyphicon glyphicon-euro""></i><br>Metodo
+											class="glyphicon glyphicon-euro"></i><br>Metodo
 											pagamento</a></li>
 									<li class="disabled"><a href="#" data-toggle="collapse"><i
 											class="fa fa-money"></i><br>Info pagamento</a></li>
@@ -56,19 +56,18 @@
 											dell'ordine</a></li>
 								</ul>
 
-								<div class="content" id="address">
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label for="firstname">Nome</label> <input type="text"
-													class="form-control" required="required" id="firstname"
+													class="form-control" required="required" id="firstname" name="firstname"
 													th:value="${user.firstName}" />
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label for="lastname">Cognome</label> <input type="text"
-													class="form-control" required="required" id="lastname" 
+													class="form-control" required="required" id="lastname" name="lastname"
 													th:value="${user.lastName}" />
 											</div>
 										</div>
@@ -83,14 +82,14 @@
 										
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="phone">Telefono</label> <input type="text"
-													class="form-control" required="required" id="phone"
+												<label for="phone">Telefono</label> <input type="number"
+													class="form-control" required="required" id="phone" name="phone"
 													th:value="${user.phone}" >
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="email">Email</label> <input type="text"
+												<label for="email">Email</label> <input type="text" readonly
 													class="form-control" required="required" id="email"
 													th:value="${user.email}">
 											</div>
@@ -98,13 +97,12 @@
 
 									</div>
 									<!-- /.row -->
-								</div>
 
 
 								<!-- /.content -->
 								<div class="box-footer">
 									<div class="pull-left">
-										<a href="shop-basket.html" class="btn btn-default"><i
+										<a th:href="@{/shoppingCart/cart}" class="btn btn-default"><i
 											class="fa fa-chevron-left"></i>Back to basket</a>
 									</div>
 									<div class="pull-right">
