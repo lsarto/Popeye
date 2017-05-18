@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.cigarettestore.domain.Cigarette;
 import com.cigarettestore.domain.CigaretteToCartItem;
+import com.cigarettestore.domain.Order;
 import com.cigarettestore.domain.User;
 import com.cigarettestore.domain.CartItem;
 import com.cigarettestore.domain.ShoppingCart;
@@ -81,5 +82,10 @@ public class CartItemServiceImpl implements CartItemService{
 	
 	public CartItem save(CartItem cartItem) {
 		return cartItemRepository.save(cartItem);
+	}
+
+	@Override
+	public List<CartItem> findByOrder(Order order) {
+		return cartItemRepository.findByOrder(order);
 	}
 }

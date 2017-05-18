@@ -19,6 +19,7 @@ import javax.persistence.OneToOne;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.cigarettestore.domain.Order;
 import com.cigarettestore.domain.UserPayment;
 import com.cigarettestore.domain.UserShipping;
 import com.cigarettestore.domain.security.Authority;
@@ -42,6 +43,9 @@ public class User implements UserDetails{
 	private String phone;
 	private boolean enabled=true;
 	
+	
+	@OneToMany(mappedBy = "user")
+	private List<Order> orderList;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<UserShipping> userShippingList;
@@ -166,6 +170,10 @@ public class User implements UserDetails{
 	}
 	public ShoppingCart getShoppingCart() {
 		return shoppingCart;
+	}
+	
+	public List<Order> getOrderList() {
+		return orderList;
 	}
 	
 	
