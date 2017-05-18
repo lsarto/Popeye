@@ -8,6 +8,25 @@
 
 	<div id="all">
 		<div th:replace="common/header :: navbar"></div>
+		
+		<div id="heading-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-7">
+						<h1>My orders</h1>
+					</div>
+					<div class="col-md-5">
+						<ul class="breadcrumb">
+
+							<li><a href="index.html">Home</a></li>
+							<li>My orders</li>
+						</ul>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<div id="content">
 			<div class="container">
 
@@ -34,7 +53,6 @@
 											<th>Order Number</th>
 											<th>Date</th>
 											<th>Total</th>
-											<th>Status</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -43,8 +61,6 @@
 											<td data-th-text="${order.id}"><a></a></td>
 											<td><span th:text="${order.orderDate}"></span></td>
 											<td data-th-text="${order.orderTotal}"></td>
-											<td data-th-text="${order.orderStatus}"><span
-												class="label label-info"></span></td>
 											<td><a th:href="@{/orderDetail(id=${order.id})}"
 												class="btn btn-template-main btn-sm">View</a></td>
 										</tr>
@@ -76,7 +92,7 @@
 							<div class="panel-body">
 
 								<ul class="nav nav-pills nav-stacked">
-									<li><a th:href="@{/orderList}"><i class="fa fa-list"></i>
+									<li class="active"><a th:href="@{/orderList}"><i class="fa fa-list"></i>
 											My orders</a></li>
 									<li><a th:href="@{/myProfile}"><i class="fa fa-user"></i>
 											My account</a></li>
@@ -102,69 +118,7 @@
 		<!-- /#content -->
 
 
-		<!-- *** LOGIN MODAL ***
-_________________________________________________________ -->
-
-		<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
-			aria-labelledby="Login" aria-hidden="true">
-			<div class="modal-dialog modal-sm">
-
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="Login">Customer login</h4>
-					</div>
-					<div class="modal-body">
-						<form action="customer-orders.html" method="post">
-							<div class="form-group">
-								<input type="text" class="form-control" id="email_modal"
-									placeholder="email">
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control" id="password_modal"
-									placeholder="password">
-							</div>
-
-							<p class="text-center">
-								<button class="btn btn-template-main">
-									<i class="fa fa-sign-in"></i> Log in
-								</button>
-							</p>
-
-						</form>
-
-						<p class="text-center text-muted">Not registered yet?</p>
-						<p class="text-center text-muted">
-							<a href="customer-register.html"><strong>Register
-									now</strong></a>! It is easy and done in 1&nbsp;minute and gives you access
-							to special discounts and much more!
-						</p>
-
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- *** LOGIN MODAL END *** -->
-
-		<div id="heading-breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-7">
-						<h1>My orders</h1>
-					</div>
-					<div class="col-md-5">
-						<ul class="breadcrumb">
-
-							<li><a href="index.html">Home</a></li>
-							<li>My orders</li>
-						</ul>
-
-					</div>
-				</div>
-			</div>
-		</div>
+		
 
 
 
