@@ -31,7 +31,7 @@
 								<table class="table table-hover">
 									<thead>
 										<tr>
-											<th>Order</th>
+											<th>Order Number</th>
 											<th>Date</th>
 											<th>Total</th>
 											<th>Status</th>
@@ -40,12 +40,12 @@
 									</thead>
 									<tbody>
 										<tr th:each="order : ${orderList}">
-											<th><a th:href="@{/orderDetail(id=${order.id})}"></a></th>
-											<td th:text="${order.orderDate}"></td>
+											<td data-th-text="${order.id}"><a></a></td>
+											<td><span th:text="${order.orderDate}"></span></td>
 											<td data-th-text="${order.orderTotal}"></td>
-											<td data-th-text="${order.orderStatus}"><span class="label label-info"></span>
-											</td>
-											<td><a href="customer-order.html"
+											<td data-th-text="${order.orderStatus}"><span
+												class="label label-info"></span></td>
+											<td><a th:href="@{/orderDetail(id=${order.id})}"
 												class="btn btn-template-main btn-sm">View</a></td>
 										</tr>
 									</tbody>
@@ -76,10 +76,10 @@
 							<div class="panel-body">
 
 								<ul class="nav nav-pills nav-stacked">
-									<li><a th:action="@{/orderDetail}"><i
-											class="fa fa-list"></i> My orders</a></li>
-									<li><a th:href="@{/myProfile}"><i
-											class="fa fa-user"></i> My account</a></li>
+									<li><a th:href="@{/orderList}"><i class="fa fa-list"></i>
+											My orders</a></li>
+									<li><a th:href="@{/myProfile}"><i class="fa fa-user"></i>
+											My account</a></li>
 									<li><a th:href="@{/logout}"><i class="fa fa-sign-out"></i>
 											Logout</a></li>
 								</ul>
