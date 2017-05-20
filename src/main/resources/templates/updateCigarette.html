@@ -161,8 +161,8 @@
 						<label class="col-md-2 control-label" for="status">Stato</label>
 						<div class="col-md-8">
 							<label><input value="true" type="radio" name="active"
-								checked="checked" /> Attivo </label> <label><input
-								value="false" type="radio" name="active" /> Inattivo </label> <span
+								th:checked="${cigarette.active}" /> Attivo </label> <label><input
+								value="false" type="radio" name="active" th:checked="${!cigarette.active}"/> Inattivo </label> <span
 								class="help-block">Settare lo stato della sigaretta</span>
 						</div>
 					</div>
@@ -185,7 +185,7 @@
 						</div>
 						<div class="col-md-8">
 							<input id="cigaretteImage" type="file" name="cigaretteImage"
-								th:value="${cigarette.cigaretteImage}" />
+								th:value="${cigarette.cigaretteCategory}" />
 						</div>
 					</div>
 
