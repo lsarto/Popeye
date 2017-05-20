@@ -60,14 +60,14 @@
 	</tr>
 </table>
 
-<h3><strong>Order Summary</strong></h3>
+<h3><strong>Sommario dell'ordine</strong></h3>
 <table>
 <thead>
 	<tr>
-		<td><strong>Item Name</strong></td>
-		<td class="text-center"><strong>Item Price</strong></td>
-		<td class="text-center"><strong>Item Quantity</strong></td>
-		<td class="text-right"><strong>Total</strong></td>
+		<td><strong>Nome prodotto</strong></td>
+		<td class="text-center"><strong>Prezzo</strong></td>
+		<td class="text-center"><strong>Quantità</strong></td>
+		<td class="text-right"><strong>Totale</strong></td>
 	</tr>
 </thead>
 <tbody>
@@ -80,19 +80,19 @@
 	<tr>
 		<td class="highrow"></td>
 		<td class="highrow"></td>
-		<td class="highrow text-center"><strong>Subtotal</strong></td>
+		<td class="highrow text-center"><strong>Subtotale</strong></td>
 		<td class="highrow text-right" data-th-text="${order.orderTotal}"></td>
 	</tr>
 	<tr>
 		<td class="emptyrow"></td>
 		<td class="emptyrow"></td>
-		<td class="emptyrow text-center"><strong>Tax</strong></td>
+		<td class="emptyrow text-center"><strong>Tassa</strong></td>
 		<td class="emptyrow text-right" data-th-text="${#numbers.formatDecimal(order.orderTotal*0.06,0,2)}"></td>
 	</tr>
 	<tr>
 		<td class="emptyrow"><i class="fa fa-barcode iconbig"></i></td>
 		<td class="emptyrow"></td>
-		<td class="emptyrow text-center"><strong>Total</strong></td>
+		<td class="emptyrow text-center"><strong>Totale</strong></td>
 		<td th:with="total=${order.orderTotal+order.orderTotal*0.06}"
             data-th-text="${#numbers.formatDecimal(total, 0, 2)}"
             class="emptyrow text-right">
@@ -102,8 +102,6 @@
 </table>
 
 <br/>
-<p>Best,</p>
-<p>Le's Bookstore</p>
-<p>Since 1923</p>
+<p></p>
 </body>
 </html>
