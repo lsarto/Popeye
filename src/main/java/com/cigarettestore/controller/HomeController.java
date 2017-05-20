@@ -114,9 +114,17 @@ public class HomeController {
 	}
 
 	@RequestMapping("/shop-category")
-	public String shopCategory(Model model) {
+	public String shopCategory(Model model, Principal principal) {
+		if(principal != null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			model.addAttribute("user", user);
+		}
+		
 		List<Cigarette> cigaretteList = cigaretteService.findAll();
 		model.addAttribute("cigaretteList", cigaretteList);
+		model.addAttribute("activeAll",true);
+
 		return "shop-category";
 	}
 
