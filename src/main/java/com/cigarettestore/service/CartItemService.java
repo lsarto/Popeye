@@ -2,6 +2,7 @@ package com.cigarettestore.service;
 
 import java.util.List;
 
+import com.cigarettestore.domain.Order;
 import com.cigarettestore.domain.CartItem;
 import com.cigarettestore.domain.Cigarette;
 import com.cigarettestore.domain.ShoppingCart;
@@ -19,4 +20,6 @@ public interface CartItemService {
 	void removeCartItem(CartItem cartItem);
 	
 	CartItem save(CartItem cartItem);
+	
+	List<CartItem> findByOrder(Order order);
 }
