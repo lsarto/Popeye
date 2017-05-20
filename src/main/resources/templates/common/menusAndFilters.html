@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.w3.org/1999/xhtml">
+	
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:fragment="menus&filters">
+		<div class="panel panel-default sidebar-menu">
+
+			<div class="panel-heading">
+				<h3 class="panel-title">Categorie</h3>
+			</div>
+
+			<div class="panel-body">
+				<ul class="nav nav-pills nav-stacked category-menu">
+					<li class="active"><a href="#">Sig. Elettroniche <span
+							class="badge pull-right">42</span>
+					</a>
+						<ul>
+							<li><a th:href="@{/shop-category(category='all')}"
+								th:classappend="${activeAll}? 'active'">All</a></li>
+							<li><a th:href="@{/searchByCategory(category='Aspire')}"
+								th:classappend="${activeAspire}? 'active'">Aspire</a></li>
+							<li><a th:href="@{/searchByCategory(category='Innokin')}"
+								th:classappend="${activeInnokin}? 'active'">Innokin</a></li>
+							<li><a th:href="@{/searchByCategory(category='Smok')}"
+								th:classappend="${activeSmok}? 'active'">Smok</a></li>
+							<li><a th:href="@{/searchByCategory(category='Xtar')}"
+								th:classappend="${activeXtar}? 'active'">Xtar</a></li>
+						</ul></li>
+
+				</ul>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
