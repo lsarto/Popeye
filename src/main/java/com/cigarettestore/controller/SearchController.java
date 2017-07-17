@@ -68,11 +68,11 @@ public class SearchController {
 		
 		if (cigaretteList.isEmpty()) {
 			model.addAttribute("emptyList", true);
-			return "cigaretteshelf";
+			return "shop-category";
 		}
 		
 		model.addAttribute("cigaretteList", cigaretteList);
 		
-		return "cigaretteshelf";
+		return "shop-category";
 	}
 }
