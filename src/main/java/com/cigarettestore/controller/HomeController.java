@@ -89,6 +89,11 @@ public class HomeController {
 		model.addAttribute("classActiveLogin", true);
 		return "customer-register";
 	}
+	
+	@RequestMapping("/contact")
+	public String contact(Model model) {
+		return "contact";
+	}
 
 	@RequestMapping("/myProfile")
 	public String myProfile(HttpSession session,
@@ -127,7 +132,7 @@ public class HomeController {
 
 		return "shop-category";
 	}
-
+	
 	@RequestMapping("/shop-detail")
 	public String shopDetail(@PathParam("id") Long id, Model model, Principal principal) {
 		if (principal != null) {
