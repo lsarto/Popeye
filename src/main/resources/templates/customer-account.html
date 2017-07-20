@@ -8,7 +8,23 @@
 		<div th:replace="common/header :: navbar"></div>
 
 
-		<div id="heading-breadcrumbs"></div>
+		<div id="heading-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<h1>Account</h1>
+					</div>
+					<div class="col-md-5">
+						<ul class="breadcrumb">
+
+							<li><a href="index.html">Home</a></li>
+							<li>Il mio account</li>
+						</ul>
+
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<div id="content" class="clearfix">
 
@@ -28,52 +44,54 @@
 							<div class="heading">
 								<h3 class="text-uppercase">Cambia Password</h3>
 							</div>
-							
+
 							<div class="alert alert-success" th:if="${passwordChanged}">
-								Password Cambiata con successo
-							</div>
-							
-							<div class="alert alert-danger alert-dismissible" th:if="${incorrectPassword!=null}">
-								Password non corretta
-							</div>
-			
-						<form th:action="@{/updateUserInfo}" method="post">
+								Password Cambiata con successo</div>
+
+							<div class="alert alert-danger alert-dismissible"
+								th:if="${incorrectPassword!=null}">Password non corretta</div>
+
+							<form th:action="@{/updateUserInfo}" method="post">
 								<input type="hidden" name="id" th:value="${user.id}" />
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label for="currentPassword">Vecchia Password</label> <input
-												type="password" class="form-control" id="currentPassword" name="password" required="required" />
+												type="password" class="form-control" id="currentPassword"
+												name="password" required="required" />
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label for="txtNewPassword">Nuova Password</label>
-											<input
-												type="password" class="form-control" id="txtNewPassword" name="newPassword" />
+											<label for="txtNewPassword">Nuova Password</label> <input
+												type="password" class="form-control" id="txtNewPassword"
+												name="newPassword" />
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label for="txtConfirmPassword">Reinserisci Nuova Password</label> <input
-												type="password" class="form-control" id="txtConfirmPassword" name="txtConfirmPassword" />
+											<label for="txtConfirmPassword">Reinserisci Nuova
+												Password</label> <input type="password" class="form-control"
+												id="txtConfirmPassword" name="txtConfirmPassword" />
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-sm-6">
-										<div class="alert alert-warning alert-dismissible" id="checkPasswordMatch" role="alert" style="display:none;"></div>
+										<div class="alert alert-warning alert-dismissible"
+											id="checkPasswordMatch" role="alert" style="display: none;"></div>
 									</div>
 								</div>
 								<!-- /.row -->
-								
-                                <div class="text-center">
-                                    <button type="submit" id="updateUserInfoButton" class="btn btn-template-main">
-                                        <i class="fa fa-save"></i> Salva Nuova Password
-                                    </button>
-                                </div>
+
+								<div class="text-center">
+									<button type="submit" id="updateUserInfoButton"
+										class="btn btn-template-main">
+										<i class="fa fa-save"></i> Salva Nuova Password
+									</button>
+								</div>
 
 							</form>
 
@@ -81,21 +99,18 @@
 						<!-- /.box -->
 
 
-						<div  class="box clearfix">
+						<div class="box clearfix">
 							<div class="heading">
 								<h3 class="text-uppercase">Dettagli Personali</h3>
 							</div>
-							
+
 							<div class="alert alert-success" th:if="${updateSuccess}">
-								Aggiornamento Dati avvenuto con successo
-							</div>
-							
-							<div class="alert alert-danger alert-dismissible" th:if="${emailExists!=null}">
-								Email gia esistente
-							</div>
-							<div class="alert alert-danger alert-dismissible" th:if="${usernameExists!=null}">
-								Username gia esistente
-							</div>
+								Aggiornamento Dati avvenuto con successo</div>
+
+							<div class="alert alert-danger alert-dismissible"
+								th:if="${emailExists!=null}">Email gia esistente</div>
+							<div class="alert alert-danger alert-dismissible"
+								th:if="${usernameExists!=null}">Username gia esistente</div>
 
 							<form th:action="@{/updateUserInfo}" method="post">
 								<input type="hidden" name="id" th:value="${user.id}" />
@@ -155,16 +170,21 @@
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item active"><a
 											th:href="@{/listOfCreditCards}"
-											th:style="${listOfCreditCards}? 'color:red'">Lista delle carte di credito</a></li>
+											th:style="${listOfCreditCards}? 'color:red'">Lista delle
+												carte di credito</a></li>
 										<li class="breadcrumb-item active"><a
 											th:href="@{/addNewCreditCard}"
-											th:style="${addNewCreditCard}? 'color:red'">Aggiungi Carta di Credito</a></li>
+											th:style="${addNewCreditCard}? 'color:red'">Aggiungi
+												Carta di Credito</a></li>
 									</ol>
 								</div>
 								<div class="col-sm-9 text-left" th:if="${listOfCreditCards}">
 									<form th:action="@{/setDefaultPayment}" method="post">
-										<div class="alert alert-warning alert-dismissible" th:if="${emptyPaymentId}">Nessun metodo di pagamento selezionato</div>
-										<input th:if="${userPaymentList.isEmpty()}" type="hidden" name="defaultUserPaymentId" th:value="0"/>
+										<div class="alert alert-warning alert-dismissible"
+											th:if="${emptyPaymentId}">Nessun metodo di pagamento
+											selezionato</div>
+										<input th:if="${userPaymentList.isEmpty()}" type="hidden"
+											name="defaultUserPaymentId" th:value="0" />
 										<table class="table">
 											<thead>
 												<tr>
@@ -174,8 +194,7 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr 
-												th:each="userPayment : ${userPaymentList}">
+												<tr th:each="userPayment : ${userPaymentList}">
 													<td><input type="radio" name="defaultUserPaymentId"
 														th:value="${userPayment.id}"
 														th:checked="${userPayment.defaultPayment}" /></td>
@@ -198,7 +217,8 @@
 
 								<div class="col-sm-9 text-left" th:if="${addNewCreditCard}">
 									<form th:action="@{addNewCreditCard}" method="post">
-										<div class="bg-info" th:if="${updateUserPaymentInfo}">Informazioni Utente aggiornate</div>
+										<div class="bg-info" th:if="${updateUserPaymentInfo}">Informazioni
+											Utente aggiornate</div>
 
 										<input hidden="hidden" name="id" th:value="${userPayment.id}"></input>
 										<hr />
@@ -237,8 +257,8 @@
 										<div class="row">
 											<div class="col-xs-4">
 												<div class="form-group">
-													<label for="billingCity">* Citt&agrave;</label> <input type="text"
-														class="form-control" id="billingCity"
+													<label for="billingCity">* Citt&agrave;</label> <input
+														type="text" class="form-control" id="billingCity"
 														placeholder="Città fatturazione" th:name="userBillingCity"
 														required="required"
 														th:value="${userBilling.userBillingCity}" />
@@ -251,7 +271,8 @@
 														th:name="userBillingState"
 														th:value="${userBilling.userBillingState}"
 														required="required">
-														<option value="" disabled="disabled">Selezionare un'opzione</option>
+														<option value="" disabled="disabled">Selezionare
+															un'opzione</option>
 														<option th:each="state : ${stateList}" th:text="${state}"
 															th:selected="(${userBilling.userBillingState}==${state})"></option>
 													</select>
@@ -288,18 +309,18 @@
 												placeholder="Indirizzo 1" th:name="userShippingStreet1"
 												required="required"
 												th:value="${userShipping.userShippingStreet1}" /> <input
-												type="text" class="form-control"
-												placeholder="Indirizzo 2" th:name="userShppingStreet2"
+												type="text" class="form-control" placeholder="Indirizzo 2"
+												th:name="userShppingStreet2"
 												th:value="${userShipping.userShippingStreet2}" />
 										</div>
 
 										<div class="row">
 											<div class="col-xs-4">
 												<div class="form-group">
-													<label for="shippingCity">* Citt&agrave;</label> <input type="text"
-														class="form-control" id="shippingCity"
-														placeholder="Città di spedizione" th:name="userShippingCity"
-														required="required"
+													<label for="shippingCity">* Citt&agrave;</label> <input
+														type="text" class="form-control" id="shippingCity"
+														placeholder="Città di spedizione"
+														th:name="userShippingCity" required="required"
 														th:value="${userShipping.userShippingCity}" />
 												</div>
 											</div>
@@ -321,8 +342,8 @@
 												<div class="form-group">
 													<label for="shippingZipcode">* CAP</label> <input
 														type="text" class="form-control" id="shippingZipcode"
-														placeholder="CAP"
-														th:name="userShippingZipcode" required="required"
+														placeholder="CAP" th:name="userShippingZipcode"
+														required="required"
 														th:value="${userShipping.userShippingZipcode}" />
 												</div>
 											</div>
@@ -338,8 +359,8 @@
 											<div class="col-xs-12">
 												<img src="/image/creditcard.png" class="img-responsive" /><br />
 												<div class="form-group">
-													<label for="cardType">* Seleziona un tipo di carta:</label> <select
-														class="form-controll" id="cardType" th:name="type"
+													<label for="cardType">* Seleziona un tipo di carta:</label>
+													<select class="form-controll" id="cardType" th:name="type"
 														th:value="${userPayment.type}">
 														<option value="visa">Visa</option>
 														<option value="mastercard">Mastercard</option>
@@ -348,9 +369,10 @@
 													</select>
 												</div>
 												<div class="form-group">
-													<label for="cardHolder">* Nome del titolare della carta:</label> <input
-														type="text" class="form-control" id="cardHolder"
-														required="required" placeHolder="Nome del titolare della carta"
+													<label for="cardHolder">* Nome del titolare della
+														carta:</label> <input type="text" class="form-control"
+														id="cardHolder" required="required"
+														placeHolder="Nome del titolare della carta"
 														th:name="holderName" th:value="${userPayment.holderName}" />
 												</div>
 												<div class="form-group">
@@ -411,8 +433,8 @@
 													</div>
 													<div class="col-xs-5">
 														<div class="form-group">
-															<label for="cardCVC">Codice CV</label> <input id="cardCVC"
-																type="tel" class="form-control" name="cvc"
+															<label for="cardCVC">Codice CV</label> <input
+																id="cardCVC" type="tel" class="form-control" name="cvc"
 																placeholder="CVC" th:name="cvc"
 																th:value="${userPayment.cvc}" />
 														</div>
@@ -428,8 +450,8 @@
 										</div>
 									</form>
 								</div>
-								</div>
-							
+							</div>
+
 						</div>
 
 
@@ -447,16 +469,16 @@
 						<div class="panel panel-default sidebar-menu">
 
 							<div class="panel-heading">
-								<h3 class="panel-title">Customer section</h3>
+								<h3 class="panel-title">Sezioni</h3>
 							</div>
 
 							<div class="panel-body">
 
 								<ul class="nav nav-pills nav-stacked">
-									<li><a th:href="@{/orderList}"><i
-											class="fa fa-list"></i> My orders</a></li>
+									<li><a th:href="@{/orderList}"><i class="fa fa-list"></i>
+											I miei ordini</a></li>
 									<li class="active"><a th:href="@{/myProfile}"><i
-											class="fa fa-user"></i> My account</a></li>
+											class="fa fa-user"></i> Il mio account</a></li>
 									<li><a th:href="@{/logout}"><i class="fa fa-sign-out"></i>
 											Logout</a></li>
 								</ul>
@@ -677,7 +699,7 @@ _________________________________________________________ -->
 
 
 	<!-- #### JAVASCRIPT FILES ### -->
-    <div th:replace="common/header :: body-bottom-scripts" ></div>
+	<div th:replace="common/header :: body-bottom-scripts"></div>
 
 </body>
 
