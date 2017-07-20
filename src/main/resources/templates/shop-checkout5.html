@@ -112,7 +112,7 @@ _________________________________________________________ -->
 												<th colspan="2">Totale</th>
 											</tr>
 										</thead>
-										<tbody th:each="cartItem : ${cartItemList}">
+										<tbody th:each="cartItem : ${session.cartItemList}">
 											<tr>
 												<td><a
 													th:href="@{shop-detail(id=${cartItem.cigarette.id})}">

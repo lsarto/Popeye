@@ -3,6 +3,8 @@ package com.cigarettestore.controller;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +39,7 @@ public class ShoppingCartController {
 	private CigaretteService cigaretteService;
 	
 	@RequestMapping("/cart")
-	public String shoppingCart(Model model, Principal principal) {
+	public String shoppingCart(HttpSession session, Model model, Principal principal) {
 		User user = userService.findByUsername(principal.getName());
 		ShoppingCart shoppingCart = user.getShoppingCart();
 		
@@ -45,8 +47,10 @@ public class ShoppingCartController {
 		
 		shoppingCartService.updateShoppingCart(shoppingCart);
 		
-		model.addAttribute("cartItemList", cartItemList);
 		model.addAttribute("shoppingCart", shoppingCart);
+		session.setAttribute("cartItemList", cartItemList);
+		model.addAttribute("shoppingCart", shoppingCart);
+		session.setAttribute("shoppingCart", shoppingCart);
 		
 		return "shop-basket";
 	}
