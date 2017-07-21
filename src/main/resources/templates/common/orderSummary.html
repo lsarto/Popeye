@@ -7,8 +7,7 @@
 		<div class="box-header">
 			<h3>Sommario ordine</h3>
 		</div>
-		<p class="text-muted">Shipping and additional costs are calculated
-			based on the values you have entered.</p>
+		<p class="text-muted">I costi di spedizione vengono calcolati in base ai valori immessi.</p>
 
 		<div class="table-responsive">
 			<table class="table">
@@ -29,13 +28,13 @@
 					<tr>
 						<td>Tasse</td>
 						<th th:with="tax=${shoppingCart.grandTotal*0.06}"
-							th:text="'$'+${#numbers.formatDecimal(tax, 0 ,2)}"></th>
+							th:text="'$'+${#numbers.formatDecimal(tax, 1 ,2)}"></th>
 					</tr>
 					<tr class="total">
 						<td>Totale</td>
 						<th
 							th:with="total=${shoppingCart.grandTotal+shoppingCart.grandTotal*0.06}"
-							th:text="'$'+${#numbers.formatDecimal(total, 0 ,2)}"></th>
+							th:text="'$'+${#numbers.formatDecimal(total, 1 ,2)}"></th>
 					</tr>
 				</tbody>
 			</table>

@@ -13,13 +13,13 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-7">
-						<h1>Checkout - Payment method</h1>
+						<h1>Checkout - Info pagamento</h1>
 					</div>
 					<div class="col-md-5">
 						<ul class="breadcrumb">
 
 							<li><a href="index.html">Home</a></li>
-							<li>Checkout - Payment method</li>
+							<li>Checkout - Info pagamento</li>
 						</ul>
 
 					</div>
@@ -35,26 +35,23 @@
 					<div class="col-md-9 clearfix" id="checkout">
 						<ul class="nav nav-pills nav-justified">
 							<li><a th:href="@{/shop-checkout1}"><i
-									class="fa fa-map-marker"></i><br>Address</a></li>
-							<li><a th:href="@{/shop-checkout2}"><i class="fa fa-truck"></i><br>Delivery
-									Method</a></li>
+									class="fa fa-map-marker"></i><br>Indirizzo</a></li>
+							<li><a th:href="@{/shop-checkout2}"><i class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
 							<li class=""><a th:href="@{/shop-checkout3}"><i
-									class="glyphicon glyphicon-euro""></i><br>Payment Method</a></li>
+									class="glyphicon glyphicon-euro""></i><br>Metodo di pagamento</a></li>
 							<li class="active"><a href="#" data-toggle="collapse"><i
-									class="fa fa-money"></i><br>Payment Information</a></li>
-							<li class="disabled"><a href="#"><i class="fa fa-eye"></i><br>Order
-									Review</a></li>
+									class="fa fa-money"></i><br>Info pagamento</a></li>
+							<li class="disabled"><a href="#"><i class="fa fa-eye"></i><br>Resoconto ordine</a></li>
 						</ul>
 						<div class="col-sm-13 text-left">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item active"><a
 									th:href="@{/paymentWithCreditCard}"
-									th:style="${listOfCreditCards}? 'color:red'">List of Credit
-										Cards</a></li>
+									th:style="${listOfCreditCards}? 'color:red'">Lista carte di credito</a></li>
 								<li class="breadcrumb-item active"><a
 									th:href="@{/paymentWithNewCreditCard}"
-									th:style="${addNewCreditCard}? 'color:red'">Add(Update)
-										Credit Card</a></li>
+									th:style="${addNewCreditCard}? 'color:red'">Aggiungi(Aggiorna)
+										una carta di credito</a></li>
 							</ol>
 						</div>
 
@@ -70,8 +67,7 @@
 											<tr th:each="userPayment : ${userPaymentList}">
 												<td th:text="${userPayment.cardName}"></td>
 												<td><a class="btn btn-template-main"
-													th:href="@{/setPaymentMethod(userPaymentId=${userPayment.id})}">use
-														this payment</a></td>
+													th:href="@{/setPaymentMethod(userPaymentId=${userPayment.id})}">Usa questo pagamento</a></td>
 											</tr>
 										</tbody>
 									</table>
