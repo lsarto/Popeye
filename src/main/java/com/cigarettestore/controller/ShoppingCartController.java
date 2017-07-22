@@ -47,7 +47,7 @@ public class ShoppingCartController {
 		
 		shoppingCartService.updateShoppingCart(shoppingCart);
 		
-		model.addAttribute("shoppingCart", shoppingCart);
+		model.addAttribute("cartItemList", cartItemList);
 		session.setAttribute("cartItemList", cartItemList);
 		model.addAttribute("shoppingCart", shoppingCart);
 		session.setAttribute("shoppingCart", shoppingCart);
