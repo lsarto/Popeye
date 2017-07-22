@@ -27,7 +27,6 @@
 
 		<div id="content">
 			<div class="container">
-
 				<div class="row">
 
 					<!-- *** LEFT COLUMN ***
@@ -39,64 +38,11 @@
 							wide selection of the best products we have found and carefully
 							selected worldwide. Pellentesque habitant morbi tristique
 							senectus et netuss.</p>
-
-						<div class="row products">
-							<div th:if="${emptyList}">
-								<h5 style="font-style: italic;">Oops, nessun risultato
-									trovato. Riprova pi&ugrave; tardi o prova qualcos'altro.</h5>
-							</div>
-
-							<div class="col-md-4 col-sm-6"
-								data-th-each="cigarette : ${cigaretteList}">
-								<div th:if="${cigarette != null}">
-									<div class="product">
-										<div class="image">
-											<a th:href="@{/shop-detail?id=}+${cigarette.id}"> <img
-												th:src="#{adminPath}+@{/image/cigarette/}+${cigarette.id}+'-1.png'"
-												alt="" class="img-responsive image1">
-											</a>
-										</div>
-										<!-- /.image -->
-										<div class="text">
-											<h3>
-												<a th:href="@{/shop-detail?id=}+${cigarette.id}"> <span
-													th:text="${cigarette.name}"> </span>
-												</a>
-											</h3>
-											<p class="price">
-												<del>
-													$<span
-														th:text="${#numbers.formatDecimal(cigarette.listPrice, 0 , 'COMMA', 2, 'POINT')}"></span>
-												</del>
-												$<span
-													th:text="${#strings.abbreviate(cigarette.ourPrice, 500)}"></span>
-											</p>
-											<p class="buttons">
-												<a th:href="@{/shop-detail?id=}+${cigarette.id}"
-													class="btn btn-default">View detail</a> <a
-													href="shop-basket.html" class="btn btn-template-main"><i
-													class="fa fa-shopping-cart"></i>Add to cart</a>
-											</p>
-										</div>
-										<!-- /.text -->
-
-										<div th:if="${cigarette.ourPrice}" class="ribbon sale">
-											<div class="theribbon">SALE</div>
-											<div class="ribbon-background"></div>
-										</div>
-										<!-- /.ribbon -->
-
-										<div class="ribbon new">
-											<div class="theribbon">NEW</div>
-											<div class="ribbon-background"></div>
-										</div>
-										<!-- /.ribbon -->
-									</div>
-									<!-- /.product -->
-								</div>
-							</div>
+						<div id="shop-category-call">
+							<div th:replace="common/categorieFragment :: listFragment"></div>
 						</div>
 
+						<div id="div-elementi-categoria"></div>
 
 						<div class="pages">
 

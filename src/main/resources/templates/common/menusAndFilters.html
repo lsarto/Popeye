@@ -18,22 +18,27 @@
 							class="badge pull-right">42</span>
 					</a>
 						<ul>
-							<li th:classappend="${activeAll}? 'active btn-default'"><a
-								th:href="@{/shop-category(category='all')}">All</a></li>
-							<li th:classappend="${activeAspire}? 'active btn-default'"><a
-								th:href="@{/searchByCategory(category='Aspire')}">Aspire</a></li>
-							<li th:classappend="${activeInnokin}? 'active btn-default'"><a
-								th:href="@{/searchByCategory(category='Innokin')}">Innokin</a></li>
-							<li th:classappend="${activeSmok}? 'active btn-default'"><a
-								th:href="@{/searchByCategory(category='Smok')}">Smok</a></li>
-							<li th:classappend="${activeXtar}? 'active btn-default'"><a
-								th:href="@{/searchByCategory(category='Xtar')}">Xtar</a></li>
+							<li th:classappend="${activeAll}? 'active btn-default'"
+								id="all-list-item"><a
+								th:href="@{/searchByCategory(category='all')}" id="all-category">All</a></li>
+							<li th:classappend="${activeAspire}? 'active btn-default'"
+								id="aspire-list-item"><a
+								href="@{/searchByCategory(category='Aspire')}" id="aspire">Aspire</a></li>
+							<li th:classappend="${activeInnokin}? 'active btn-default'"
+								id="innokin-list-item"><a
+								th:href="@{/searchByCategory(category='Innokin')}" id="innokin">Innokin</a></li>
+							<li th:classappend="${activeSmok}? 'active btn-default'"
+								id="smok-list-item"><a
+								th:href="@{/searchByCategory(category='Smok')}" id="smok">Smok</a></li>
+							<li th:classappend="${activeXtar}? 'active btn-default'"
+								id="xtar-list-item"><a
+								th:href="@{/searchByCategory(category='Xtar')}" id="xtar">Xtar</a></li>
 						</ul></li>
 
 				</ul>
 
 			</div>
 		</div>
-	</div>
+	</div>	
 </body>
 </html>

@@ -305,8 +305,33 @@
 
 						<!-- *** MENUS AND FILTERS ***
  _________________________________________________________ -->
- 
-						<div th:replace="common/menusAndFilters :: menus&filters"></div>
+
+						<div class="panel panel-default sidebar-menu">
+
+							<div class="panel-heading">
+								<h3 class="panel-title">Categorie</h3>
+							</div>
+
+							<div class="panel-body">
+								<ul class="nav nav-pills nav-stacked category-menu">
+									<li class="active"><a href="#">Sig. Elettroniche <span
+											class="badge pull-right">42</span>
+									</a>
+										<ul>
+											<li th:classappend="${activeAll}? 'active btn-default'"><a
+												th:href="@{/shop-category(category='all')}">All</a></li>
+											<li th:classappend="${activeAspire}? 'active btn-default'"><a
+												href="@{/searchByCategory(category='Aspire')}">Aspire</a></li>
+											<li th:classappend="${activeInnokin}? 'active btn-default'"><a
+												th:href="@{/searchByCategory(category='Innokin')}">Innokin</a></li>
+											<li th:classappend="${activeSmok}? 'active btn-default'"><a
+												th:href="@{/searchByCategory(category='Smok')}">Smok</a></li>
+											<li th:classappend="${activeXtar}? 'active btn-default'"><a
+												th:href="@{/searchByCategory(category='Xtar')}">Xtar</a></li>
+										</ul></li>
+								</ul>
+							</div>
+						</div>
 
 						<!-- *** MENUS AND FILTERS END *** -->
 
