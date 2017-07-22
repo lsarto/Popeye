@@ -16,14 +16,14 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-7">
-						<h1>Order # <span th:text="${order.id}"></span></h1>
+						<h1>Ordine # <span th:text="${order.id}"></span></h1>
 					</div>
 					<div class="col-md-5">
 						<ul class="breadcrumb">
 
 							<li><a href="index.html">Home</a></li>
-							<li><a href="customer-orders.html">My orders</a></li>
-							<li>Order # </li><span th:text="${order.id}"></span>
+							<li><a href="customer-orders.html">I miei ordini</a></li>
+							<li>Ordine # </li><span th:text="${order.id}"></span>
 						</ul>
 					</div>
 				</div>
@@ -42,13 +42,8 @@
 					<div class="col-md-9 clearfix" id="customer-order">
 
 						<p class="lead">
-							Order <span th:text="${order.id}"></span> was placed on <strong><span
+							L'ordine <span th:text="${order.id}"></span> è stato effettuato <strong><span
 								th:text="${order.orderDate}"></span></strong>.
-						</p>
-						<p class="lead text-muted">
-							If you have any questions, please feel free to <a
-								href="contact.html">contact us</a>, our customer service center
-							is working for you 24/7.
 						</p>
 
 						<div class="box">
@@ -56,10 +51,10 @@
 								<table class="table">
 									<thead>
 										<tr>
-											<th colspan="3">Product</th>
-											<th>Quantity</th>
-											<th>Price</th>
-											<th>Total</th>
+											<th colspan="3">Prodotto</th>
+											<th>Quantità</th>
+											<th>Prezzo</th>
+											<th>Totale</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -77,12 +72,12 @@
 										<tr>
 										</tr>
 										<tr>
-											<th colspan="5" class="text-right">Tax</th>
+											<th colspan="5" class="text-right">Tasse</th>
 											<th
 												data-th-text="${#numbers.formatDecimal(order.orderTotal*0.06,0,2)}+€"></th>
 										</tr>
 										<tr>
-											<th colspan="5" class="text-right">Total</th>
+											<th colspan="5" class="text-right">Totale</th>
 											<th data-th-text="${order.orderTotal}+€"></th>
 										</tr>
 									</tfoot>
@@ -93,7 +88,7 @@
 
 							<div class="row addresses">
 								<div class="col-sm-6">
-									<h3 class="text-uppercase">Billing address</h3>
+									<h3 class="text-uppercase">Indirizzo di fatturazione</h3>
 									<p>
 										<span th:text="${order.billingAddress.billingAddressName}"></span><br />
 										<span
@@ -104,7 +99,7 @@
 									</p>
 								</div>
 								<div class="col-sm-6">
-									<h3 class="text-uppercase">Shipping address</h3>
+									<h3 class="text-uppercase">Indirizzo di spedizione</h3>
 									<p>
 										<span th:text="${order.shippingAddress.shippingAddressName}"></span><br />
 										<span
@@ -142,9 +137,9 @@
 
 								<ul class="nav nav-pills nav-stacked">
 									<li class="active"><a th:href="@{/orderList}"><i class="fa fa-list"></i>
-											My orders</a></li>
+											I miei ordini</a></li>
 									<li><a th:href="@{/myProfile}"><i class="fa fa-user"></i>
-											My account</a></li>
+											Il mio account</a></li>
 									<li><a th:href="@{/logout}"><i class="fa fa-sign-out"></i>
 											Logout</a></li>
 								</ul>

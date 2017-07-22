@@ -19,7 +19,7 @@
 					<div class="col-md-6">
 						<ul class="breadcrumb">
 							<li><a href="index.html">Home</a></li>
-							<li>Shopping cart</li>
+							<li>Carrello</li>
 						</ul>
 
 					</div>
@@ -32,8 +32,7 @@
 
 				<div class="row">
 					<div class="col-md-12">
-						<p class="text-muted lead">You currently have 3 item(s) in
-							your cart.</p>
+						
 					</div>
 
 
@@ -55,7 +54,7 @@
 											<th colspan="2">Totale</th>
 										</tr>
 									</thead>
-									<tbody th:each="cartItem : ${cartItemList}">
+									<tbody th:each="cartItem : ${session.cartItemList}">
 										<tr>
 											<td><a
 												th:href="@{shop-detail(id=${cartItem.cigarette.id})}"> <img
@@ -119,28 +118,6 @@
 						
 						<div th:replace="common/orderSummary :: orderSummary"></div>
 
-
-						<div class="box">
-							<div class="box-header">
-								<h4>Coupon code</h4>
-							</div>
-							<p class="text-muted">If you have a coupon code, please enter
-								it in the box below.</p>
-							<form>
-								<div class="input-group">
-
-									<input type="text" class="form-control"> <span
-										class="input-group-btn">
-
-										<button class="btn btn-template-main" type="button">
-											<i class="fa fa-gift"></i>
-										</button>
-
-									</span>
-								</div>
-								<!-- /input-group -->
-							</form>
-						</div>
 
 					</div>
 					<!-- /.col-md-3 -->
