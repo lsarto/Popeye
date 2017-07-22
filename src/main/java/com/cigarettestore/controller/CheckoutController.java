@@ -90,7 +90,7 @@ public class CheckoutController {
 		User user = userService.findByUsername(principal.getName());
 		session.setAttribute("user", user);
 		model.addAttribute("user", user);
-		session.setAttribute("shoppingCart", shoppingCart);
+//		session.setAttribute("shoppingCart", shoppingCart);
 		UserBilling userBilling = new UserBilling();
 		model.addAttribute("userBilling", userBilling);
 		List<String> stateList = ITConstants.listOfITStatesName;
