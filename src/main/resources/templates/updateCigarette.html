@@ -13,7 +13,8 @@
 				enctype="multipart/form-data">
 				<fieldset>
 					<legend class="center-block">
-						Aggiorna le informazioni del prodotto<span style="font-size: small">* campo obbligatorio</span>
+						Aggiorna le informazioni del prodotto<span
+							style="font-size: small">* campo obbligatorio</span>
 					</legend>
 
 					<input hidden="hidden" name="id" th:value="${cigarette.id}" />
@@ -106,7 +107,8 @@
 
 					<!-- shipping weight -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="shippingWeight">Peso spedizione</label>
+						<label class="col-md-2 control-label" for="shippingWeight">Peso
+							spedizione</label>
 						<div class="col-md-8">
 							<div class="input-group">
 								<input th:value="${cigarette.shippingWeight}" type="number"
@@ -120,7 +122,8 @@
 
 					<!-- list price -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="listPrice">Prezzo Lista</label>
+						<label class="col-md-2 control-label" for="listPrice">Prezzo
+							Lista</label>
 						<div class="col-md-8">
 							<div class="input-group">
 								<span class="input-group-addon">$</span> <input
@@ -134,7 +137,8 @@
 
 					<!-- our price -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="ourPrice">Nostro Prezzo</label>
+						<label class="col-md-2 control-label" for="ourPrice">Nostro
+							Prezzo</label>
 						<div class="col-md-8">
 							<div class="input-group">
 								<span class="input-group-addon">$</span> <input
@@ -152,7 +156,8 @@
 							<input th:value="${cigarette.inStockNumber}" type="number"
 								name="inStockNumber" class="form-control" id="inStockNumber"
 								placeholder="Number of in-stock copies" /> <span
-								class="help-block">Numero di copie nello stock del magazzino</span>
+								class="help-block">Numero di copie nello stock del
+								magazzino</span>
 						</div>
 					</div>
 
@@ -162,7 +167,8 @@
 						<div class="col-md-8">
 							<label><input value="true" type="radio" name="active"
 								th:checked="${cigarette.active}" /> Attivo </label> <label><input
-								value="false" type="radio" name="active" th:checked="${!cigarette.active}"/> Inattivo </label> <span
+								value="false" type="radio" name="active"
+								th:checked="${!cigarette.active}" /> Inattivo </label> <span
 								class="help-block">Settare lo stato della sigaretta</span>
 						</div>
 					</div>
@@ -178,16 +184,53 @@
 						</div>
 					</div>
 
-					<!-- upload image -->
+					<!-- upload images START-->
+
 					<div class="form-group">
 						<div class="col-md-2">
-							<label for="cigaretteImage">Aggiorna immagine</label>
+							<label for="cigaretteImage">Aggiorna immagine sigaretta -
+								negozio</label>
 						</div>
 						<div class="col-md-8">
-							<input id="cigaretteImage" type="file" name="cigaretteImage"
+							<input id="cigaretteCategory" type="file" name="cigaretteCategory"
 								th:value="${cigarette.cigaretteCategory}" />
 						</div>
 					</div>
+
+					<div class="form-group">
+						<div class="col-md-2">
+							<label for="cigaretteImage">Aggiorna immagine sigaretta -
+								dettaglio 1</label>
+						</div>
+						<div class="col-md-8">
+							<input id="cigaretteDetail1" type="file" name="cigaretteDetail1"
+								th:value="${cigarette.cigaretteDetail1}" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-2">
+							<label for="cigaretteImage">Aggiorna immagine sigaretta -
+								dettaglio 2</label>
+						</div>
+						<div class="col-md-8">
+							<input id="cigaretteDetail2" type="file" name="cigaretteDetail2"
+								th:value="${cigarette.cigaretteDetail2}" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-2">
+							<label for="cigaretteImage">Aggiorna immagine sigaretta -
+								dettaglio 3</label>
+						</div>
+						<div class="col-md-8">
+							<input id="cigaretteDetail3" type="file" name="cigaretteDetail3"
+								th:value="${cigarette.cigaretteDetail3}" />
+						</div>
+					</div>
+
+					<!-- upload images END -->
 
 					<div class="form-group">
 						<div class="col-md-2"></div>

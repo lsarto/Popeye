@@ -120,7 +120,7 @@ public class CigaretteController {
 		if(!cigaretteCategory.isEmpty()) {
 			try {
 				byte[] bytes = cigaretteCategory.getBytes();
-				String name = cigarette.getId() + ".png";
+				String name = cigarette.getId() + "-1.png";
 				
 				Files.delete(Paths.get("src/main/resources/static/image/cigarette/"+name));
 				
@@ -136,7 +136,7 @@ public class CigaretteController {
 		if(!cigaretteDetail1.isEmpty()) {
 			try {
 				byte[] bytes = cigaretteDetail1.getBytes();
-				String name = cigarette.getId() + ".png";
+				String name = cigarette.getId() + "-2.png";
 				
 				Files.delete(Paths.get("src/main/resources/static/image/cigarette/"+name));
 				
@@ -152,7 +152,7 @@ public class CigaretteController {
 		if(!cigaretteDetail2.isEmpty()) {
 			try {
 				byte[] bytes = cigaretteDetail2.getBytes();
-				String name = cigarette.getId() + ".png";
+				String name = cigarette.getId() + "-3.png";
 				
 				Files.delete(Paths.get("src/main/resources/static/image/cigarette/"+name));
 				
@@ -168,7 +168,7 @@ public class CigaretteController {
 		if(!cigaretteDetail3.isEmpty()) {
 			try {
 				byte[] bytes = cigaretteDetail3.getBytes();
-				String name = cigarette.getId() + ".png";
+				String name = cigarette.getId() + "-4.png";
 				
 				Files.delete(Paths.get("src/main/resources/static/image/cigarette/"+name));
 				
