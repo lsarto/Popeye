@@ -41,7 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/shop-category",
 			"/searchByCategory",
 			"/searchByCategoryAjax",
-			"/searchCigarette"
+			"/searchCigarette",
+			"/contact"
 	};
 
 	@Override
