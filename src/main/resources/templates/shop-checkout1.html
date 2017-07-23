@@ -37,7 +37,7 @@
 					<div class="col-md-9 clearfix" id="checkout">
 
 						<div class="box">
-							<form th:action="@{/shop-checkout2}"  method="post">
+							<form th:action="@{/shop-checkout2}" method="post">
 
 								<ul class="nav nav-pills nav-justified">
 									<li class="active" data-toggle="collapse"><a
@@ -56,47 +56,47 @@
 											dell'ordine</a></li>
 								</ul>
 
-									<div class="row">
-										<div class="col-sm-6">
-											<div class="form-group">
-												<label for="firstname">Nome</label> <input type="text"
-													class="form-control" required="required" id="firstname" name="firstname"
-													th:value="${user.firstName}" />
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="form-group">
-												<label for="lastname">Cognome</label> <input type="text"
-													class="form-control" required="required" id="lastname" name="lastname"
-													th:value="${user.lastName}" />
-											</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label for="firstname">Nome</label> <input type="text"
+												class="form-control" required="required" id="firstname"
+												name="firstname" th:value="${user.firstName}" />
 										</div>
 									</div>
-									<!-- /.row -->
-
-	
-									<!-- /.row -->
-
-									<div class="row">
-										
-										
-										<div class="col-sm-6">
-											<div class="form-group">
-												<label for="phone">Telefono</label> <input type="number"
-													class="form-control" required="required" id="phone" name="phone"
-													th:value="${user.phone}" >
-											</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label for="lastname">Cognome</label> <input type="text"
+												class="form-control" required="required" id="lastname"
+												name="lastname" th:value="${user.lastName}" />
 										</div>
-										<div class="col-sm-6">
-											<div class="form-group">
-												<label for="email">Email</label> <input type="text" readonly
-													class="form-control" required="required" id="email"
-													th:value="${user.email}">
-											</div>
-										</div>
-
 									</div>
-									<!-- /.row -->
+								</div>
+								<!-- /.row -->
+
+
+								<!-- /.row -->
+
+								<div class="row">
+
+
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label for="phone">Telefono</label> <input type="number"
+												class="form-control" required="required" id="phone"
+												name="phone" th:value="${user.phone}">
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label for="email">Email</label> <input type="text" readonly
+												class="form-control" required="required" id="email"
+												th:value="${user.email}">
+										</div>
+									</div>
+
+								</div>
+								<!-- /.row -->
 
 
 								<!-- /.content -->
@@ -125,6 +125,11 @@
 
 					</div>
 					<!-- /.col-md-3 -->
+									<div class="col-md-3">
+
+					<div th:replace="common/orderSummary :: orderSummary"></div>
+
+				</div>
 
 				</div>
 				<!-- /.row -->
@@ -189,6 +194,7 @@ _________________________________________________________ -->
 
 				</div>
 				<!-- /.col-md-3 -->
+				
 
 				<div class="col-md-3 col-sm-6">
 
@@ -239,6 +245,7 @@ _________________________________________________________ -->
 
 				</div>
 				<!-- /.col-md-3 -->
+				
 
 				<div class="col-md-3 col-sm-6">
 
@@ -257,47 +264,6 @@ _________________________________________________________ -->
 
 				</div>
 				<!-- /.col-md-3 -->
-
-
-
-				<div class="col-md-3 col-sm-6">
-
-					<h4>Photostream</h4>
-
-					<div class="photostream">
-						<div>
-							<a href="#"> <img src="img/detailsquare.jpg"
-								class="img-responsive" alt="#">
-							</a>
-						</div>
-						<div>
-							<a href="#"> <img src="img/detailsquare2.jpg"
-								class="img-responsive" alt="#">
-							</a>
-						</div>
-						<div>
-							<a href="#"> <img src="img/detailsquare3.jpg"
-								class="img-responsive" alt="#">
-							</a>
-						</div>
-						<div>
-							<a href="#"> <img src="img/detailsquare3.jpg"
-								class="img-responsive" alt="#">
-							</a>
-						</div>
-						<div>
-							<a href="#"> <img src="img/detailsquare2.jpg"
-								class="img-responsive" alt="#">
-							</a>
-						</div>
-						<div>
-							<a href="#"> <img src="img/detailsquare.jpg"
-								class="img-responsive" alt="#">
-							</a>
-						</div>
-					</div>
-
-				</div>
 				<!-- /.col-md-3 -->
 			</div>
 			<!-- /.container -->
