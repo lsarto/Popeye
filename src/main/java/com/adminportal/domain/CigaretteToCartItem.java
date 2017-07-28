@@ -14,7 +14,7 @@ public class CigaretteToCartItem {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name="cigarette_id")
 	private Cigarette cigarette;
 	

@@ -3,14 +3,19 @@
 <head th:replace="common/header :: common-header" />
 
 <body>
-	<div th:replace="common/header :: navbar" />
+	<div th:replace="common/header :: navbar"></div>
 
 	<div class="container">
+		<div class="alert alert-danger" th:if="${foreignKeyErr}">
+			<strong>Danger!</strong> Indicates a dangerous or potentially
+			negative action.
+		</div>
 		<div class="table-responsive">
 			<table id="cigaretteListTable"
 				class="table table-bordered table-hover table-striped">
 				<thead>
 					<tr>
+						<th><input th:id="selectAllCigarette" type="checkbox" /></th>
 						<th>Nome</th>
 						<th>Modello</th>
 						<th>Marca</th>
@@ -27,7 +32,12 @@
 				<tbody>
 					<tr data-th-each="cigarette : ${cigaretteList}">
 						<!-- <td><input hidden="hidden" name="id" th:value="${cigarette.id}" /></td> -->
-						<td><a th:href="@{/cigarette/cigaretteInfo(id=${cigarette.id})}"><span
+						<td><input hidden="hidden" name="id"
+							th:value="${cigarette.id}" /> <input
+							th:id="'selected'+${cigarette.id}" class="checkboxCigarette"
+							type="checkbox" /></td>
+						<td><a
+							th:href="@{/cigarette/cigaretteInfo(id=${cigarette.id})}"><span
 								th:text="${cigarette.name}"></span></a></td>
 						<td th:text="${cigarette.model}"></td>
 						<td th:text="${cigarette.brand}"></td>
@@ -38,26 +48,36 @@
 						<td th:text="${cigarette.listPrice}"></td>
 						<td th:text="${cigarette.ourPrice}"></td>
 						<td th:text="${cigarette.active}"></td>
-						<td>delete</td>
+						<td><input hidden="hidden" name="id"
+							th:value="${cigarette.id}" />
+							<button th:id="'oneCigarette-'+${cigarette.id}"
+								class="btn btn-danger btn-xs delete-cigarette" type="submit"
+								value="delete">
+								<span class="fa fa-times"></span>Delete
+							</button></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-
+		<button th:id="deleteSelected" class="btn btn-danger ">Delete
+			Selected</button>
 	</div>
 
 
-	<div th:replace="common/header :: body-bottom-scripts" />
-	
+	<div th:replace="common/header :: body-bottom-scripts"></div>
+
 	<script>
-		$(document).ready(function() {
-			$("#cigaretteListTable").DataTable({
-				"lengthMenu": [[5,10,15,20,-1],[5,10,15,20,"All"]],
-				"ordering": false,
-				stateSave: true
-			});
-		});
+		$(document).ready(
+				function() {
+					$("#cigaretteListTable").DataTable(
+							{
+								"lengthMenu" : [ [ 5, 10, 15, 20, -1 ],
+										[ 5, 10, 15, 20, "All" ] ],
+								"ordering" : false,
+								stateSave : true
+							});
+				});
 	</script>
-	
+
 </body>
 </html>

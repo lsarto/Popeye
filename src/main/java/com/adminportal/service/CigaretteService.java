@@ -11,4 +11,6 @@ public interface CigaretteService {
 	List<Cigarette> findAll();
 	
 	Cigarette findOne(Long id);
+	
+	void removeOne(Long id);
 }

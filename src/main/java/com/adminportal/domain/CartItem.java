@@ -23,7 +23,7 @@ public class CartItem {
 	private int qty;
 	private BigDecimal subtotal;
 	
-	@OneToOne
+	@OneToOne()
 	private Cigarette cigarette;
 	
 	@OneToMany(mappedBy = "cartItem")

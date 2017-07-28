@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.adminportal.domain.Cigarette;
@@ -82,12 +83,14 @@ public class CigaretteController {
 	}
 	
 	@RequestMapping("/cigaretteList")
-	public String cigaretteList(Model model) {
+	public String cigaretteListPage(Model model) {
 		List<Cigarette> cigaretteList = cigaretteService.findAll();
-		model.addAttribute("cigaretteList", cigaretteList);		
+		model.addAttribute("cigaretteList", cigaretteList);	
+
 		return "cigaretteList";
 		
 	}
+
 	
 	@RequestMapping("/cigaretteInfo")
 	public String cigaretteInfo(@RequestParam("id") Long id, Model model) {
@@ -184,5 +187,19 @@ public class CigaretteController {
 		return "redirect:/cigarette/cigaretteInfo?id="+cigarette.getId();
 	}
 	
+	@RequestMapping(value="/remove", method=RequestMethod.POST)
+	public @ResponseBody Boolean remove(
+			@ModelAttribute("id") String id, Model model) {
+		try {
+			cigaretteService.removeOne(Long.parseLong(id.substring(13)));
+        } catch (Exception e){
+			System.out.println("Sono qui\n");
+			return new Boolean(false);
+		}
 	
+		List<Cigarette> cigaretteList = cigaretteService.findAll();
+		model.addAttribute("cigaretteList", cigaretteList);
+		
+		return new Boolean(true);
+	}
 }

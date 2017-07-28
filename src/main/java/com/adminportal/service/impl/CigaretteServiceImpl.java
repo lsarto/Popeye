@@ -28,4 +28,9 @@ public class CigaretteServiceImpl implements CigaretteService{
 	public Cigarette findOne(Long id) {
 		return cigaretteRepository.findOne(id);
 	}
+	
+	@Override
+	public void removeOne(Long id) {
+		cigaretteRepository.delete(id);
+	}
 }
