@@ -1,13 +1,18 @@
 package com.cigarettestore.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -41,6 +46,9 @@ public class Cigarette {
 	@Transient
 	private MultipartFile cigaretteDetail3;
 
+	@OneToMany(mappedBy = "cigarette")
+	@JsonIgnore
+	private List<CigaretteToCartItem> cigaretteToCartItemList;
 	
 	public Long getId() {
 		return id;
@@ -184,6 +192,14 @@ public class Cigarette {
 
 	public void setCigaretteDetail3(MultipartFile cigaretteDetail3) {
 		this.cigaretteDetail3 = cigaretteDetail3;
+	}
+
+	public List<CigaretteToCartItem> getCigaretteToCartItemList() {
+		return cigaretteToCartItemList;
+	}
+
+	public void setCigaretteToCartItemList(List<CigaretteToCartItem> cigaretteToCartItemList) {
+		this.cigaretteToCartItemList = cigaretteToCartItemList;
 	}
 
 

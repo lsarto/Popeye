@@ -34,7 +34,7 @@ public class MailConstructor {
 		String message = "\nClicca su questo link per verificare la tua email e modificare i tuoi dati personali. La tua password e': \n"+password;
 		SimpleMailMessage email = new SimpleMailMessage();
 		email.setTo(user.getEmail());
-		email.setSubject("Le's Bookstore - New User");
+		email.setSubject("Cigarette - New User");
 		email.setText(url+message);
 		email.setFrom(env.getProperty("support.email"));
 		return email;

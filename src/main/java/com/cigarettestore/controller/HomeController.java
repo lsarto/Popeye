@@ -80,7 +80,8 @@ public class HomeController {
 	private CartItemService cartItemService;
 
 	@RequestMapping("/")
-	public String index() {
+	public String index(Model model) {
+		model.addAttribute("home", true);
 		return "index5";
 	}
 
@@ -92,6 +93,8 @@ public class HomeController {
 	
 	@RequestMapping("/contact")
 	public String contact(Model model) {
+		model.addAttribute("contatti", true);
+		
 		return "contact";
 	}
 
@@ -129,6 +132,7 @@ public class HomeController {
 		List<Cigarette> cigaretteList = cigaretteService.findAll();
 		model.addAttribute("cigaretteList", cigaretteList);
 		model.addAttribute("activeAll",true);
+		model.addAttribute("negozio", true);
 
 		return "shop-category";
 	}

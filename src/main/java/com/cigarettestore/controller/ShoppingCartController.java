@@ -52,6 +52,8 @@ public class ShoppingCartController {
 		model.addAttribute("shoppingCart", shoppingCart);
 		session.setAttribute("shoppingCart", shoppingCart);
 		
+		model.addAttribute("carrello", true);
+		
 		return "shop-basket";
 	}
 	
