@@ -202,6 +202,4 @@ public class Cigarette {
 		this.cigaretteToCartItemList = cigaretteToCartItemList;
 	}
 
-
-	
 }

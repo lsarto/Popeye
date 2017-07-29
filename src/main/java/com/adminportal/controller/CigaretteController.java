@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -189,11 +190,12 @@ public class CigaretteController {
 	
 	@RequestMapping(value="/remove", method=RequestMethod.POST)
 	public @ResponseBody Boolean remove(
-			@ModelAttribute("id") String id, Model model) {
+			@RequestBody String id, Model model) {
 		try {
-			cigaretteService.removeOne(Long.parseLong(id.substring(13)));
+			//System.out.println("id: "+id+"\n");
+			cigaretteService.removeOne(Long.parseLong(id.substring(16)));
         } catch (Exception e){
-			System.out.println("Sono qui\n");
+        	e.printStackTrace();
 			return new Boolean(false);
 		}
 	

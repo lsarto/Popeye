@@ -3,13 +3,18 @@
  */
 
 $(document).ready(function() {
+	if(localStorage.getItem("Success")) {
+		toastr.info('L\'elemenoto è stato rimosso');
+	    localStorage.clear();
+	}
+	
 	$('.delete-cigarette').on('click', function (){
 		/*<![CDATA[*/
 	    var path = /*[[@{/}]]*/'remove';
 	    /*]]>*/
 		
 		var id=$(this).attr('id');
-		
+
 		bootbox.confirm({
 			message: "Sicuro di voler cancellare questo prodotto? Non puoi tornare indietro.",
 			buttons: {
@@ -25,15 +30,20 @@ $(document).ready(function() {
 					$.ajax({
 						type: 'POST',
 						url: path,
-						data: JSON.stringify(id),
+						data: {'id':id},
 						contentType: "application/json",
 						dataType: "json",
 						success: function(res) {
 							var obj = JSON.parse(res);
-							alert(obj);
-							toastr["info"]("I was launched via jQuery!")
+							
+							if(!obj) {
+								toastr.error('Attenzione! Non puoi rimuovere questo elemento');
+							}
+							else  {
+								localStorage.setItem("Success", true);
+								location.reload();
+							}
 							console.log(res); 
-							location.reload();
 							},
 						error: function(res){
 							console.log(res); 
