@@ -31,6 +31,8 @@ public class Cigarette {
 	private double shippingWeight;
 	private double listPrice;
 	private double ourPrice;
+	private boolean newProduct=false;
+	private boolean sale=false;
 	private boolean active=true;
 	
 	@Column(columnDefinition="text")
@@ -200,6 +202,22 @@ public class Cigarette {
 
 	public void setCigaretteToCartItemList(List<CigaretteToCartItem> cigaretteToCartItemList) {
 		this.cigaretteToCartItemList = cigaretteToCartItemList;
+	}
+
+	public boolean isNewProduct() {
+		return newProduct;
+	}
+
+	public void setNewProduct(boolean newProduct) {
+		this.newProduct = newProduct;
+	}
+
+	public boolean isSale() {
+		return sale;
+	}
+
+	public void setSale(boolean sale) {
+		this.sale = sale;
 	}
 
 }

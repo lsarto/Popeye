@@ -160,6 +160,26 @@
 								magazzino</span>
 						</div>
 					</div>
+					
+					<!-- sale -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="status">Saldi</label>
+						<div class="col-md-8">
+							<label><input value="true" type="radio" name="sale" th:checked="${cigarette.sale}"/> Sale </label> <label><input
+								value="false" type="radio" name="sale" th:checked="${!cigarette.sale}" />
+								No Sale </label> <span class="help-block">Scegliere se si vuole che sul prodotto compaia l'etichetta "Sale".</span>
+						</div>
+					</div>
+					
+					<!-- new -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="status">Nuovo</label>
+						<div class="col-md-8">
+							<label><input value="true" type="radio" name="newProduct" th:checked="${cigarette.newProduct}" /> New </label> <label><input
+								value="false" type="radio" name="newProduct" th:checked="${!cigarette.newProduct}"/>
+								No New </label> <span class="help-block">Scegliere se si vuole che sul prodotto compaia l'etichetta "New".</span>
+						</div>
+					</div>
 
 					<!-- status of cigarette -->
 					<div class="form-group">
