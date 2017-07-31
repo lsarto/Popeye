@@ -80,7 +80,7 @@ public class ShoppingCartController {
 	}
 	
 	@RequestMapping("/updateCartItem")
-	public String updateShoppingCart(
+	public String updateShoppingCart(Model model,
 			@ModelAttribute("id") Long cartItemId,
 			@ModelAttribute("qty") int qty
 			) {

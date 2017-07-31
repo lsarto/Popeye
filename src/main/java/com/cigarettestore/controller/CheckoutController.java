@@ -86,8 +86,22 @@ public class CheckoutController {
 			HttpSession session,
 			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart, Model model,
 			Principal principal) {
-
 		User user = userService.findByUsername(principal.getName());
+
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
+
+		if (cartItemList.size() == 0) {
+			model.addAttribute("emptyCart", true);
+			return "forward:/shoppingCart/cart";
+		}
+
+		for (CartItem cartItem : cartItemList) {
+			if (cartItem.getCigarette().getInStockNumber() < cartItem.getQty()) {
+				model.addAttribute("notEnoughStock", true);
+				return "forward:/shoppingCart/cart";
+			}
+		}
+
 		session.setAttribute("user", user);
 		model.addAttribute("user", user);
 //		session.setAttribute("shoppingCart", shoppingCart);
