@@ -32,7 +32,7 @@
 
 				<div class="row">
 					<div class="col-md-12">
-						
+						<p class="text-muted lead">Hai <span th:text="${numItems}"></span> prodotto(i) nel tuo carrello.</p>
 					</div>
 
 
@@ -55,7 +55,7 @@
 										</tr>
 									</thead>
 									<tbody th:each="cartItem : ${cartItemList}">
-										<tr>
+										<tr th:if="${cartItem.cigarette.active}">
 											<td><a
 												th:href="@{shop-detail(id=${cartItem.cigarette.id})}"> <img
 													th:src="#{adminPath}+@{/image/cigarette/}+

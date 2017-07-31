@@ -51,6 +51,7 @@ public class ShoppingCartController {
 		session.setAttribute("cartItemList", cartItemList);
 		model.addAttribute("shoppingCart", shoppingCart);
 		session.setAttribute("shoppingCart", shoppingCart);
+		model.addAttribute("numItems", cartItemList.size());
 		
 		model.addAttribute("carrello", true);
 		
