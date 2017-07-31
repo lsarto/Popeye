@@ -3,8 +3,12 @@
  */
 
 $(document).ready(function() {
-	if(localStorage.getItem("Success")) {
-		toastr.info('L\'elemenoto è stato rimosso');
+	if(localStorage.getItem("RemoveItemSuccess")) {
+		toastr.info('Il prodotto è stato rimosso');
+	    localStorage.clear();
+	}
+	if(localStorage.getItem("RemoveItemsSuccess")) {
+		toastr.info('I prodotti selezionati sono stati rimossi.');
 	    localStorage.clear();
 	}
 	
@@ -16,7 +20,7 @@ $(document).ready(function() {
 		var id=$(this).attr('id');
 
 		bootbox.confirm({
-			message: "Sicuro di voler cancellare questo prodotto? Non puoi tornare indietro.",
+			message: "Sicuro di voler rimuovere questo prodotto? L\'operazione è irriversibile.",
 			buttons: {
 				cancel: {
 					label:'<i class="fa fa-times"></i> Cancel'
@@ -37,10 +41,10 @@ $(document).ready(function() {
 							var obj = JSON.parse(res);
 							
 							if(!obj) {
-								toastr.error('Attenzione! Non puoi rimuovere questo elemento');
+								toastr.error('Attenzione! Non puoi rimuovere questo prodotto.');
 							}
 							else  {
-								localStorage.setItem("Success", true);
+								localStorage.setItem("RemoveItemSuccess", true);
 								location.reload();
 							}
 							console.log(res); 
@@ -83,7 +87,7 @@ $(document).ready(function() {
 	    /*]]>*/
 	    
 	    bootbox.confirm({
-			message: "Sicuro di voler cancellare questo/i prodotto/i? Non puoi tornare indietro.",
+			message: "Sicuro di voler rimuovere i prodotti selezionati? L\'operazione è irriversibile.",
 			buttons: {
 				cancel: {
 					label:'<i class="fa fa-times"></i> Cancel'
@@ -100,8 +104,14 @@ $(document).ready(function() {
 						data: JSON.stringify(bookIdList),
 						contentType: "application/json",
 						success: function(res) {
+							if(res){
+								localStorage.setItem("RemoveItemsSuccess", true);
+								location.reload()
+							}
+							else {
+								toastr.error('Attenzione! Non puoi rimuovere i prodotti selezionati.');
+							}	
 							console.log(res); 
-							location.reload()
 							},
 						error: function(res){
 							console.log(res); 

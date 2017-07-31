@@ -18,15 +18,20 @@ public class ResourceController {
 	private CigaretteService cigaretteService;
 	
 	@RequestMapping(value="/cigarette/removeList", method=RequestMethod.POST)
-	public String removeList(
+	public boolean removeList(
 			@RequestBody ArrayList<String> bookIdList, Model model
 			){
 		
 		for (String id : bookIdList) {
 			String bookId =id.substring(8);
-			cigaretteService.removeOne(Long.parseLong(bookId));
+			try {
+				cigaretteService.removeOne(Long.parseLong(bookId));
+			} catch(Exception e) {
+				e.printStackTrace();
+				return false;
+			}
 		}
 		
-		return "delete success";
+		return true;
 	}
 }
