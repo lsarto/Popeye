@@ -32,10 +32,11 @@
 							</h3>
 							<p class="price">
 								<del>
-									$<span
-										th:text="${#numbers.formatDecimal(cigarette.listPrice, 0 , 'COMMA', 2, 'POINT')}"></span>
+									<span th:if="${cigarette.ourPrice}">$</span> <span th:if="${cigarette.ourPrice}" th:text="${#numbers.formatDecimal(cigarette.listPrice, 0 , 'COMMA', 2, 'POINT')}"></span>
 								</del>
-								$<span th:text="${#strings.abbreviate(cigarette.ourPrice, 500)}"></span>
+								$ <span th:if="${cigarette.ourPrice}" th:text="${#strings.abbreviate(cigarette.ourPrice, 500)}"></span>
+				
+								<span th:if="${cigarette.ourPrice==0}" th:text="${#strings.abbreviate(cigarette.listPrice, 500)}">$</span>
 							</p>
 							<p class="buttons">
 								<a th:href="@{/shop-detail?id=}+${cigarette.id}"
@@ -46,13 +47,13 @@
 						</div>
 						<!-- /.text -->
 
-						<div th:if="${cigarette.ourPrice}" class="ribbon sale">
+						<div th:if="${cigarette.sale}" class="ribbon sale">
 							<div class="theribbon">SALE</div>
 							<div class="ribbon-background"></div>
 						</div>
 						<!-- /.ribbon -->
 
-						<div class="ribbon new">
+						<div th:if="${cigarette.newProduct}" class="ribbon new">
 							<div class="theribbon">NEW</div>
 							<div class="ribbon-background"></div>
 						</div>

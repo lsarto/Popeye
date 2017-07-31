@@ -58,13 +58,13 @@
 										alt="" class="img-responsive">
 								</div>
 
-								<div th:if="${cigarette.ourPrice}" class="ribbon sale">
+								<div th:if="${cigarette.sale}" class="ribbon sale">
 									<div class="theribbon">SALE</div>
 									<div class="ribbon-background"></div>
 								</div>
 								<!-- /.ribbon -->
 
-								<div class="ribbon new">
+								<div th:if="${cigarette.newProduct}" class="ribbon new">
 									<div class="theribbon">NEW</div>
 									<div class="ribbon-background"></div>
 								</div>
@@ -96,7 +96,7 @@
 										</p>
 
 										<p class="text-center">
-											<button type="submit" class="btn btn-template-main">
+											<button type="submit" th:classappend="*{cigarette.inStockNumber&lt;=0}? 'disabled'" class="btn btn-template-main">
 												<i class="fa fa-shopping-cart"></i> Aggiungi al carrello
 											</button>
 											<button type="submit" class="btn btn-default"
