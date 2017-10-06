@@ -31,85 +31,86 @@
 
 		<div id="content">
 			<div class="container">
-
 				<div class="row">
-
 					<div class="col-md-9 clearfix">
 						<form th:action="@{/checkout}" method="post">
+							<div th:if="${missingRequiredField}">
+								<h5 class="alert alert-warning">I campi contrassegnati con
+									* sono obbligatori.</h5>
+							</div>
 							<!-- Address Starts -->
-							<div class="col">
-								<div class="box collapse in width coll-12 coll-13 coll-14" id="address">
-									<div class="row">
-										<div class="col-md-10 clearfix" id="checkout1">
-											<ul class="nav nav-pills nav-justified">
-												<li class="active"><a href="#"><i
-														class="fa fa-map-marker"></i><br>Indirizzo</a></li>
-												<li class="disabled"><a href="#"><i
-														class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
-												<li class="disabled"><a href="#"><i
-														class="glyphicon glyphicon-euro"></i><br>Metodo di
-														pagamento</a></li>
-												<li class="disabled"><a href="#"><i
-														class="fa fa-eye"></i><br>Resoconto ordine</a></li>
-											</ul>
-											<div class="form-group">
-												<h4>Indirizzo di spedizione</h4>
-											</div>
+							<div
+								class="panel panel-default collapse in coll-12 coll-13 coll-14"
+								id="address">
+								<div class="panel-body">
+									<div class="col-md-12 clearfix" id="checkout1">
+										<ul class="nav nav-pills nav-justified">
+											<li class="active"><a href="#"><i
+													class="fa fa-map-marker"></i><br>Indirizzo</a></li>
+											<li class="disabled"><a href="#"><i
+													class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
+											<li class="disabled"><a href="#"><i
+													class="glyphicon glyphicon-euro"></i><br>Metodo di
+													pagamento</a></li>
+											<li class="disabled"><a href="#"><i
+													class="fa fa-eye"></i><br>Resoconto ordine</a></li>
+										</ul>
+										<div class="form-group">
+											<h4>Indirizzo di spedizione</h4>
+										</div>
 
-											<div class="form-group">
-												<label for="shippingName">* Name</label> <input type="text"
-													class="form-control" id="shippingName"
-													placeholder="Receiver Name" name="shippingAddressName"
-													required="required"
-													th:value="${shippingAddress.shippingAddressName}" />
-											</div>
-											<div class="form-group">
-												<label for="shippingAddress">* Street Address</label> <input
-													type="text" class="form-control" id="shippingAddress"
-													placeholder="Street Address 1"
-													name="shippingAddressStreet1" required="required"
-													th:value="${shippingAddress.shippingAddressStreet1}" /> <input
-													type="text" class="form-control"
-													placeholder="Street Address 2" name="userShppingStreet2"
-													th:value="${shippingAddress.shippingAddressStreet2}" />
-											</div>
+										<div class="form-group">
+											<label for="shippingName">* Name</label> <input type="text"
+												class="form-control" id="shippingName"
+												placeholder="Receiver Name" name="shippingAddressName"
+												required="required"
+												th:value="${shippingAddress.shippingAddressName}" />
+										</div>
+										<div class="form-group">
+											<label for="shippingAddress">* Street Address</label> <input
+												type="text" class="form-control" id="shippingAddress"
+												placeholder="Street Address 1" name="shippingAddressStreet1"
+												required="required"
+												th:value="${shippingAddress.shippingAddressStreet1}" /> <input
+												type="text" class="form-control"
+												placeholder="Street Address 2" name="userShppingStreet2"
+												th:value="${shippingAddress.shippingAddressStreet2}" />
+										</div>
 
-											<div class="row">
-												<div class="col-xs-4">
-													<div class="form-group">
-														<label for="shippingCity">* City</label> <input
-															type="text" class="form-control" id="shippingCity"
-															placeholder="Shipping City" name="shippingAddressCity"
-															required="required"
-															th:value="${shippingAddress.shippingAddressCity}" />
-													</div>
+										<div class="row">
+											<div class="col-xs-4">
+												<div class="form-group">
+													<label for="shippingCity">* City</label> <input type="text"
+														class="form-control" id="shippingCity"
+														placeholder="Shipping City" name="shippingAddressCity"
+														required="required"
+														th:value="${shippingAddress.shippingAddressCity}" />
 												</div>
-												<div class="col-xs-4">
-													<div class="form-group">
-														<label for="shippingState">* State</label> <select
-															id="shippingState" class="form-control"
-															th:name="shippingAddressState"
-															th:value="${shippingAddress.shippingAddressState}"
-															required="required">
-															<option value="" disabled="disabled">Please
-																select an option</option>
-															<option th:each="state : ${stateList}" th:text="${state}"
-																th:selected="(${shippingAddress.shippingAddressState}==${state})"></option>
-														</select>
-													</div>
+											</div>
+											<div class="col-xs-4">
+												<div class="form-group">
+													<label for="shippingState">* State</label> <select
+														id="shippingState" class="form-control"
+														th:name="shippingAddressState"
+														th:value="${shippingAddress.shippingAddressState}"
+														required="required">
+														<option value="" disabled="disabled">Please
+															select an option</option>
+														<option th:each="state : ${stateList}" th:text="${state}"
+															th:selected="(${shippingAddress.shippingAddressState}==${state})"></option>
+													</select>
 												</div>
-												<div class="col-xs-4">
-													<div class="form-group">
-														<label for="shippingZipcode">* Zipcode</label> <input
-															type="number" class="form-control" id="shippingZipcode"
-															placeholder="Shipping Zipcode"
-															th:name="shippingAddressZipcode" required="required"
-															th:value="${shippingAddress.shippingAddressZipcode}" />
-													</div>
+											</div>
+											<div class="col-xs-4">
+												<div class="form-group">
+													<label for="shippingZipcode">* Zipcode</label> <input
+														type="number" class="form-control" id="shippingZipcode"
+														placeholder="Shipping Zipcode"
+														th:name="shippingAddressZipcode" required="required"
+														th:value="${shippingAddress.shippingAddressZipcode}" />
 												</div>
 											</div>
 										</div>
-
 									</div>
 
 									<!-- /.content -->
@@ -121,166 +122,58 @@
 											</button>
 										</div>
 										<div class="pull-right">
-											<button class="btn btn-template-main" type="button"
-												data-toggle="collapse" data-target=".coll-12">
-												Continue to Delivery Method<i class="fa fa-chevron-right"></i>
-											</button>
+											<a class="btn btn-template-main" type="button"
+												data-toggle="collapse" data-target=".coll-12"
+												href="#deliveryMethod"> Continue to Delivery Method<i
+												class="fa fa-chevron-right"></i>
+											</a>
 										</div>
 									</div>
 								</div>
-								<!-- /.box -->
 							</div>
-							<!-- /.collapse -->
+							<!-- /.box -->
 							<!-- Address Ends -->
 
 							<!-- Delivery Method Starts -->
-							<div class="col">
-								<div class="box collapse width coll-12 coll-23 coll-24"
-									id="deliveryMethod">
-									<div class="row">
-										<div class="col-md-10 clearfix" id="checkout2">
-											<ul class="nav nav-pills nav-justified">
-												<li class=""><a href="#address" data-toggle="collapse"
-													data-target=".coll-12"><i class="fa fa-map-marker"></i><br>Indirizzo</a></li>
-												<li class="active"><a href="#"><i
-														class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
-												<li class="disabled"><a href="#"><i
-														class="glyphicon glyphicon-euro"></i><br>Metodo di
-														pagamento</a></li>
-												<li class="disabled"><a href="#"><i
-														class="fa fa-eye"></i><br>Resoconto ordine</a></li>
-											</ul>
-
-											<div class="content">
-												<div class="row">
-													<div class="col-sm-6">
-														<div class="box shipping-method">
-
-															<h4>USPS Next Day</h4>
-
-															<p>Get it right on next day - fastest option
-																possible.</p>
-
-															<div class="box-footer text-center">
-
-																<input type="radio" name="delivery" value="delivery1">
-															</div>
-														</div>
-													</div>
-													<div class="col-sm-6">
-														<div class="box shipping-method">
-
-															<h4>USPS Next Day</h4>
-
-															<p>Get it right on next day - fastest option
-																possible.</p>
-
-															<div class="box-footer text-center">
-
-																<input type="radio" name="delivery" value="delivery2">
-															</div>
-														</div>
-													</div>
-
-													<div class="col-sm-6">
-														<div class="box shipping-method">
-
-															<h4>USPS Next Day</h4>
-
-															<p>Get it right on next day - fastest option
-																possible.</p>
-
-															<div class="box-footer text-center">
-
-																<input type="radio" name="delivery" value="delivery3">
-															</div>
-														</div>
-													</div>
-												</div>
-												<!-- /.row -->
-
-											</div>
-											<!-- /.content -->
-
-											<div class="box-footer">
-												<div class="pull-left">
-													<button class="btn btn-default" type="button"
-														data-toggle="collapse" data-target=".coll-12">
-														<i class="fa fa-chevron-left"></i>Back to Addresses
-													</button>
-												</div>
-												<div class="pull-right">
-													<button class="btn btn-template-main" type="button"
-														data-toggle="collapse" data-target=".coll-23">
-														Continue to Payment Method<i class="fa fa-chevron-right"></i>
-													</button>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- /.box -->
-							</div>
-							<!-- /.collapse -->
-							<!-- Delivery Method Ends -->
-
-							<!-- Payment Method Starts -->
-							<div class="col">
-								<div class="box collapse width coll-13 coll-23 coll-34"
-									id="paymentMethod">
-									<div class="row">
+							<div class="panel panel-default collapse coll-12 coll-23 coll-24"
+								id="deliveryMethod">
+								<div class="panel-body">
+									<div class="col-md-12 clearfix" id="checkout2">
 										<ul class="nav nav-pills nav-justified">
 											<li class=""><a href="#address" data-toggle="collapse"
-												data-target=".coll-13"><i class="fa fa-map-marker"></i><br>Indirizzo</a></li>
-											<li class=""><a href="#deliveryMethod"
-												data-toggle="collapse" data-target=".coll-23"><i
-													class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
+												data-target=".coll-12"><i class="fa fa-map-marker"></i><br>Indirizzo</a></li>
 											<li class="active"><a href="#"><i
+													class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
+											<li class="disabled"><a href="#"><i
 													class="glyphicon glyphicon-euro"></i><br>Metodo di
 													pagamento</a></li>
 											<li class="disabled"><a href="#"><i
-													class="fa fa-eye"></i><br>Resoconto Ordine</a></li>
+													class="fa fa-eye"></i><br>Resoconto ordine</a></li>
 										</ul>
 
 										<div class="content">
 											<div class="row">
 												<div class="col-sm-6">
-													<div class="box payment-method">
+													<div class="box shipping-method">
 
-														<h4>Paypal</h4>
+														<h4>Ground Shipping</h4>
 
-														<p>We like it all.</p>
+														<p>Consegna entro 5 giorni.</p>
 
 														<div class="box-footer text-center">
-
-															<input type="radio" name="payment" value="payment1">
+															<input type="radio" name="shippingMethod" value="premiumShipping" checked="checked" />
 														</div>
 													</div>
 												</div>
 												<div class="col-sm-6">
-													<div class="box payment-method">
+													<div class="box shipping-method">
 
-														<h4>Payment gateway</h4>
+														<h4>Premium Shipping</h4>
 
-														<p>VISA and Mastercard only.</p>
-
-														<div class="box-footer text-center">
-
-															<input type="radio" name="payment" value="payment2">
-														</div>
-													</div>
-												</div>
-
-												<div class="col-sm-6">
-													<div class="box payment-method">
-
-														<h4>Cash on delivery</h4>
-
-														<p>You pay when you get it.</p>
+														<p>Consegna entro 3 giorni.</p>
 
 														<div class="box-footer text-center">
-
-															<input type="radio" name="payment" value="payment3">
+															<input type="radio" name="shippingMethod" value="premiumShipping"/>
 														</div>
 													</div>
 												</div>
@@ -289,124 +182,164 @@
 
 										</div>
 										<!-- /.content -->
-
 										<div class="box-footer">
 											<div class="pull-left">
-												<button class="btn btn-default" type="button"
-													data-toggle="collapse" data-target=".coll-23">
-													<i class="fa fa-chevron-left"></i>Back to Delivery Method
-												</button>
+												<a class="btn btn-default" type="button"
+													data-toggle="collapse" data-target=".coll-12"
+													href="#address"> <i class="fa fa-chevron-left"></i>Back
+													to Addresses
+												</a>
 											</div>
 											<div class="pull-right">
-												<button class="btn btn-template-main" type="button"
-													data-toggle="collapse" data-target=".coll-34">
-													Continue to Order Review<i class="fa fa-chevron-right"></i>
-												</button>
+												<a class="btn btn-template-main" type="button"
+													data-toggle="collapse" data-target=".coll-23"
+													href="#paymentMethod"> Continue to Payment Method<i
+													class="fa fa-chevron-right"></i>
+												</a>
 											</div>
 										</div>
 									</div>
 								</div>
-								<!-- /.box -->
 							</div>
-							<!-- /.collapse -->
+							<!-- /.box -->
+							<!-- Delivery Method Ends -->
+
+							<!-- Payment Method Starts -->
+							<div class="panel panel-default collapse coll-13 coll-23 coll-34"
+								id="paymentMethod">
+								<div class="panel-body">
+									<ul class="nav nav-pills nav-justified">
+										<li class=""><a href="#address" data-toggle="collapse"
+											data-target=".coll-13"><i class="fa fa-map-marker"></i><br>Indirizzo</a></li>
+										<li class=""><a href="#deliveryMethod"
+											data-toggle="collapse" data-target=".coll-23"><i
+												class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
+										<li class="active"><a href="#"><i
+												class="glyphicon glyphicon-euro"></i><br>Metodo di
+												pagamento</a></li>
+										<li class="disabled"><a href="#"><i class="fa fa-eye"></i><br>Resoconto
+												Ordine</a></li>
+									</ul>
+
+									<div class="content">
+										<div class="row">
+											<div class="col-sm-6">
+												<div class="box payment-method">
+
+													<h4>Paypal</h4>
+
+													<p>Effettua un versamento sicuro attraverso PayPal.</p>
+
+													<div class="box-footer text-center">
+
+														<input type="radio" name="payment" value="payment1" checked="true">
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- /.row -->
+
+									</div>
+									<!-- /.content -->
+									<div class="box-footer">
+										<div class="pull-left">
+											<a class="btn btn-default" type="button"
+												data-toggle="collapse" data-target=".coll-23"
+												href="#deliveryMethod"> <i class="fa fa-chevron-left"></i>Back
+												to Delivery Method
+											</a>
+										</div>
+										<div class="pull-right">
+											<a class="btn btn-template-main" type="button"
+												data-toggle="collapse" data-target=".coll-34"
+												href="#orderReview"> Continue to Order Review<i
+												class="fa fa-chevron-right"></i>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.box -->
 							<!-- Payment Method Ends -->
 
 							<!-- Order Review Start-->
-							<div class="col">
-								<div class="box collapse width coll-14 coll-24 coll-34" id="orderReview">
-									<div class="row">
-										<ul class="nav nav-pills nav-justified">
-											<li class=""><a href="#address" data-toggle="collapse"
-												data-target=".coll-14"><i class="fa fa-map-marker"></i><br>Indirizzo</a></li>
-											<li class=""><a href="#deliveryMethod"
-												data-toggle="collapse" data-target=".coll-24"><i
-													class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
-											<li class=""><a href="#paymentMethod"
-												data-toggle="collapse" data-target=".coll-34"><i
-													class="glyphicon glyphicon-euro"></i><br>Metodo di
-													pagamento</a></li>
-											<li class="active"><a href="#"><i
-													class="fa fa-eye"></i><br>Resoconto Ordine</a></li>
-										</ul>
-
-										<div th:each="cartItem : ${cartItemList}">
-											<form th:action="@{/shoppingCart/updateCartItem}"
-												method="post" th:id="'update-item-'+${cartItem.id}"></form>
-										</div>
-										<div class="table-responsive">
-											<table class="table">
-												<thead>
-													<tr>
-														<th colspan="2">Prodotto</th>
-														<th>Quantità</th>
-														<th>Prezzo Lista</th>
-														<th>Prezzo Scontato</th>
-														<th colspan="2">Totale</th>
-													</tr>
-												</thead>
-												<tbody th:each="cartItem : ${cartItemList}">
-													<tr>
-														<td><a
-															th:href="@{shop-detail(id=${cartItem.cigarette.id})}">
-																<img
-																th:src="#{adminPath}+@{/image/cigarette/}+
+							<div class="panel panel-default collapse coll-14 coll-24 coll-34"
+								id="orderReview">
+								<div class="col-md-12 clearfix" id="basket">
+									<ul class="nav nav-pills nav-justified">
+										<li class=""><a href="#address" data-toggle="collapse"
+											data-target=".coll-14"><i class="fa fa-map-marker"></i><br>Indirizzo</a></li>
+										<li class=""><a href="#deliveryMethod"
+											data-toggle="collapse" data-target=".coll-24"><i
+												class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
+										<li class=""><a href="#paymentMethod"
+											data-toggle="collapse" data-target=".coll-34"><i
+												class="glyphicon glyphicon-euro"></i><br>Metodo di
+												pagamento</a></li>
+										<li class="active"><a href="#"><i class="fa fa-eye"></i><br>Resoconto
+												Ordine</a></li>
+									</ul>
+									<div class="table-responsive">
+										<table class="table">
+											<thead>
+												<tr>
+													<th colspan="2">Prodotto</th>
+													<th>Quantità</th>
+													<th>Prezzo Lista</th>
+													<th>Prezzo Scontato</th>
+													<th colspan="2">Totale</th>
+												</tr>
+											</thead>
+											<tbody th:each="cartItem : ${cartItemList}">
+												<tr>
+													<td><a
+														th:href="@{shop-detail(id=${cartItem.cigarette.id})}">
+															<img
+															th:src="#{adminPath}+@{/image/cigarette/}+
 														${cartItem.cigarette.id}+'-1.png'">
-														</a></td>
-														<td><a
-															th:href="@{/shop-detail?id=}+${cartItem.cigarette.id}"><span
-																th:text="${cartItem.cigarette.name}"></span></a></td>
-														<td><input hidden="hidden" name="id"
-															th:value="${cartItem.id}"
-															th:form="'update-item-'+${cartItem.id}" /> <input
-															type="number" class="form-control" th:id="${cartItem.id}"
-															th:name="qty"
-															th:disabled="${cartItem.cigarette.inStockNumber==0}"
-															th:value="${cartItem.qty}" min="1" max="9"
-															th:form="'update-item-'+${cartItem.id}" /></td>
-														<td>$ <span th:text="${cartItem.cigarette.listPrice}"></span></td>
-														<td>$ <span th:text="${cartItem.cigarette.ourPrice}"></span></td>
-														<td>$ <span
-															th:text="${cartItem.qty * cartItem.cigarette.ourPrice}"></span></td>
-														<td><a
-															th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}"><i
-																class="fa fa-trash-o"></i></a></td>
-														<td><button class="btn btn-default"
-																th:form="'update-item-'+${cartItem.id}" type="submit">
-																<i class="fa fa-refresh"></i>
-															</button></td>
-													</tr>
-												</tbody>
+													</a></td>
+													<td><a
+														th:href="@{/shop-detail?id=}+${cartItem.cigarette.id}"><span
+															th:text="${cartItem.cigarette.name}"></span></a></td>
+													<td><input hidden="hidden" name="id"
+														th:value="${cartItem.id}"
+														th:form="'update-item-'+${cartItem.id}" /> <input
+														type="number" class="form-control" th:id="${cartItem.id}"
+														th:name="qty" th:disabled="true"
+														th:value="${cartItem.qty}" min="1" max="9" /></td>
+													<td>$ <span th:text="${cartItem.cigarette.listPrice}"></span></td>
+													<td>$ <span th:text="${cartItem.cigarette.ourPrice}"></span></td>
+													<td>$ <span
+														th:text="${cartItem.qty * cartItem.cigarette.ourPrice}"></span></td>
+												</tr>
+											</tbody>
 
-												<tfoot>
-													<tr>
-														<th colspan="5">Totale</th>
-														<th colspan="2">$ <span
-															th:text="${shoppingCart.grandTotal}"></span></th>
-													</tr>
-												</tfoot>
+											<tfoot>
+												<tr>
+													<th colspan="5">Totale</th>
+													<th colspan="2">$ <span
+														th:text="${shoppingCart.grandTotal}"></span></th>
+												</tr>
+											</tfoot>
 
-											</table>
-										</div>
-										<!-- /.content -->
-
-										<div class="box-footer">
-											<div class="pull-left">
-												<button class="btn btn-default" type="button"
-													data-toggle="collapse" data-target=".coll-34">
-													<i class="fa fa-chevron-left"></i>Back to Payment Method
-												</button>
-											</div>
-											<div class="pull-right">
-												<button type="submit" class="btn btn-template-main">
-													Place an order<i class="fa fa-chevron-right"></i>
-												</button>
-											</div>
-										</div>
+										</table>
+									</div>
+									<!-- /.content -->
+									<div class="pull-left">
+										<a class="btn btn-default" type="button"
+											data-toggle="collapse" data-target=".coll-34"
+											href="#paymentMethod"> <i class="fa fa-chevron-left"></i>Back
+											to Payment Method
+										</a>
+									</div>
+									<div class="pull-right form-group">
+										<button type="submit" class="btn btn-template-main">
+											Place an order<i class="fa fa-chevron-right"></i>
+										</button>
 									</div>
 								</div>
-								<!-- /.box -->
 							</div>
-							<!-- /.collapse -->
+							<!-- /.box -->
 							<!-- Order Review Ends -->
 						</form>
 					</div>
@@ -424,7 +357,6 @@
 						<div th:replace="common/orderSummary :: orderSummary"></div>
 
 					</div>
-
 				</div>
 				<!-- /.row -->
 

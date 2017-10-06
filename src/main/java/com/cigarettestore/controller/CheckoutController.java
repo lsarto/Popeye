@@ -157,6 +157,62 @@ public class CheckoutController {
 		return "shop-checkout1";
 
 	}
+	
+	@RequestMapping(value = "/checkout", method = RequestMethod.POST)
+	public String checkoutPost(@ModelAttribute("shippingAddress") ShippingAddress shippingAddress,
+			@ModelAttribute("billingAddress") BillingAddress billingAddress, @ModelAttribute("payment") Payment payment,
+			@ModelAttribute("billingSameAsShipping") String billingSameAsShipping,
+			@ModelAttribute("shippingMethod") String shippingMethod, Principal principal, Model model) {
+		ShoppingCart shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
+
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		model.addAttribute("cartItemList", cartItemList);
+
+		if (billingSameAsShipping.equals("true")) {
+			billingAddress.setBillingAddressName(shippingAddress.getShippingAddressName());
+			billingAddress.setBillingAddressStreet1(shippingAddress.getShippingAddressStreet1());
+			billingAddress.setBillingAddressStreet2(shippingAddress.getShippingAddressStreet2());
+			billingAddress.setBillingAddressCity(shippingAddress.getShippingAddressCity());
+			billingAddress.setBillingAddressState(shippingAddress.getShippingAddressState());
+			billingAddress.setBillingAddressCountry(shippingAddress.getShippingAddressCountry());
+			billingAddress.setBillingAddressZipcode(shippingAddress.getShippingAddressZipcode());
+		}
+
+		if (shippingAddress.getShippingAddressStreet1().isEmpty() 
+				|| shippingAddress.getShippingAddressCity().isEmpty()
+				|| shippingAddress.getShippingAddressState().isEmpty()
+				|| shippingAddress.getShippingAddressName().isEmpty()
+				|| shippingAddress.getShippingAddressZipcode().isEmpty() 
+				|| payment.getCardNumber().isEmpty()
+				|| payment.getCvc() == 0 || billingAddress.getBillingAddressStreet1().isEmpty()
+				|| billingAddress.getBillingAddressCity().isEmpty() 
+				|| billingAddress.getBillingAddressState().isEmpty()
+				|| billingAddress.getBillingAddressName().isEmpty()
+				|| billingAddress.getBillingAddressZipcode().isEmpty())
+			return "redirect:/checkout?id=" + shoppingCart.getId() + "&missingRequiredField=true";
+		
+		User user = userService.findByUsername(principal.getName());
+		
+		Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, payment, shippingMethod, user);
+		
+		mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ITALY));
+		
+		shoppingCartService.clearShoppingCart(shoppingCart);
+		
+		LocalDate today = LocalDate.now();
+		LocalDate estimatedDeliveryDate;
+		
+		if (shippingMethod.equals("groundShipping")) {
+			estimatedDeliveryDate = today.plusDays(5);
+		} else {
+			estimatedDeliveryDate = today.plusDays(3);
+		}
+		
+		model.addAttribute("estimatedDeliveryDate", estimatedDeliveryDate);
+		
+		return "orderSubmittedPage";
+	}
+
 
 	@RequestMapping("/shop-checkout2")
 	public String ShopCheckout2(@ModelAttribute("shoppingCart") ShoppingCart shoppingCart) {
@@ -327,145 +383,7 @@ public class CheckoutController {
 		return "shop-checkout4";
 	}
 
-	@RequestMapping(value = "/checkout", method = RequestMethod.POST)
-	public String checkoutPost(HttpSession session, @ModelAttribute("billingAddress") BillingAddress billingAddress,
-			@ModelAttribute("payment") Payment payment,
-			@ModelAttribute("shippingAddress") ShippingAddress shippingAddress,
-			@ModelAttribute("billingSameAsShipping") String billingSameAsShipping,
-			@ModelAttribute("shippingMethod") String shippingMethod, Principal principal, Model model) {
-		ShoppingCart shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
 
-		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
-		model.addAttribute("cartItemList", cartItemList);
-
-		User currentUser = userService.findByUsername(principal.getName());
-		String firstnameUser = (String) session.getAttribute("firstname");
-		currentUser.setFirstName(firstnameUser);
-		String lastnameUser = (String) session.getAttribute("lastname");
-		currentUser.setLastName(lastnameUser);
-		String phone = (String) session.getAttribute("phone");
-		currentUser.setPhone(phone);
-		userService.save(currentUser);
-		
-		//Existing card
-		if (session.getAttribute("existingCard").equals("true")) {
-
-			UserShipping userShipping = (UserShipping) session.getAttribute("userShipping");
-			billingAddress = (BillingAddress) session.getAttribute("billingAddress");
-			payment = (Payment) session.getAttribute("payment");
-
-			if (userShipping.getUserShippingStreet1().isEmpty() || userShipping.getUserShippingCity().isEmpty()
-					|| userShipping.getUserShippingState().isEmpty() || userShipping.getUserShippingName().isEmpty()
-					|| userShipping.getUserShippingZipcode().isEmpty() || payment.getCardNumber().isEmpty()
-					|| payment.getCvc() == 0 || billingAddress.getBillingAddressStreet1().isEmpty()
-					|| billingAddress.getBillingAddressCity().isEmpty()
-					|| billingAddress.getBillingAddressState().isEmpty()
-					|| billingAddress.getBillingAddressName().isEmpty()
-					|| billingAddress.getBillingAddressZipcode().isEmpty())
-				return "redirect:/checkout?id=" + shoppingCart.getId() + "&missingRequiredField=true";
-
-			shippingAddress.setShippingAddressName(userShipping.getUserShippingName());
-			shippingAddress.setShippingAddressStreet1(userShipping.getUserShippingStreet1());
-			shippingAddress.setShippingAddressStreet2(userShipping.getUserShippingStreet2());
-			shippingAddress.setShippingAddressCity(userShipping.getUserShippingCity());
-			shippingAddress.setShippingAddressState(userShipping.getUserShippingState());
-			shippingAddress.setShippingAddressCountry(userShipping.getUserShippingCountry());
-			shippingAddress.setShippingAddressZipcode(userShipping.getUserShippingZipcode());
-			
-			User user = userService.findByUsername(principal.getName());
-
-			Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, payment,
-					shippingMethod, user);
-			
-			mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ENGLISH));
-
-			shoppingCartService.clearShoppingCart(shoppingCart);
-
-			LocalDate today = LocalDate.now();
-			LocalDate estimatedDeliveryDate;
-
-			if (shippingMethod.equals("groundShipping")) {
-				estimatedDeliveryDate = today.plusDays(5);
-			} else {
-				estimatedDeliveryDate = today.plusDays(3);
-			}
-
-			model.addAttribute("estimatedDeliveryDate", estimatedDeliveryDate);
-
-			return "orderSubmittedPage";
-
-		}//// end existing card
-		
-		else {
-			session.setAttribute("existingCard", "false");
-			shippingAddress = (ShippingAddress) session.getAttribute("shippingAddress");
-			payment = (Payment) session.getAttribute("payment");
-			shippingMethod = (String) session.getAttribute("shippingMethod");
-			billingAddress = (BillingAddress) session.getAttribute("billingAddress");
-			
-			/*
-			 * if (billingSameAsShipping.equals("true")) {
-			 * billingAddress.setBillingAddressName(shippingAddress.
-			 * getShippingAddressName());
-			 * billingAddress.setBillingAddressStreet1(shippingAddress.
-			 * getShippingAddressStreet1());
-			 * billingAddress.setBillingAddressStreet2(shippingAddress.
-			 * getShippingAddressStreet2());
-			 * billingAddress.setBillingAddressCity(shippingAddress.
-			 * getShippingAddressCity());
-			 * billingAddress.setBillingAddressState(shippingAddress.
-			 * getShippingAddressState());
-			 * billingAddress.setBillingAddressCountry(shippingAddress.
-			 * getShippingAddressCountry());
-			 * billingAddress.setBillingAddressZipcode(shippingAddress.
-			 * getShippingAddressZipcode()); }
-			 */
-
-			if (shippingAddress.getShippingAddressStreet1().isEmpty()
-					|| shippingAddress.getShippingAddressCity().isEmpty()
-					|| shippingAddress.getShippingAddressState().isEmpty()
-					|| shippingAddress.getShippingAddressName().isEmpty()
-					|| shippingAddress.getShippingAddressZipcode().isEmpty() || payment.getCardNumber().isEmpty()
-					|| payment.getCvc() == 0 || billingAddress.getBillingAddressStreet1().isEmpty()
-					|| billingAddress.getBillingAddressCity().isEmpty()
-					|| billingAddress.getBillingAddressState().isEmpty()
-					|| billingAddress.getBillingAddressName().isEmpty()
-					|| billingAddress.getBillingAddressZipcode().isEmpty())
-				return "redirect:/checkout?id=" + shoppingCart.getId() + "&missingRequiredField=true";
-
-			User user = userService.findByUsername(principal.getName());
-			
-			Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, payment,
-					shippingMethod, user);
-
-			mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ENGLISH));
-
-			shoppingCartService.clearShoppingCart(shoppingCart);
-
-			LocalDate today = LocalDate.now();
-			LocalDate estimatedDeliveryDate;
-
-			if (shippingMethod.equals("groundShipping")) {
-				estimatedDeliveryDate = today.plusDays(5);
-			} else {
-				estimatedDeliveryDate = today.plusDays(3);
-			}
-
-			model.addAttribute("estimatedDeliveryDate", estimatedDeliveryDate);
-			
-			session.removeAttribute("billingAddress");
-			session.removeAttribute("payment");
-			session.removeAttribute("shippingMethod");
-			session.removeAttribute("shippingAddress");
-			session.removeAttribute("userShipping");
-			session.removeAttribute("userBilling");
-			session.removeAttribute("userPayment");
-			session.removeAttribute("shoppingCart");
-
-
-			return "orderSubmittedPage";
-		}
-	}
 
 	@RequestMapping("/setPaymentMethod")
 	public String setPaymentMethod(HttpSession session, @RequestParam("userPaymentId") Long userPaymentId,
