@@ -369,12 +369,10 @@
 													<td><a
 														th:href="@{/shop-detail?id=}+${cartItem.cigarette.id}"><span
 															th:text="${cartItem.cigarette.name}"></span></a></td>
-													<td><input hidden="hidden" name="id"
-														th:value="${cartItem.id}"
-														th:form="'update-item-'+${cartItem.id}" /> <input
+													<td><input
 														type="number" class="form-control" th:id="${cartItem.id}"
 														th:name="qty" th:disabled="true"
-														th:value="${cartItem.qty}" min="1" max="9" /></td>
+														th:value="${cartItem.qty}"/></td>
 													<td>$ <span th:text="${cartItem.cigarette.listPrice}"></span></td>
 													<td>$ <span th:text="${cartItem.cigarette.ourPrice}"></span></td>
 													<td>$ <span

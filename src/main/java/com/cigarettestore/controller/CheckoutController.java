@@ -45,7 +45,6 @@ public class CheckoutController {
 
 	private ShippingAddress shippingAddress = new ShippingAddress();
 	private BillingAddress billingAddress = new BillingAddress();
-	private Payment payment = new Payment();
 
 	@Autowired
 	private JavaMailSender mailSender;
@@ -76,9 +75,6 @@ public class CheckoutController {
 
 	@Autowired
 	private UserPaymentService userPaymentService;
-
-	@Autowired
-	private PaymentService paymentService;
 
 	
 	@RequestMapping("/checkout")
@@ -133,13 +129,11 @@ public class CheckoutController {
 
 		for (UserPayment userPayment : userPaymentList) {
 			if (userPayment.isDefaultPayment()) {
-				paymentService.setByUserPayment(userPayment, payment);
 				billingAddressService.setByUserBilling(userPayment.getUserBilling(), billingAddress);
 			}
 		}
 
 		model.addAttribute("shippingAddress", shippingAddress);
-		model.addAttribute("payment", payment);
 		model.addAttribute("billingAddress", billingAddress);
 		model.addAttribute("cartItemList", cartItemList);
 		model.addAttribute("shoppingCart", user.getShoppingCart());
@@ -160,7 +154,7 @@ public class CheckoutController {
 	
 	@RequestMapping(value = "/checkout", method = RequestMethod.POST)
 	public String checkoutPost(@ModelAttribute("shippingAddress") ShippingAddress shippingAddress,
-			@ModelAttribute("billingAddress") BillingAddress billingAddress, @ModelAttribute("payment") Payment payment,
+			@ModelAttribute("billingAddress") BillingAddress billingAddress,
 			@ModelAttribute("billingSameAsShipping") String billingSameAsShipping,
 			@ModelAttribute("shippingMethod") String shippingMethod, Principal principal, Model model) {
 		ShoppingCart shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
@@ -183,8 +177,7 @@ public class CheckoutController {
 				|| shippingAddress.getShippingAddressState().isEmpty()
 				|| shippingAddress.getShippingAddressName().isEmpty()
 				|| shippingAddress.getShippingAddressZipcode().isEmpty() 
-				|| payment.getCardNumber().isEmpty()
-				|| payment.getCvc() == 0 || billingAddress.getBillingAddressStreet1().isEmpty()
+				|| billingAddress.getBillingAddressStreet1().isEmpty()
 				|| billingAddress.getBillingAddressCity().isEmpty() 
 				|| billingAddress.getBillingAddressState().isEmpty()
 				|| billingAddress.getBillingAddressName().isEmpty()
@@ -193,7 +186,7 @@ public class CheckoutController {
 		
 		User user = userService.findByUsername(principal.getName());
 		
-		Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, payment, shippingMethod, user);
+		Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, shippingMethod, user);
 		
 		mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ITALY));
 		
@@ -354,7 +347,7 @@ public class CheckoutController {
 		UserPayment userPayment = new UserPayment();
 
 		model.addAttribute("shippingAddress", shippingAddress);
-		model.addAttribute("payment", payment);
+	//	model.addAttribute("payment", payment);
 		model.addAttribute("billingAddress", billingAddress);
 		model.addAttribute("cartItemList", cartItemList);
 		model.addAttribute("shoppingCart", user.getShoppingCart());
@@ -368,8 +361,8 @@ public class CheckoutController {
 		model.addAttribute("userShipping", userShipping);
 		model.addAttribute("userBilling", userBilling);
 		model.addAttribute("userPayment", userPayment);
-		model.addAttribute("payment", payment);
-		paymentService.setByUserPayment(userPayment, payment);
+		//model.addAttribute("payment", payment);
+	//	paymentService.setByUserPayment(userPayment, payment);
 
 		/* model.addAttribute("orderList", user.orderList()); */
 
@@ -396,7 +389,7 @@ public class CheckoutController {
 		if (userPayment.getUser().getId() != user.getId()) {
 			return "badRequestPage";
 		} else {
-			paymentService.setByUserPayment(userPayment, payment);
+			//paymentService.setByUserPayment(userPayment, payment);
 
 			List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
 
@@ -404,7 +397,7 @@ public class CheckoutController {
 
 			session.setAttribute("existingCard", "true");
 			session.setAttribute("userShipping", userShipping);
-			session.setAttribute("payment", payment);
+		//	session.setAttribute("payment", payment);
 			session.setAttribute("billingAddress", billingAddress);
 			session.setAttribute("cartItemList", cartItemList);
 			session.setAttribute("shoppingCart", user.getShoppingCart());

@@ -32,7 +32,6 @@
 <table>
 	<tr>
 		<th>Dettagli Fatturazione</th>
-		<th>Informazioni Pagamento</th>
 		<th>Indirizzo di spedizione</th>
 	</tr>
 	<tr>
@@ -42,13 +41,6 @@
 			<span th:text="${order.billingAddress.billingAddressCity}"></span><br/>
 			<span th:text="${order.billingAddress.billingAddressState}"></span><br/>
 			<span th:text="${order.billingAddress.billingAddressZipcode}"></span><br/>
-		</td>
-		<td>
-			<span th:text="${order.payment.holderName}"></span><br/>
-			<span th:text="${order.payment.type}"></span><br/>
-			<span th:text="${order.payment.cardNumber}"></span><br/>
-			<span th:text="${order.payment.expiryMonth}"></span><br/>
-			<span th:text="${order.payment.expiryYear}"></span><br/>
 		</td>
 		<td>
 			<span th:text="${order.shippingAddress.shippingAddressName}"></span><br/>
@@ -66,7 +58,7 @@
 	<tr>
 		<td><strong>Nome prodotto</strong></td>
 		<td class="text-center"><strong>Prezzo</strong></td>
-		<td class="text-center"><strong>Quantità</strong></td>
+		<td class="text-center"><strong>Quantit&agrave</strong></td>
 		<td class="text-right"><strong>Totale</strong></td>
 	</tr>
 </thead>
