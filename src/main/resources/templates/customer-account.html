@@ -163,19 +163,19 @@
 
 						<div class="box clearfix">
 							<div class="heading">
-								<h3 class="text-uppercase">Metodi di pagamento</h3>
+								<h3 class="text-uppercase">Informazioni pagamento</h3>
 							</div>
 							<div class="panel panel-default" style="border: none;">
 								<div class="col-sm-9 text-left">
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item active"><a
 											th:href="@{/listOfCreditCards}"
-											th:style="${listOfCreditCards}? 'color:red'">Lista delle
-												carte di credito</a></li>
+											th:style="${listOfCreditCards}? 'color:red'">Lista
+												indirizzi</a></li>
 										<li class="breadcrumb-item active"><a
 											th:href="@{/addNewCreditCard}"
 											th:style="${addNewCreditCard}? 'color:red'">Aggiungi
-												Carta di Credito</a></li>
+												indirizzo</a></li>
 									</ol>
 								</div>
 								<div class="col-sm-9 text-left" th:if="${listOfCreditCards}">
@@ -189,7 +189,7 @@
 											<thead>
 												<tr>
 													<th>Default</th>
-													<th>Carta di Credito</th>
+													<th>Indirizzo</th>
 													<th>Operazioni</th>
 												</tr>
 											</thead>
@@ -198,7 +198,7 @@
 													<td><input type="radio" name="defaultUserPaymentId"
 														th:value="${userPayment.id}"
 														th:checked="${userPayment.defaultPayment}" /></td>
-													<td th:text="${userPayment.cardName}"></td>
+													<td th:text="${userPayment.userBilling.userBillingStreet1}"></td>
 													<td><a
 														th:href="@{/updateCreditCard(id=${userPayment.id}, idShipping=${userPayment.id})}"><i
 															class="fa fa-pencil"></i></a> <a
@@ -221,15 +221,6 @@
 											Utente aggiornate</div>
 
 										<input hidden="hidden" name="id" th:value="${userPayment.id}"></input>
-										<hr />
-
-										<div class="form-group">
-											<h5>* Dai un nome alla tua carta:</h5>
-											<input type="text" class="form-control" id="cardName"
-												placeHolder="Card Name" th:name="cardName"
-												required="required" th:value="${userPayment.cardName}" />
-
-										</div>
 
 										<!-- Billing Address -->
 										<hr />
@@ -248,11 +239,15 @@
 												type="text" class="form-control" id="billingAddress"
 												placeholder="Indirizzo 1" th:name="userBillingStreet1"
 												required="required"
-												th:value="${userBilling.userBillingStreet1}" /> <input
-												type="text" class="form-control" id="billingAddress"
+												th:value="${userBilling.userBillingStreet1}" />
+										</div>
+
+										<div class="form-group">
+											<input type="text" class="form-control" id="billingAddress"
 												placeholder="Indirizzo 2" th:name="userBillingStreet2"
 												th:value="${userBilling.userBillingStreet2}" />
 										</div>
+
 
 										<div class="row">
 											<div class="col-xs-4">
@@ -308,9 +303,12 @@
 												type="text" class="form-control" id="shippingAddress"
 												placeholder="Indirizzo 1" th:name="userShippingStreet1"
 												required="required"
-												th:value="${userShipping.userShippingStreet1}" /> <input
-												type="text" class="form-control" placeholder="Indirizzo 2"
-												th:name="userShppingStreet2"
+												th:value="${userShipping.userShippingStreet1}" />
+										</div>
+
+										<div class="form-group">
+											<input type="text" class="form-control"
+												placeholder="Indirizzo 2" th:name="userShippingStreet2"
 												th:value="${userShipping.userShippingStreet2}" />
 										</div>
 
@@ -345,100 +343,6 @@
 														placeholder="CAP" th:name="userShippingZipcode"
 														required="required"
 														th:value="${userShipping.userShippingZipcode}" />
-												</div>
-											</div>
-										</div>
-
-
-										<!-- Credit Card Information -->
-										<hr />
-										<div class="form-group">
-											<h4>Informazioni Carte di Credito</h4>
-										</div>
-										<div class="row">
-											<div class="col-xs-12">
-												<img src="/image/creditcard.png" class="img-responsive" /><br />
-												<div class="form-group">
-													<label for="cardType">* Seleziona un tipo di carta:</label>
-													<select class="form-controll" id="cardType" th:name="type"
-														th:value="${userPayment.type}">
-														<option value="visa">Visa</option>
-														<option value="mastercard">Mastercard</option>
-														<option value="discover">Discover</option>
-														<option value="amex">American Express</option>
-													</select>
-												</div>
-												<div class="form-group">
-													<label for="cardHolder">* Nome del titolare della
-														carta:</label> <input type="text" class="form-control"
-														id="cardHolder" required="required"
-														placeHolder="Nome del titolare della carta"
-														th:name="holderName" th:value="${userPayment.holderName}" />
-												</div>
-												<div class="form-group">
-													<label for="cardNumber">* Numero Carta:</label>
-													<div class="input-group">
-														<input type="tel" class="form-control" id="cardNumber"
-															required="required" placeHolder="Numero di carta valido"
-															th:name="cardNumber" th:value="${userPayment.cardNumber}" />
-														<span class="input-group-addon"><i
-															class="fa fa-credit-card" aria-hidden="true"></i></span>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-xs-7">
-														<div class="form-group">
-															<label>* Data scadenza</label>
-															<div class="row">
-																<div class="col-xs-6">
-																	<select class="form-control" name="expiryMonth"
-																		required="required"
-																		th:value="${userPayment.expiryMonth}">
-																		<option disabled="disabled">-- Mese --</option>
-																		<option value="01">Gen (01)</option>
-																		<option value="02">Feb (02)</option>
-																		<option value="03">Mar (03)</option>
-																		<option value="04">Apr (04)</option>
-																		<option value="05">Mag (05)</option>
-																		<option value="06">Giu (06)</option>
-																		<option value="07">Lug (07)</option>
-																		<option value="08">Ago (08)</option>
-																		<option value="09">Set (09)</option>
-																		<option value="10">Ott (10)</option>
-																		<option value="11">Nov (11)</option>
-																		<option value="12">Dic (12)</option>
-																	</select>
-																</div>
-																<div class="col-xs-6">
-																	<select class="form-control" name="expiryYear"
-																		th:value="${userPayment.expiryYear}">
-																		<option disabled="disabled">-- Anno --</option>
-																		<option value="2017">2017</option>
-																		<option value="2018">2018</option>
-																		<option value="19">2019</option>
-																		<option value="20">2020</option>
-																		<option value="21">2021</option>
-																		<option value="22">2022</option>
-																		<option value="23">2023</option>
-																		<option value="23">2024</option>
-																		<option value="23">2025</option>
-																		<option value="23">2026</option>
-																		<option value="23">2027</option>
-																		<option value="23">2028</option>
-																		<option value="23">2029</option>
-																	</select>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="col-xs-5">
-														<div class="form-group">
-															<label for="cardCVC">Codice CV</label> <input
-																id="cardCVC" type="tel" class="form-control" name="cvc"
-																placeholder="CVC" th:name="cvc"
-																th:value="${userPayment.cvc}" />
-														</div>
-													</div>
 												</div>
 											</div>
 										</div>

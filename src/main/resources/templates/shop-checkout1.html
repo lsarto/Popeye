@@ -38,6 +38,7 @@
 								<h5 class="alert alert-warning">I campi contrassegnati con
 									* sono obbligatori.</h5>
 							</div>
+
 							<!-- Address Starts -->
 							<div
 								class="panel panel-default collapse in coll-12 coll-13 coll-14"
@@ -58,7 +59,24 @@
 										<div class="form-group">
 											<h4>Indirizzo di spedizione</h4>
 										</div>
-
+										<table class="table" th:if="${not emptyShippingList}">
+											<thead>
+												<tr>
+													<th>Indirizzi Disponibili</th>
+													<th>Operazioni</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="userShipping : ${userShippingList}">
+													<td
+														th:text="${userShipping.userShippingStreet1}+' '+${userShipping.userShippingStreet2}+', '+${userShipping.userShippingCity}
+												+', '+${userShipping.userShippingState}"></td>
+													<td><a
+														th:href="@{/setShippingAddress(userShippingId=${userShipping.id})}">usa 
+														questo indirizzo</a></td>
+												</tr>
+											</tbody>
+										</table>
 										<div class="form-group">
 											<label for="shippingName">* Name</label> <input type="text"
 												class="form-control" id="shippingName"

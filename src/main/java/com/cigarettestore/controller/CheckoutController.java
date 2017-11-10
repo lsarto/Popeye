@@ -45,6 +45,7 @@ public class CheckoutController {
 
 	private ShippingAddress shippingAddress = new ShippingAddress();
 	private BillingAddress billingAddress = new BillingAddress();
+	private Payment payment = new Payment();
 
 	@Autowired
 	private JavaMailSender mailSender;
@@ -72,6 +73,9 @@ public class CheckoutController {
 
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private PaymentService paymentService;
 
 	@Autowired
 	private UserPaymentService userPaymentService;
@@ -207,210 +211,84 @@ public class CheckoutController {
 	}
 
 
-	@RequestMapping("/shop-checkout2")
-	public String ShopCheckout2(@ModelAttribute("shoppingCart") ShoppingCart shoppingCart) {
-
-		return "shop-checkout2";
-	}
-	
-	@RequestMapping(value = "/shop-checkout2", method = RequestMethod.POST)
-	public String ShopCheckout2(HttpSession session, 
-			@RequestParam("firstname") String firstname,
-			@RequestParam("lastname") String lastname,
-			@RequestParam("phone") String phone,
-			Principal principal, Model model) {
-
-		session.setAttribute("firstname", firstname);
-		session.setAttribute("lastname", lastname);
-		session.setAttribute("phone", phone);
-
-		return "shop-checkout2";
-	}
-
-	@RequestMapping(value = "/shop-checkout3", method = RequestMethod.POST)
-	public String ShopCheckout3(@ModelAttribute("shippingMethod") String shippingMethod, Principal principal,
+	@RequestMapping("/setShippingAddress")
+	public String setShippingAddress(@RequestParam("userShippingId") Long userShippingId, Principal principal,
 			Model model) {
-
-		model.addAttribute("shippingMethod", shippingMethod);
-
-		return "shop-checkout3";
-	}
-
-
-	@RequestMapping("/shop-checkout3")
-	public String ShopCheckout3(@ModelAttribute("shoppingCart") ShoppingCart shoppingCart) {
-
-		return "shop-checkout3";
-	}
-
-	@RequestMapping("/shop-checkout4")
-	public String ShopCheckout4(@ModelAttribute("shoppingCart") ShoppingCart shoppingCart) {
-
-		return "shop-checkout4";
-	}
-	
-	@RequestMapping(value = "/shop-checkout4", method = RequestMethod.POST)
-	public String ShopCheckout4(HttpSession session, @ModelAttribute("payment") String payment, Principal principal,
-			Model model) {
-
-		session.setAttribute("payment", payment);
-		session.setAttribute("shippingAddress", shippingAddress);
-		session.setAttribute("billingAddress", billingAddress);
-
 		User user = userService.findByUsername(principal.getName());
+		UserShipping userShipping = userShippingService.findById(userShippingId);
 
-		UserBilling userBilling = new UserBilling();
-		UserShipping userShipping = new UserShipping();
-		UserPayment userPayment = new UserPayment();
-
-		session.setAttribute("existingCard", "false");
-		session.setAttribute("userShipping", userShipping);
-		session.setAttribute("userBilling", userBilling);
-		session.setAttribute("userPayment", userPayment);
-
-		List<String> stateList = ITConstants.listOfITStatesName;
-		Collections.sort(stateList);
-		model.addAttribute("stateList", stateList);
-		/* model.addAttribute("orderList", user.orderList()); */
-
-		// List<String> stateList = USConstants.listOfUSStatesCode;
-		// Collections.sort(stateList);
-		model.addAttribute("stateList", stateList);
-		model.addAttribute("userPaymentList", user.getUserPaymentList());
-		model.addAttribute("userShippingList", user.getUserShippingList());
-		/* model.addAttribute("orderList", user.orderList()); */
-
-		return "shop-checkout4";
-	}
-
-	@RequestMapping("/shop-checkout5")
-	public String ShopCheckout5(@ModelAttribute("shoppingCart") ShoppingCart shoppingCart) {
-
-		return "shop-checkout5";
-	}
-	
-	@RequestMapping(value = "/shop-checkout5", method = RequestMethod.POST)
-	public String ShopCheckout5(@ModelAttribute("shippingAddress") ShippingAddress shippingAddress,
-			@ModelAttribute("payment") Payment payment,
-			@ModelAttribute("shippingMethod") String shippingMethod,
-			@ModelAttribute("billingAddress") BillingAddress billingAddress,
-			HttpSession session) {
-		
-		session.setAttribute("billingAddress", billingAddress);
-		session.setAttribute("payment", payment);
-		session.setAttribute("shippingMethod", shippingMethod);
-		session.setAttribute("shippingAddress", shippingAddress);
-
-		
-		return "shop-checkout5";
-	}
-
-	@RequestMapping("/paymentWithCreditCard")
-	public String listOfCreditCards(Model model, Principal principal, HttpServletRequest request) {
-		User user = userService.findByUsername(principal.getName());
-		model.addAttribute("user", user);
-		model.addAttribute("userPaymentList", user.getUserPaymentList());
-		model.addAttribute("userShippingList", user.getUserShippingList());
-		/* model.addAttribute("orderList", user.orderList()); */
-
-		model.addAttribute("listOfCreditCards", true);
-		model.addAttribute("classActiveBilling", true);
-		model.addAttribute("listOfShippingAddresses", true);
-		model.addAttribute("shippingAddress", shippingAddress);
-		model.addAttribute("billingAddress", billingAddress);
-
-		return "shop-checkout4";
-	}
-
-	@RequestMapping("/paymentWithNewCreditCard")
-	public String addNewCreditCard(Model model, Principal principal) {
-		User user = userService.findByUsername(principal.getName());
-		model.addAttribute("user", user);
-
-		model.addAttribute("addNewCreditCard", true);
-		model.addAttribute("classActiveShipping", true);
-		model.addAttribute("listOfShippingAddresses", true);
-		model.addAttribute("classActiveBilling", true);
-		model.addAttribute("shippingAddress", shippingAddress);
-		model.addAttribute("billingAddress", billingAddress);
-
-		UserShipping userShipping = new UserShipping();
-
-		List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
-		List<UserShipping> userShippingList = user.getUserShippingList();
-		List<UserPayment> userPaymentList = user.getUserPaymentList();
-
-		model.addAttribute("userShippingList", userShippingList);
-		model.addAttribute("userPaymentList", userPaymentList);
-
-		UserBilling userBilling = new UserBilling();
-		UserPayment userPayment = new UserPayment();
-
-		model.addAttribute("shippingAddress", shippingAddress);
-	//	model.addAttribute("payment", payment);
-		model.addAttribute("billingAddress", billingAddress);
-		model.addAttribute("cartItemList", cartItemList);
-		model.addAttribute("shoppingCart", user.getShoppingCart());
-
-		List<String> stateList = ITConstants.listOfITStatesName;
-		Collections.sort(stateList);
-		model.addAttribute("stateList", stateList);
-
-		model.addAttribute("classActiveShipping", true);
-
-		model.addAttribute("userShipping", userShipping);
-		model.addAttribute("userBilling", userBilling);
-		model.addAttribute("userPayment", userPayment);
-		//model.addAttribute("payment", payment);
-	//	paymentService.setByUserPayment(userPayment, payment);
-
-		/* model.addAttribute("orderList", user.orderList()); */
-
-		// List<String> stateList = USConstants.listOfUSStatesCode;
-		// Collections.sort(stateList);
-		model.addAttribute("stateList", stateList);
-		model.addAttribute("userPaymentList", user.getUserPaymentList());
-		model.addAttribute("userShippingList", user.getUserShippingList());
-		/* model.addAttribute("orderList", user.orderList()); */
-
-		return "shop-checkout4";
-	}
-
-
-
-	@RequestMapping("/setPaymentMethod")
-	public String setPaymentMethod(HttpSession session, @RequestParam("userPaymentId") Long userPaymentId,
-			Principal principal, Model model) {
-		User user = userService.findByUsername(principal.getName());
-		UserPayment userPayment = userPaymentService.findById(userPaymentId);
-		UserBilling userBilling = userPayment.getUserBilling();
-		UserShipping userShipping = userShippingService.findById(userPaymentId);
-
-		if (userPayment.getUser().getId() != user.getId()) {
+		if (userShipping.getUser().getId() != user.getId()) {
 			return "badRequestPage";
 		} else {
-			//paymentService.setByUserPayment(userPayment, payment);
+			shippingAddressService.setByUserShipping(userShipping, shippingAddress);
 
 			List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
 
-			billingAddressService.setByUserBilling(userBilling, billingAddress);
+			model.addAttribute("shippingAddress", shippingAddress);
+			model.addAttribute("payment", payment);
+			model.addAttribute("billingAddress", billingAddress);
+			model.addAttribute("cartItemList", cartItemList);
+			model.addAttribute("shoppingCart", user.getShoppingCart());
 
-			session.setAttribute("existingCard", "true");
-			session.setAttribute("userShipping", userShipping);
-		//	session.setAttribute("payment", payment);
-			session.setAttribute("billingAddress", billingAddress);
-			session.setAttribute("cartItemList", cartItemList);
-			session.setAttribute("shoppingCart", user.getShoppingCart());
-
-			List<String> stateList = ITConstants.listOfITStatesName;
+			List<String> stateList = ITConstants.listOfITStatesCode;
 			Collections.sort(stateList);
 			model.addAttribute("stateList", stateList);
 
 			List<UserShipping> userShippingList = user.getUserShippingList();
 			List<UserPayment> userPaymentList = user.getUserPaymentList();
 
-			session.setAttribute("userShippingList", userShippingList);
-			session.setAttribute("userPaymentList", userPaymentList);
+			model.addAttribute("userShippingList", userShippingList);
+			model.addAttribute("userPaymentList", userPaymentList);
+
+			model.addAttribute("shippingAddress", shippingAddress);
+
+			model.addAttribute("classActiveShipping", true);
+
+			if (userPaymentList.size() == 0) {
+				model.addAttribute("emptyPaymentList", true);
+			} else {
+				model.addAttribute("emptyPaymentList", false);
+			}
+
+			model.addAttribute("emptyShippingList", false);
+
+			return "shop-checkout1";
+		}
+	}
+
+	@RequestMapping("/setPaymentMethod")
+	public String setPaymentMethod(@RequestParam("userPaymentId") Long userPaymentId, Principal principal,
+			Model model) {
+		User user = userService.findByUsername(principal.getName());
+		UserPayment userPayment = userPaymentService.findById(userPaymentId);
+		UserBilling userBilling = userPayment.getUserBilling();
+
+		if (userPayment.getUser().getId() != user.getId()) {
+			return "badRequestPage";
+		} else {
+			paymentService.setByUserPayment(userPayment, payment);
+
+			List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
+
+			billingAddressService.setByUserBilling(userBilling, billingAddress);
+
+			model.addAttribute("shippingAddress", shippingAddress);
+			model.addAttribute("payment", payment);
+			model.addAttribute("billingAddress", billingAddress);
+			model.addAttribute("cartItemList", cartItemList);
+			model.addAttribute("shoppingCart", user.getShoppingCart());
+
+			List<String> stateList = ITConstants.listOfITStatesCode;
+			Collections.sort(stateList);
+			model.addAttribute("stateList", stateList);
+
+			List<UserShipping> userShippingList = user.getUserShippingList();
+			List<UserPayment> userPaymentList = user.getUserPaymentList();
+
+			model.addAttribute("userShippingList", userShippingList);
+			model.addAttribute("userPaymentList", userPaymentList);
+
+			model.addAttribute("shippingAddress", shippingAddress);
 
 			model.addAttribute("classActivePayment", true);
 
@@ -422,7 +300,7 @@ public class CheckoutController {
 				model.addAttribute("emptyShippingList", false);
 			}
 
-			return "shop-checkout5";
+			return "shop-checkout1";
 		}
 	}
 }
