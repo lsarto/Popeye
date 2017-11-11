@@ -9,7 +9,5 @@ public interface ProductService {
 
 	Product findOne(Long id);
 
-	List<Product> findByCategory(String category);
-
 	List<Product> blurrySearch(String name);
 }

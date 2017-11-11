@@ -32,19 +32,19 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.findOne(id);
 	}
 
-	public List<Product> findByCategory(String category) {
-		List<Product> productList = productRepository.findByCategory(category);
-
-		List<Product> activeProductList = new ArrayList<>();
-
-		for (Product product : productList) {
-			if (product.isActive()) {
-				activeProductList.add(product);
-			}
-		}
-
-		return activeProductList;
-	}
+//	public List<Product> findByCategory(String category) {
+//		List<Product> productList = productRepository.findByCategory(category);
+//
+//		List<Product> activeProductList = new ArrayList<>();
+//
+//		for (Product product : productList) {
+//			if (product.isActive()) {
+//				activeProductList.add(product);
+//			}
+//		}
+//
+//		return activeProductList;
+//	}
 
 	public List<Product> blurrySearch(String name) {
 		List<Product> productList = productRepository.findByNameContaining(name);

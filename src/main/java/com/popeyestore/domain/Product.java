@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
@@ -170,6 +171,22 @@ public class Product {
 
 	public void setSale(boolean sale) {
 		this.sale = sale;
+	}
+
+	public List<ProductAttribute> getProductAttributes() {
+		return productAttributes;
+	}
+
+	public void setProductAttributes(List<ProductAttribute> productAttributes) {
+		this.productAttributes = productAttributes;
+	}
+
+	public SubCategory getSubCategory() {
+		return subCategory;
+	}
+
+	public void setSubCategory(SubCategory subCategory) {
+		this.subCategory = subCategory;
 	}
 
 
