@@ -8,5 +8,7 @@ public interface SubCategoryService {
 	
 	List<SubCategory> findAll();
 	
-	List<SubCategory> findByName(String name);
+	SubCategory findByName(String name);
+
+	SubCategory createSubCategory(SubCategory subCategory);
 }

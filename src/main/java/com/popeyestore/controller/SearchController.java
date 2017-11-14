@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 import com.popeyestore.domain.Product;
+import com.popeyestore.domain.SubCategory;
 import com.popeyestore.domain.User;
 import com.popeyestore.service.ProductService;
+import com.popeyestore.service.SubCategoryService;
 import com.popeyestore.service.UserService;
 
 @Controller
@@ -23,6 +24,9 @@ public class SearchController {
 
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private SubCategoryService subCategoryService;
 
 	@RequestMapping("/searchByCategory")
 	public String searchByCategory(@RequestParam("category") String category, Model model, Principal principal) {
@@ -38,11 +42,13 @@ public class SearchController {
 		model.addAttribute(classActiveCategory, true);
 
 		List<Product> productList;
+		SubCategory subCategory;
 
 		if (category.equals("all")) {
 			productList = productService.findAll();
 		} else {
-			productList = productService.findByCategory(category);
+			subCategory = subCategoryService.findByName(category);
+			productList = subCategory.getProducts();
 		}
 
 		if (productList.isEmpty()) {
@@ -69,11 +75,13 @@ public class SearchController {
 		model.addAttribute(classActiveCategory, true);
 
 		List<Product> productList;
+		SubCategory subCategory;
 
 		if (category.equals("all")) {
 			productList = productService.findAll();
 		} else {
-			productList = productService.findByCategory(category);
+			subCategory = subCategoryService.findByName(category);
+			productList = subCategory.getProducts();
 		}
 
 		if (productList.isEmpty()) {

@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.popeyestore.domain.User;
-import com.poepyestore.repository.UserRepository;
+import com.popeyestore.repository.UserRepository;
 
 @Service
 public class UserSecurityService implements UserDetailsService{
