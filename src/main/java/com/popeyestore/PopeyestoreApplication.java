@@ -10,12 +10,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.popeyestore.domain.Type;
 import com.popeyestore.domain.Category;
-import com.popeyestore.domain.SubCategory;
 import com.popeyestore.domain.User;
 import com.popeyestore.domain.security.Role;
 import com.popeyestore.domain.security.UserRole;
-import com.popeyestore.service.CategoryService;
+import com.popeyestore.service.TypeService;
 import com.popeyestore.service.UserService;
 import com.popeyestore.utility.SecurityUtility;
 
@@ -26,7 +26,7 @@ public class PopeyestoreApplication implements CommandLineRunner {
 	private UserService userService;
 	
 	@Autowired
-	private CategoryService categoryService;
+	private TypeService typeService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PopeyestoreApplication.class, args);
@@ -48,32 +48,32 @@ public class PopeyestoreApplication implements CommandLineRunner {
 		
 		userService.createUser(user1, userRoles);
 		
-		Category category1 = new Category();
-		Category category2 = new Category();
-		category1.setName("Categoria1");
-		category2.setName("Categoria2");
+		Type type1 = new Type();
+		Type type2 = new Type();
+		type1.setName("Type1");
+		type2.setName("Type2");
 		
-		SubCategory subCategory11 = new SubCategory();
-		SubCategory subCategory12 = new SubCategory();
-		SubCategory subCategory21 = new SubCategory();
-		SubCategory subCategory22 = new SubCategory();
-		subCategory11.setName("subCategory11");
-		subCategory12.setName("subCategory12");
-		subCategory21.setName("subCategory21");
-		subCategory22.setName("subCategory22");
-		subCategory11.setQty(2);
-		subCategory12.setQty(2);
-		subCategory21.setQty(2);
-		subCategory22.setQty(2);
+		Category category11 = new Category();
+		Category category12 = new Category();
+		Category category21 = new Category();
+		Category category22 = new Category();
+		category11.setName("category11");
+		category12.setName("category12");
+		category21.setName("category21");
+		category22.setName("category22");
+		category11.setQty(2);
+		category12.setQty(2);
+		category21.setQty(2);
+		category22.setQty(2);
 
-		List<SubCategory> subCategories1 = new ArrayList<>();
-		List<SubCategory> subCategories2 = new ArrayList<>();
-		subCategories1.add(subCategory11);
-		subCategories1.add(subCategory12);
-		subCategories2.add(subCategory21);
-		subCategories1.add(subCategory22);
+		List<Category> categories1 = new ArrayList<>();
+		List<Category> categories2 = new ArrayList<>();
+		categories1.add(category11);
+		categories1.add(category12);
+		categories2.add(category21);
+		categories1.add(category22);
 		
-		categoryService.createCategory(category1, subCategories1);
-		categoryService.createCategory(category2, subCategories2);
+		typeService.createCategory(type1, categories1);
+		typeService.createCategory(type2, categories2);
 	}
 }

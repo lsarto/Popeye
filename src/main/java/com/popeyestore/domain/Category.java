@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -15,9 +16,13 @@ public class Category {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String name;
+	private Integer qty;
 	
 	@OneToMany
-	private List<SubCategory> subCategories;
+	private List<Product> products;
+	
+	@ManyToOne
+	private Type type;
 
 	public Long getId() {
 		return id;
@@ -35,12 +40,28 @@ public class Category {
 		this.name = name;
 	}
 
-	public List<SubCategory> getSubCategories() {
-		return subCategories;
+	public Integer getQty() {
+		return qty;
 	}
 
-	public void setSubCategories(List<SubCategory> subCategories) {
-		this.subCategories = subCategories;
+	public void setQty(Integer qty) {
+		this.qty = qty;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
 	}
 	
 	

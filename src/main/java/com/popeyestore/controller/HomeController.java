@@ -29,7 +29,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.popeyestore.domain.CartItem;
+import com.popeyestore.domain.Type;
 import com.popeyestore.domain.Product;
+import com.popeyestore.domain.Category;
 import com.popeyestore.domain.Order;
 import com.popeyestore.domain.User;
 import com.popeyestore.domain.UserBilling;
@@ -39,7 +41,9 @@ import com.popeyestore.domain.security.PasswordResetToken;
 import com.popeyestore.domain.security.Role;
 import com.popeyestore.domain.security.UserRole;
 import com.popeyestore.service.CartItemService;
+import com.popeyestore.service.TypeService;
 import com.popeyestore.service.ProductService;
+import com.popeyestore.service.CategoryService;
 import com.popeyestore.service.OrderService;
 import com.popeyestore.service.UserPaymentService;
 import com.popeyestore.service.UserService;
@@ -78,9 +82,20 @@ public class HomeController {
 
 	@Autowired
 	private CartItemService cartItemService;
-
+	
+	@Autowired
+	private TypeService typeService;
+	
+	@Autowired
+	private CategoryService categoryService;
+	
+	
 	@RequestMapping("/")
-	public String index(Model model) {
+	public String index(Model model, HttpSession session) {
+		List<Type> types = typeService.findAll();
+		List<Category> categories = categoryService.findAll();
+		session.setAttribute("categories", categories);
+		session.setAttribute("types", types);
 		model.addAttribute("home", true);
 		return "index5";
 	}

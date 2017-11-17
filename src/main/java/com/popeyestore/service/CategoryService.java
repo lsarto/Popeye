@@ -3,7 +3,6 @@ package com.popeyestore.service;
 import java.util.List;
 
 import com.popeyestore.domain.Category;
-import com.popeyestore.domain.SubCategory;
 
 public interface CategoryService {
 	
@@ -11,5 +10,5 @@ public interface CategoryService {
 	
 	Category findByName(String name);
 
-	Category createCategory(Category category, List<SubCategory> subCategories);
+	Category createCategory(Category category);
 }
