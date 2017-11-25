@@ -1,5 +1,7 @@
 /* your styles go here */
 
+
+/******* RESPONSIVE NAVBAR MEDIA QUERIES ******* 
 @media ( max-width : 1199px) {
 	.navbar-header {
 		float: none;
@@ -35,15 +37,27 @@
 	.collapse.in {
 		display: block !important;
 	}
+	.navbar-nav .open .dropdown-menu {
+		position: static;
+		float: none;
+		width: auto;
+		margin-top: 0;
+		background-color: transparent;
+		border: 0;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+	}
 }
 
 @media ( max-width : 1199px) and (min-width: 768px) {
-	.navbar {
-		overflow-y: scroll;
+	#prova {
+		overflow-y: auto;
 		overflow-x: hidden;
 	}
 	::-webkit-scrollbar {
-		width: 0px; /* remove scrollbar space */
-		background: transparent; /* optional: just make scrollbar invisible */
+		width: 0px; remove scrollbar space background : transparent;
+		optional: just make scrollbar invisible
 	}
-}
+} 
+
+*******/

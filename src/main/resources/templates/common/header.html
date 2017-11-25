@@ -21,11 +21,13 @@
 <!-- Bootstrap and Font Awesome css -->
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<!-- <link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
 <link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	href="/css/bootstrap.min.css">
 
 <!-- Css animations  -->
-<link href="/css/animate.css" rel="stylesheet">
+<!-- <link href="/css/animate.css" rel="stylesheet"> -->
 
 <!-- Theme stylesheet, if possible do not edit this stylesheet -->
 <link href="/css/style.default.css" rel="stylesheet"
@@ -167,10 +169,20 @@ ________________________________________________________ -->
 								<li th:classappend="${home}? 'active dropdown'"><a href="#"
 									class="dropdown-toggle" th:href="@{/}"><span
 										class="glyphicon glyphicon-home"></span> Home</a></li>
-								<li th:each="type: ${session.types}"><a href="#"
-									class="dropdown-toggle" th:href="@{/}"
-									th:text="${type.getName()}"><span
-										class="glyphicon glyphicon-home"></span></a></li>
+								<li th:each="type: ${session.types}"
+									class="dropdown use-yamm yamm-fw"><a href="#"
+									class="dropdown-toggle" th:href="@{/}" data-toggle="dropdown"
+									data-hover="dropdown" data-delay="200"> <span
+										class="dropdown-toggle" th:text="${type.getName()}"
+										th:remove="tag"></span> <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<li><a href="index.html">Option 1: Default Page</a></li>
+										<li><a href="index2.html">Option 2: Application</a></li>
+										<li><a href="index3.html">Option 3: Startup</a></li>
+										<li><a href="index4.html">Option 4: Agency</a></li>
+										<li><a href="index5.html">Option 5: Portfolio</a></li>
+									</ul>
+								</li>
 								<li th:each="type: ${session.types}"><a href="#"
 									class="dropdown-toggle" th:href="@{/}"
 									th:text="${type.getName()}"><span
@@ -178,9 +190,6 @@ ________________________________________________________ -->
 								<li th:classappend="${negozio}? 'active dropdown'"><a
 									class="dropdown-toggle" th:href="@{/shop-category}"><span
 										class="glyphicon glyphicon-gift"></span> Negozio</a></li>
-
-
-								<!-- ========== FULL WIDTH MEGAMENU END ================== -->
 
 								<li th:classappend="${carrello}? 'active dropdown'"><a
 									th:href="@{/shoppingCart/cart}" href="#"
@@ -281,8 +290,10 @@ _________________________________________________________ -->
 					|| document
 							.write('<script src="/js/jquery-1.11.0.min.js"><\/script>')
 		</script>
+		<!-- <script
+			src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
 		<script
-			src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+			src="/js/bootstrap.min.js"></script>
 
 		<script src="/js/jquery.cookie.js"></script>
 		<script src="/js/waypoints.min.js"></script>
@@ -291,22 +302,6 @@ _________________________________________________________ -->
 		<script src="/js/front.js"></script>
 		<script th:src="@{/js/scripts.js}"></script>
 
-		<script>
-			$('#search').bootstrapToggle('destroy');
-
-			(function($, viewport) {
-
-				// Executes only in XS breakpoint
-				if (viewport.is('xs')) {
-					// ...
-				}
-
-				// Executes in SM, MD and LG breakpoints
-				if (viewport.is('>=sm')) {
-				}
-
-			})(jQuery, ResponsiveBootstrapToolkit);
-		</script>
 		<!-- owl carousel -->
 		<script src="/js/owl.carousel.min.js"></script>
 	</div>
