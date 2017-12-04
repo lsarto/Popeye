@@ -12,7 +12,7 @@ $(document).ready(function() {
 	    localStorage.clear();
 	}
 	
-	$('.delete-cigarette').on('click', function (){
+	$('.delete-product').on('click', function (){
 		/*<![CDATA[*/
 	    var path = /*[[@{/}]]*/'remove';
 	    /*]]>*/
@@ -72,7 +72,7 @@ $(document).ready(function() {
 //    })
 	
 	$('#deleteSelected').click(function() {
-		var idList= $('.checkboxCigarette');
+		var idList= $('.checkboxProduct');
 		var bookIdList=[];
 		for (var i = 0; i < idList.length; i++) {
 			if(idList[i].checked==true) {
@@ -123,11 +123,11 @@ $(document).ready(function() {
 		});
 	});
 	
-	$("#selectAllCigarette").click(function() {
+	$("#selectAllProduct").click(function() {
 		if($(this).prop("checked")==true) {
-			$(".checkboxCigarette").prop("checked",true);
+			$(".checkboxProduct").prop("checked",true);
 		} else if ($(this).prop("checked")==false) {
-			$(".checkboxCigarette").prop("checked",false);
+			$(".checkboxProduct").prop("checked",false);
 		}
 	})
 });

@@ -19,8 +19,6 @@ import javax.persistence.OneToOne;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.adminportal.domain.UserPayment;
-import com.adminportal.domain.UserShipping;
 import com.adminportal.domain.security.Authority;
 import com.adminportal.domain.security.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -42,6 +40,9 @@ public class User implements UserDetails{
 	private String phone;
 	private boolean enabled=true;
 	
+	
+	@OneToMany(mappedBy = "user")
+	private List<Order> orderList;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<UserShipping> userShippingList;
@@ -166,6 +167,10 @@ public class User implements UserDetails{
 	}
 	public ShoppingCart getShoppingCart() {
 		return shoppingCart;
+	}
+	
+	public List<Order> getOrderList() {
+		return orderList;
 	}
 	
 	

@@ -23,12 +23,12 @@ public class CartItem {
 	private int qty;
 	private BigDecimal subtotal;
 	
-	@OneToOne()
-	private Cigarette cigarette;
+	@OneToOne
+	private Product product;
 	
 	@OneToMany(mappedBy = "cartItem")
 	@JsonIgnore
-	private List<CigaretteToCartItem> cigaretteToCartItemList;
+	private List<ProductToCartItem> productToCartItemList;
 	
 	@ManyToOne
 	@JoinColumn(name="shopping_cart_id")
@@ -62,20 +62,20 @@ public class CartItem {
 		this.subtotal = subtotal;
 	}
 
-	public Cigarette getCigarette() {
-		return cigarette;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setCigarette(Cigarette cigarette) {
-		this.cigarette = cigarette;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
-	public List<CigaretteToCartItem> getCigaretteToCartItemList() {
-		return cigaretteToCartItemList;
+	public List<ProductToCartItem> getProductToCartItemList() {
+		return productToCartItemList;
 	}
 
-	public void setCigaretteToCartItemList(List<CigaretteToCartItem> cigaretteToCartItemList) {
-		this.cigaretteToCartItemList = cigaretteToCartItemList;
+	public void setProductToCartItemList(List<ProductToCartItem> productToCartItemList) {
+		this.productToCartItemList = productToCartItemList;
 	}
 
 	public ShoppingCart getShoppingCart() {

@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.adminportal.service.CigaretteService;
+import com.adminportal.service.ProductService;
 
 @RestController
 public class ResourceController {
 
 	@Autowired
-	private CigaretteService cigaretteService;
+	private ProductService cigaretteService;
 	
 	@RequestMapping(value="/cigarette/removeList", method=RequestMethod.POST)
 	public boolean removeList(

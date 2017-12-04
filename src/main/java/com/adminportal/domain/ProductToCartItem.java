@@ -8,15 +8,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class CigaretteToCartItem {
+public class ProductToCartItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@ManyToOne()
-	@JoinColumn(name="cigarette_id")
-	private Cigarette cigarette;
+	@ManyToOne
+	@JoinColumn(name="product_id")
+	private Product product;
 	
 	@ManyToOne
 	@JoinColumn(name="cart_item_id")
@@ -30,12 +30,12 @@ public class CigaretteToCartItem {
 		this.id = id;
 	}
 
-	public Cigarette getCigarette() {
-		return cigarette;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setCigarette(Cigarette cigarette) {
-		this.cigarette = cigarette;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public CartItem getCartItem() {

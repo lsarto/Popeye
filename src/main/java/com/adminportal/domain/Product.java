@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
@@ -16,18 +17,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
-public class Cigarette {
+public class Product {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String name;
-	private String model;
-	private String brand;
-	private String typeOfPuff;
-	private String technology;
-	private String subOhm;
-	private String category;
 	private double shippingWeight;
 	private double listPrice;
 	private double ourPrice;
@@ -35,22 +30,28 @@ public class Cigarette {
 	private boolean sale=false;
 	private boolean active=true;
 	
+	@OneToMany
+	private List<ProductAttribute> productAttributes;
+	
+	@ManyToOne
+	private Category subCategory;
+	
 	@Column(columnDefinition="text")
 	private String description;
 	private int inStockNumber;
 	
 	@Transient
-	private MultipartFile cigaretteCategory;
+	private MultipartFile productCategory;
 	@Transient
-	private MultipartFile cigaretteDetail1;
+	private MultipartFile productDetail1;
 	@Transient
-	private MultipartFile cigaretteDetail2;
+	private MultipartFile productDetail2;
 	@Transient
-	private MultipartFile cigaretteDetail3;
+	private MultipartFile productDetail3;
 
-	@OneToMany(mappedBy = "cigarette")
+	@OneToMany(mappedBy = "product")
 	@JsonIgnore
-	private List<CigaretteToCartItem> cigaretteToCartItemList;
+	private List<ProductToCartItem> productToCartItemList;
 	
 	public Long getId() {
 		return id;
@@ -66,54 +67,6 @@ public class Cigarette {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
-	public String getBrand() {
-		return brand;
-	}
-
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
-
-	public String getTypeOfPuff() {
-		return typeOfPuff;
-	}
-
-	public void setTypeOfPuff(String typeOfPuff) {
-		this.typeOfPuff = typeOfPuff;
-	}
-
-	public String getTechnology() {
-		return technology;
-	}
-
-	public void setTechnology(String technology) {
-		this.technology = technology;
-	}
-
-	public String getSubOhm() {
-		return subOhm;
-	}
-
-	public void setSubOhm(String subOhm) {
-		this.subOhm = subOhm;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
 	}
 
 	public double getShippingWeight() {
@@ -164,44 +117,44 @@ public class Cigarette {
 		this.inStockNumber = inStockNumber;
 	}
 
-	public MultipartFile getCigaretteCategory() {
-		return cigaretteCategory;
+	public MultipartFile getProductCategory() {
+		return productCategory;
 	}
 
-	public void setCigaretteCategory(MultipartFile cigaretteCategory) {
-		this.cigaretteCategory = cigaretteCategory;
+	public void setProductCategory(MultipartFile productCategory) {
+		this.productCategory = productCategory;
 	}
 
-	public MultipartFile getCigaretteDetail1() {
-		return cigaretteDetail1;
+	public MultipartFile getProductDetail1() {
+		return productDetail1;
 	}
 
-	public void setCigaretteDetail1(MultipartFile cigaretteDetail1) {
-		this.cigaretteDetail1 = cigaretteDetail1;
+	public void setProductDetail1(MultipartFile productDetail1) {
+		this.productDetail1 = productDetail1;
 	}
 
-	public MultipartFile getCigaretteDetail2() {
-		return cigaretteDetail2;
+	public MultipartFile getProductDetail2() {
+		return productDetail2;
 	}
 
-	public void setCigaretteDetail2(MultipartFile cigaretteDetail2) {
-		this.cigaretteDetail2 = cigaretteDetail2;
+	public void setProductDetail2(MultipartFile productDetail2) {
+		this.productDetail2 = productDetail2;
 	}
 
-	public MultipartFile getCigaretteDetail3() {
-		return cigaretteDetail3;
+	public MultipartFile getProductDetail3() {
+		return productDetail3;
 	}
 
-	public void setCigaretteDetail3(MultipartFile cigaretteDetail3) {
-		this.cigaretteDetail3 = cigaretteDetail3;
+	public void setProductDetail3(MultipartFile productDetail3) {
+		this.productDetail3 = productDetail3;
 	}
 
-	public List<CigaretteToCartItem> getCigaretteToCartItemList() {
-		return cigaretteToCartItemList;
+	public List<ProductToCartItem> getProductToCartItemList() {
+		return productToCartItemList;
 	}
 
-	public void setCigaretteToCartItemList(List<CigaretteToCartItem> cigaretteToCartItemList) {
-		this.cigaretteToCartItemList = cigaretteToCartItemList;
+	public void setProductToCartItemList(List<ProductToCartItem> productToCartItemList) {
+		this.productToCartItemList = productToCartItemList;
 	}
 
 	public boolean isNewProduct() {
@@ -220,4 +173,22 @@ public class Cigarette {
 		this.sale = sale;
 	}
 
+	public List<ProductAttribute> getProductAttributes() {
+		return productAttributes;
+	}
+
+	public void setProductAttributes(List<ProductAttribute> productAttributes) {
+		this.productAttributes = productAttributes;
+	}
+
+	public Category getSubCategory() {
+		return subCategory;
+	}
+
+	public void setSubCategory(Category subCategory) {
+		this.subCategory = subCategory;
+	}
+
+
+	
 }
