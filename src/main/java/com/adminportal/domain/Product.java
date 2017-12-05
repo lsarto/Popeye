@@ -34,7 +34,7 @@ public class Product {
 	private List<ProductAttribute> productAttributes;
 	
 	@ManyToOne
-	private Category subCategory;
+	private Category category;
 	
 	@Column(columnDefinition="text")
 	private String description;
@@ -181,12 +181,12 @@ public class Product {
 		this.productAttributes = productAttributes;
 	}
 
-	public Category getSubCategory() {
-		return subCategory;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setSubCategory(Category subCategory) {
-		this.subCategory = subCategory;
+	public void setSubCategory(Category category) {
+		this.category = category;
 	}
 
 

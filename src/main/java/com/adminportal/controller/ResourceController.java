@@ -15,17 +15,17 @@ import com.adminportal.service.ProductService;
 public class ResourceController {
 
 	@Autowired
-	private ProductService cigaretteService;
+	private ProductService productService;
 	
-	@RequestMapping(value="/cigarette/removeList", method=RequestMethod.POST)
+	@RequestMapping(value="/product/removeList", method=RequestMethod.POST)
 	public boolean removeList(
-			@RequestBody ArrayList<String> bookIdList, Model model
+			@RequestBody ArrayList<String> productIdList, Model model
 			){
 		
-		for (String id : bookIdList) {
-			String bookId =id.substring(8);
+		for (String id : productIdList) {
+			String productId =id.substring(8);
 			try {
-				cigaretteService.removeOne(Long.parseLong(bookId));
+				productService.removeOne(Long.parseLong(productId));
 			} catch(Exception e) {
 				e.printStackTrace();
 				return false;

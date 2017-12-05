@@ -20,20 +20,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.adminportal.domain.Category;
 import com.adminportal.domain.Product;
+import com.adminportal.domain.Type;
+import com.adminportal.service.CategoryService;
 import com.adminportal.service.ProductService;
 
 @Controller
 @RequestMapping("/product")
 public class ProductController {
-
+	@Autowired
+	private CategoryService categoryService;
 	@Autowired
 	private ProductService productService;
 
+	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addProduct(Model model) {
+	public String addProduct(@ModelAttribute("type") Type type, Model model) {
 		Product product = new Product();
+		model.addAttribute("type", type);
 		model.addAttribute("product", product);
+		List<Category> categories = categoryService.findByType(type);
+		model.addAttribute("categories", categories);
+		
 		return "addProduct";
 	}
 

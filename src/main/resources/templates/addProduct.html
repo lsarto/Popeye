@@ -8,7 +8,7 @@
 
 	<div class="container">
 		<div class="row">
-			<form class="form-horizontal" th:action="@{/cigarette/add}" method="post"
+			<form class="form-horizontal" th:action="@{/product/add}" method="post"
 				enctype="multipart/form-data">
 				<fieldset>
 					<legend class="center-block">
@@ -22,59 +22,19 @@
 
 						<div class="col-md-8">
 							<input type="text" name="name" class="form-control" id="name"
-								th:value="${cigarette.name}" required="required" placeholder="nome" />
-							<span class="help-block">Nome della sigaretta</span>
+								th:value="${product.name}" required="required" placeholder="nome" />
+							<span class="help-block">Nome prodotto</span>
 						</div>
 					</div>
 
-					<!-- model -->
-					<div class="form-group">
+					<!-- attributes -->
+					<div class="form-group" th:each="attribute : ${product.productAttributes}">
 						<label class="col-md-2 control-label" for="model">*
-							Modello</label>
+							</label>
 						<div class="col-md-8">
-							<input type="text" name="model" class="form-control" id="model"
-								th:value="${cigarette.model}" required="required"
-								placeholder="Modello" /> <span class="help-block">Modello della sigaretta</span>
-						</div>
-					</div>
-
-					<!-- brand -->
-					<div class="form-group">
-						<label class="col-md-2 control-label" for="publisher">Marca</label>
-						<div class="col-md-8">
-							<input type="text" name="brand" class="form-control"
-								id="brand" th:value="${cigarette.brand}"
-								placeholder="Marca" /> <span class="help-block">Marca della sigaretta</span>
-						</div>
-					</div>
-
-					<!-- typeOfPuff -->
-					<div class="form-group">
-						<label class="col-md-2 control-label" for="typeOfPuff">Tipo di tiro</label>
-						<div class="col-md-8">
-							<input type="text" class="form-control" id="publicationDate"
-								name="typeOfPuff" th:value="${cigarette.typeOfPuff}"
-								placeholder="Tipo di tiro" /> <span class="help-block">Tipo di tiro</span>
-						</div>
-					</div>
-
-					<!-- technology -->
-					<div class="form-group">
-						<label class="col-md-2 control-label" for="mode">Tecnologia</label>
-						<div class="col-md-8">
-							<input type="text" class="form-control" id="technology"
-								name="technology" th:value="${cigarette.technology}"
-								placeholder="Tecnologia" /> <span class="help-block">Tecnologia</span>
-						</div>
-					</div>
-
-					<!-- subOhm -->
-					<div class="form-group">
-						<label class="col-md-2 control-label" for="mode">subOhm</label>
-						<div class="col-md-8">
-							<input type="text" class="form-control" id="subOhm"
-								name="subOhm" th:value="${cigarette.subOhm}"
-								placeholder="subOhm" /> <span class="help-block">subOhm</span>
+							<input type="text" name="value" class="form-control" id="model"
+								th:value="${attribute.value}" required="required"
+								placeholder="Modello" /> <span class="help-block" th:text="${attribute.name}"></span>
 						</div>
 					</div>
 
@@ -83,17 +43,19 @@
 						<label class="col-md-2 control-label" for="category">*
 							Categoria</label>
 						<div class="col-md-8">
-							<select th:value="${cigarette.category}" id="category" name="category"
+							<select th:value="${product.category}" id="category" name="category"
 								class="form-control">
 								<option value="" selected="selected" disabled="disabled">Per favore selezionare un'opzione...</option>
-								<option value="Aspire"
-									th:selected="(${cigarette.brand}=='Aspire')">Aspire</option>
+								<option th:each="${category : categories}"  th:value="${category.name}"
+									th:selected="(${product.category}=='category.name')" th:text="${category.name}"></option>
+								<!-- <option value="Aspire"
+									th:selected="(${product.brand}=='Aspire')">Aspire</option>
 								<option value="Innokin"
-									th:selected="(${cigarette.brand}=='Innokin')">Innokin</option>
+									th:selected="(${product.brand}=='Innokin')">Innokin</option>
 								<option value="Smok"
-									th:selected="(${cigarette.brand}=='Smok')">Smok</option>
+									th:selected="(${product.brand}=='Smok')">Smok</option>
 								<option value="Xtar"
-									th:selected="(${cigarette.brand}=='Xtar')">Xtar</option>
+									th:selected="(${product.brand}=='Xtar')">Xtar</option> -->
 							</select>
 						</div>
 					</div>
@@ -103,12 +65,12 @@
 						<label class="col-md-2 control-label" for="shippingWeight">Peso Spedizione</label>
 						<div class="col-md-8">
 							<div class="input-group">
-								<input th:value="${cigarette.shippingWeight}" type="number"
+								<input th:value="${product.shippingWeight}" type="number"
 									name="shippingWeight" class="form-control" id="shippingWeight"
 									placeholder="Shipping Weight" /> <span
 									class="input-group-addon">Kg</span>
 							</div>
-							<span class="help-block">Peso spedizione sigaretta</span>
+							<span class="help-block">Peso spedizione</span>
 						</div>
 					</div>
 
@@ -118,10 +80,10 @@
 						<div class="col-md-8">
 							<div class="input-group">
 								<span class="input-group-addon">$</span> <input
-									th:value="${cigarette.listPrice}" type="number" name="listPrice"
+									th:value="${product.listPrice}" type="number" name="listPrice"
 									class="form-control" id="listPrice" placeholder="List Price" />
 							</div>
-							<span class="help-block">Prezzo Lista della sigaretta</span>
+							<span class="help-block">Prezzo Lista del prodotto</span>
 						</div>
 					</div>
 
@@ -131,10 +93,10 @@
 						<div class="col-md-8">
 							<div class="input-group">
 								<span class="input-group-addon">$</span> <input
-									th:value="${cigarette.ourPrice}" type="number" name="ourPrice"
+									th:value="${product.ourPrice}" type="number" name="ourPrice"
 									class="form-control" id="ourPrice" placeholder="Our Price" />
 							</div>
-							<span class="help-block">Nostro Prezzo della sigaretta</span>
+							<span class="help-block">Nostro Prezzo del prodotto</span>
 						</div>
 					</div>
 
@@ -142,7 +104,7 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="inStockNumber">SKU</label>
 						<div class="col-md-8">
-							<input th:value="${cigarette.inStockNumber}" type="number"
+							<input th:value="${product.inStockNumber}" type="number"
 								name="inStockNumber" class="form-control" id="inStockNumber"
 								placeholder="Number of in-stock copies" /> <span
 								class="help-block">Numero copie in stock.</span>
@@ -169,7 +131,7 @@
 						</div>
 					</div>
 
-					<!-- status of cigarette -->
+					<!-- status of product -->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="status">Stato</label>
 						<div class="col-md-8">
@@ -185,9 +147,9 @@
 						<label class="col-md-2 control-label" for="description">Descrizione</label>
 						<div class="col-md-8">
 							<textarea name="description" rows="5" class="form-control"
-								id="description" th:value="${cigarette.description}"
+								id="description" th:value="${product.description}"
 								placeholder="Description" />
-							<span class="help-block">Descrizione sigaretta</span>
+							<span class="help-block">Descrizione prodotto</span>
 						</div>
 					</div>
 
@@ -195,41 +157,41 @@
 					
 					<div class="form-group">
 						<div class="col-md-2">
-							<label for="cigaretteImage">Aggiorna immagine sigaretta - negozio</label>
+							<label for="productImage">Aggiorna immagine prodotto - negozio</label>
 						</div>
 						<div class="col-md-8">
-							<input id="cigaretteCategory" type="file" name="cigaretteCategory"
-								th:value="${cigarette.cigaretteCategory}" />
+							<input id="productCategory" type="file" name="productCategory"
+								th:value="${product.productCategory}" />
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<div class="col-md-2">
-							<label for="cigaretteImage">Aggiorna immagine sigaretta - dettaglio 1</label>
+							<label for="productImage">Aggiorna immagine prodotto - dettaglio 1</label>
 						</div>
 						<div class="col-md-8">
-							<input id="cigaretteDetail1" type="file" name="cigaretteDetail1"
-								th:value="${cigarette.cigaretteDetail1}" />
+							<input id="productDetail1" type="file" name="productDetail1"
+								th:value="${product.productDetail1}" />
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<div class="col-md-2">
-							<label for="cigaretteImage">Aggiorna immagine sigaretta - dettaglio 2</label>
+							<label for="productImage">Aggiorna immagine prodotto - dettaglio 2</label>
 						</div>
 						<div class="col-md-8">
-							<input id="cigaretteDetail2" type="file" name="cigaretteDetail2"
-								th:value="${cigarette.cigaretteDetail2}" />
+							<input id="productDetail2" type="file" name="productDetail2"
+								th:value="${product.productDetail2}" />
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<div class="col-md-2">
-							<label for="cigaretteImage">Aggiorna immagine sigaretta - dettaglio 3</label>
+							<label for="productImage">Aggiorna immagine prodotto - dettaglio 3</label>
 						</div>
 						<div class="col-md-8">
-							<input id="cigaretteDetail3" type="file" name="cigaretteDetail3"
-								th:value="${cigarette.cigaretteDetail3}" />
+							<input id="productDetail3" type="file" name="productDetail3"
+								th:value="${product.productDetail3}" />
 						</div>
 					</div>
 					
