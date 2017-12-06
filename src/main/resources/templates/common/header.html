@@ -179,8 +179,7 @@ ________________________________________________________ -->
 										<li><a href="index3.html">Option 3: Startup</a></li>
 										<li><a href="index4.html">Option 4: Agency</a></li>
 										<li><a href="index5.html">Option 5: Portfolio</a></li>
-									</ul>
-								</li>
+									</ul></li>
 								<li th:classappend="${negozio}? 'active dropdown'"><a
 									class="dropdown-toggle" th:href="@{/shop-category}"><span
 										class="glyphicon glyphicon-gift"></span> Negozio</a></li>
@@ -194,7 +193,8 @@ ________________________________________________________ -->
 										class="glyphicon glyphicon-envelope"></span> Contatti<b></b></a></li>
 							</ul>
 							<div class="clearfix" id="search">
-								<form class="navbar-form navbar-right" role="search">
+								<form class="navbar-form navbar-right" role="search"
+									th:action="@{searchProduct}" method="post">
 									<div class="input-group">
 										<input type="text" class="form-control" placeholder="Search">
 										<span class="input-group-btn">

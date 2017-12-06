@@ -2,8 +2,10 @@ package com.popeyestore.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,11 +32,11 @@ public class Product {
 	private boolean sale=false;
 	private boolean active=true;
 	
-	@OneToMany
+	@OneToMany(mappedBy="product", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<ProductAttribute> productAttributes;
 	
 	@ManyToOne
-	private Category subCategory;
+	private Category category;
 	
 	@Column(columnDefinition="text")
 	private String description;
@@ -181,12 +183,12 @@ public class Product {
 		this.productAttributes = productAttributes;
 	}
 
-	public Category getSubCategory() {
-		return subCategory;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setSubCategory(Category subCategory) {
-		this.subCategory = subCategory;
+	public void setSubCategory(Category category) {
+		this.category = category;
 	}
 
 
