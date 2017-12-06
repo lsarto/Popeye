@@ -46,7 +46,7 @@
 							<select th:value="${product.category}" id="category" name="category"
 								class="form-control">
 								<option value="" selected="selected" disabled="disabled">Per favore selezionare un'opzione...</option>
-								<option th:each="${category : categories}"  th:value="${category.name}"
+								<option th:each="category : ${categories}"  th:value="${category.name}"
 									th:selected="(${product.category}=='category.name')" th:text="${category.name}"></option>
 								<!-- <option value="Aspire"
 									th:selected="(${product.brand}=='Aspire')">Aspire</option>
@@ -200,7 +200,7 @@
 					<div class="form-group">
 						<div class="col-md-2"></div>
 						<div class="col-md-8">
-							<button type="submit" class="btn btn-success">Aggiungi sigaretta</button>
+							<button type="submit" class="btn btn-success">Aggiungi prodotto</button>
 							<a class="btn btn-danger" th:href="@{/}">Cancella</a>
 						</div>
 					</div>

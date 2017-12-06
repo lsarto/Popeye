@@ -25,6 +25,7 @@ import com.adminportal.domain.Product;
 import com.adminportal.domain.Type;
 import com.adminportal.service.CategoryService;
 import com.adminportal.service.ProductService;
+import com.adminportal.service.TypeService;
 
 @Controller
 @RequestMapping("/product")
@@ -33,11 +34,15 @@ public class ProductController {
 	private CategoryService categoryService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private TypeService typeService;
 
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addProduct(@ModelAttribute("type") Type type, Model model) {
+	public String addProduct(@ModelAttribute("typeSelected") String typeName, Model model) {
 		Product product = new Product();
+		
+		Type type = typeService.findByName(typeName);
 		model.addAttribute("type", type);
 		model.addAttribute("product", product);
 		List<Category> categories = categoryService.findByType(type);

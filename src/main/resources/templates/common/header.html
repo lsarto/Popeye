@@ -134,7 +134,7 @@
 							aria-expanded="false">Prodotto <span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li th:each="type : ${types}" th:value="${type.name}">
-								<a th:href="@{/product/add}">Aggiungi new
+								<a th:href="@{/product/add(typeSelected=${type.name})}">Aggiungi new
 										<span th:text="${type.name}"></span></a></li>
 								<li><a th:href="@{/product/productList}">Visualizza
 										lista prodotti</a></li>

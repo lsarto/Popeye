@@ -2,7 +2,9 @@ package com.adminportal.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +18,7 @@ public class Type {
 	private Long id;
 	private String name;
 	
-	@OneToMany
+	@OneToMany(mappedBy="type", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Category> categories;
 
 	public Long getId() {
