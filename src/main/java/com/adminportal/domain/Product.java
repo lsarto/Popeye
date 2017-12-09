@@ -187,7 +187,7 @@ public class Product {
 		return category;
 	}
 
-	public void setSubCategory(Category category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 

@@ -15,4 +15,6 @@ public interface CategoryService {
 	Category createCategory(Category category);
 	
 	List<Category> findByType(Type type);
+	
+	Category save(Category category);
 }

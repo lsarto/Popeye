@@ -21,20 +21,9 @@
 						<label class="col-md-2 control-label" for="name">* Nome</label>
 
 						<div class="col-md-8">
-							<input type="text" name="name" class="form-control" id="name"
-								th:value="${product.name}" required="required" placeholder="nome" />
+							<input type="text" name="product.name" class="form-control" id="name"
+								th:value="${dataTransfer.product.name}" required="required" placeholder="nome" />
 							<span class="help-block">Nome prodotto</span>
-						</div>
-					</div>
-
-					<!-- attributes -->
-					<div class="form-group" th:each="attribute : ${product.productAttributes}">
-						<label class="col-md-2 control-label" for="model">*
-							</label>
-						<div class="col-md-8">
-							<input type="text" name="value" class="form-control" id="model"
-								th:value="${attribute.value}" required="required"
-								placeholder="Modello" /> <span class="help-block" th:text="${attribute.name}"></span>
 						</div>
 					</div>
 
@@ -43,44 +32,52 @@
 						<label class="col-md-2 control-label" for="category">*
 							Categoria</label>
 						<div class="col-md-8">
-							<select th:value="${product.category}" id="category" name="category"
-								class="form-control">
+							<select th:value="${dataTransfer.product.category.name}" id="category" name="product.category.name"
+								class="form-control" required="required">
 								<option value="" selected="selected" disabled="disabled">Per favore selezionare un'opzione...</option>
-								<option th:each="category : ${categories}"  th:value="${category.name}"
-									th:selected="(${product.category}=='category.name')" th:text="${category.name}"></option>
-								<!-- <option value="Aspire"
-									th:selected="(${product.brand}=='Aspire')">Aspire</option>
-								<option value="Innokin"
-									th:selected="(${product.brand}=='Innokin')">Innokin</option>
-								<option value="Smok"
-									th:selected="(${product.brand}=='Smok')">Smok</option>
-								<option value="Xtar"
-									th:selected="(${product.brand}=='Xtar')">Xtar</option> -->
+								<option th:each="categorySel : ${dataTransfer.categories}" th:value="${categorySel.name}"
+								th:text="${categorySel.name}"></option>
 							</select>
+							<span class="help-block">Selezionare la categoria del prodotto</span>
+						</div>
+					</div>  
+					
+					<!-- attributes -->
+					<div th:each="attribute,attributeStat: *{dataTransfer.productAttributes}" class="form-group">
+						<label class="col-md-2 control-label" for="model">Attributo
+							</label>
+						<div class="col-md-8">
+							<input type="text" th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].name}" class="form-control"
+								placeholder="Nome Attributo" />
+						</div>
+						<div class="col-md-8">
+							<input type="text" th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].value}" class="form-control"
+								placeholder="Informazione Attributo" /> <span class="help-block">
+								Aggiungi (opzionalmente) un nome e una descrizione di una caratteristica del prodotto</span>
 						</div>
 					</div>
-
+					
 					<!-- shipping weight -->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="shippingWeight">Peso Spedizione</label>
 						<div class="col-md-8">
 							<div class="input-group">
-								<input th:value="${product.shippingWeight}" type="number"
-									name="shippingWeight" class="form-control" id="shippingWeight"
+								<input th:value="${dataTransfer.product.shippingWeight}" type="number"
+									name="product.shippingWeight" class="form-control" id="shippingWeight"
 									placeholder="Shipping Weight" /> <span
 									class="input-group-addon">Kg</span>
 							</div>
-							<span class="help-block">Peso spedizione</span>
+							<span class="help-block">Peso spedizione in Kg</span>
 						</div>
 					</div>
 
 					<!-- list price -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="listPrice">Prezzo Lista.</label>
+						<label class="col-md-2 control-label" for="listPrice">Prezzo Lista</label>
 						<div class="col-md-8">
 							<div class="input-group">
 								<span class="input-group-addon">$</span> <input
-									th:value="${product.listPrice}" type="number" name="listPrice"
+									th:value="${dataTransfer.product.listPrice}" type="number" name="product.listPrice"
 									class="form-control" id="listPrice" placeholder="List Price" />
 							</div>
 							<span class="help-block">Prezzo Lista del prodotto</span>
@@ -93,7 +90,7 @@
 						<div class="col-md-8">
 							<div class="input-group">
 								<span class="input-group-addon">$</span> <input
-									th:value="${product.ourPrice}" type="number" name="ourPrice"
+									th:value="${dataTransfer.product.ourPrice}" type="number" name="product.ourPrice"
 									class="form-control" id="ourPrice" placeholder="Our Price" />
 							</div>
 							<span class="help-block">Nostro Prezzo del prodotto</span>
@@ -104,10 +101,10 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="inStockNumber">SKU</label>
 						<div class="col-md-8">
-							<input th:value="${product.inStockNumber}" type="number"
-								name="inStockNumber" class="form-control" id="inStockNumber"
+							<input th:value="${dataTransfer.product.inStockNumber}" type="number"
+								name="product.inStockNumber" class="form-control" id="inStockNumber"
 								placeholder="Number of in-stock copies" /> <span
-								class="help-block">Numero copie in stock.</span>
+								class="help-block">Numero copie in stock</span>
 						</div>
 					</div>
 					
@@ -115,7 +112,7 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="status">Saldi</label>
 						<div class="col-md-8">
-							<label><input value="true" type="radio" name="sale"/> Sale </label> <label><input
+							<label><input value="true" type="radio" name="product.sale"/> Sale </label> <label><input
 								value="false" type="radio" name="sale" checked="checked"/>
 								No Sale </label> <span class="help-block">Scegliere se si vuole che sul prodotto compaia l'etichetta "Sale".</span>
 						</div>
@@ -125,7 +122,7 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="status">Nuovo</label>
 						<div class="col-md-8">
-							<label><input value="true" type="radio" name="newProduct"/> New </label> <label><input
+							<label><input value="true" type="radio" name="product.newProduct"/> New </label> <label><input
 								value="false" type="radio" name="newProduct" checked="checked"/>
 								No New </label> <span class="help-block">Scegliere se si vuole che sul prodotto compaia l'etichetta "New".</span>
 						</div>
@@ -135,10 +132,10 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="status">Stato</label>
 						<div class="col-md-8">
-							<label><input value="true" type="radio" name="active"
+							<label><input value="true" type="radio" name="product.active"
 								checked="checked" /> Attivo </label> <label><input
 								value="false" type="radio" name="active" />
-								Inattivo </label> <span class="help-block">Scegliere se il prodotto è attivo o meno.</span>
+								Inattivo </label> <span class="help-block">Scegliere se il prodotto &egrave; attivo o meno.</span>
 						</div>
 					</div>
 
@@ -146,22 +143,22 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="description">Descrizione</label>
 						<div class="col-md-8">
-							<textarea name="description" rows="5" class="form-control"
-								id="description" th:value="${product.description}"
+							<textarea name="product.description" rows="5" class="form-control"
+								id="description" th:value="${dataTransfer.product.description}"
 								placeholder="Description" />
 							<span class="help-block">Descrizione prodotto</span>
 						</div>
 					</div>
 
-					<!-- upload images START-->
+					<!-- upload images START -->
 					
 					<div class="form-group">
 						<div class="col-md-2">
 							<label for="productImage">Aggiorna immagine prodotto - negozio</label>
 						</div>
 						<div class="col-md-8">
-							<input id="productCategory" type="file" name="productCategory"
-								th:value="${product.productCategory}" />
+							<input id="productCategory" type="file" name="product.productCategory"
+								th:value="${dataTransfer.product.productCategory}" />
 						</div>
 					</div>
 					
@@ -170,8 +167,8 @@
 							<label for="productImage">Aggiorna immagine prodotto - dettaglio 1</label>
 						</div>
 						<div class="col-md-8">
-							<input id="productDetail1" type="file" name="productDetail1"
-								th:value="${product.productDetail1}" />
+							<input id="productDetail1" type="file" name="product.productDetail1"
+								th:value="${dataTransfer.product.productDetail1}" />
 						</div>
 					</div>
 					
@@ -180,8 +177,8 @@
 							<label for="productImage">Aggiorna immagine prodotto - dettaglio 2</label>
 						</div>
 						<div class="col-md-8">
-							<input id="productDetail2" type="file" name="productDetail2"
-								th:value="${product.productDetail2}" />
+							<input id="productDetail2" type="file" name="product.productDetail2"
+								th:value="${dataTransfer.product.productDetail2}" />
 						</div>
 					</div>
 					
@@ -190,8 +187,8 @@
 							<label for="productImage">Aggiorna immagine prodotto - dettaglio 3</label>
 						</div>
 						<div class="col-md-8">
-							<input id="productDetail3" type="file" name="productDetail3"
-								th:value="${product.productDetail3}" />
+							<input id="productDetail3" type="file" name="product.productDetail3"
+								th:value="${dataTransfer.product.productDetail3}" />
 						</div>
 					</div>
 					
