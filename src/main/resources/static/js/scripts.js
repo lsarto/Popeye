@@ -133,7 +133,22 @@ $(document).ready(function() {
 });
 
 $(document).ready(function(){
-    $("#btn1").click(function(){
-        $("p").append(" <b>Appended text</b>.");
+	var i=0;
+	
+    $("#btn-attr").click(function(){
+        $("#toAppend").append('<div class="form-group">' +
+						'<label class="col-md-2 control-label" for="model">Attributo ' + (i+1) +
+							'</label>' +
+						'<div class="col-md-8">' +
+							'<input type="text" class="form-control" name="product.productAttributes['+i+'].name"' +
+								'id="product.productAttributes'+i+'.name"' +
+								'placeholder="Nome Attributo" />' +
+							'<input type="text" class="form-control" name="product.productAttributes['+i+'].value"' +
+								'id="product.productAttributes'+i+'.value"' + 
+								'placeholder="Valore Attributo" /> <span class="help-block">' +
+								'Aggiungi (opzionalmente) un nome e una descrizione di una caratteristica del prodotto</span>' + 
+						'</div>' +
+					'</div>');
+        i++;
     });
 });

@@ -43,17 +43,22 @@
 					</div>  
 					
 					<!-- attributes -->
-					<div th:each="attribute,attributeStat: *{dataTransfer.productAttributes}" class="form-group">
+					<!-- <div th:each="attribute,attributeStat: *{dataTransfer.productAttributes}" class="form-group">
 						<label class="col-md-2 control-label" for="model">Attributo
 							</label>
 						<div class="col-md-8">
 							<input type="text" th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].name}" class="form-control"
 								placeholder="Nome Attributo" />
-						</div>
-						<div class="col-md-8">
 							<input type="text" th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].value}" class="form-control"
-								placeholder="Informazione Attributo" /> <span class="help-block">
+								placeholder="Valore Attributo" /> <span class="help-block">
 								Aggiungi (opzionalmente) un nome e una descrizione di una caratteristica del prodotto</span>
+						</div>
+					</div> -->
+					<div id="toAppend"></div>
+					<div class="form-group">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<button type="button" id="btn-attr" class="btn btn-primary glyphicon glyphicon-plus-sign"> Aggiungi attributo</button>
 						</div>
 					</div>
 					

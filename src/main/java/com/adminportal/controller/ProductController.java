@@ -50,9 +50,6 @@ public class ProductController {
 		Category category = new Category();
 		List<ProductAttribute> attributeList = new ArrayList<>();
 		
-		for(int i=0; i<20; i++){
-			attributeList.add(new ProductAttribute());
-		}
 		product.setProductAttributes(attributeList);
 		product.setCategory(category);
 		
