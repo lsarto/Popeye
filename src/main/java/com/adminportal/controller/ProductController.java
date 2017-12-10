@@ -56,6 +56,7 @@ public class ProductController {
 		Type type = typeService.findByName(typeName);
 		List<Category> categories = categoryService.findByType(type);
 		DataTransfer dt = new DataTransfer(product, categories, attributeList);
+//		model.addAttribute("product", product);
 		model.addAttribute("dataTransfer", dt);
 		model.addAttribute("categories", categories);
 		
@@ -64,9 +65,10 @@ public class ProductController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addProductPost(@ModelAttribute("dataTransfer") DataTransfer dataTransfer, HttpServletRequest request) {
-		Category category = dataTransfer.getProduct().getCategory();
-		String productName = dataTransfer.getProduct().getName();
-		System.out.println("productName: "+ productName);
+		Category categoryName = dataTransfer.getProduct().getCategory();
+		Category category = categoryService.findByName(categoryName.getName());
+		
+		System.out.println("productName: "+ dataTransfer.getProduct().getName());
 		System.out.println("productCategory: " + category.getName());
 		List<ProductAttribute> attributeList = dataTransfer.getProduct().getProductAttributes();
 		for(ProductAttribute pa: attributeList){
@@ -80,62 +82,64 @@ public class ProductController {
 		System.out.println("New: " + dataTransfer.getProduct().isNewProduct());
 		System.out.println("Status of product: " + dataTransfer.getProduct().isActive());
 		System.out.println("description: " + dataTransfer.getProduct().getDescription());
-		System.out.println("description: " + dataTransfer.getProduct().getDescription());
 
+		Product product = dataTransfer.getProduct();
 
-//		category.setQty(category.getQty()+1);
-//		categoryService.save(category);
-//		product.setCategory(category);
-//
-//		for(ProductAttribute attribute: attributeList){
-//			if(attribute.getName()!=null && attribute.getName()!=""){
-//				attributeService.save(attribute);
-//			}
-//			else{
-//				attributeList.remove(attribute);
-//			}
-//		}
-//		
-//		productService.save(product);
-//
-//		MultipartFile productCategory = product.getProductCategory();
-//		MultipartFile productDetail1 = product.getProductDetail1();
-//		MultipartFile productDetail2 = product.getProductDetail2();
-//		MultipartFile productDetail3 = product.getProductDetail3();
-//
-//		try {
-//			byte[] bytes;
-//			BufferedOutputStream stream;
-//			String name;
-//			
-//			bytes = productCategory.getBytes();
-//			name = product.getId() + "-1.png";
-//			stream = new BufferedOutputStream(
-//					new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
-//			stream.write(bytes);
-//			
-//		    bytes = productDetail1.getBytes();
-//			name = product.getId() + "-2.png";
-//			stream = new BufferedOutputStream(
-//					new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
-//			stream.write(bytes);
-//			
-//			bytes = productDetail2.getBytes();
-//			name = product.getId() + "-3.png";
-//			stream = new BufferedOutputStream(
-//					new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
-//			stream.write(bytes);
-//			
-//			bytes = productDetail3.getBytes();
-//			name = product.getId() + "-4.png";
-//			stream = new BufferedOutputStream(
-//					new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
-//			stream.write(bytes);
-//			
-//			stream.close();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		category.setQty(category.getQty()+1);
+		categoryService.save(category);
+		product.setCategory(category);
+
+		productService.save(product);
+
+		for(ProductAttribute attribute: attributeList){
+			if(attribute.getName()!=null && attribute.getName()!=""){
+				attribute.setProduct(product);
+				attributeService.save(attribute);
+			}
+			else{
+				attributeList.remove(attribute);
+			}
+		}
+		
+
+		MultipartFile productCategory = product.getProductCategory();
+		MultipartFile productDetail1 = product.getProductDetail1();
+		MultipartFile productDetail2 = product.getProductDetail2();
+		MultipartFile productDetail3 = product.getProductDetail3();
+
+		try {
+			byte[] bytes;
+			BufferedOutputStream stream;
+			String name;
+			
+			bytes = productCategory.getBytes();
+			name = product.getId() + "-1.png";
+			stream = new BufferedOutputStream(
+					new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
+			stream.write(bytes);
+			
+		    bytes = productDetail1.getBytes();
+			name = product.getId() + "-2.png";
+			stream = new BufferedOutputStream(
+					new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
+			stream.write(bytes);
+			
+			bytes = productDetail2.getBytes();
+			name = product.getId() + "-3.png";
+			stream = new BufferedOutputStream(
+					new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
+			stream.write(bytes);
+			
+			bytes = productDetail3.getBytes();
+			name = product.getId() + "-4.png";
+			stream = new BufferedOutputStream(
+					new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
+			stream.write(bytes);
+			
+			stream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		return "redirect:productList";
 	}
