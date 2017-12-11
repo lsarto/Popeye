@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+
 @Entity
 public class Type {
 	
@@ -20,6 +21,9 @@ public class Type {
 	
 	@OneToMany(mappedBy="type", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Category> categories;
+	
+	@OneToMany(mappedBy="type", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Product> products;
 
 	public Long getId() {
 		return id;
@@ -41,8 +45,16 @@ public class Type {
 		return categories;
 	}
 
-	public void setCategories(List<Category> subCategories) {
-		this.categories = subCategories;
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 	
 	

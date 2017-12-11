@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.popeyestore.domain.Type;
 import com.popeyestore.domain.Category;
+import com.popeyestore.domain.Product;
 import com.popeyestore.domain.User;
 import com.popeyestore.domain.security.Role;
 import com.popeyestore.domain.security.UserRole;
@@ -52,26 +53,35 @@ public class PopeyestoreApplication implements CommandLineRunner {
 		Type type2 = new Type();
 		type1.setName("Type1");
 		type2.setName("Type2");
+		type1.setProducts(new ArrayList<Product>());
+		type2.setProducts(new ArrayList<Product>());
 		
 		Category category11 = new Category();
 		Category category12 = new Category();
 		Category category21 = new Category();
 		Category category22 = new Category();
+		
 		category11.setName("category11");
 		category12.setName("category12");
+		category11.setType(type1);
+		category12.setType(type1);
+		
 		category21.setName("category21");
 		category22.setName("category22");
-		category11.setQty(2);
-		category12.setQty(2);
-		category21.setQty(2);
-		category22.setQty(2);
+		category21.setType(type2);
+		category22.setType(type2);
+		
+		category11.setQty(0);
+		category12.setQty(0);
+		category21.setQty(0);
+		category22.setQty(0);
 
 		List<Category> categories1 = new ArrayList<>();
 		List<Category> categories2 = new ArrayList<>();
 		categories1.add(category11);
 		categories1.add(category12);
 		categories2.add(category21);
-		categories1.add(category22);
+		categories2.add(category22);
 		
 		typeService.createCategory(type1, categories1);
 		typeService.createCategory(type2, categories2);
