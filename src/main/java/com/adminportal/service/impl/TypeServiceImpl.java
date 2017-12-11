@@ -56,4 +56,9 @@ public class TypeServiceImpl implements TypeService{
 		return localType;
 	}
 
+	@Override
+	public Type save(Type type) {
+		return typeRepository.save(type);
+	}
+
 }

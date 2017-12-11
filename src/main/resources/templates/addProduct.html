@@ -14,7 +14,9 @@
 					<legend class="center-block">
 						Nuovo prodotto<span style="font-size: small"> * Campo obbligatorio</span>
 					</legend>
-
+					
+					<input type="hidden" name="product.type.name"
+							th:value="${dataTransfer.product.type.name}"/> 
 
 					<!-- name -->
 					<div class="form-group">
@@ -36,7 +38,7 @@
 								class="form-control" required="required">
 								<option value="" selected="selected" disabled="disabled">Per favore selezionare un'opzione...</option>
 								<option th:each="categorySel : ${dataTransfer.categories}" 
-								th:select="(${dataTransfer.product.category.name}==${categorySel.name})"
+								th:selected="(${dataTransfer.product.category.name}==${categorySel.name})"
 								th:value="${categorySel.name}"
 								th:text="${categorySel.name}"></option>
 							</select>
@@ -45,15 +47,20 @@
 					</div>  
 					
 					<!-- attributes contained -->
-					<div th:each="attribute,attributeStat: *{dataTransfer.productAttributes}" class="form-group">
+					<div
+						th:each="attribute,attributeStat: *{dataTransfer.product.productAttributes}"
+						class="form-group">
 						<label class="col-md-2 control-label" for="model">Attributo
-							</label>
+						</label>
 						<div class="col-md-8">
-							<input type="text" th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].name}" class="form-control"
-								placeholder="Nome Attributo" />
-							<input type="text" th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].value}" class="form-control"
-								placeholder="Valore Attributo" /> <span class="help-block">
-								Aggiungi (opzionalmente) un nome e una descrizione di una caratteristica del prodotto</span>
+							<input type="text"
+								th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].name}"
+								class="form-control" placeholder="Nome Attributo" /> <input
+								type="text"
+								th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].value}"
+								class="form-control" placeholder="Valore Attributo" /> <span
+								class="help-block"> Aggiungi (opzionalmente) un nome e
+								una descrizione di una caratteristica del prodotto</span>
 						</div>
 					</div>
 					

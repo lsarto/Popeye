@@ -13,11 +13,9 @@
 				enctype="multipart/form-data">
 				<fieldset>
 					<legend class="center-block">
-						Aggiorna le informazioni del prodotto<span
-							style="font-size: small">* campo obbligatorio</span>
+						Aggiorna le informazioni del prodotto<span style="font-size: small"> * Campo
+							obbligatorio</span>
 					</legend>
-
-					<input hidden="hidden" name="id" th:value="${cigarette.id}" />
 
 
 					<!-- name -->
@@ -25,98 +23,74 @@
 						<label class="col-md-2 control-label" for="name">* Nome</label>
 
 						<div class="col-md-8">
-							<input type="text" name="name" class="form-control" id="name"
-								th:value="${cigarette.name}" required="required"
-								placeholder="nome" /> <span class="help-block">Nome
-								della sigaretta</span>
-						</div>
-					</div>
-
-					<!-- model -->
-					<div class="form-group">
-						<label class="col-md-2 control-label" for="model">*
-							Modello</label>
-						<div class="col-md-8">
-							<input type="text" name="model" class="form-control" id="model"
-								th:value="${cigarette.model}" required="required"
-								placeholder="Modello" /> <span class="help-block">Modello
-								della sigaretta</span>
-						</div>
-					</div>
-
-					<!-- brand -->
-					<div class="form-group">
-						<label class="col-md-2 control-label" for="publisher">Marca</label>
-						<div class="col-md-8">
-							<input type="text" name="brand" class="form-control" id="brand"
-								th:value="${cigarette.brand}" placeholder="Marca" /> <span
-								class="help-block">Marca della sigaretta</span>
-						</div>
-					</div>
-
-					<!-- typeOfPuff -->
-					<div class="form-group">
-						<label class="col-md-2 control-label" for="typeOfPuff">Tipo
-							di tiro</label>
-						<div class="col-md-8">
-							<input type="text" class="form-control" id="publicationDate"
-								name="typeOfPuff" th:value="${cigarette.typeOfPuff}"
-								placeholder="Tipo di tiro" /> <span class="help-block">Tipo
-								di tiro</span>
-						</div>
-					</div>
-
-					<!-- technology -->
-					<div class="form-group">
-						<label class="col-md-2 control-label" for="mode">Tecnologia</label>
-						<div class="col-md-8">
-							<input type="text" class="form-control" id="technology"
-								name="technology" th:value="${cigarette.technology}"
-								placeholder="Tecnologia" /> <span class="help-block">Tecnologia</span>
-						</div>
-					</div>
-
-					<!-- subOhm -->
-					<div class="form-group">
-						<label class="col-md-2 control-label" for="mode">subOhm</label>
-						<div class="col-md-8">
-							<input type="text" class="form-control" id="subOhm" name="subOhm"
-								th:value="${cigarette.subOhm}" placeholder="subOhm" /> <span
-								class="help-block">subOhm</span>
+							<input type="text" name="product.name" class="form-control"
+								id="name" th:value="${dataTransfer.product.name}"
+								required="required" placeholder="nome" /> <span
+								class="help-block">Nome prodotto</span>
 						</div>
 					</div>
 
 					<!-- category -->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="category">*
-							Marca</label>
+							Categoria</label>
 						<div class="col-md-8">
-							<select th:value="${cigarette.brand}" id="category"
-								name="category" class="form-control">
-								<option value="" selected="selected" disabled="disabled">Please
-									select an option...</option>
-								<option value="Aspire"
-									th:selected="(${cigarette.brand}=='Aspire')">Aspire</option>
-								<option value="Innokin"
-									th:selected="(${cigarette.brand}=='Innokin')">Innokin</option>
-								<option value="Smok" th:selected="(${cigarette.brand}=='Smok')">Smok</option>
-								<option value="Xtar" th:selected="(${cigarette.brand}=='Xtar')">Xtar</option>
-							</select>
+							<select th:value="${dataTransfer.product.category.name}"
+								id="category" name="product.category.name" class="form-control"
+								required="required">
+								<option value="" selected="selected" disabled="disabled">Per
+									favore selezionare un'opzione...</option>
+								<option th:each="categorySel : ${dataTransfer.categories}"
+									th:selected="(${dataTransfer.product.category.name}==${categorySel.name})"
+									th:value="${categorySel.name}" th:text="${categorySel.name}"></option>
+							</select> <span class="help-block">Selezionare la categoria del
+								prodotto</span>
+						</div>
+					</div>
+
+					<!-- attributes contained -->
+					<div
+						th:each="attribute,attributeStat: *{dataTransfer.product.productAttributes}"
+						class="form-group">
+						<label class="col-md-2 control-label" for="model">Attributo
+						</label>
+						<div class="col-md-8">
+							<input type="text"
+								th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].name}"
+								class="form-control" placeholder="Nome Attributo" /> <input
+								type="text"
+								th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].value}"
+								class="form-control" placeholder="Valore Attributo" /> <span
+								class="help-block"> Aggiungi (opzionalmente) un nome e
+								una descrizione di una caratteristica del prodotto</span>
+						</div>
+					</div>
+
+					<!-- dynamic attributes -->
+					<div id="toAppend"></div>
+
+					<div class="form-group">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<button type="button" id="btn-attr"
+								class="btn btn-primary glyphicon glyphicon-plus-sign">
+								Aggiungi attributo</button>
 						</div>
 					</div>
 
 					<!-- shipping weight -->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="shippingWeight">Peso
-							spedizione</label>
+							Spedizione</label>
 						<div class="col-md-8">
 							<div class="input-group">
-								<input th:value="${cigarette.shippingWeight}" type="number"
-									name="shippingWeight" class="form-control" id="shippingWeight"
+								<input th:value="${dataTransfer.product.shippingWeight}"
+									type="number" step="0.01" name="product.shippingWeight"
+									class="form-control" id="shippingWeight"
 									placeholder="Shipping Weight" /> <span
-									class="input-group-addon">Chili</span>
+									class="input-group-addon">Kg</span>
 							</div>
-							<span class="help-block">Peso spedizione della sigaretta</span>
+							<span class="help-block">Peso spedizione in Kg</span>
 						</div>
 					</div>
 
@@ -127,11 +101,11 @@
 						<div class="col-md-8">
 							<div class="input-group">
 								<span class="input-group-addon">$</span> <input
-									th:value="${cigarette.listPrice}" type="number"
-									name="listPrice" class="form-control" id="listPrice"
-									placeholder="List Price" />
+									th:value="${dataTransfer.product.listPrice}" type="number"
+									step="0.01" name="product.listPrice" class="form-control"
+									id="listPrice" placeholder="List Price" />
 							</div>
-							<span class="help-block">Prezzo Lista della sigaretta</span>
+							<span class="help-block">Prezzo Lista del prodotto</span>
 						</div>
 					</div>
 
@@ -142,10 +116,11 @@
 						<div class="col-md-8">
 							<div class="input-group">
 								<span class="input-group-addon">$</span> <input
-									th:value="${cigarette.ourPrice}" type="number" name="ourPrice"
-									class="form-control" id="ourPrice" placeholder="Our Price" />
+									th:value="${dataTransfer.product.ourPrice}" type="number"
+									step="0.01" name="product.ourPrice" class="form-control"
+									id="ourPrice" placeholder="Our Price" />
 							</div>
-							<span class="help-block">Nostro prezzo della sigaretta</span>
+							<span class="help-block">Nostro Prezzo del prodotto</span>
 						</div>
 					</div>
 
@@ -153,43 +128,46 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="inStockNumber">SKU</label>
 						<div class="col-md-8">
-							<input th:value="${cigarette.inStockNumber}" type="number"
-								name="inStockNumber" class="form-control" id="inStockNumber"
-								placeholder="Number of in-stock copies" /> <span
-								class="help-block">Numero di copie nello stock del
-								magazzino</span>
+							<input th:value="${dataTransfer.product.inStockNumber}"
+								type="number" name="product.inStockNumber" class="form-control"
+								id="inStockNumber" placeholder="Number of in-stock copies" /> <span
+								class="help-block">Numero copie in stock</span>
 						</div>
 					</div>
-					
+
 					<!-- sale -->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="status">Saldi</label>
 						<div class="col-md-8">
-							<label><input value="true" type="radio" name="sale" th:checked="${cigarette.sale}"/> Sale </label> <label><input
-								value="false" type="radio" name="sale" th:checked="${!cigarette.sale}" />
-								No Sale </label> <span class="help-block">Scegliere se si vuole che sul prodotto compaia l'etichetta "Sale".</span>
+							<label><input value="true" type="radio"
+								name="product.sale" /> Sale </label> <label><input value="false"
+								type="radio" name="sale" checked="checked" /> No Sale </label> <span
+								class="help-block">Scegliere se si vuole che sul prodotto
+								compaia l'etichetta "Sale".</span>
 						</div>
 					</div>
-					
+
 					<!-- new -->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="status">Nuovo</label>
 						<div class="col-md-8">
-							<label><input value="true" type="radio" name="newProduct" th:checked="${cigarette.newProduct}" /> New </label> <label><input
-								value="false" type="radio" name="newProduct" th:checked="${!cigarette.newProduct}"/>
-								No New </label> <span class="help-block">Scegliere se si vuole che sul prodotto compaia l'etichetta "New".</span>
+							<label><input value="true" type="radio"
+								name="product.newProduct" /> New </label> <label><input
+								value="false" type="radio" name="newProduct" checked="checked" />
+								No New </label> <span class="help-block">Scegliere se si vuole
+								che sul prodotto compaia l'etichetta "New".</span>
 						</div>
 					</div>
 
-					<!-- status of cigarette -->
+					<!-- status of product -->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="status">Stato</label>
 						<div class="col-md-8">
-							<label><input value="true" type="radio" name="active"
-								th:checked="${cigarette.active}" /> Attivo </label> <label><input
-								value="false" type="radio" name="active"
-								th:checked="${!cigarette.active}" /> Inattivo </label> <span
-								class="help-block">Settare lo stato della sigaretta</span>
+							<label><input value="true" type="radio"
+								name="product.active" checked="checked" /> Attivo </label> <label><input
+								value="false" type="radio" name="active" /> Inattivo </label> <span
+								class="help-block">Scegliere se il prodotto &egrave;
+								attivo o meno.</span>
 						</div>
 					</div>
 
@@ -197,56 +175,61 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="description">Descrizione</label>
 						<div class="col-md-8">
-							<textarea name="description" rows="5" class="form-control"
-								id="description" th:value="${cigarette.description}"
+							<textarea name="product.description" rows="5"
+								class="form-control" id="description"
+								th:value="${dataTransfer.product.description}"
 								placeholder="Description" />
-							<span class="help-block">Descrizione della sigaretta</span>
+							<span class="help-block">Descrizione prodotto</span>
 						</div>
 					</div>
 
-					<!-- upload images START-->
+					<!-- upload images START -->
 
 					<div class="form-group">
 						<div class="col-md-2">
-							<label for="cigaretteImage">Aggiorna immagine sigaretta -
+							<label for="productImage">Aggiorna immagine prodotto -
 								negozio</label>
 						</div>
 						<div class="col-md-8">
-							<input id="cigaretteCategory" type="file" name="cigaretteCategory"
-								th:value="${cigarette.cigaretteCategory}" />
+							<input id="productCategory" type="file"
+								name="product.productCategory"
+								th:value="${dataTransfer.product.productCategory}" />
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-2">
-							<label for="cigaretteImage">Aggiorna immagine sigaretta -
+							<label for="productImage">Aggiorna immagine prodotto -
 								dettaglio 1</label>
 						</div>
 						<div class="col-md-8">
-							<input id="cigaretteDetail1" type="file" name="cigaretteDetail1"
-								th:value="${cigarette.cigaretteDetail1}" />
+							<input id="productDetail1" type="file"
+								name="product.productDetail1"
+								th:value="${dataTransfer.product.productDetail1}" />
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-2">
-							<label for="cigaretteImage">Aggiorna immagine sigaretta -
+							<label for="productImage">Aggiorna immagine prodotto -
 								dettaglio 2</label>
 						</div>
 						<div class="col-md-8">
-							<input id="cigaretteDetail2" type="file" name="cigaretteDetail2"
-								th:value="${cigarette.cigaretteDetail2}" />
+							<input id="productDetail2" type="file"
+								name="product.productDetail2"
+								th:value="${dataTransfer.product.productDetail2}" />
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-2">
-							<label for="cigaretteImage">Aggiorna immagine sigaretta -
+							<label for="productImage">Aggiorna immagine prodotto -
 								dettaglio 3</label>
 						</div>
 						<div class="col-md-8">
-							<input id="cigaretteDetail3" type="file" name="cigaretteDetail3"
-								th:value="${cigarette.cigaretteDetail3}" />
+							<input id="productDetail3" type="file"
+								name="product.productDetail3"
+								th:value="${dataTransfer.product.productDetail3}" />
 						</div>
 					</div>
 
@@ -257,7 +240,7 @@
 						<div class="col-md-8">
 							<button type="submit" class="btn btn-success">Aggiorna</button>
 							<a class="btn btn-danger"
-								th:href="@{/cigarette/cigaretteInfo(id=${cigarette.id})}">Cancella</a>
+								th:href="@{/product/productInfo(id=${dataTransfer.product.id})}">Cancella</a>
 						</div>
 					</div>
 				</fieldset>

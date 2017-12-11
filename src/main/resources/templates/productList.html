@@ -7,47 +7,46 @@
 
 	<div class="container">
 		<div class="table-responsive">
-			<table id="cigaretteListTable"
+			<table id="productListTable"
 				class="table table-bordered table-hover table-striped">
 				<thead>
 					<tr>
-						<th><input th:id="selectAllCigarette" type="checkbox" /></th>
+						<th><input th:id="selectAllProducts" type="checkbox" /></th>
 						<th>Nome</th>
-						<th>Modello</th>
-						<th>Marca</th>
-						<th>Tipo di Tiro</th>
-						<th>Tecnologia</th>
-						<th>subOhm</th>
+						<th>Tipo</th>
+						<th>Categoria</th>
 						<th>pesoSpedizione</th>
 						<th>Prezzo Lista</th>
 						<th>Nostro Prezzo</th>
+						<th>SKU</th>
+						<th>Sale</th>
+						<th>New</th>
 						<th>Attivo</th>
 						<th>Operazione</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr data-th-each="cigarette : ${cigaretteList}">
-						<!-- <td><input hidden="hidden" name="id" th:value="${cigarette.id}" /></td> -->
+					<tr data-th-each="product : ${productList}">
 						<td><input hidden="hidden" name="id"
-							th:value="${cigarette.id}" /> <input
-							th:id="'selected'+${cigarette.id}" class="checkboxCigarette"
+							th:value="${product.id}" /> <input
+							th:id="'selected'+${product.id}" class="checkboxProduct"
 							type="checkbox" /></td>
 						<td><a
-							th:href="@{/cigarette/cigaretteInfo(id=${cigarette.id})}"><span
-								th:text="${cigarette.name}"></span></a></td>
-						<td th:text="${cigarette.model}"></td>
-						<td th:text="${cigarette.brand}"></td>
-						<td th:text="${cigarette.typeOfPuff}"></td>
-						<td th:text="${cigarette.technology}"></td>
-						<td th:text="${cigarette.subOhm}"></td>
-						<td th:text="${cigarette.shippingWeight}"></td>
-						<td th:text="${cigarette.listPrice}"></td>
-						<td th:text="${cigarette.ourPrice}"></td>
-						<td th:text="${cigarette.active}"></td>
+							th:href="@{/product/productInfo(id=${product.id})}"><span
+								th:text="${product.name}"></span></a></td>
+						<td th:text="${product.type.name}"></td>
+						<td th:text="${product.category.name}"></td>
+						<td th:text="${product.shippingWeight}"></td>
+						<td th:text="${product.listPrice}"></td>
+						<td th:text="${product.OurPrice}"></td>
+						<td th:text="${product.inStockNumber}"></td>
+						<td th:text="${product.sale}"></td>
+						<td th:text="${product.newProduct}"></td>
+						<td th:text="${product.active}"></td>
 						<td><input hidden="hidden" name="id"
-							th:value="${cigarette.id}" />
-							<button th:id="'oneCigarette-'+${cigarette.id}"
-								class="btn btn-danger btn-xs delete-cigarette" type="submit"
+							th:value="${product.id}" />
+							<button th:id="'oneProduct-'+${product.id}"
+								class="btn btn-danger btn-xs delete-product" type="submit"
 								value="delete">
 								<span class="fa fa-times"></span>Delete
 							</button></td>
@@ -65,7 +64,7 @@
 	<script>
 		$(document).ready(
 				function() {
-					$("#cigaretteListTable").DataTable(
+					$("#productListTable").DataTable(
 							{
 								"lengthMenu" : [ [ 5, 10, 15, 20, -1 ],
 										[ 5, 10, 15, 20, "All" ] ],

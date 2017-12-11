@@ -49,14 +49,15 @@ public class ProductController {
 		Product product = new Product();
 		Category category = new Category();
 		List<ProductAttribute> attributeList = new ArrayList<>();
+		Type type = new Type();
 		
+		type.setName(typeName);
+		product.setType(type);
 		product.setProductAttributes(attributeList);
 		product.setCategory(category);
 		
-		Type type = typeService.findByName(typeName);
-		List<Category> categories = categoryService.findByType(type);
+		List<Category> categories = categoryService.findByType(typeService.findByName(typeName));
 		DataTransfer dt = new DataTransfer(product, categories, attributeList);
-//		model.addAttribute("product", product);
 		model.addAttribute("dataTransfer", dt);
 		model.addAttribute("categories", categories);
 		
@@ -65,14 +66,48 @@ public class ProductController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addProductPost(@ModelAttribute("dataTransfer") DataTransfer dataTransfer, HttpServletRequest request) {
-		Category categoryName = dataTransfer.getProduct().getCategory();
-		Category category = categoryService.findByName(categoryName.getName());
+		Product product = dataTransfer.getProduct();
 		
+		//save category
+		String categoryName = product.getCategory().getName();
+		Category category = categoryService.findByName(categoryName);
+		category.setQty(category.getQty()+1);
+		categoryService.save(category);
+		product.setCategory(category);
+		
+		
+		//save type
+		String typeName = product.getType().getName();
+		Type type = typeService.findByName(typeName);
+		typeService.save(type);
+		product.setType(type);
+
+		//save product
+		productService.save(product);
+		
+		//save attributes
+		List<ProductAttribute> attributeList = product.getProductAttributes();
+		if(attributeList!=null && !attributeList.isEmpty()){
+			for(ProductAttribute attribute: attributeList){
+				if(attribute.getName()!=null && attribute.getName()!=""){
+					attribute.setProduct(product);
+					attributeService.save(attribute);
+				}
+				else{
+					attributeList.remove(attribute);
+				}
+			}
+		}
+		
+		
+		//system debug
 		System.out.println("productName: "+ dataTransfer.getProduct().getName());
+		System.out.println("productType: "+ dataTransfer.getProduct().getType().getName());
 		System.out.println("productCategory: " + category.getName());
-		List<ProductAttribute> attributeList = dataTransfer.getProduct().getProductAttributes();
-		for(ProductAttribute pa: attributeList){
-			System.out.println("productAttribute Name: "+pa.getName()+", Value: "+pa.getValue());
+		if(attributeList!=null && !attributeList.isEmpty()){
+			for(ProductAttribute pa: attributeList){
+				System.out.println("productAttribute Name: "+pa.getName()+", Value: "+pa.getValue());
+			}
 		}
 		System.out.println("Peso spedizione: " + dataTransfer.getProduct().getShippingWeight());
 		System.out.println("list price: " + dataTransfer.getProduct().getListPrice());
@@ -82,24 +117,7 @@ public class ProductController {
 		System.out.println("New: " + dataTransfer.getProduct().isNewProduct());
 		System.out.println("Status of product: " + dataTransfer.getProduct().isActive());
 		System.out.println("description: " + dataTransfer.getProduct().getDescription());
-
-		Product product = dataTransfer.getProduct();
-
-		category.setQty(category.getQty()+1);
-		categoryService.save(category);
-		product.setCategory(category);
-
-		productService.save(product);
-
-		for(ProductAttribute attribute: attributeList){
-			if(attribute.getName()!=null && attribute.getName()!=""){
-				attribute.setProduct(product);
-				attributeService.save(attribute);
-			}
-			else{
-				attributeList.remove(attribute);
-			}
-		}
+		
 		
 
 		MultipartFile productCategory = product.getProductCategory();
@@ -166,11 +184,15 @@ public class ProductController {
 	@RequestMapping("/updateProduct")
 	public String updateProduct(@RequestParam("id") Long id, Model model) {
 		Product product = productService.findOne(id);
-		model.addAttribute("product", product);
+		System.out.println("product.getType(): "+product.getType().getName());
+		System.out.println("product.getCategory(): "+product.getCategory());
+		List<Category> categories = categoryService.findByType(product.getType());
+		System.out.println("categories: " + categories);
+		DataTransfer dt = new DataTransfer(product, categories, product.getProductAttributes());
+		model.addAttribute("dataTransfer", dt);
 		
 		return "updateProduct";
 	}
-	
 	
 
 	@RequestMapping(value="/updateProduct", method=RequestMethod.POST)

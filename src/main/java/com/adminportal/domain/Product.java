@@ -38,6 +38,9 @@ public class Product {
 	@ManyToOne
 	private Category category;
 	
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private Type type;
+	
 	@Column(columnDefinition="text")
 	private String description;
 	private int inStockNumber;
@@ -189,6 +192,14 @@ public class Product {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
 	}
 
 
