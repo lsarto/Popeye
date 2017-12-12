@@ -23,14 +23,14 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/home")
-	public String home(Model model, HttpSession session){
-		List<Type> types = typeService.findAll();
-		session.setAttribute("types", types);
+	public String home(Model model){
 		return "home";
 	}
 	
 	@RequestMapping("/login")
-	public String login(){
+	public String login(HttpSession session){
+		List<Type> types = typeService.findAll();
+		session.setAttribute("types", types);
 		return "login";
 	}
 }

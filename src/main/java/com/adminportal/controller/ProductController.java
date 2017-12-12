@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -67,6 +68,7 @@ public class ProductController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addProductPost(@ModelAttribute("dataTransfer") DataTransfer dataTransfer, HttpServletRequest request) {
 		Product product = dataTransfer.getProduct();
+		List<ProductAttribute> attributeList = product.getProductAttributes();
 		
 		//save category
 		String categoryName = product.getCategory().getName();
@@ -81,24 +83,23 @@ public class ProductController {
 		Type type = typeService.findByName(typeName);
 		typeService.save(type);
 		product.setType(type);
-
+		
 		//save product
+		product.setProductAttributes(null);
 		productService.save(product);
 		
 		//save attributes
-		List<ProductAttribute> attributeList = product.getProductAttributes();
 		if(attributeList!=null && !attributeList.isEmpty()){
-			for(ProductAttribute attribute: attributeList){
-				if(attribute.getName()!=null && attribute.getName()!=""){
+			for(int i=0; i<attributeList.size(); i++){
+				ProductAttribute attribute = attributeList.get(i);
+				if(attribute.getName()!=null && !Objects.equals(attribute.getName(), "")){
+					System.out.println("save attribute");
 					attribute.setProduct(product);
 					attributeService.save(attribute);
 				}
-				else{
-					attributeList.remove(attribute);
-				}
 			}
 		}
-		
+
 		
 		//system debug
 		System.out.println("productName: "+ dataTransfer.getProduct().getName());
