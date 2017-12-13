@@ -135,9 +135,13 @@ $(document).ready(function() {
 $(document).ready(function(){
 	var i=0;
 	
+	$(".div-attr-contained").each(function() {
+		i++;
+	});
+    
     $("#btn-attr").click(function(){
         $("#toAppend").append('<div class="form-group">' +
-						'<label class="col-md-2 control-label" for="model">Attributo ' + (i+1) +
+						'<label class="col-md-2 control-label" for="model">Attributo ' +
 							'</label>' +
 						'<div class="col-md-8">' +
 							'<input type="text" class="form-control" name="product.productAttributes['+i+'].name"' +

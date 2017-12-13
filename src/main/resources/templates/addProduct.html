@@ -47,7 +47,7 @@
 					</div>  
 					
 					<!-- attributes contained -->
-					<div
+					<div id="div-attr-contained"
 						th:each="attribute,attributeStat: *{dataTransfer.product.productAttributes}"
 						class="form-group">
 						<label class="col-md-2 control-label" for="model">Attributo
@@ -55,11 +55,11 @@
 						<div class="col-md-8">
 							<input type="text"
 								th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].name}"
-								class="form-control" placeholder="Nome Attributo" /> <input
-								type="text"
+								class="form-control" placeholder="Nome Attributo" /> 
+							<input type="text"
 								th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].value}"
-								class="form-control" placeholder="Valore Attributo" /> <span
-								class="help-block"> Aggiungi (opzionalmente) un nome e
+								class="form-control" placeholder="Valore Attributo" /> 
+							<span class="help-block"> Aggiungi (opzionalmente) un nome e
 								una descrizione di una caratteristica del prodotto</span>
 						</div>
 					</div>
@@ -171,7 +171,7 @@
 					
 					<div class="form-group">
 						<div class="col-md-2">
-							<label for="productImage">Aggiorna immagine prodotto - negozio</label>
+							<label for="productImage">Aggiungi immagine prodotto - negozio</label>
 						</div>
 						<div class="col-md-8">
 							<input id="productCategory" type="file" name="product.productCategory"
@@ -181,7 +181,7 @@
 					
 					<div class="form-group">
 						<div class="col-md-2">
-							<label for="productImage">Aggiorna immagine prodotto - dettaglio 1</label>
+							<label for="productImage">Aggiungi immagine prodotto - dettaglio 1</label>
 						</div>
 						<div class="col-md-8">
 							<input id="productDetail1" type="file" name="product.productDetail1"
@@ -191,7 +191,7 @@
 					
 					<div class="form-group">
 						<div class="col-md-2">
-							<label for="productImage">Aggiorna immagine prodotto - dettaglio 2</label>
+							<label for="productImage">Aggiungi immagine prodotto - dettaglio 2</label>
 						</div>
 						<div class="col-md-8">
 							<input id="productDetail2" type="file" name="product.productDetail2"
@@ -201,7 +201,7 @@
 					
 					<div class="form-group">
 						<div class="col-md-2">
-							<label for="productImage">Aggiorna immagine prodotto - dettaglio 3</label>
+							<label for="productImage">Aggiungi immagine prodotto - dettaglio 3</label>
 						</div>
 						<div class="col-md-8">
 							<input id="productDetail3" type="file" name="product.productDetail3"
@@ -215,7 +215,7 @@
 						<div class="col-md-2"></div>
 						<div class="col-md-8">
 							<button type="submit" class="btn btn-success">Aggiungi prodotto</button>
-							<a class="btn btn-danger" th:href="@{/}">Cancella</a>
+							<a class="btn btn-danger" th:href="@{/}">Annulla</a>
 						</div>
 					</div>
 				</fieldset>

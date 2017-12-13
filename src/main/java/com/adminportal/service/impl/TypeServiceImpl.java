@@ -61,4 +61,9 @@ public class TypeServiceImpl implements TypeService{
 		return typeRepository.save(type);
 	}
 
+	@Override
+	public Type findOne(Long typeId) {
+		return typeRepository.findOne(typeId);
+	}
+
 }

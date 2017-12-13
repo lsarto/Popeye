@@ -17,4 +17,9 @@ public class AttributeServiceImpl implements AttributeService{
 		return attributeRepository.save(productAttribute);
 	}
 
+	@Override
+	public ProductAttribute findOne(Long id) {
+		return attributeRepository.findOne(id);
+	}
+
 }

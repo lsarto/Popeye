@@ -5,4 +5,6 @@ import com.adminportal.domain.ProductAttribute;
 public interface AttributeService {
 
 	ProductAttribute save(ProductAttribute productAttribute);
+
+	ProductAttribute findOne(Long id);
 }

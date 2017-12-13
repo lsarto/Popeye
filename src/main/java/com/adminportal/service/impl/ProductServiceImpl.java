@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.adminportal.domain.Category;
 import com.adminportal.domain.Product;
 import com.adminportal.repository.ProductRepository;
 import com.adminportal.service.ProductService;
@@ -32,5 +33,10 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public void removeOne(Long id) {
 		productRepository.delete(id);
+	}
+
+	@Override
+	public List<Product> findByCategory(Category categorySelected) {
+		return productRepository.findByCategory(categorySelected);
 	}
 }

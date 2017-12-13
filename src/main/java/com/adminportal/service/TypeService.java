@@ -15,4 +15,6 @@ public interface TypeService {
 	Type createCategory(Type category, List<Category> subCategories);
 	
 	Type save(Type type);
+
+	Type findOne(Long typeId);
 }

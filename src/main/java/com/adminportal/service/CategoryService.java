@@ -17,4 +17,6 @@ public interface CategoryService {
 	List<Category> findByType(Type type);
 	
 	Category save(Category category);
+
+	Category findOne(Long categoryId);
 }

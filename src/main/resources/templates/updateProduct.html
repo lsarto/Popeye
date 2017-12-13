@@ -9,15 +9,18 @@
 	<div class="container">
 		<div class="row">
 			<form class="form-horizontal"
-				th:action="@{/cigarette/updateCigarette}" method="post"
+				th:action="@{/product/updateProduct}" method="post"
 				enctype="multipart/form-data">
 				<fieldset>
 					<legend class="center-block">
 						Aggiorna le informazioni del prodotto<span style="font-size: small"> * Campo
 							obbligatorio</span>
 					</legend>
-
-
+					
+					<!-- IDs -->
+					<input hidden="hidden" name="product.id" th:value="${dataTransfer.product.id}" />
+					<input hidden="hidden" name="product.type.id" th:value="${dataTransfer.product.type.id}" />
+					
 					<!-- name -->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="name">* Nome</label>
@@ -35,33 +38,34 @@
 						<label class="col-md-2 control-label" for="category">*
 							Categoria</label>
 						<div class="col-md-8">
-							<select th:value="${dataTransfer.product.category.name}"
-								id="category" name="product.category.name" class="form-control"
+							<select th:value="${dataTransfer.product.category.id}"
+								id="category" name="product.category.id" class="form-control"
 								required="required">
 								<option value="" selected="selected" disabled="disabled">Per
 									favore selezionare un'opzione...</option>
 								<option th:each="categorySel : ${dataTransfer.categories}"
-									th:selected="(${dataTransfer.product.category.name}==${categorySel.name})"
-									th:value="${categorySel.name}" th:text="${categorySel.name}"></option>
+									th:selected="(${dataTransfer.product.category.id}==${categorySel.id})"
+									th:value="${categorySel.id}" th:text="${categorySel.name}"></option>
 							</select> <span class="help-block">Selezionare la categoria del
 								prodotto</span>
 						</div>
 					</div>
 
 					<!-- attributes contained -->
-					<div
-						th:each="attribute,attributeStat: *{dataTransfer.product.productAttributes}"
-						class="form-group">
+					<div th:each="attribute,attributeStat: *{dataTransfer.product.productAttributes}"
+						class="form-group div-attr-contained">
 						<label class="col-md-2 control-label" for="model">Attributo
 						</label>
 						<div class="col-md-8">
+							<input type="hidden" th:name="'product.productAttributes['+__${attributeStat.index}__+'].id'"
+								th:value="${dataTransfer.product.productAttributes[__${attributeStat.index}__].id}"/>
 							<input type="text"
 								th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].name}"
-								class="form-control" placeholder="Nome Attributo" /> <input
-								type="text"
+								class="form-control" placeholder="Nome Attributo" /> 
+							<input type="text"
 								th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].value}"
-								class="form-control" placeholder="Valore Attributo" /> <span
-								class="help-block"> Aggiungi (opzionalmente) un nome e
+								class="form-control" placeholder="Valore Attributo" /> 
+							<span class="help-block"> Aggiungi (opzionalmente) un nome e
 								una descrizione di una caratteristica del prodotto</span>
 						</div>
 					</div>
@@ -139,9 +143,10 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="status">Saldi</label>
 						<div class="col-md-8">
-							<label><input value="true" type="radio"
+							<label><input value="true" th:checked="${dataTransfer.product.sale}" type="radio"
 								name="product.sale" /> Sale </label> <label><input value="false"
-								type="radio" name="sale" checked="checked" /> No Sale </label> <span
+								th:checked="${!dataTransfer.product.sale}" 
+								type="radio" name="product.sale"/> No Sale </label> <span
 								class="help-block">Scegliere se si vuole che sul prodotto
 								compaia l'etichetta "Sale".</span>
 						</div>
@@ -151,9 +156,11 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="status">Nuovo</label>
 						<div class="col-md-8">
-							<label><input value="true" type="radio"
+							<label><input value="true"
+								th:checked="${dataTransfer.product.newProduct}" type="radio"
 								name="product.newProduct" /> New </label> <label><input
-								value="false" type="radio" name="newProduct" checked="checked" />
+								value="false" th:checked="${!dataTransfer.product.newProduct}"
+								type="radio" name="product.newProduct" />
 								No New </label> <span class="help-block">Scegliere se si vuole
 								che sul prodotto compaia l'etichetta "New".</span>
 						</div>
@@ -163,9 +170,11 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="status">Stato</label>
 						<div class="col-md-8">
-							<label><input value="true" type="radio"
-								name="product.active" checked="checked" /> Attivo </label> <label><input
-								value="false" type="radio" name="active" /> Inattivo </label> <span
+							<label><input value="true"
+								th:checked="${dataTransfer.product.active}" type="radio"
+								name="product.active" /> Attivo </label> <label><input
+								value="false" th:checked="${!dataTransfer.product.active}"
+								type="radio" name="product.active" /> Inattivo </label> <span
 								class="help-block">Scegliere se il prodotto &egrave;
 								attivo o meno.</span>
 						</div>
@@ -178,6 +187,7 @@
 							<textarea name="product.description" rows="5"
 								class="form-control" id="description"
 								th:value="${dataTransfer.product.description}"
+								th:text="${dataTransfer.product.description}"
 								placeholder="Description" />
 							<span class="help-block">Descrizione prodotto</span>
 						</div>
@@ -240,7 +250,7 @@
 						<div class="col-md-8">
 							<button type="submit" class="btn btn-success">Aggiorna</button>
 							<a class="btn btn-danger"
-								th:href="@{/product/productInfo(id=${dataTransfer.product.id})}">Cancella</a>
+								th:href="@{/product/productInfo(id=${dataTransfer.product.id})}">Annulla</a>
 						</div>
 					</div>
 				</fieldset>

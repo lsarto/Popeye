@@ -11,6 +11,8 @@ import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +37,8 @@ import com.adminportal.service.TypeService;
 @Controller
 @RequestMapping("/product")
 public class ProductController {
+	private static final Logger LOG = LoggerFactory.getLogger(ProductController.class);
+
 	@Autowired
 	private CategoryService categoryService;
 	@Autowired
@@ -93,33 +97,36 @@ public class ProductController {
 			for(int i=0; i<attributeList.size(); i++){
 				ProductAttribute attribute = attributeList.get(i);
 				if(attribute.getName()!=null && !Objects.equals(attribute.getName(), "")){
-					System.out.println("save attribute");
 					attribute.setProduct(product);
 					attributeService.save(attribute);
 				}
 			}
 		}
-
 		
 		//system debug
-		System.out.println("productName: "+ dataTransfer.getProduct().getName());
-		System.out.println("productType: "+ dataTransfer.getProduct().getType().getName());
-		System.out.println("productCategory: " + category.getName());
+		LOG.debug("productName: "+ dataTransfer.getProduct().getName());
+		LOG.debug("productType: "+ dataTransfer.getProduct().getType().getName());
+		LOG.debug("productCategory: " + category.getName());
 		if(attributeList!=null && !attributeList.isEmpty()){
 			for(ProductAttribute pa: attributeList){
-				System.out.println("productAttribute Name: "+pa.getName()+", Value: "+pa.getValue());
+				LOG.debug("productAttribute Name: "+pa.getName()+", Value: "+pa.getValue());
 			}
 		}
-		System.out.println("Peso spedizione: " + dataTransfer.getProduct().getShippingWeight());
-		System.out.println("list price: " + dataTransfer.getProduct().getListPrice());
-		System.out.println("Our Price: " + dataTransfer.getProduct().getOurPrice());
-		System.out.println("SKU: " + dataTransfer.getProduct().getInStockNumber());
-		System.out.println("Sale: " + dataTransfer.getProduct().isSale());
-		System.out.println("New: " + dataTransfer.getProduct().isNewProduct());
-		System.out.println("Status of product: " + dataTransfer.getProduct().isActive());
-		System.out.println("description: " + dataTransfer.getProduct().getDescription());
+		LOG.debug("Peso spedizione: " + dataTransfer.getProduct().getShippingWeight());
+		LOG.debug("list price: " + dataTransfer.getProduct().getListPrice());
+		LOG.debug("Our Price: " + dataTransfer.getProduct().getOurPrice());
+		LOG.debug("SKU: " + dataTransfer.getProduct().getInStockNumber());
+		LOG.debug("Sale: " + dataTransfer.getProduct().isSale());
+		LOG.debug("New: " + dataTransfer.getProduct().isNewProduct());
+		LOG.debug("Status of product: " + dataTransfer.getProduct().isActive());
+		LOG.debug("description: " + dataTransfer.getProduct().getDescription());
 		
-		
+		LOG.info("Add new Product: Name: "+product.getName()+", Type: "+product.getType().getName()
+				+", Category: "+product.getCategory().getName()+", AttributeList: "+product.getProductAttributes()
+				+", ShippingWeight: "+product.getShippingWeight()+", listPrice: "+product.getListPrice()
+				+", OurPrice: "+product.getOurPrice()+", SKU: "+product.getInStockNumber()
+				+", Sale"+product.isSale()+", New: "+product.isNewProduct()
+				+", Status: "+product.isActive()+", Description: "+product.getDescription());
 
 		MultipartFile productCategory = product.getProductCategory();
 		MultipartFile productDetail1 = product.getProductDetail1();
@@ -185,10 +192,10 @@ public class ProductController {
 	@RequestMapping("/updateProduct")
 	public String updateProduct(@RequestParam("id") Long id, Model model) {
 		Product product = productService.findOne(id);
-		System.out.println("product.getType(): "+product.getType().getName());
-		System.out.println("product.getCategory(): "+product.getCategory());
+		LOG.debug("product.getType(): "+product.getType().getName());
+		LOG.debug("product.getCategory(): "+product.getCategory());
 		List<Category> categories = categoryService.findByType(product.getType());
-		System.out.println("categories: " + categories);
+		LOG.debug("categories: " + categories);
 		DataTransfer dt = new DataTransfer(product, categories, product.getProductAttributes());
 		model.addAttribute("dataTransfer", dt);
 		
@@ -197,8 +204,63 @@ public class ProductController {
 	
 
 	@RequestMapping(value="/updateProduct", method=RequestMethod.POST)
-	public String updateProductPost(@ModelAttribute("product") Product product, HttpServletRequest request) {
+	public String updateProductPost(@ModelAttribute("dataTransfer") DataTransfer dataTransfer, HttpServletRequest request) {
+		Product product = dataTransfer.getProduct();
+		List<ProductAttribute> attributeList = product.getProductAttributes();
+		
+		//save type
+		Long typeId = product.getType().getId();
+		Type type = typeService.findOne(typeId);
+		product.setType(type);
+		
+		//save category
+		Long categoryId = product.getCategory().getId();
+		Category categorySelected = categoryService.findOne(categoryId);
+		List<Product> productsOfSelCat = productService.findByCategory(categorySelected);
+		boolean categoryChanged=true;
+		for(Product p: productsOfSelCat){ //verifying if admin has changed category
+			if(product.getId()==p.getId()){
+				categoryChanged = false;
+				break;
+			}
+		}
+		if(categoryChanged){ // if category has changed
+			//update qty in old category
+			Product productInRepository = productService.findOne(product.getId());
+			Long oldCatgoryId = productInRepository.getCategory().getId();
+			Category oldCategory = categoryService.findOne(oldCatgoryId);
+			oldCategory.setQty(oldCategory.getQty()-1);
+			
+			//update qty new category
+			Category category = categoryService.findOne(categoryId);
+			category.setQty(category.getQty()+1);
+			categoryService.save(category);
+			
+			//association of new category to product
+			product.setCategory(category);
+		}
+		
+		
+		//save product
+		product.setProductAttributes(null);
 		productService.save(product);
+		
+		//save attributes
+		if(attributeList!=null && !attributeList.isEmpty()){
+			for(ProductAttribute attribute: attributeList){
+				if(attribute.getName()!=null && !Objects.equals(attribute.getName(), "")){
+					attribute.setProduct(product);
+					attributeService.save(attribute);
+				}
+			}
+		}
+		
+		LOG.info("Update Product: Name: "+product.getName()+", Type: "+product.getType().getName()
+				+", Category: "+product.getCategory().getName()+", AttributeList: "+product.getProductAttributes()
+				+", ShippingWeight: "+product.getShippingWeight()+", listPrice: "+product.getListPrice()
+				+", OurPrice: "+product.getOurPrice()+", SKU: "+product.getInStockNumber()
+				+", Sale"+product.isSale()+", New: "+product.isNewProduct()
+				+", Status: "+product.isActive()+", Description: "+product.getDescription());
 		
 		MultipartFile productCategory = product.getProductCategory();
 		MultipartFile productDetail1 = product.getProductDetail1();
