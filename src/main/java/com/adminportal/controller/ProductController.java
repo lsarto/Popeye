@@ -338,8 +338,11 @@ public class ProductController {
 	public @ResponseBody Boolean remove(
 			@RequestBody String id, Model model) {
 		try {
-			//System.out.println("id: "+id+"\n");
-			productService.removeOne(Long.parseLong(id.substring(16)));
+			Product product = productService.findOne(Long.parseLong(id.substring(14)));
+			Category category = product.getCategory();
+			category.setQty(category.getQty()-1);
+			categoryService.save(category);
+			productService.removeOne(Long.parseLong(id.substring(14)));
         } catch (Exception e){
         	e.printStackTrace();
 			return new Boolean(false);
