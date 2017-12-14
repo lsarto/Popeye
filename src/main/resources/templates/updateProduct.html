@@ -53,7 +53,7 @@
 
 					<!-- attributes contained -->
 					<div th:each="attribute,attributeStat: *{dataTransfer.product.productAttributes}"
-						class="form-group div-attr-contained">
+						th:class="'form-group div-attr-contained del-attr-'+${__${attributeStat.index}__}">
 						<label class="col-md-2 control-label" for="model">Attributo
 						</label>
 						<div class="col-md-8">
@@ -67,6 +67,8 @@
 								class="form-control" placeholder="Valore Attributo" /> 
 							<span class="help-block"> Aggiungi (opzionalmente) un nome e
 								una descrizione di una caratteristica del prodotto</span>
+							<button type="button" th:id="'button-del-attr-'+${__${attributeStat.index}__}" 
+								class="btn btn-danger" style="margin-bottom:15px;">Delete</button>
 						</div>
 					</div>
 
@@ -81,6 +83,7 @@
 								Aggiungi attributo</button>
 						</div>
 					</div>
+					<br/>
 
 					<!-- shipping weight -->
 					<div class="form-group">

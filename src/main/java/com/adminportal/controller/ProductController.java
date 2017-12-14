@@ -247,6 +247,20 @@ public class ProductController {
 		
 		//save attributes
 		if(attributeList!=null && !attributeList.isEmpty()){
+			List<ProductAttribute> oldAttributes = attributeService.findByProduct(product);
+			if(oldAttributes!=null && !oldAttributes.isEmpty()){
+				for(ProductAttribute oldAttribute: oldAttributes){ //verifying if attribute has been removed
+					boolean found=false;
+					for(ProductAttribute attribute: attributeList){
+						if(oldAttribute.getId()==attribute.getId()){
+							found=true;
+						}
+					}
+					if(!found){
+						attributeService.deleteById(oldAttribute.getId());
+					}
+				}
+			}
 			for(ProductAttribute attribute: attributeList){
 				if(attribute.getName()!=null && !Objects.equals(attribute.getName(), "")){
 					attribute.setProduct(product);
@@ -256,7 +270,7 @@ public class ProductController {
 		}
 		
 		LOG.info("Update Product: Name: "+product.getName()+", Type: "+product.getType().getName()
-				+", Category: "+product.getCategory().getName()+", AttributeList: "+product.getProductAttributes()
+				+", CategoryId: "+product.getCategory().getId()+", AttributeList: "+product.getProductAttributes()
 				+", ShippingWeight: "+product.getShippingWeight()+", listPrice: "+product.getListPrice()
 				+", OurPrice: "+product.getOurPrice()+", SKU: "+product.getInStockNumber()
 				+", Sale"+product.isSale()+", New: "+product.isNewProduct()

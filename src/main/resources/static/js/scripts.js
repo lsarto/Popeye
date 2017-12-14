@@ -136,11 +136,21 @@ $(document).ready(function(){
 	var i=0;
 	
 	$(".div-attr-contained").each(function() {
+		$('#button-del-attr-'+i).click(function() {
+//        alert( this.id );
+      	  for(var j=0; j<=i; j++){
+        	if(this.id===('button-del-attr-'.concat(j))){
+//        		alert( "button "+j);
+        		$(".del-attr-"+j).remove();
+        		break;
+        	}
+      	  }
+		});
 		i++;
 	});
     
     $("#btn-attr").click(function(){
-        $("#toAppend").append('<div class="form-group">' +
+        $("#toAppend").append('<div class="form-group del-attr-'+i+'">'+
 						'<label class="col-md-2 control-label" for="model">Attributo ' +
 							'</label>' +
 						'<div class="col-md-8">' +
@@ -150,9 +160,24 @@ $(document).ready(function(){
 							'<input type="text" class="form-control" name="product.productAttributes['+i+'].value"' +
 								'id="product.productAttributes'+i+'.value"' + 
 								'placeholder="Valore Attributo" /> <span class="help-block">' +
-								'Aggiungi (opzionalmente) un nome e una descrizione di una caratteristica del prodotto</span>' + 
+								'Aggiungi (opzionalmente) un nome e una descrizione di una caratteristica del prodotto</span>' +
+							'<button type="button" id="button-del-attr-'+i+'" class="btn btn-danger " ' +
+								'style="margin-bottom:15px;">Delete</button>' +
 						'</div>' +
 					'</div>');
+       
+        
+        $('#button-del-attr-'+i).click(function() {
+//        	alert( this.id );
+        	for(var j=0; j<=i; j++){
+          		if(this.id===('button-del-attr-'.concat(j))){
+//          		alert( "button "+j);
+          			$(".del-attr-"+j).remove();
+          			break;
+          		}
+        	}
+        });
+        
         i++;
     });
 });
