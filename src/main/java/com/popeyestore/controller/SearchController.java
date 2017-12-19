@@ -45,7 +45,6 @@ public class SearchController {
 //		classActiveCategory = classActiveCategory.replaceAll("\\s+", "");
 //		classActiveCategory = classActiveCategory.replaceAll("&", "");
 //		model.addAttribute(classActiveCategory, true);
-		System.out.println("activeCategory " + category);
 		model.addAttribute("activeCategory", category);
 		
 		List<Type> types = typeService.findAll();
@@ -135,7 +134,7 @@ public class SearchController {
 			User user = userService.findByUsername(username);
 			model.addAttribute("user", user);
 		}
-
+		
 		List<Product> productList = productService.blurrySearch(keyword);
 
 		if (productList.isEmpty()) {

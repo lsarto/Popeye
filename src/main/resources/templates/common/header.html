@@ -164,7 +164,7 @@ ________________________________________________________ -->
 						<!--/.navbar-header -->
 
 						<div class="navbar-collapse collapse nav-col" id="navigation">
-							<ul class="nav navbar-nav">
+							<ul class="nav navbar-nav navbar-right">
 								<li th:classappend="${home}? 'active dropdown'"><a href="#"
 									class="dropdown-toggle" th:href="@{/}"><span
 										class="glyphicon glyphicon-home"></span> Home</a></li>
@@ -194,8 +194,8 @@ ________________________________________________________ -->
 								<form class="navbar-form navbar-right" role="search"
 									th:action="@{searchProduct}" method="post">
 									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Search">
-										<span class="input-group-btn">
+										<input type="text" class="form-control" name="keyword"
+											placeholder="Search"> <span class="input-group-btn">
 
 											<button type="submit" class="btn btn-template-main">
 												<i class="fa fa-search"></i>
