@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.popeyestore.domain.Product;
+import com.popeyestore.domain.Type;
 import com.popeyestore.repository.ProductRepository;
 import com.popeyestore.service.ProductService;
 
@@ -57,5 +58,10 @@ public class ProductServiceImpl implements ProductService {
 		}
 
 		return activeProductList;
+	}
+
+	@Override
+	public List<Product> findByType(Type type) {
+		return productRepository.findByType(type);
 	}
 }

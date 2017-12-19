@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.popeyestore.domain.Product;
+import com.popeyestore.domain.Type;
 import com.popeyestore.domain.Category;
 import com.popeyestore.domain.User;
 import com.popeyestore.service.ProductService;
+import com.popeyestore.service.TypeService;
 import com.popeyestore.service.CategoryService;
 import com.popeyestore.service.UserService;
 
@@ -27,6 +29,9 @@ public class SearchController {
 	
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private TypeService typeService;
 
 	@RequestMapping("/searchByCategory")
 	public String searchByCategory(@RequestParam("category") String category, Model model, Principal principal) {
@@ -36,22 +41,37 @@ public class SearchController {
 			model.addAttribute("user", user);
 		}
 
-		String classActiveCategory = "active" + category;
-		classActiveCategory = classActiveCategory.replaceAll("\\s+", "");
-		classActiveCategory = classActiveCategory.replaceAll("&", "");
-		model.addAttribute(classActiveCategory, true);
+//		String classActiveCategory = "active" + category;
+//		classActiveCategory = classActiveCategory.replaceAll("\\s+", "");
+//		classActiveCategory = classActiveCategory.replaceAll("&", "");
+//		model.addAttribute(classActiveCategory, true);
+		System.out.println("activeCategory " + category);
+		model.addAttribute("activeCategory", category);
+		
+		List<Type> types = typeService.findAll();
+		model.addAttribute("types", types);
 
-		List<Product> productList;
+		List<Product> productList=null;
 		Category categoryFound;
 
-		if (category.equals("all")) {
-			productList = productService.findAll();
+		if(category=="all"){
+			categoryFound = categoryService.findByName(category);
+			productList = categoryFound.getProducts();
+		}
+		else if(category.startsWith("all")){
+			for(Type type: types){
+				if(category.equals("all"+type.getName())){
+					productList = productService.findByType(type);
+					break;
+				}
+			}
 		} else {
 			categoryFound = categoryService.findByName(category);
 			productList = categoryFound.getProducts();
 		}
+		
 
-		if (productList.isEmpty()) {
+		if (productList==null || productList.isEmpty()) {
 			model.addAttribute("emptyList", true);
 			return "shop-category";
 		}
@@ -69,22 +89,36 @@ public class SearchController {
 			model.addAttribute("user", user);
 		}
 
-		String classActiveCategory = "active" + category;
-		classActiveCategory = classActiveCategory.replaceAll("\\s+", "");
-		classActiveCategory = classActiveCategory.replaceAll("&", "");
-		model.addAttribute(classActiveCategory, true);
+//		String classActiveCategory = "active" + category;
+//		classActiveCategory = classActiveCategory.replaceAll("\\s+", "");
+//		classActiveCategory = classActiveCategory.replaceAll("&", "");
+//		model.addAttribute(classActiveCategory, true);
+		model.addAttribute("activeCategory", category);
+		
+		List<Type> types = typeService.findAll();
+		model.addAttribute("types", types);
 
-		List<Product> productList;
+		List<Product> productList = null;
 		Category categoryFound;
-
-		if (category.equals("all")) {
-			productList = productService.findAll();
+		
+		if(category=="all"){
+			categoryFound = categoryService.findByName(category);
+			productList = categoryFound.getProducts();
+		}
+		else if(category.startsWith("all")){
+			for(Type type: types){
+				if(category.equals("all"+type.getName())){
+					productList = productService.findByType(type);
+					break;
+				}
+			}
 		} else {
 			categoryFound = categoryService.findByName(category);
 			productList = categoryFound.getProducts();
 		}
+		
 
-		if (productList.isEmpty()) {
+		if (productList==null || productList.isEmpty()) {
 			model.addAttribute("emptyList", true);
 			return "common/categorieFragment :: listFragment";
 		}

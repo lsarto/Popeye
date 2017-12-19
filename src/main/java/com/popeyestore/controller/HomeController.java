@@ -9,11 +9,14 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,9 +32,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.popeyestore.domain.CartItem;
+import com.popeyestore.domain.Category;
 import com.popeyestore.domain.Type;
 import com.popeyestore.domain.Product;
-import com.popeyestore.domain.Category;
 import com.popeyestore.domain.Order;
 import com.popeyestore.domain.User;
 import com.popeyestore.domain.UserBilling;
@@ -41,9 +44,9 @@ import com.popeyestore.domain.security.PasswordResetToken;
 import com.popeyestore.domain.security.Role;
 import com.popeyestore.domain.security.UserRole;
 import com.popeyestore.service.CartItemService;
+import com.popeyestore.service.CategoryService;
 import com.popeyestore.service.TypeService;
 import com.popeyestore.service.ProductService;
-import com.popeyestore.service.CategoryService;
 import com.popeyestore.service.OrderService;
 import com.popeyestore.service.UserPaymentService;
 import com.popeyestore.service.UserService;
@@ -53,6 +56,7 @@ import com.popeyestore.utility.ITConstants;
 import com.popeyestore.utility.MailConstructor;
 import com.popeyestore.utility.SecurityUtility;
 
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Controller
 public class HomeController {
 
@@ -89,13 +93,20 @@ public class HomeController {
 	@Autowired
 	private CategoryService categoryService;
 	
+	@Autowired
+	private HttpSession session;
 	
-	@RequestMapping("/")
-	public String index(Model model, HttpSession session) {
+	
+	@PostConstruct
+	public void init(){
 		List<Type> types = typeService.findAll();
 		List<Category> categories = categoryService.findAll();
 		session.setAttribute("categories", categories);
 		session.setAttribute("types", types);
+	}
+	
+	@RequestMapping("/")
+	public String index(Model model, HttpSession session) {
 		model.addAttribute("home", true);
 		return "index5";
 	}
@@ -145,8 +156,10 @@ public class HomeController {
 		}
 		
 		List<Product> productList = productService.findAll();
+		List<Type> types = typeService.findAll();
+		model.addAttribute("types", types);
 		model.addAttribute("productList", productList);
-		model.addAttribute("activeAll",true);
+//		model.addAttribute("activeAll",true);
 		model.addAttribute("negozio", true);
 
 		return "shop-category";
@@ -161,7 +174,9 @@ public class HomeController {
 		}
 
 		Product product = productService.findOne(id);
+		List<Type> types = typeService.findAll();
 
+		model.addAttribute("types", types);
 		model.addAttribute("product", product);
 
 		List<Integer> qtyList = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);

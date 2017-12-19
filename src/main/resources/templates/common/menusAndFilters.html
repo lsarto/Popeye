@@ -9,36 +9,31 @@
 		<div class="panel panel-default sidebar-menu">
 
 			<div class="panel-heading">
-				<h3 class="panel-title">Categorie</h3>
+				<h3 class="panel-title">Filtra</h3>
 			</div>
 
 			<div class="panel-body">
-				<ul class="nav nav-pills nav-stacked category-menu">
-					<li class="active"><a href="#">Sig. Elettroniche <span
-							class="badge pull-right">42</span>
-					</a>
+				<ul th:each="type: ${types}"
+					class="nav nav-pills nav-stacked category-menu">
+					<li class="active"><a href="#" th:text="${type.name}"></a>
 						<ul>
-							<li th:classappend="${activeAll}? 'active btn-default'"
-								id="all-list-item"><a
-								th:href="@{/searchByCategory(category='all')}" id="all-category">All</a></li>
-							<li th:classappend="${activeAspire}? 'active btn-default'"
-								id="aspire-list-item"><a
-								href="@{/searchByCategory(category='Aspire')}" id="aspire">Aspire</a></li>
-							<li th:classappend="${activeInnokin}? 'active btn-default'"
-								id="innokin-list-item"><a
-								th:href="@{/searchByCategory(category='Innokin')}" id="innokin">Innokin</a></li>
-							<li th:classappend="${activeSmok}? 'active btn-default'"
-								id="smok-list-item"><a
-								th:href="@{/searchByCategory(category='Smok')}" id="smok">Smok</a></li>
-							<li th:classappend="${activeXtar}? 'active btn-default'"
-								id="xtar-list-item"><a
-								th:href="@{/searchByCategory(category='Xtar')}" id="xtar">Xtar</a></li>
+							<li th:classappend="${activeCategory}=='all'+${type.name}? 'active btn-default'" 
+								th:id="'all'+${type.name}+'-list-item'"><a
+								th:href="@{/searchByCategory(category='all'+${type.name})}" 
+								class="category-ajax" 
+								th:id="'all'+${type.name}">All</a></li>
+							<li th:each="category: ${type.categories}" th:id="${category.name}+'-list-item'"
+								th:classappend="(${activeCategory}==${category.name})? 'active btn-default'">
+								<a th:href="@{/searchByCategory(category=${category.name})}"
+								class="category-ajax"
+								th:id="${category.name}"
+								th:inline="text">[[${category.name}]] <span
+									class="badge pull-right" th:text="${category.qty}"></span></a>
+							</li>
 						</ul></li>
-
 				</ul>
-
 			</div>
 		</div>
-	</div>	
+	</div>
 </body>
 </html>
