@@ -169,13 +169,14 @@ ________________________________________________________ -->
 									class="dropdown-toggle" th:href="@{/}"><span
 										class="glyphicon glyphicon-home"></span> Home</a></li>
 								<li th:each="type: ${session.types}" class="dropdown"><a
-									href="#" class="dropdown-toggle" th:href="@{/}"
+									href="#" class="dropdown-toggle" href="#"
 									data-toggle="dropdown"> <span class="dropdown-toggle"
 										th:text="${type.getName()}" th:remove="tag"></span> <b
 										class="caret"></b></a>
 									<ul class="dropdown-menu">
 										<li th:each="category: ${type.categories}">
-											<a href="" th:text="${category.name}"></a>
+											<a th:href="@{/searchByCategory(category=${category.name})}"
+											 th:text="${category.name}"></a>
 										</li>
 									</ul></li>
 								<li th:classappend="${negozio}? 'active dropdown'"><a

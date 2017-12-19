@@ -159,7 +159,7 @@
 							</div>
 
 							<div class="panel-body">
-								<ul th:each="type: ${types}" class="nav nav-pills nav-stacked category-menu">
+								<ul th:each="type: ${session.types}" class="nav nav-pills nav-stacked category-menu">
 									<li class="active"><a href="#" th:text="${type.name}"></a>
 										<ul>
 											<li th:classappend="${activeAll}? 'active btn-default'"><a

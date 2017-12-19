@@ -141,7 +141,7 @@ public class SearchController {
 			model.addAttribute("emptyList", true);
 			return "shop-category";
 		}
-
+		
 		model.addAttribute("productList", productList);
 
 		return "shop-category";
