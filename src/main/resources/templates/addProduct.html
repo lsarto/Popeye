@@ -133,19 +133,26 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="status">Saldi</label>
 						<div class="col-md-8">
-							<label><input value="true" type="radio" name="product.sale"/> Sale </label> <label><input
-								value="false" type="radio" name="sale" checked="checked"/>
-								No Sale </label> <span class="help-block">Scegliere se si vuole che sul prodotto compaia l'etichetta "Sale".</span>
+							<label><input value="true" th:checked="${dataTransfer.product.sale}" type="radio"
+								name="product.sale" /> Sale </label> <label><input value="false"
+								th:checked="${!dataTransfer.product.sale}" 
+								type="radio" name="product.sale"/> No Sale </label> <span
+								class="help-block">Scegliere se si vuole che sul prodotto
+								compaia l'etichetta "Sale".</span>
 						</div>
 					</div>
-					
+
 					<!-- new -->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="status">Nuovo</label>
 						<div class="col-md-8">
-							<label><input value="true" type="radio" name="product.newProduct"/> New </label> <label><input
-								value="false" type="radio" name="newProduct" checked="checked"/>
-								No New </label> <span class="help-block">Scegliere se si vuole che sul prodotto compaia l'etichetta "New".</span>
+							<label><input value="true"
+								th:checked="${dataTransfer.product.newProduct}" type="radio"
+								name="product.newProduct" /> New </label> <label><input
+								value="false" th:checked="${!dataTransfer.product.newProduct}"
+								type="radio" name="product.newProduct" />
+								No New </label> <span class="help-block">Scegliere se si vuole
+								che sul prodotto compaia l'etichetta "New".</span>
 						</div>
 					</div>
 
@@ -153,10 +160,13 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="status">Stato</label>
 						<div class="col-md-8">
-							<label><input value="true" type="radio" name="product.active"
-								checked="checked" /> Attivo </label> <label><input
-								value="false" type="radio" name="active" />
-								Inattivo </label> <span class="help-block">Scegliere se il prodotto &egrave; attivo o meno.</span>
+							<label><input value="true"
+								th:checked="${dataTransfer.product.active}" type="radio"
+								name="product.active" /> Attivo </label> <label><input
+								value="false" th:checked="${!dataTransfer.product.active}"
+								type="radio" name="product.active" /> Inattivo </label> <span
+								class="help-block">Scegliere se il prodotto &egrave;
+								attivo o meno.</span>
 						</div>
 					</div>
 

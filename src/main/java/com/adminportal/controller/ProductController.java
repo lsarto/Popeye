@@ -352,11 +352,11 @@ public class ProductController {
 	public @ResponseBody Boolean remove(
 			@RequestBody String id, Model model) {
 		try {
+			productService.removeOne(Long.parseLong(id.substring(14)));
 			Product product = productService.findOne(Long.parseLong(id.substring(14)));
 			Category category = product.getCategory();
 			category.setQty(category.getQty()-1);
 			categoryService.save(category);
-			productService.removeOne(Long.parseLong(id.substring(14)));
         } catch (Exception e){
         	e.printStackTrace();
 			return new Boolean(false);

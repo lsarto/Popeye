@@ -30,11 +30,11 @@ public class ResourceController {
 		for (String id : productIdList) {
 			String productId =id.substring(8);
 			try {
+				productService.removeOne(Long.parseLong(productId));
 				Product product = productService.findOne(Long.parseLong(productId));
 				Category category = product.getCategory();
 				category.setQty(category.getQty()-1);
 				categoryService.save(category);
-				productService.removeOne(Long.parseLong(productId));
 			} catch(Exception e) {
 				e.printStackTrace();
 				return false;
