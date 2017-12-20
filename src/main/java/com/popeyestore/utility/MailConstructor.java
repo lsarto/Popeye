@@ -34,7 +34,7 @@ public class MailConstructor {
 		String message = "\nClicca su questo link per verificare la tua email e modificare i tuoi dati personali. La tua password e': \n"+password;
 		SimpleMailMessage email = new SimpleMailMessage();
 		email.setTo(user.getEmail());
-		email.setSubject("Cigarette - New User");
+		email.setSubject("Nuovo Utente");
 		email.setText(url+message);
 		email.setFrom(env.getProperty("support.email"));
 		return email;
@@ -54,7 +54,7 @@ public class MailConstructor {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				MimeMessageHelper email = new MimeMessageHelper(mimeMessage);
 				email.setTo(user.getEmail());
-				email.setSubject("Order Confirmation - "+order.getId());
+				email.setSubject("Conferma Ordine - "+order.getId());
 				email.setText(text, true);
 				email.setFrom(new InternetAddress("poroporopoppoppo@gmail.com"));
 			}
