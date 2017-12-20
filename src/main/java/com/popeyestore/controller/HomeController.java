@@ -602,6 +602,7 @@ public class HomeController {
 
 			model.addAttribute("userPaymentList", user.getUserPaymentList());
 			model.addAttribute("userShippingList", user.getUserShippingList());
+			model.addAttribute("orderList", user.getOrderList());
 			
 
 			UserShipping userShipping = new UserShipping();

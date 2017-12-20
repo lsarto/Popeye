@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="common/header :: common-header" />
+
+<body>
+
+	<div th:fragment="footer">
+		<footer id="footer">
+			<div class="container">
+				<div class="col-md-3 col-sm-6">
+					<h4>Chi siamo</h4>
+
+					<p>Pellentesque habitant morbi tristique senectus et netus et
+						malesuada fames ac turpis egestas.</p>
+
+
+					<hr class="hidden-md hidden-lg hidden-sm">
+
+				</div>
+				<!-- /.col-md-3 -->
+
+				<div class="col-md-3 col-sm-6">
+
+					<h4>Informazioni</h4>
+
+					<div class="blog-entries">
+						<div class="item same-height-row clearfix">
+							<div class="name same-height-always">
+								<h5>
+									<a href="#">> Chi siamo</a>
+								</h5>
+							</div>
+						</div>
+
+						<div class="item same-height-row clearfix">
+							<div class="name same-height-always">
+								<h5>
+									<a href="#">> Info spedizioni</a>
+								</h5>
+							</div>
+						</div>
+
+						<div class="item same-height-row clearfix">
+							<div class="name same-height-always">
+								<h5>
+									<a href="#">> Privacy</a>
+								</h5>
+							</div>
+						</div>
+
+						<div class="item same-height-row clearfix">
+							<div class="name same-height-always">
+								<h5>
+									<a href="#">> Termini e condizioni</a>
+								</h5>
+							</div>
+						</div>
+
+						<div class="item same-height-row clearfix">
+							<div class="name same-height-always">
+								<h5>
+									<a href="#">> Contattaci</a>
+								</h5>
+							</div>
+						</div>
+
+						<div class="item same-height-row clearfix">
+							<div class="name same-height-always">
+								<h5>
+									<a href="#">> Home</a>
+								</h5>
+							</div>
+						</div>
+					</div>
+
+					<hr class="hidden-md hidden-lg">
+
+				</div>
+				<!-- /.col-md-3 -->
+
+				<div class="col-md-3 col-sm-6">
+
+					<h4>Contatti</h4>
+
+					<p>
+						<strong>Universal Ltd.</strong> <br>13/25 New Avenue <br>Newtown
+						upon River <br>45Y 73J <br>England <br> <strong>Great
+							Britain</strong>
+					</p>
+
+					<a th:href="@{/contact}" class="btn btn-small btn-template-main">Vai
+						alla pagina contatti</a>
+
+					<hr class="hidden-md hidden-lg hidden-sm">
+
+				</div>
+				<!-- /.col-md-3 -->
+
+
+
+				<div class="col-md-3 col-sm-6">
+
+					<h4>Social</h4>
+
+					<div class="social">
+						<a class="external facebook" data-animate-hover="pulse" href="#"
+							style="color: #38a7bb;"><i class="fa fa-facebook"></i></a> <a
+							class="external gplus" data-animate-hover="pulse" href="#"
+							style="color: #38a7bb;"><i class="fa fa-google-plus"></i></a> <a
+							class="external twitter" data-animate-hover="pulse" href="#"
+							style="color: #38a7bb;"><i class="fa fa-twitter"></i></a> <a
+							class="email" data-animate-hover="pulse" href="#"
+							style="color: #38a7bb;"><i class="fa fa-envelope"></i></a>
+					</div>
+
+				</div>
+				<!-- /.col-md-3 -->
+			</div>
+			<!-- /.container -->
+		</footer>
+		<!-- /#footer -->
+		<!-- *** COPYRIGHT ***
+_________________________________________________________ -->
+
+		<div id="copyright">
+			<div class="container">
+				<div class="col-md-12">
+					<p class="pull-left">&copy; 2015. Your company / name goes here</p>
+					<p class="pull-right">
+						Template by <a href="https://bootstrapious.com">Bootstrapious</a>
+						& <a href="https://remoteplease.com">Remote Please</a>
+						<!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
+					</p>
+
+				</div>
+			</div>
+		</div>
+		<!-- /#copyright -->
+
+		<!-- *** COPYRIGHT END *** -->
+
+	</div>
+	
+	<!-- #### JAVASCRIPT FILES ### -->
+
+	<div th:replace="common/header :: body-bottom-scripts"></div>
+</body>
+</html>
