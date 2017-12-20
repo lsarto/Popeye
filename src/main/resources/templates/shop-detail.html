@@ -14,15 +14,14 @@
 				<div class="row">
 					<div class="col-md-7">
 						<h1>
-							<span th:text="${cigarette.name}"></span>
+							<span th:text="${product.name}"></span>
 						</h1>
 					</div>
 					<div class="col-md-5">
 						<ul class="breadcrumb">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="shop-category.html">Ladies</a></li>
-							<li><a href="shop-category.html">Tops</a></li>
-							<li>White Blouse Armani</li>
+							<li><a th:href="@{/}">Home</a></li>
+							<li><a th:href="@{/shop-category}">Negozio</a></li>
+							<li th:text="${product.name}"></li>
 						</ul>
 
 					</div>
@@ -39,32 +38,21 @@
 		    _________________________________________________________ -->
 
 					<div class="col-md-9">
-
-						<p class="lead">Built purse maids cease her ham new seven
-							among and. Pulled coming wooded tended it answer remain me be. So
-							landlord by we unlocked sensible it. Fat cannot use denied excuse
-							son law. Wisdom happen suffer common the appear ham beauty her
-							had. Or belonging zealously existence as by resources.</p>
-						<p class="goToDescription">
-							<a href="#details" class="scroll-to text-uppercase">Scroll to
-								product details, material & care and sizing</a>
-						</p>
-
 						<div class="row" id="productMain">
 							<div class="col-sm-6">
 								<div id="mainImage">
 									<img
-										th:src="#{adminPath}+@{/image/cigarette/}+${cigarette.id}+'-2.png'"
+										th:src="#{adminPath}+@{/image/product/}+${product.id}+'-2.png'"
 										alt="" class="img-responsive">
 								</div>
 
-								<div th:if="${cigarette.sale}" class="ribbon sale">
+								<div th:if="${product.sale}" class="ribbon sale">
 									<div class="theribbon">SALE</div>
 									<div class="ribbon-background"></div>
 								</div>
 								<!-- /.ribbon -->
 
-								<div th:if="${cigarette.newProduct}" class="ribbon new">
+								<div th:if="${product.newProduct}" class="ribbon new">
 									<div class="theribbon">NEW</div>
 									<div class="ribbon-background"></div>
 								</div>
@@ -75,34 +63,29 @@
 								<div class="box">
 
 									<form th:action="@{/shoppingCart/addItem}" method="post">
-										<input hidden="hidden" th:field="*{cigarette.id}" />
+										<input hidden="hidden" th:field="*{product.id}" />
 
 										<div class="sizes">
 
-											<h3 th:if="*{cigarette.inStockNumber&lt;=0}"
+											<h3 th:if="*{product.inStockNumber&lt;=0}"
 												style="color: red">Non Disponibile</h3>
 
-											<h3 th:if="*{cigarette.inStockNumber!=0}">Quantit&agrave;
+											<h3 th:if="*{product.inStockNumber!=0}">Quantit&agrave;
 												disponibile</h3>
-											<h2 th:if="*{cigarette.inStockNumber!=0}" class="text">
-												<span th:text="${cigarette.inStockNumber}"></span>
+											<h2 th:if="*{product.inStockNumber!=0}" class="text">
+												<span th:text="${product.inStockNumber}"></span>
 											</h2>
 
 										</div>
 
 										<p class="price">
 											$<span
-												th:text="${#strings.abbreviate(cigarette.ourPrice, 500)}"></span>
+												th:text="${#strings.abbreviate(product.ourPrice, 500)}"></span>
 										</p>
 
 										<p class="text-center">
-											<button type="submit" th:classappend="*{cigarette.inStockNumber&lt;=0}? 'disabled'" class="btn btn-template-main">
+											<button type="submit" th:classappend="*{product.inStockNumber&lt;=0}? 'disabled'" class="btn btn-template-main">
 												<i class="fa fa-shopping-cart"></i> Aggiungi al carrello
-											</button>
-											<button type="submit" class="btn btn-default"
-												data-toggle="tooltip" data-placement="top"
-												title="Add to wishlist">
-												<i class="fa fa-heart-o"></i>
 											</button>
 										</p>
 
@@ -112,25 +95,25 @@
 								<div class="row" id="thumbs">
 									<div class="col-xs-4">
 										<a
-											th:href="#{adminPath}+@{/image/cigarette/}+${cigarette.id}+'-2.png'"
+											th:href="#{adminPath}+@{/image/product/}+${product.id}+'-2.png'"
 											class="thumb"> <img
-											th:src="#{adminPath}+@{/image/cigarette/}+${cigarette.id}+'-2.png'"
+											th:src="#{adminPath}+@{/image/product/}+${product.id}+'-2.png'"
 											alt="" class="img-responsive">
 										</a>
 									</div>
 									<div class="col-xs-4">
 										<a
-											th:href="#{adminPath}+@{/image/cigarette/}+${cigarette.id}+'-3.png'"
+											th:href="#{adminPath}+@{/image/product/}+${product.id}+'-3.png'"
 											class="thumb"> <img
-											th:src="#{adminPath}+@{/image/cigarette/}+${cigarette.id}+'-3.png'"
+											th:src="#{adminPath}+@{/image/product/}+${product.id}+'-3.png'"
 											alt="" class="img-responsive">
 										</a>
 									</div>
 									<div class="col-xs-4">
 										<a
-											th:href="#{adminPath}+@{/image/cigarette/}+${cigarette.id}+'-4.png'"
+											th:href="#{adminPath}+@{/image/product/}+${product.id}+'-4.png'"
 											class="thumb"> <img
-											th:src="#{adminPath}+@{/image/cigarette/}+${cigarette.id}+'-4.png'"
+											th:src="#{adminPath}+@{/image/product/}+${product.id}+'-4.png'"
 											alt="" class="img-responsive">
 										</a>
 									</div>
@@ -143,155 +126,12 @@
 						<div class="box" id="details">
 							<p>
 							<h4>Descrizione Prodotto</h4>
-							<p th:utext="${cigarette.description}"></p>
-							<h4>Modello</h4>
-							<p th:text="${cigarette.model}"></p>
-							<h4>Marca</h4>
-							<p th:text="${cigarette.brand}"></p>
-							<h4>Tipo di soffio</h4>
-							<p th:text="${cigarette.typeOfPuff}"></p>
-							<h4>Tecnologia</h4>
-							<p th:text="${cigarette.technology}"></p>
-							<h4>Sub Ohm</h4>
-							<p th:text="${cigarette.subOhm}"></p>
-							<h4>Categoria</h4>
-							<p th:text="${cigarette.category}"></p>
-
-
-							<blockquote>
-								<p>
-									<em>Define style this season with Armani's new range of
-										trendy tops, crafted with intricate details. Create a chic
-										statement look by teaming this lace number with skinny jeans
-										and pumps.</em>
-								</p>
-							</blockquote>
-						</div>
-
-						<div class="box social" id="product-social">
-							<h4>Show it to your friends</h4>
-							<p>
-								<a href="#" class="external facebook" data-animate-hover="pulse"><i
-									class="fa fa-facebook"></i></a> <a href="#" class="external gplus"
-									data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
-								<a href="#" class="external twitter" data-animate-hover="pulse"><i
-									class="fa fa-twitter"></i></a> <a href="#" class="email"
-									data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
-							</p>
-						</div>
-
-						<div class="row">
-							<div class="col-md-3 col-sm-6">
-								<div class="box text-uppercase">
-									<h3>You may also like these products</h3>
-								</div>
+							<p th:utext="${product.description}"></p>
+							<div th:each="attribute: ${product.productAttributes}">
+								<h4 th:text="${attribute.name}"></h4>
+								<p th:text="${attribute.value}"></p>
 							</div>
-
-							<div class="col-md-3 col-sm-6">
-								<div class="product">
-									<div class="image">
-										<a href="#"> <img src="image/product2.jpg" alt=""
-											class="img-responsive image1">
-										</a>
-									</div>
-									<div class="text">
-										<h3>Fur coat</h3>
-										<p class="price">$143</p>
-
-									</div>
-								</div>
-								<!-- /.product -->
-							</div>
-
-							<div class="col-md-3 col-sm-6">
-								<div class="product">
-									<div class="image">
-										<a href="#"> <img src="image/product3.jpg" alt=""
-											class="img-responsive image1">
-										</a>
-									</div>
-									<div class="text">
-										<h3>Fur coat</h3>
-										<p class="price">$143</p>
-									</div>
-								</div>
-								<!-- /.product -->
-							</div>
-
-							<div class="col-md-3 col-sm-6">
-								<div class="product">
-									<div class="image">
-										<a href="#"> <img src="image/product1.jpg" alt=""
-											class="img-responsive image1">
-										</a>
-									</div>
-									<div class="text">
-										<h3>Fur coat</h3>
-										<p class="price">$143</p>
-									</div>
-								</div>
-								<!-- /.product -->
-							</div>
-
-						</div>
-
-						<div class="row">
-							<div class="col-md-3 col-sm-6">
-								<div class="box text-uppercase">
-									<h3>Products viewed recently</h3>
-								</div>
-							</div>
-
-
-							<div class="col-md-3 col-sm-6">
-								<div class="product">
-									<div class="image">
-										<a href="#"> <img src="image/product3.jpg" alt=""
-											class="img-responsive image1">
-										</a>
-									</div>
-									<div class="text">
-										<h3>Fur coat</h3>
-										<p class="price">$143</p>
-									</div>
-								</div>
-								<!-- /.product -->
-							</div>
-
-							<div class="col-md-3 col-sm-6">
-								<div class="product">
-									<div class="image">
-										<a href="#"> <img src="image/product1.jpg" alt=""
-											class="img-responsive image1">
-										</a>
-									</div>
-									<div class="text">
-										<h3>Fur coat</h3>
-										<p class="price">$143</p>
-									</div>
-								</div>
-								<!-- /.product -->
-							</div>
-
-
-							<div class="col-md-3 col-sm-6">
-								<div class="product">
-									<div class="image">
-										<a href="#"> <img src="image/product2.jpg" alt=""
-											class="img-responsive image1">
-										</a>
-									</div>
-									<div class="text">
-										<h3>Fur coat</h3>
-										<p class="price">$143</p>
-
-									</div>
-								</div>
-								<!-- /.product -->
-							</div>
-
-						</div>
-
+						</div>					
 					</div>
 					<!-- /.col-md-9 -->
 
@@ -309,26 +149,23 @@
 						<div class="panel panel-default sidebar-menu">
 
 							<div class="panel-heading">
-								<h3 class="panel-title">Categorie</h3>
+								<h3 class="panel-title">Filtra</h3>
 							</div>
 
 							<div class="panel-body">
-								<ul class="nav nav-pills nav-stacked category-menu">
-									<li class="active"><a href="#">Sig. Elettroniche <span
-											class="badge pull-right">42</span>
-									</a>
+								<ul th:each="type: ${session.types}" class="nav nav-pills nav-stacked category-menu">
+									<li class="active"><a href="#" th:text="${type.name}"></a>
 										<ul>
 											<li th:classappend="${activeAll}? 'active btn-default'"><a
-												th:href="@{/shop-category(category='all')}">All</a></li>
-											<li th:classappend="${activeAspire}? 'active btn-default'"><a
-												th:href="@{/searchByCategory(category='Aspire')}">Aspire</a></li>
-											<li th:classappend="${activeInnokin}? 'active btn-default'"><a
-												th:href="@{/searchByCategory(category='Innokin')}">Innokin</a></li>
-											<li th:classappend="${activeSmok}? 'active btn-default'"><a
-												th:href="@{/searchByCategory(category='Smok')}">Smok</a></li>
-											<li th:classappend="${activeXtar}? 'active btn-default'"><a
-												th:href="@{/searchByCategory(category='Xtar')}">Xtar</a></li>
-										</ul></li>
+												th:href="@{/searchByCategory(category='all'+${type.name})}">All</a></li>
+											<li th:each="category: ${type.categories}" 
+												th:classappend="(${activeCategory}==${category.name})? 'active btn-default'">
+												<a th:href="@{/searchByCategory(category=${category.name})}" 
+													th:inline="text">[[${category.name}]]
+													<span class="badge pull-right" th:text="${category.qty}"></span></a>
+											</li>
+										</ul>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -348,199 +185,12 @@
 		</div>
 		<!-- /#content -->
 
-
-		<!-- *** GET IT ***
+<!-- *** FOOTER ***
 _________________________________________________________ -->
 
-		<div id="get-it">
-			<div class="container">
-				<div class="col-md-8 col-sm-12">
-					<h3>Do you want cool website like this one?</h3>
-				</div>
-				<div class="col-md-4 col-sm-12">
-					<a href="#" class="btn btn-template-transparent-primary">Buy
-						this template now</a>
-				</div>
-			</div>
-		</div>
-
-
-		<!-- *** GET IT END *** -->
-
-
-		<!-- *** FOOTER ***
-_________________________________________________________ -->
-
-		<footer id="footer">
-			<div class="container">
-				<div class="col-md-3 col-sm-6">
-					<h4>About us</h4>
-
-					<p>Pellentesque habitant morbi tristique senectus et netus et
-						malesuada fames ac turpis egestas.</p>
-
-					<hr>
-
-					<h4>Join our monthly newsletter</h4>
-
-					<form>
-						<div class="input-group">
-
-							<input type="text" class="form-control"> <span
-								class="input-group-btn">
-
-								<button class="btn btn-default" type="button">
-									<i class="fa fa-send"></i>
-								</button>
-
-							</span>
-
-						</div>
-						<!-- /input-group -->
-					</form>
-
-					<hr class="hidden-md hidden-lg hidden-sm">
-
-				</div>
-				<!-- /.col-md-3 -->
-
-				<div class="col-md-3 col-sm-6">
-
-					<h4>Blog</h4>
-
-					<div class="blog-entries">
-						<div class="item same-height-row clearfix">
-							<div class="image same-height-always">
-								<a href="#"> <img class="img-responsive"
-									src="image/detailsquare.jpg" alt="">
-								</a>
-							</div>
-							<div class="name same-height-always">
-								<h5>
-									<a href="#">Blog post name</a>
-								</h5>
-							</div>
-						</div>
-
-						<div class="item same-height-row clearfix">
-							<div class="image same-height-always">
-								<a href="#"> <img class="img-responsive"
-									src="image/detailsquare.jpg" alt="">
-								</a>
-							</div>
-							<div class="name same-height-always">
-								<h5>
-									<a href="#">Blog post name</a>
-								</h5>
-							</div>
-						</div>
-
-						<div class="item same-height-row clearfix">
-							<div class="image same-height-always">
-								<a href="#"> <img class="img-responsive"
-									src="image/detailsquare.jpg" alt="">
-								</a>
-							</div>
-							<div class="name same-height-always">
-								<h5>
-									<a href="#">Very very long blog post name</a>
-								</h5>
-							</div>
-						</div>
-					</div>
-
-					<hr class="hidden-md hidden-lg">
-
-				</div>
-				<!-- /.col-md-3 -->
-
-				<div class="col-md-3 col-sm-6">
-
-					<h4>Contact</h4>
-
-					<p>
-						<strong>Universal Ltd.</strong> <br>13/25 New Avenue <br>Newtown
-						upon River <br>45Y 73J <br>England <br> <strong>Great
-							Britain</strong>
-					</p>
-
-					<a href="contact.html" class="btn btn-small btn-template-main">Go
-						to contact page</a>
-
-					<hr class="hidden-md hidden-lg hidden-sm">
-
-				</div>
-				<!-- /.col-md-3 -->
-
-
-
-				<div class="col-md-3 col-sm-6">
-
-					<h4>Photostream</h4>
-
-					<div class="photostream">
-						<div>
-							<a href="#"> <img src="image/detailsquare.jpg"
-								class="img-responsive" alt="#">
-							</a>
-						</div>
-						<div>
-							<a href="#"> <img src="image/detailsquare2.jpg"
-								class="img-responsive" alt="#">
-							</a>
-						</div>
-						<div>
-							<a href="#"> <img src="image/detailsquare3.jpg"
-								class="img-responsive" alt="#">
-							</a>
-						</div>
-						<div>
-							<a href="#"> <img src="image/detailsquare3.jpg"
-								class="img-responsive" alt="#">
-							</a>
-						</div>
-						<div>
-							<a href="#"> <img src="image/detailsquare2.jpg"
-								class="img-responsive" alt="#">
-							</a>
-						</div>
-						<div>
-							<a href="#"> <img src="image/detailsquare.jpg"
-								class="img-responsive" alt="#">
-							</a>
-						</div>
-					</div>
-
-				</div>
-				<!-- /.col-md-3 -->
-			</div>
-			<!-- /.container -->
-		</footer>
-		<!-- /#footer -->
-
-		<!-- *** FOOTER END *** -->
-
-		<!-- *** COPYRIGHT ***
-_________________________________________________________ -->
-
-		<div id="copyright">
-			<div class="container">
-				<div class="col-md-12">
-					<p class="pull-left">&copy; 2015. Your company / name goes here</p>
-					<p class="pull-right">
-						Template by <a href="https://bootstrapious.com">Bootstrapious</a>
-						& <a href="https://remoteplease.com">Remote Please</a>
-						<!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
-					</p>
-
-				</div>
-			</div>
-		</div>
-		<!-- /#copyright -->
-
-		<!-- *** COPYRIGHT END *** -->
-
-
+        <div th:replace="common/footer :: footer">
+        </div>
+<!-- *** FOOTER END *** -->
 
 	</div>
 	<!-- /#all -->

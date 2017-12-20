@@ -74,9 +74,9 @@ table, th, td {
 		</thead>
 		<tbody>
 			<tr th:each="cartItem : ${cartItemList}">
-				<td><span data-th-text="${cartItem.cigarette.name}"></span></td>
+				<td><span data-th-text="${cartItem.product.name}"></span></td>
 				<td class="text-center"
-					data-th-text="${cartItem.cigarette.ourPrice}"></td>
+					data-th-text="${cartItem.product.ourPrice}"></td>
 				<td class="text-center" data-th-text="${cartItem.qty}"></td>
 				<td class="text-right" data-th-text="${cartItem.subtotal}"></td>
 			</tr>

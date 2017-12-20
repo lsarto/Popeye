@@ -20,7 +20,7 @@
 					</div>
 					<div class="col-md-5">
 						<ul class="breadcrumb">
-							<li><a href="index.html">Home</a></li>
+							<li><a th:href="@{/}">Home</a></li>
 							<li>Checkout</li>
 						</ul>
 
@@ -46,14 +46,14 @@
 								<div class="panel-body">
 									<div class="col-md-12 clearfix" id="checkout1">
 										<ul class="nav nav-pills nav-justified">
-											<li class="active"><a href="#"><i
+											<li class="active"><a href="javascript:void(0);"><i
 													class="fa fa-map-marker"></i><br>Indirizzo</a></li>
-											<li class="disabled"><a href="#"><i
+											<li class="disabled"><a href="javascript:void(0);"><i
 													class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
-											<li class="disabled"><a href="#"><i
+											<li class="disabled"><a href="javascript:void(0);"><i
 													class="glyphicon glyphicon-euro"></i><br>Metodo di
 													pagamento</a></li>
-											<li class="disabled"><a href="#"><i
+											<li class="disabled"><a href="javascript:void(0);"><i
 													class="fa fa-eye"></i><br>Resoconto ordine</a></li>
 										</ul>
 										<div class="form-group">
@@ -78,44 +78,44 @@
 											</tbody>
 										</table>
 										<div class="form-group">
-											<label for="shippingName">* Name</label> <input type="text"
+											<label for="shippingName">* Nome</label> <input type="text"
 												class="form-control" id="shippingName"
-												placeholder="Receiver Name" name="shippingAddressName"
+												placeholder="Nome Ricevente" name="shippingAddressName"
 												required="required"
 												th:value="${shippingAddress.shippingAddressName}" />
 										</div>
 										<div class="form-group">
 											<label for="shippingAddress">* Street Address</label> <input
 												type="text" class="form-control" id="shippingAddress1"
-												placeholder="Street Address 1" name="shippingAddressStreet1"
+												placeholder="Indirizzo Spedizione 1" name="shippingAddressStreet1"
 												required="required"
 												th:value="${shippingAddress.shippingAddressStreet1}" />
 										</div>
 										<div class="form-group">
 											<input type="text" class="form-control"
-												placeholder="Street Address 2" name="shippingAddressStreet2"
+												placeholder="Indirizzo Spedizione 2" name="shippingAddressStreet2"
 												th:value="${shippingAddress.shippingAddressStreet2}" />
 										</div>
 
 										<div class="row">
 											<div class="col-xs-4">
 												<div class="form-group">
-													<label for="shippingCity">* City</label> <input type="text"
+													<label for="shippingCity">* Citt&agrave;</label> <input type="text"
 														class="form-control" id="shippingCity"
-														placeholder="Shipping City" name="shippingAddressCity"
+														placeholder="Citt&agrave; Spedizione" name="shippingAddressCity"
 														required="required"
 														th:value="${shippingAddress.shippingAddressCity}" />
 												</div>
 											</div>
 											<div class="col-xs-4">
 												<div class="form-group">
-													<label for="shippingState">* State</label> <select
+													<label for="shippingState">* Provincia</label> <select
 														id="shippingState" class="form-control"
 														th:name="shippingAddressState"
 														th:value="${shippingAddress.shippingAddressState}"
 														required="required">
-														<option value="" disabled="disabled">Please
-															select an option</option>
+														<option value="" disabled="disabled">Per favore
+														sleziona un'opzione</option>
 														<option th:each="state : ${stateList}" th:text="${state}"
 															th:selected="(${shippingAddress.shippingAddressState}==${state})"></option>
 													</select>
@@ -123,9 +123,9 @@
 											</div>
 											<div class="col-xs-4">
 												<div class="form-group">
-													<label for="shippingZipcode">* Zipcode</label> <input
+													<label for="shippingZipcode">* Codice Fiscale</label> <input
 														type="text" class="form-control" id="shippingZipcode"
-														placeholder="Shipping Zipcode"
+														placeholder="Codice Fiscale Ricevente"
 														th:name="shippingAddressZipcode" required="required"
 														th:value="${shippingAddress.shippingAddressZipcode}" />
 												</div>
@@ -144,22 +144,22 @@
 										</div>
 
 										<div class="form-group">
-											<label for="billingName">* Name</label> <input type="text"
+											<label for="billingName">* Nome</label> <input type="text"
 												class="form-control billingAddress" id="billingName"
 												placeholder="Receiver Name" th:name="billingAddressName"
 												required="required"
 												th:value="${billingAddress.billingAddressName}" />
 										</div>
 										<div class="form-group">
-											<label for="billingAddress">* Street Address</label> <input
+											<label for="billingAddress">* Indirizzo</label> <input
 												type="text" class="form-control billingAddress"
-												id="billingAddress1" placeholder="Street Address 1"
+												id="billingAddress1" placeholder="Indirizzo 1"
 												th:name="billingAddressStreet1" required="required"
 												th:value="${billingAddress.billingAddressStreet1}" />
 										</div>
 										<div class="form-group">
 											<input type="text" class="form-control billingAddress"
-												id="billingAddress2" placeholder="Street Address 2"
+												id="billingAddress2" placeholder="Indirizzo 2"
 												th:name="billingAddressStreet2"
 												th:value="${billingAddress.billingAddressStreet2}" />
 										</div>
@@ -167,22 +167,22 @@
 										<div class="row">
 											<div class="col-xs-4">
 												<div class="form-group">
-													<label for="billingCity">* City</label> <input type="text"
+													<label for="billingCity">* Citt&agrave;</label> <input type="text"
 														class="form-control billingAddress" id="billingCity"
-														placeholder="Billing city" th:name="billingAddressCity"
+														placeholder="Citt&agrave; Fatturazione" th:name="billingAddressCity"
 														required="required"
 														th:value="${billingAddress.billingAddressCity}" />
 												</div>
 											</div>
 											<div class="col-xs-4">
 												<div class="form-group">
-													<label for="billingState">* State</label> <select
+													<label for="billingState">* Provincia</label> <select
 														id="billingState" class="form-control billingAddress"
 														th:name="billingAddressState"
 														th:value="${billingAddress.billingAddressState}"
 														required="required">
-														<option value="" disabled="disabled">Please
-															select an option</option>
+														<option value="" disabled="disabled">Per favore
+														 seleziona un'opzione</option>
 														<option th:each="state : ${stateList}" th:text="${state}"
 															th:selected="(${billingAddress.billingAddressState}==${state})"></option>
 													</select>
@@ -190,9 +190,9 @@
 											</div>
 											<div class="col-xs-4">
 												<div class="form-group">
-													<label for="billingZipcode">* Zipcode</label> <input
+													<label for="billingZipcode">* Codice Fiscale</label> <input
 														type="text" class="form-control billingAddress"
-														id="billingZipcode" placeholder="Billing Zipcode"
+														id="billingZipcode" placeholder="Codice Fiscale Fatturazione"
 														th:name="billingAddressZipcode" required="required"
 														th:value="${billingAddress.billingAddressZipcode}" />
 												</div>
@@ -205,13 +205,13 @@
 										<div class="pull-left">
 											<button th:href="@{/shoppingCart/cart}"
 												class="btn btn-default">
-												<i class="fa fa-chevron-left"></i>Back to basket
+												<i class="fa fa-chevron-left"></i>Torna al Carrello
 											</button>
 										</div>
 										<div class="pull-right">
 											<a class="btn btn-template-main" type="button"
 												data-toggle="collapse" data-target=".coll-12"
-												href="#deliveryMethod"> Continue to Delivery Method<i
+												href="javascript:void(0);"> Vai al metodo di Consegna<i
 												class="fa fa-chevron-right"></i>
 											</a>
 										</div>
@@ -227,11 +227,11 @@
 								<div class="panel-body">
 									<div class="col-md-12 clearfix" id="checkout2">
 										<ul class="nav nav-pills nav-justified">
-											<li class=""><a href="#address" data-toggle="collapse"
+											<li class=""><a href="javascript:void(0);" data-toggle="collapse"
 												data-target=".coll-12"><i class="fa fa-map-marker"></i><br>Indirizzo</a></li>
-											<li class="active"><a href="#"><i
+											<li class="active"><a href="javascript:void(0);"><i
 													class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
-											<li class="disabled"><a href="#"><i
+											<li class="disabled"><a href="javascript:void(0);"><i
 													class="glyphicon glyphicon-euro"></i><br>Metodo di
 													pagamento</a></li>
 											<li class="disabled"><a href="#"><i
@@ -275,14 +275,14 @@
 											<div class="pull-left">
 												<a class="btn btn-default" type="button"
 													data-toggle="collapse" data-target=".coll-12"
-													href="#address"> <i class="fa fa-chevron-left"></i>Back
-													to Addresses
+													href="javascript:void(0);"> <i class="fa fa-chevron-left"></i>Torna
+													agli Indirizzi
 												</a>
 											</div>
 											<div class="pull-right">
 												<a class="btn btn-template-main" type="button"
 													data-toggle="collapse" data-target=".coll-23"
-													href="#paymentMethod"> Continue to Payment Method<i
+													href="javascript:void(0);"> Vai al Metodo di Pagamento<i
 													class="fa fa-chevron-right"></i>
 												</a>
 											</div>
@@ -298,12 +298,12 @@
 								id="paymentMethod">
 								<div class="panel-body">
 									<ul class="nav nav-pills nav-justified">
-										<li class=""><a href="#address" data-toggle="collapse"
+										<li class=""><a href="javascript:void(0);" data-toggle="collapse"
 											data-target=".coll-13"><i class="fa fa-map-marker"></i><br>Indirizzo</a></li>
-										<li class=""><a href="#deliveryMethod"
+										<li class=""><a href="javascript:void(0);"
 											data-toggle="collapse" data-target=".coll-23"><i
 												class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
-										<li class="active"><a href="#"><i
+										<li class="active"><a href="javascript:void(0);"><i
 												class="glyphicon glyphicon-euro"></i><br>Metodo di
 												pagamento</a></li>
 										<li class="disabled"><a href="#"><i class="fa fa-eye"></i><br>Resoconto
@@ -335,14 +335,14 @@
 										<div class="pull-left">
 											<a class="btn btn-default" type="button"
 												data-toggle="collapse" data-target=".coll-23"
-												href="#deliveryMethod"> <i class="fa fa-chevron-left"></i>Back
-												to Delivery Method
+												href="javascript:void(0);"> <i class="fa fa-chevron-left"></i>Torna
+												al Metodo di Spedizione
 											</a>
 										</div>
 										<div class="pull-right">
 											<a class="btn btn-template-main" type="button"
 												data-toggle="collapse" data-target=".coll-34"
-												href="#orderReview"> Continue to Order Review<i
+												href="javascript:void(0);"> Vai al Resoconto dell'Ordine<i
 												class="fa fa-chevron-right"></i>
 											</a>
 										</div>
@@ -357,16 +357,16 @@
 								id="orderReview">
 								<div class="col-md-12 clearfix" id="basket">
 									<ul class="nav nav-pills nav-justified">
-										<li class=""><a href="#address" data-toggle="collapse"
+										<li class=""><a href="javascript:void(0);" data-toggle="collapse"
 											data-target=".coll-14"><i class="fa fa-map-marker"></i><br>Indirizzo</a></li>
-										<li class=""><a href="#deliveryMethod"
+										<li class=""><a href="javascript:void(0);"
 											data-toggle="collapse" data-target=".coll-24"><i
 												class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
-										<li class=""><a href="#paymentMethod"
+										<li class=""><a href="javascript:void(0);"
 											data-toggle="collapse" data-target=".coll-34"><i
 												class="glyphicon glyphicon-euro"></i><br>Metodo di
 												pagamento</a></li>
-										<li class="active"><a href="#"><i class="fa fa-eye"></i><br>Resoconto
+										<li class="active"><a href="javascript:void(0);"><i class="fa fa-eye"></i><br>Resoconto
 												Ordine</a></li>
 									</ul>
 									<div class="table-responsive">
@@ -383,21 +383,21 @@
 											<tbody th:each="cartItem : ${cartItemList}">
 												<tr>
 													<td><a
-														th:href="@{shop-detail(id=${cartItem.cigarette.id})}">
+														th:href="@{shop-detail(id=${cartItem.product.id})}">
 															<img
-															th:src="#{adminPath}+@{/image/cigarette/}+
-														${cartItem.cigarette.id}+'-1.png'">
+															th:src="#{adminPath}+@{/image/product/}+
+														${cartItem.product.id}+'-1.png'">
 													</a></td>
 													<td><a
-														th:href="@{/shop-detail?id=}+${cartItem.cigarette.id}"><span
-															th:text="${cartItem.cigarette.name}"></span></a></td>
+														th:href="@{/shop-detail?id=}+${cartItem.product.id}"><span
+															th:text="${cartItem.product.name}"></span></a></td>
 													<td><input type="number" class="form-control"
 														th:id="${cartItem.id}" th:name="qty" th:disabled="true"
 														th:value="${cartItem.qty}" /></td>
-													<td>$ <span th:text="${cartItem.cigarette.listPrice}"></span></td>
-													<td>$ <span th:text="${cartItem.cigarette.ourPrice}"></span></td>
+													<td>$ <span th:text="${cartItem.product.listPrice}"></span></td>
+													<td>$ <span th:text="${cartItem.product.ourPrice}"></span></td>
 													<td>$ <span
-														th:text="${cartItem.qty * cartItem.cigarette.ourPrice}"></span></td>
+														th:text="${cartItem.qty * cartItem.product.ourPrice}"></span></td>
 												</tr>
 											</tbody>
 
@@ -415,13 +415,13 @@
 									<div class="pull-left">
 										<a class="btn btn-default" type="button"
 											data-toggle="collapse" data-target=".coll-34"
-											href="#paymentMethod"> <i class="fa fa-chevron-left"></i>Back
-											to Payment Method
+											href="javascript:void(0);"> <i class="fa fa-chevron-left"></i>Torna 
+											al Metodo di Pagamento
 										</a>
 									</div>
 									<div class="pull-right form-group">
 										<button type="submit" class="btn btn-template-main">
-											Place an order<i class="fa fa-chevron-right"></i>
+											Effettua Ordine<i class="fa fa-chevron-right"></i>
 										</button>
 									</div>
 								</div>
@@ -453,182 +453,19 @@
 		<!-- /#content -->
 
 
-		<!-- *** GET IT ***
+<!-- *** FOOTER ***
 _________________________________________________________ -->
 
-		<div id="get-it">
-			<div class="container">
-				<div class="col-md-8 col-sm-12">
-					<h3>Do you want cool website like this one?</h3>
-				</div>
-				<div class="col-md-4 col-sm-12">
-					<a href="#" class="btn btn-template-transparent-primary">Buy
-						this template now</a>
-				</div>
-			</div>
-		</div>
-
-
-		<!-- *** GET IT END *** -->
-
-
-		<!-- *** FOOTER ***
-_________________________________________________________ -->
-
-		<footer id="footer">
-			<div class="container">
-				<div class="col-md-3 col-sm-6">
-					<h4>About us</h4>
-
-					<p>Pellentesque habitant morbi tristique senectus et netus et
-						malesuada fames ac turpis egestas.</p>
-
-					<hr>
-
-					<h4>Join our monthly newsletter</h4>
-
-					<form>
-						<div class="input-group">
-
-							<input type="text" class="form-control"> <span
-								class="input-group-btn">
-
-								<button class="btn btn-default" type="button">
-									<i class="fa fa-send"></i>
-								</button>
-
-							</span>
-
-						</div>
-						<!-- /input-group -->
-					</form>
-
-					<hr class="hidden-md hidden-lg hidden-sm">
-
-				</div>
-				<!-- /.col-md-3 -->
-
-
-				<div class="col-md-3 col-sm-6">
-
-					<h4>Blog</h4>
-
-					<div class="blog-entries">
-						<div class="item same-height-row clearfix">
-							<div class="image same-height-always">
-								<a href="#"> <img class="img-responsive"
-									src="img/detailsquare.jpg" alt="">
-								</a>
-							</div>
-							<div class="name same-height-always">
-								<h5>
-									<a href="#">Blog post name</a>
-								</h5>
-							</div>
-						</div>
-
-						<div class="item same-height-row clearfix">
-							<div class="image same-height-always">
-								<a href="#"> <img class="img-responsive"
-									src="img/detailsquare.jpg" alt="">
-								</a>
-							</div>
-							<div class="name same-height-always">
-								<h5>
-									<a href="#">Blog post name</a>
-								</h5>
-							</div>
-						</div>
-
-						<div class="item same-height-row clearfix">
-							<div class="image same-height-always">
-								<a href="#"> <img class="img-responsive"
-									src="img/detailsquare.jpg" alt="">
-								</a>
-							</div>
-							<div class="name same-height-always">
-								<h5>
-									<a href="#">Very very long blog post name</a>
-								</h5>
-							</div>
-						</div>
-					</div>
-
-					<hr class="hidden-md hidden-lg">
-
-				</div>
-				<!-- /.col-md-3 -->
-
-
-				<div class="col-md-3 col-sm-6">
-
-					<h4>Contact</h4>
-
-					<p>
-						<strong>Universal Ltd.</strong> <br>13/25 New Avenue <br>Newtown
-						upon River <br>45Y 73J <br>England <br> <strong>Great
-							Britain</strong>
-					</p>
-
-					<a href="contact.html" class="btn btn-small btn-template-main">Go
-						to contact page</a>
-
-					<hr class="hidden-md hidden-lg hidden-sm">
-
-				</div>
-				<!-- /.col-md-3 -->
-				<!-- /.col-md-3 -->
-			</div>
-			<!-- /.container -->
-		</footer>
-		<!-- /#footer -->
-
-		<!-- *** FOOTER END *** -->
-
-		<!-- *** COPYRIGHT ***
-_________________________________________________________ -->
-
-		<div id="copyright">
-			<div class="container">
-				<div class="col-md-12">
-					<p class="pull-left">&copy; 2015. Your company / name goes here</p>
-					<p class="pull-right">
-						Template by <a href="https://bootstrapious.com">Bootstrapious</a>
-						& <a href="https://remoteplease.com">Remote Please</a>with support
-						from <a href="https://kakusei.cz">Kakusei</a>
-						<!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
-					</p>
-
-				</div>
-			</div>
-		</div>
-		<!-- /#copyright -->
-
-		<!-- *** COPYRIGHT END *** -->
-
-
+        <div th:replace="common/footer :: footer">
+        </div>
+<!-- *** FOOTER END *** -->
 
 	</div>
 	<!-- /#all -->
 
 	<!-- #### JAVASCRIPT FILES ### -->
-	<script
-		src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="js/jquery-1.11.0.min.js"><\/script>')
-	</script>
-	<script
-		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-	<script src="js/jquery.cookie.js"></script>
-	<script src="js/waypoints.min.js"></script>
-	<script src="js/jquery.counterup.min.js"></script>
-	<script src="js/jquery.parallax-1.1.3.js"></script>
-	<script src="js/front.js"></script>
-	<script th:src="@{/js/scripts.js}"></script>
-
+	<div th:replace="common/header :: body-bottom-scripts"></div>
+	
 </body>
 
 </html>

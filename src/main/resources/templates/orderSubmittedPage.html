@@ -4,67 +4,93 @@
 <head th:replace="common/header :: common-header" />
 
 <body>
+	<div id="all">
 
-<div th:replace="common/header :: navbar"></div>
+		<div th:replace="common/header :: navbar"></div>
 
-	<div class="container">
-		<div class="row" style="margin-bottom: -100px;">
-			<div class="col-xs-8">
-				<h2 class="section-headline">
-					<span>User Account</span>
-				</h2>
+		<div id="heading-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<h1>Ordine Confermato</h1>
+					</div>
+					<div class="col-md-6">
+						<ul class="breadcrumb">
+							<li><a th:href="@{/}">Home</a></li>
+						</ul>
+
+					</div>
+				</div>
 			</div>
 		</div>
-		<hr
-			style="position: absolute; width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;" />
-		<img class="img-responsive" src="/image/wood.png"
-			style="margin-top: -75px;" />
 
-		<div class="row" style="margin-top: 10px;">
-			<div class="col-xs-12">
-				<div class="alert alert-success">
-					<h3>
-						<i class="fa fa-check" aria-hidden="true"
-							style="color: limegreen;"></i> Grazie per aver acquistato dal nostro sito, il tuo ordine &egrave stato confermato.
-					</h3>
-					<h4>
-						La data di consegna &egrave prevista per il giorno: <span
-							th:text="${estimatedDeliveryDate}"></span>
-					</h4>
+		<div id="content">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-8">
+						<h2 class="section-headline">
+							<span>Account Utente</span>
+						</h2>
+					</div>
 				</div>
 
-				<h3>Prodotti acquistati</h3>
-				<div class="row" th:each="cartItem : ${cartItemList}">
-					<hr />
-					<div class="col-xs-2"></div>
-					<div class="col-xs-2">
-
-						<a th:href="@{/shop-detail(id=${cartItem.cigarette.id})}"> <img
-							class="img-responsive shelf-cigarette"
-							th:src="#{adminPath}+@{/image/cigarette/}+${cartItem.cigarette.id}+'.png'"
-							style="width: 70px;" />
-						</a>
-					</div>
-					<div class="col-xs-6">
-						<div style="margin-left: 50px;">
-							<a th:href="@{/shop-detail?id=}+${cartItem.cigarette.id}"><h4
-									th:text="${cartItem.cigarette.name}"></h4></a>
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-xs-12">
+						<div class="alert alert-success">
+							<h3>
+								<i class="fa fa-check" aria-hidden="true"
+									style="color: limegreen;"></i> Grazie per aver acquistato dal nostro sito,
+									il tuo ordine &egrave; stato piazzato
+							</h3>
+							<h4>
+								La data di consegna stimata &egrave; <span
+									th:text="${estimatedDeliveryDate}"></span>
+							</h4>
 						</div>
-					</div>
 
-					<div class="col-xs-2">
-						<h5 style="color: #db3208; font-size: large;">
-							$<span th:text="${cartItem.cigarette.ourPrice}"
-								th:style="${cartItem.cigarette.inStockNumber}==0? 'text-decoration: line-through' : ''"></span>
-						</h5>
+						<h3>Lista prodotti</h3>
+						<div class="row" th:each="cartItem : ${cartItemList}">
+							<hr />
+							<div class="col-xs-2"></div>
+							<div class="col-xs-2">
+
+								<a th:href="@{/productDetail(id=${cartItem.product.id})}"> <img
+									class="img-responsive shelf-product"
+									th:src="#{adminPath}+@{/image/product/}+${cartItem.product.id}+'-1.png'"
+									style="width: 70px;" />
+								</a>
+							</div>
+							<div class="col-xs-6">
+								<div style="margin-left: 50px;">
+									<a th:href="@{/productDetail?id=}+${cartItem.product.id}"><h4
+											th:text="${cartItem.product.name}"></h4></a>
+								</div>
+							</div>
+
+							<div class="col-xs-2">
+								<h5 style="color: #db3208; font-size: large;">
+									$<span th:text="${cartItem.product.ourPrice}"
+										th:style="${cartItem.product.inStockNumber}==0? 'text-decoration: line-through' : ''"></span>
+								</h5>
+							</div>
+						</div>
+						<br>
 					</div>
 				</div>
 			</div>
+			<!-- end of container -->
 		</div>
+		<!-- end content -->
+
+		<!-- *** FOOTER ***
+_________________________________________________________ -->
+
+		<div th:replace="common/footer :: footer"></div>
+		<!-- *** FOOTER END *** -->
+
 	</div>
-	<!-- end of container -->
 
-
+	<!-- #### JAVASCRIPT FILES ### -->
 	<div th:replace="common/header :: body-bottom-scripts"></div>
 </body>
 </html>

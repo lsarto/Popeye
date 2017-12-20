@@ -84,102 +84,26 @@ $(document).ready(function() {
  * Qui di seguito definisco ajax-jquery per la ricerca asincrona delle categorie
  */
 
-$("#all-category").on("click", function(e) {
+$(".category-ajax").click(function(e) {
 	// evito che venga eseguito l'href dell'ancora
 	e.preventDefault();
+	var id = $(this).attr("id");
 
 	// ripulisco i prodotti caricati precedentemente
 	$("#shop-category-call").empty();
 	$("#div-elementi-categoria").empty();
-
+	
 	// rendo attivo il bottone della categoria selezionata, e non attivo
 	// tutti gli altri
-	$("#all-list-item").addClass("active btn-default");
-	$("#aspire-list-item").removeClass("active");
-	$("#innokin-list-item").removeClass("active");
-	$("#smok-list-item").removeClass("active");
-	$("#xtar-list-item").removeClass("active");
+	$(".category-ajax").each(function(i, obj) {
+		if(id==$(this).attr("id")){
+			$("#"+id+"-list-item").addClass("active btn-default");
+		} else {
+			$("#"+$(this).attr("id")+"-list-item").removeClass("active");
+		}
+	});
 
 	// chiamata ajax-jquery
-	$("#div-elementi-categoria").load("/searchByCategoryAjax?category=all");
-});
+	$("#div-elementi-categoria").load("/searchByCategoryAjax?category="+id);
 
-$("#aspire").on("click", function(e) {
-	// evito che venga eseguito l'href dell'ancora
-	e.preventDefault();
-
-	// ripulisco i prodotti caricati precedentemente
-	$("#shop-category-call").empty();
-	$("#div-elementi-categoria").empty();
-
-	// rendo attivo il bottone della categoria selezionata, e non attivo tutti
-	// gli altri
-	$("#aspire-list-item").addClass("active btn-default");
-	$("#all-list-item").removeClass("active");
-	$("#innokin-list-item").removeClass("active");
-	$("#smok-list-item").removeClass("active");
-	$("#xtar-list-item").removeClass("active");
-
-	// chiamata ajax-jquery
-	$("#div-elementi-categoria").load("/searchByCategoryAjax?category=Aspire");
-});
-
-$("#innokin").on("click", function(e) {
-	// evito che venga eseguito l'href dell'ancora
-	e.preventDefault();
-
-	// ripulisco i prodotti caricati precedentemente
-	$("#shop-category-call").empty();
-	$("#div-elementi-categoria").empty();
-
-	// rendo attivo il bottone della categoria selezionata, e non attivo tutti
-	// gli altri
-	$("#innokin-list-item").addClass("active btn-default");
-	$("#aspire-list-item").removeClass("active");
-	$("#all-list-item").removeClass("active");
-	$("#smok-list-item").removeClass("active");
-	$("#xtar-list-item").removeClass("active");
-
-	// chiamata ajax-jquery
-	$("#div-elementi-categoria").load("/searchByCategoryAjax?category=Innokin");
-});
-
-$("#smok").on("click", function(e) {
-	// evito che venga eseguito l'href dell'ancora
-	e.preventDefault();
-
-	// ripulisco i prodotti caricati precedentemente
-	$("#shop-category-call").empty();
-	$("#div-elementi-categoria").empty();
-
-	// rendo attivo il bottone della categoria selezionata, e non attivo tutti
-	// gli altri
-	$("#smok-list-item").addClass("active btn-default");
-	$("#aspire-list-item").removeClass("active");
-	$("#innokin-list-item").removeClass("active");
-	$("#all-list-item").removeClass("active");
-	$("#xtar-list-item").removeClass("active");
-
-	// chiamata ajax-jquery
-	$("#div-elementi-categoria").load("/searchByCategoryAjax?category=Smok");
-});
-
-$("#xtar").on("click", function(e) {
-	// evito che venga eseguito l'href dell'ancora
-	e.preventDefault();
-
-	// ripulisco i prodotti caricati precedentemente
-	$("#shop-category-call").empty();
-	$("#div-elementi-categoria").empty();
-
-	// rendo attivo il bottone della categoria selezionata, e non attivo tutti
-	// gli altri
-	$("#xtar-list-item").addClass("active btn-default");
-	$("#aspire-list-item").removeClass("active");
-	$("#innokin-list-item").removeClass("active");
-	$("#smok-list-item").removeClass("active");
-	$("#all-list-item").removeClass("active");
-
-	// chiamata ajax-jquery
-	$("#div-elementi-categoria").load("/searchByCategoryAjax?category=Xtar");
 });
