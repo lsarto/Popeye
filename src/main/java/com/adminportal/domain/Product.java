@@ -30,6 +30,7 @@ public class Product {
 	private double ourPrice;
 	private boolean newProduct=false;
 	private boolean sale=false;
+	private boolean latest=false;
 	private boolean active=true;
 	
 	@OneToMany(mappedBy="product", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
@@ -53,6 +54,8 @@ public class Product {
 	private MultipartFile productDetail2;
 	@Transient
 	private MultipartFile productDetail3;
+	@Transient
+	private MultipartFile latestImage;
 
 	@OneToMany(mappedBy = "product")
 	@JsonIgnore
@@ -153,6 +156,14 @@ public class Product {
 	public void setProductDetail3(MultipartFile productDetail3) {
 		this.productDetail3 = productDetail3;
 	}
+	
+	public MultipartFile getLatestImage() {
+		return latestImage;
+	}
+
+	public void setLatestImage(MultipartFile latestImage) {
+		this.latestImage = latestImage;
+	}
 
 	public List<ProductToCartItem> getProductToCartItemList() {
 		return productToCartItemList;
@@ -200,6 +211,14 @@ public class Product {
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	public boolean isLatest() {
+		return latest;
+	}
+
+	public void setLatest(boolean latest) {
+		this.latest = latest;
 	}
 
 

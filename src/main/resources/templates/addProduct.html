@@ -155,6 +155,20 @@
 								che sul prodotto compaia l'etichetta "New".</span>
 						</div>
 					</div>
+					
+					<!-- latest -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="status">Prodotto in evidenza</label>
+						<div class="col-md-8">
+							<label><input value="true"
+								th:checked="${dataTransfer.product.latest}" type="radio"
+								name="product.latest" /> In evidenza </label> <label><input
+								value="false" th:checked="${!dataTransfer.product.latest}"
+								type="radio" name="product.latest" />
+								No In evidenza </label> <span class="help-block">Scegliere se si vuole
+								che sul prodotto compaia nella "Home" come prodotto in evidenza.</span>
+						</div>
+					</div>
 
 					<!-- status of product -->
 					<div class="form-group">
@@ -220,6 +234,16 @@
 						<div class="col-md-8">
 							<input id="productDetail3" type="file" name="product.productDetail3"
 								th:value="${dataTransfer.product.productDetail3}" />
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-md-2">
+							<label for="productImage">Aggiungi immagine prodotto - ultimo arrivo</label>
+						</div>
+						<div class="col-md-8">
+							<input id="latestImage" type="file" name="product.latestImage"
+								th:value="${dataTransfer.product.latestImage}" />
 						</div>
 					</div>
 					

@@ -90,6 +90,9 @@ public class ProductController {
 		
 		//save product
 		product.setProductAttributes(null);
+		if(product.getOurPrice()==0.0){
+			product.setOurPrice(product.getListPrice());
+		}
 		productService.save(product);
 		
 		//save attributes
