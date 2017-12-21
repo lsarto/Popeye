@@ -11,4 +11,6 @@ public interface CategoryService {
 	Category findByName(String name);
 
 	Category createCategory(Category category);
+
+	Category save(Category category);
 }

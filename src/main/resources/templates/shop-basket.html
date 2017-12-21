@@ -79,7 +79,8 @@
 												th:value="${cartItem.qty}" min="1" max="9"
 												th:form="'update-item-'+${cartItem.id}" /></td>
 											<td>$ <span th:text="${cartItem.product.listPrice}"></span></td>
-											<td>$ <span th:text="${cartItem.product.ourPrice}"></span></td>
+											<td>$ <span th:if="${cartItem.product.ourPrice}!=0.0" th:text="${cartItem.product.ourPrice}"></span>
+											      <span th:if="${cartItem.product.ourPrice}==0.0" th:text="${cartItem.product.listPrice}"></span></td>
 											<td>$ <span
 												th:text="${cartItem.qty * cartItem.product.ourPrice}"></span></td>
 											<td><a

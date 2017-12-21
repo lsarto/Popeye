@@ -41,6 +41,11 @@ public class CategoryServiceImpl implements CategoryService{
 		
 		return localCategory;
 	}
+
+	@Override
+	public Category save(Category category) {
+		return categoryRepository.save(category);
+	}
 	
 
 }

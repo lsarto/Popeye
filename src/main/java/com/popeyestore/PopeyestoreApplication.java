@@ -16,6 +16,7 @@ import com.popeyestore.domain.Product;
 import com.popeyestore.domain.User;
 import com.popeyestore.domain.security.Role;
 import com.popeyestore.domain.security.UserRole;
+import com.popeyestore.service.CategoryService;
 import com.popeyestore.service.TypeService;
 import com.popeyestore.service.UserService;
 import com.popeyestore.utility.SecurityUtility;
@@ -28,6 +29,9 @@ public class PopeyestoreApplication implements CommandLineRunner {
 	
 	@Autowired
 	private TypeService typeService;
+	
+	@Autowired
+	private CategoryService categoryService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PopeyestoreApplication.class, args);
@@ -63,13 +67,10 @@ public class PopeyestoreApplication implements CommandLineRunner {
 		
 		category11.setName("category11");
 		category12.setName("category12");
-		category11.setType(type1);
-		category12.setType(type1);
 		
 		category21.setName("category21");
 		category22.setName("category22");
-		category21.setType(type2);
-		category22.setType(type2);
+
 		
 		category11.setQty(0);
 		category12.setQty(0);
@@ -85,5 +86,15 @@ public class PopeyestoreApplication implements CommandLineRunner {
 		
 		typeService.createCategory(type1, categories1);
 		typeService.createCategory(type2, categories2);
+		
+		category11.setType(type1);
+		category12.setType(type1);
+		category21.setType(type2);
+		category22.setType(type2);
+		
+		categoryService.save(category11);
+		categoryService.save(category12);
+		categoryService.save(category21);
+		categoryService.save(category22);
 	}
 }
