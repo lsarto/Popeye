@@ -73,8 +73,19 @@ public class SearchController {
 		if (productList==null || productList.isEmpty()) {
 			model.addAttribute("emptyList", true);
 			return "shop-category";
+		} else {
+			for(int i=0; i<productList.size(); i++){
+				Product product = productList.get(i);
+				if(!product.isActive()){
+					productList.remove(product);
+				}
+			}
+			if(productList.isEmpty()){
+				model.addAttribute("emptyList", true);
+				return "shop-category";
+			}
 		}
-
+		
 		model.addAttribute("productList", productList);
 
 		return "shop-category";
@@ -116,10 +127,20 @@ public class SearchController {
 			productList = categoryFound.getProducts();
 		}
 		
-
 		if (productList==null || productList.isEmpty()) {
 			model.addAttribute("emptyList", true);
 			return "common/categorieFragment :: listFragment";
+		} else {
+			for(int i=0; i<productList.size(); i++){
+				Product product = productList.get(i);
+				if(!product.isActive()){
+					productList.remove(product);
+				}
+			}
+			if(productList.isEmpty()){
+				model.addAttribute("emptyList", true);
+				return "common/categorieFragment :: listFragment";
+			}
 		}
 
 		model.addAttribute("productList", productList);

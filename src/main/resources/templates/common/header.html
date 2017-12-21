@@ -240,7 +240,7 @@ _________________________________________________________ -->
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="Login">Customer login</h4>
+						<h4 class="modal-title" id="Login">login</h4>
 					</div>
 					<div class="modal-body">
 						<form th:action="@{/login}" method="post">
@@ -261,11 +261,11 @@ _________________________________________________________ -->
 
 						</form>
 
-						<p class="text-center text-muted">Not registered yet?</p>
+						<p class="text-center text-muted">Non sei ancora registrato?</p>
 						<p class="text-center text-muted">
-							<a href="customer-register.html"><strong>Register
-									now</strong></a>! It is easy and done in 1&nbsp;minute and gives you access
-							to special discounts and much more!
+							<a th:href="@{/login}"><strong>Registrati
+									ora</strong></a>! E' facile e lo fai in 1&nbsp;minuto. Accedi subito
+									ai nostri sconti e molto altro!
 						</p>
 
 					</div>
