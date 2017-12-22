@@ -50,14 +50,14 @@
 							<form th:action="@{/newUser}" method="post">
 								<div class="form-group">
 									<label for="name-login">Username</label>&nbsp;<span
-										style="color: red;" th:if="${usernameExists}">Username
+										style="color: red;" th:if="${usernameExists}"> Username
 										gi&agrave; esistente. Scegline un altro per favore.</span> <input
 										required="required" type="text" class="form-control"
 										id="name-login" name="name-login" />
 								</div>
 								<div class="form-group">
 									<label for="email-login">Email</label><span style="color: red;"
-										th:if="${emailExists}">Email gi&agrave; esistente. Scegline 
+										th:if="${emailExists}"> Email gi&agrave; esistente. Scegline 
 										un'altra per favore.</span> <input required="required" type="text"
 										class="form-control" id="email-login" name="email-login" />
 								</div>

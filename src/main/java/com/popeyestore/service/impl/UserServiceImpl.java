@@ -21,6 +21,7 @@ import com.popeyestore.domain.security.UserRole;
 import com.popeyestore.repository.PasswordResetTokenRepository;
 import com.popeyestore.repository.RoleRepository;
 import com.popeyestore.repository.UserRepository;
+import com.popeyestore.repository.UserShippingRepository;
 import com.popeyestore.service.UserService;
 
 @Service
@@ -39,6 +40,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private UserPaymentRepository userPaymentRepository;
+	
+	@Autowired
+	private UserShippingRepository userShippingRepository;
 	
 	@Override
 	public PasswordResetToken getPasswordResetToken(final String token) {
@@ -121,6 +125,21 @@ public class UserServiceImpl implements UserService{
 			}
 		}
 		
+	}
+	
+	@Override
+	public void setUserDefaultShipping(Long userShippingId, User user) {
+		List<UserShipping> userShippingList = (List<UserShipping>) userShippingRepository.findAll();
+		
+		for (UserShipping userShipping : userShippingList) {
+			if(userShipping.getId() == userShippingId) {
+				userShipping.setUserShippingDefault(true);
+				userShippingRepository.save(userShipping);
+			} else {
+				userShipping.setUserShippingDefault(false);
+				userShippingRepository.save(userShipping);
+			}
+		}
 	}
 
 	@Override

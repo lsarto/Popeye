@@ -142,11 +142,27 @@
 												Lo stesso di quello di spedizione
 											</label>
 										</div>
+										<table class="table" th:if="${not emptyPaymentList}">
+											<thead>
+												<tr>
+													<th>Fatturazioni Disponibili</th>
+													<th>Operazioni</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="userPayment : ${userPaymentList}">
+													<td th:text="${userPayment.userBilling.userBillingName}"></td>
+													<td><a
+														th:href="@{/setPaymentMethod(userPaymentId=${userPayment.id})}">usa
+															questo pagamento</a></td>
+												</tr>
+											</tbody>
+										</table>
 
 										<div class="form-group">
 											<label for="billingName">* Nome</label> <input type="text"
 												class="form-control billingAddress" id="billingName"
-												placeholder="Receiver Name" th:name="billingAddressName"
+												placeholder="Nome di chi effettua la fattura" th:name="billingAddressName"
 												required="required"
 												th:value="${billingAddress.billingAddressName}" />
 										</div>
