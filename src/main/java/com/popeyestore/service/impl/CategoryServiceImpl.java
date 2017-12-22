@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.popeyestore.domain.Category;
+import com.popeyestore.domain.Type;
 import com.popeyestore.repository.CategoryRepository;
 import com.popeyestore.service.CategoryService;
 import com.popeyestore.service.UserService;
@@ -30,12 +31,14 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public Category createCategory(Category category) {
+	public Category createCategory(Category category, Type type) {
 		Category localCategory = (Category) categoryRepository.findByName(category.getName());
 		
 		if(localCategory != null){
 			LOG.info("category {} already exists. Nothing will be done.", category.getName());
 		} else {
+			category.setQty(0);
+			category.setType(type);
 			localCategory = categoryRepository.save(category);
 		}
 		

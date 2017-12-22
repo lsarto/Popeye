@@ -13,4 +13,6 @@ public interface ProductService {
 	List<Product> blurrySearch(String name);
 	
 	List<Product> findByType(Type type);
+	
+	List<Product> findLatest();
 }

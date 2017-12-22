@@ -64,4 +64,9 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> findByType(Type type) {
 		return productRepository.findByType(type);
 	}
+
+	@Override
+	public List<Product> findLatest() {
+		return productRepository.findByLatestTrue();
+	}
 }

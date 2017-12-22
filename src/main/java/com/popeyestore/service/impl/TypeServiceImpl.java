@@ -37,17 +37,12 @@ public class TypeServiceImpl implements TypeService{
 
 	@Override
 	@Transactional
-	public Type createCategory(Type type, List<Category> categories) {
+	public Type createType(Type type) {
 		Type localType = typeRepository.findByName(type.getName());
 		
 		if(localType != null){
 			LOG.info("type {} already exists. Nothing will be done.", type.getName());
 		} else {
-			for(Category category: categories){
-				categoryService.createCategory(category);
-			}
-			
-			type.setCategories(categories);
 			localType = typeRepository.save(type);
 		}
 		

@@ -55,46 +55,35 @@ public class PopeyestoreApplication implements CommandLineRunner {
 		
 		Type type1 = new Type();
 		Type type2 = new Type();
+		Type maglietta = new Type();
 		type1.setName("Type1");
 		type2.setName("Type2");
+		maglietta.setName("Maglietta");
 		type1.setProducts(new ArrayList<Product>());
 		type2.setProducts(new ArrayList<Product>());
+		maglietta.setProducts(new ArrayList<>());
 		
 		Category category11 = new Category();
 		Category category12 = new Category();
 		Category category21 = new Category();
 		Category category22 = new Category();
+		Category mezzaManica = new Category();
 		
 		category11.setName("category11");
 		category12.setName("category12");
 		
 		category21.setName("category21");
 		category22.setName("category22");
-
+		mezzaManica.setName("mezzaManica");
 		
-		category11.setQty(0);
-		category12.setQty(0);
-		category21.setQty(0);
-		category22.setQty(0);
-
-		List<Category> categories1 = new ArrayList<>();
-		List<Category> categories2 = new ArrayList<>();
-		categories1.add(category11);
-		categories1.add(category12);
-		categories2.add(category21);
-		categories2.add(category22);
+		typeService.createType(type1);
+		typeService.createType(type2);
+		typeService.createType(maglietta);
 		
-		typeService.createCategory(type1, categories1);
-		typeService.createCategory(type2, categories2);
-		
-		category11.setType(type1);
-		category12.setType(type1);
-		category21.setType(type2);
-		category22.setType(type2);
-		
-		categoryService.save(category11);
-		categoryService.save(category12);
-		categoryService.save(category21);
-		categoryService.save(category22);
+		categoryService.createCategory(category11, type1);
+		categoryService.createCategory(category12, type1);
+		categoryService.createCategory(category21, type2);
+		categoryService.createCategory(category22, type2);
+		categoryService.createCategory(mezzaManica, maglietta);
 	}
 }

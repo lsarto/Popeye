@@ -11,5 +11,5 @@ public interface TypeService {
 	
 	Type findByName(String name);
 
-	Type createCategory(Type category, List<Category> subCategories);
+	Type createType(Type category);
 }

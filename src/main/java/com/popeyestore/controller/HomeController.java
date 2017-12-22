@@ -107,6 +107,8 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String index(Model model, HttpSession session) {
+		List<Product> productList = productService.findLatest();
+		model.addAttribute("productList", productList);
 		model.addAttribute("home", true);
 		return "index5";
 	}

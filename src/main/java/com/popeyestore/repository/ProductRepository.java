@@ -13,4 +13,6 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	
 	List<Product> findByType(Type type);
 	
+	List<Product> findByLatestTrue();
+	
 }
