@@ -135,6 +135,7 @@ public class ProductController {
 		MultipartFile productDetail1 = product.getProductDetail1();
 		MultipartFile productDetail2 = product.getProductDetail2();
 		MultipartFile productDetail3 = product.getProductDetail3();
+		MultipartFile latestImage = product.getLatestImage();
 
 		try {
 			byte[] bytes;
@@ -161,6 +162,12 @@ public class ProductController {
 			
 			bytes = productDetail3.getBytes();
 			name = product.getId() + "-4.png";
+			stream = new BufferedOutputStream(
+					new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
+			stream.write(bytes);
+			
+			bytes = latestImage.getBytes();
+			name = product.getId() + "-5.png";
 			stream = new BufferedOutputStream(
 					new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
 			stream.write(bytes);
@@ -283,6 +290,7 @@ public class ProductController {
 		MultipartFile productDetail1 = product.getProductDetail1();
 		MultipartFile productDetail2 = product.getProductDetail2();
 		MultipartFile productDetail3 = product.getProductDetail3();
+		MultipartFile latestImage = product.getLatestImage();
 		
 		if(!productCategory.isEmpty()) {
 			try {
@@ -336,6 +344,22 @@ public class ProductController {
 			try {
 				byte[] bytes = productDetail3.getBytes();
 				String name = product.getId() + "-4.png";
+				
+				Files.delete(Paths.get("src/main/resources/static/image/product/"+name));
+				
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
+				stream.write(bytes);
+				stream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(!latestImage.isEmpty()) {
+			try {
+				byte[] bytes = latestImage.getBytes();
+				String name = product.getId() + "-5.png";
 				
 				Files.delete(Paths.get("src/main/resources/static/image/product/"+name));
 				
