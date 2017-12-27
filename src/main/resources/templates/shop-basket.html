@@ -82,7 +82,7 @@
 											<td>$ <span th:if="${cartItem.product.ourPrice}!=0.0" th:text="${cartItem.product.ourPrice}"></span>
 											      <span th:if="${cartItem.product.ourPrice}==0.0" th:text="${cartItem.product.listPrice}"></span></td>
 											<td>$ <span
-												th:text="${cartItem.qty * cartItem.product.ourPrice}"></span></td>
+												th:text="${#numbers.formatDecimal(cartItem.qty * cartItem.product.ourPrice,1,2)}"></span></td>
 											<td><a
 												th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}"><i
 													class="fa fa-trash-o"></i></a></td>

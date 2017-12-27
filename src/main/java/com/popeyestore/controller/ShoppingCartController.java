@@ -1,5 +1,6 @@
 package com.popeyestore.controller;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 
@@ -46,6 +47,18 @@ public class ShoppingCartController {
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 		
 		shoppingCartService.updateShoppingCart(shoppingCart);
+		
+		if(cartItemList!=null && !cartItemList.isEmpty()){
+			BigDecimal grandTotal = new BigDecimal(0);
+			for(CartItem cartItem: cartItemList){
+				BigDecimal bigDecimal = new BigDecimal(cartItem.getProduct().getOurPrice()).multiply(new BigDecimal(cartItem.getQty()));
+				bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
+				grandTotal = grandTotal.add(bigDecimal);
+			}
+			if(!grandTotal.equals(shoppingCart.getGrandTotal())){
+				model.addAttribute("notEnoughStock", true);
+			}
+		}
 		
 		model.addAttribute("cartItemList", cartItemList);
 		session.setAttribute("cartItemList", cartItemList);
