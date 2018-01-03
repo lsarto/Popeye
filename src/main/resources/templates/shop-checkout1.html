@@ -3,6 +3,7 @@
 
 <head th:replace="common/header :: common-header" />
 
+
 <body>
 
 
@@ -219,10 +220,10 @@
 									<!-- /.content -->
 									<div class="box-footer">
 										<div class="pull-left">
-											<button th:href="@{/shoppingCart/cart}"
+											<a th:href="@{/shoppingCart/cart/}" 
 												class="btn btn-default">
 												<i class="fa fa-chevron-left"></i>Torna al Carrello
-											</button>
+											</a>
 										</div>
 										<div class="pull-right">
 											<a class="btn btn-template-main" type="button"
@@ -436,9 +437,10 @@
 										</a>
 									</div>
 									<div class="pull-right form-group">
-										<button type="submit" class="btn btn-template-main">
+										<div id="paypal-button-container"></div>
+										<!-- <button type="submit" class="btn btn-template-main">
 											Effettua Ordine<i class="fa fa-chevron-right"></i>
-										</button>
+										</button> -->
 									</div>
 								</div>
 							</div>

@@ -1,13 +1,33 @@
 package com.popeyestore.controller;
 
+import com.paypal.api.payments.Amount;
+import com.paypal.api.payments.Details;
+import com.paypal.api.payments.Links;
+import com.paypal.api.payments.Payer;
+import com.paypal.api.payments.Payment;
+import com.paypal.api.payments.PaymentExecution;
+import com.paypal.api.payments.RedirectUrls;
+import com.paypal.api.payments.Transaction;
+import com.paypal.base.rest.APIContext;
+import com.paypal.base.rest.PayPalRESTException;
+
+import org.apache.log4j.Logger;
+
+import static com.popeye.paypal.api.payments.util.SampleConstants.clientID;
+import static com.popeye.paypal.api.payments.util.SampleConstants.clientSecret;
+import static com.popeye.paypal.api.payments.util.SampleConstants.mode;
+
+import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,11 +37,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.popeyestore.domain.BillingAddress;
 import com.popeyestore.domain.CartItem;
 import com.popeyestore.domain.Order;
-import com.popeyestore.domain.Payment;
 import com.popeyestore.domain.ShippingAddress;
 import com.popeyestore.domain.ShoppingCart;
 import com.popeyestore.domain.User;
@@ -43,9 +63,12 @@ import com.popeyestore.utility.ITConstants;
 @Controller
 public class CheckoutController {
 
+	private static final Logger LOGGER = Logger.getLogger(CheckoutController.class);
+
 	private ShippingAddress shippingAddress = new ShippingAddress();
 	private BillingAddress billingAddress = new BillingAddress();
-	private Payment payment = new Payment();
+	private com.popeyestore.domain.Payment payment = new com.popeyestore.domain.Payment();
+	private APIContext apiContext;
 
 	@Autowired
 	private JavaMailSender mailSender;
@@ -73,14 +96,13 @@ public class CheckoutController {
 
 	@Autowired
 	private OrderService orderService;
-	
+
 	@Autowired
 	private PaymentService paymentService;
 
 	@Autowired
 	private UserPaymentService userPaymentService;
 
-	
 	@RequestMapping("/checkout")
 	public String checkout(@RequestParam("id") Long cartId,
 			@RequestParam(value = "missingRequiredField", required = false) boolean missingRequiredField, Model model,
@@ -151,16 +173,108 @@ public class CheckoutController {
 		if (missingRequiredField) {
 			model.addAttribute("missingRequiredField", true);
 		}
-
+		
 		return "shop-checkout1";
+	}
 
+	@RequestMapping(value = "/createPayment", method = RequestMethod.POST)
+	@ResponseBody
+	public String createPayment(HttpServletRequest req, HttpServletResponse resp) {
+		apiContext = new APIContext(clientID, clientSecret, mode);
+		
+		// Set payer details
+		Payer payer = new Payer();
+		payer.setPaymentMethod("paypal");
+
+		// Set redirect URLs
+		RedirectUrls redirectUrls = new RedirectUrls();
+		redirectUrls.setCancelUrl("http://localhost:8080");
+		redirectUrls.setReturnUrl("http://localhost:8080");
+
+		// Set payment details
+		Details details = new Details();
+		details.setShipping("1");
+		details.setSubtotal("5");
+		details.setTax("1");
+
+		// Payment amount
+		Amount amount = new Amount();
+		amount.setCurrency("USD");
+		// Total must be equal to sum of shipping, tax and subtotal.
+		amount.setTotal("7");
+		amount.setDetails(details);
+
+		// Transaction information
+		Transaction transaction = new Transaction();
+		transaction.setAmount(amount);
+		transaction
+		  .setDescription("This is the payment transaction description.");
+
+		// Add transaction to a list
+		List<Transaction> transactions = new ArrayList<Transaction>();
+		transactions.add(transaction);
+
+		// Add payment details
+		Payment payment = new Payment();
+		payment.setIntent("sale");
+		payment.setPayer(payer);
+		payment.setRedirectUrls(redirectUrls);
+		payment.setTransactions(transactions);
+		
+		// Create payment
+		try {
+		  Payment createdPayment = payment.create(apiContext);
+
+		  Iterator links = createdPayment.getLinks().iterator();
+		  while (links.hasNext()) {
+		    Links link = (Links) links.next();
+		    if (link.getRel().equalsIgnoreCase("approval_url")) {
+		      // REDIRECT USER TO link.getHref()
+
+		    }
+		  }
+		  
+		  return "{\"paymentID\":\"" + createdPayment.getId()+"\"}";
+		} catch (PayPalRESTException e) {
+		    System.err.println(e.getDetails());
+		}
+		return "";
+	} 
+
+	@RequestMapping(value = "/executePayment", method = RequestMethod.POST)
+	@ResponseBody
+	public String executePayment(Model model, 
+			@RequestParam("paymentID") String paymentId, @RequestParam("payerID") String payerId) {
+		Payment payment = new Payment();
+		payment.setId(paymentId);
+
+		PaymentExecution paymentExecution = new PaymentExecution();
+		paymentExecution.setPayerId(payerId);
+		try {
+		  Payment createdPayment = payment.execute(apiContext, paymentExecution);
+		  System.out.println(createdPayment);
+		  
+		  return "";
+
+		} catch (PayPalRESTException e) {
+		  System.err.println(e.getDetails());
+		}
+		
+		return "";
 	}
 	
+//	@RequestMapping(value = "/paypalToPopeye", method = RequestMethod.POST)
+//	public void paypalToPopeye(@RequestParam("res") Payment payment) {
+//		System.out.println("Sono quiiii");
+//
+//	}
+
 	@RequestMapping(value = "/checkout", method = RequestMethod.POST)
 	public String checkoutPost(@ModelAttribute("shippingAddress") ShippingAddress shippingAddress,
 			@ModelAttribute("billingAddress") BillingAddress billingAddress,
 			@ModelAttribute("billingSameAsShipping") String billingSameAsShipping,
 			@ModelAttribute("shippingMethod") String shippingMethod, Principal principal, Model model) {
+		System.out.println("Sono qui");
 		ShoppingCart shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
 
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
@@ -176,40 +290,37 @@ public class CheckoutController {
 			billingAddress.setBillingAddressZipcode(shippingAddress.getShippingAddressZipcode());
 		}
 
-		if (shippingAddress.getShippingAddressStreet1().isEmpty() 
-				|| shippingAddress.getShippingAddressCity().isEmpty()
+		if (shippingAddress.getShippingAddressStreet1().isEmpty() || shippingAddress.getShippingAddressCity().isEmpty()
 				|| shippingAddress.getShippingAddressState().isEmpty()
 				|| shippingAddress.getShippingAddressName().isEmpty()
-				|| shippingAddress.getShippingAddressZipcode().isEmpty() 
+				|| shippingAddress.getShippingAddressZipcode().isEmpty()
 				|| billingAddress.getBillingAddressStreet1().isEmpty()
-				|| billingAddress.getBillingAddressCity().isEmpty() 
-				|| billingAddress.getBillingAddressState().isEmpty()
+				|| billingAddress.getBillingAddressCity().isEmpty() || billingAddress.getBillingAddressState().isEmpty()
 				|| billingAddress.getBillingAddressName().isEmpty()
 				|| billingAddress.getBillingAddressZipcode().isEmpty())
 			return "redirect:/checkout?id=" + shoppingCart.getId() + "&missingRequiredField=true";
-		
+
 		User user = userService.findByUsername(principal.getName());
-		
+
 		Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, shippingMethod, user);
-		
+
 		mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ITALY));
-		
+
 		shoppingCartService.clearShoppingCart(shoppingCart);
-		
+
 		LocalDate today = LocalDate.now();
 		LocalDate estimatedDeliveryDate;
-		
+
 		if (shippingMethod.equals("groundShipping")) {
 			estimatedDeliveryDate = today.plusDays(5);
 		} else {
 			estimatedDeliveryDate = today.plusDays(3);
 		}
-		
+
 		model.addAttribute("estimatedDeliveryDate", estimatedDeliveryDate);
-		
+
 		return "orderSubmittedPage";
 	}
-
 
 	@RequestMapping("/setShippingAddress")
 	public String setShippingAddress(@RequestParam("userShippingId") Long userShippingId, Principal principal,

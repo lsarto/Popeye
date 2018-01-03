@@ -82,6 +82,19 @@
 			<artifactId>nekohtml</artifactId>
 			<version>1.9.21</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.spec.javax.net.ssl</groupId>
+			<artifactId>jboss-jsse-api_8.0_spec</artifactId>
+			<version>1.0.0.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.paypal.sdk</groupId>
+			<artifactId>rest-api-sdk</artifactId>
+			<version>LATEST</version>
+		</dependency>
+		
 	</dependencies>
 
 
