@@ -18,17 +18,15 @@ public class ResultPrinter {
 		response = (response != null) ? response : error;
 		addDataToAttributeList(req, "responses", response);
 		addDataToAttributeList(req, "errors", error);
-		if (error != null) {
-			try {
-				req.getRequestDispatcher("response.jsp").forward(req, resp);
-			} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+//		if (error != null) {
+//			try {
+//				req.getRequestDispatcher("response.jsp").forward(req, resp);
+//			} catch (ServletException e) {
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
 	}
 
 	@SuppressWarnings("unchecked")

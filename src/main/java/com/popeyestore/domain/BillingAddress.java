@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class BillingAddress {
 
@@ -22,6 +24,7 @@ public class BillingAddress {
 	private String BillingAddressZipcode;
 	
 	@OneToOne
+	@JsonIgnore
 	private Order order;
 
 	public Long getId() {

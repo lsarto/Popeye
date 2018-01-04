@@ -73,8 +73,8 @@
 														th:text="${userShipping.userShippingStreet1}+' '+${userShipping.userShippingStreet2}+', '+${userShipping.userShippingCity}
 												+', '+${userShipping.userShippingState}"></td>
 													<td><a
-														th:href="@{/setShippingAddress(userShippingId=${userShipping.id})}">usa 
-														questo indirizzo</a></td>
+														th:href="@{/setShippingAddress(userShippingId=${userShipping.id})}">usa
+															questo indirizzo</a></td>
 												</tr>
 											</tbody>
 										</table>
@@ -88,23 +88,24 @@
 										<div class="form-group">
 											<label for="shippingAddress">* Indirizzo</label> <input
 												type="text" class="form-control" id="shippingAddress1"
-												placeholder="Indirizzo di Spedizione" name="shippingAddressStreet1"
-												required="required"
+												placeholder="Indirizzo di Spedizione"
+												name="shippingAddressStreet1" required="required"
 												th:value="${shippingAddress.shippingAddressStreet1}" />
 										</div>
 										<div class="form-group">
 											<input type="text" class="form-control"
-												placeholder="Indirizzo di Spedizione Alternativo" name="shippingAddressStreet2"
+												placeholder="Indirizzo di Spedizione Alternativo"
+												name="shippingAddressStreet2"
 												th:value="${shippingAddress.shippingAddressStreet2}" />
 										</div>
 
 										<div class="row">
 											<div class="col-xs-4">
 												<div class="form-group">
-													<label for="shippingCity">* Citt&agrave;</label> <input type="text"
-														class="form-control" id="shippingCity"
-														placeholder="Citt&agrave; Spedizione" name="shippingAddressCity"
-														required="required"
+													<label for="shippingCity">* Citt&agrave;</label> <input
+														type="text" class="form-control" id="shippingCity"
+														placeholder="Citt&agrave; Spedizione"
+														name="shippingAddressCity" required="required"
 														th:value="${shippingAddress.shippingAddressCity}" />
 												</div>
 											</div>
@@ -116,7 +117,7 @@
 														th:value="${shippingAddress.shippingAddressState}"
 														required="required">
 														<option value="" disabled="disabled">Per favore
-														sleziona un'opzione</option>
+															sleziona un'opzione</option>
 														<option th:each="state : ${stateList}" th:text="${state}"
 															th:selected="(${shippingAddress.shippingAddressState}==${state})"></option>
 													</select>
@@ -163,8 +164,8 @@
 										<div class="form-group">
 											<label for="billingName">* Nome</label> <input type="text"
 												class="form-control billingAddress" id="billingName"
-												placeholder="Nome di chi effettua la fattura" th:name="billingAddressName"
-												required="required"
+												placeholder="Nome di chi effettua la fattura"
+												th:name="billingAddressName" required="required"
 												th:value="${billingAddress.billingAddressName}" />
 										</div>
 										<div class="form-group">
@@ -176,7 +177,8 @@
 										</div>
 										<div class="form-group">
 											<input type="text" class="form-control billingAddress"
-												id="billingAddress2" placeholder="Indirizzo Fatturazione Alternativo"
+												id="billingAddress2"
+												placeholder="Indirizzo Fatturazione Alternativo"
 												th:name="billingAddressStreet2"
 												th:value="${billingAddress.billingAddressStreet2}" />
 										</div>
@@ -184,10 +186,10 @@
 										<div class="row">
 											<div class="col-xs-4">
 												<div class="form-group">
-													<label for="billingCity">* Citt&agrave;</label> <input type="text"
-														class="form-control billingAddress" id="billingCity"
-														placeholder="Citt&agrave; Fatturazione" th:name="billingAddressCity"
-														required="required"
+													<label for="billingCity">* Citt&agrave;</label> <input
+														type="text" class="form-control billingAddress"
+														id="billingCity" placeholder="Citt&agrave; Fatturazione"
+														th:name="billingAddressCity" required="required"
 														th:value="${billingAddress.billingAddressCity}" />
 												</div>
 											</div>
@@ -199,7 +201,7 @@
 														th:value="${billingAddress.billingAddressState}"
 														required="required">
 														<option value="" disabled="disabled">Per favore
-														 seleziona un'opzione</option>
+															seleziona un'opzione</option>
 														<option th:each="state : ${stateList}" th:text="${state}"
 															th:selected="(${billingAddress.billingAddressState}==${state})"></option>
 													</select>
@@ -220,16 +222,14 @@
 									<!-- /.content -->
 									<div class="box-footer">
 										<div class="pull-left">
-											<a th:href="@{/shoppingCart/cart/}" 
-												class="btn btn-default">
+											<a th:href="@{/shoppingCart/cart/}" class="btn btn-default">
 												<i class="fa fa-chevron-left"></i>Torna al Carrello
 											</a>
 										</div>
 										<div class="pull-right">
 											<a class="btn btn-template-main" type="button"
-												data-toggle="collapse" data-target=".coll-12"
-												href="#"> Vai al metodo di Consegna<i
-												class="fa fa-chevron-right"></i>
+												data-toggle="collapse" data-target=".coll-12" href="#">
+												Vai al metodo di Consegna<i class="fa fa-chevron-right"></i>
 											</a>
 										</div>
 									</div>
@@ -244,8 +244,9 @@
 								<div class="panel-body">
 									<div class="col-md-12 clearfix" id="checkout2">
 										<ul class="nav nav-pills nav-justified">
-											<li class=""><a href="javascript:void(0);" data-toggle="collapse"
-												data-target=".coll-12"><i class="fa fa-map-marker"></i><br>Indirizzo</a></li>
+											<li class=""><a href="javascript:void(0);"
+												data-toggle="collapse" data-target=".coll-12"><i
+													class="fa fa-map-marker"></i><br>Indirizzo</a></li>
 											<li class="active"><a href="javascript:void(0);"><i
 													class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
 											<li class="disabled"><a href="javascript:void(0);"><i
@@ -292,8 +293,8 @@
 											<div class="pull-left">
 												<a class="btn btn-default" type="button"
 													data-toggle="collapse" data-target=".coll-12"
-													href="javascript:void(0);"> <i class="fa fa-chevron-left"></i>Torna
-													agli Indirizzi
+													href="javascript:void(0);"> <i
+													class="fa fa-chevron-left"></i>Torna agli Indirizzi
 												</a>
 											</div>
 											<div class="pull-right">
@@ -315,8 +316,9 @@
 								id="paymentMethod">
 								<div class="panel-body">
 									<ul class="nav nav-pills nav-justified">
-										<li class=""><a href="javascript:void(0);" data-toggle="collapse"
-											data-target=".coll-13"><i class="fa fa-map-marker"></i><br>Indirizzo</a></li>
+										<li class=""><a href="javascript:void(0);"
+											data-toggle="collapse" data-target=".coll-13"><i
+												class="fa fa-map-marker"></i><br>Indirizzo</a></li>
 										<li class=""><a href="javascript:void(0);"
 											data-toggle="collapse" data-target=".coll-23"><i
 												class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
@@ -352,8 +354,8 @@
 										<div class="pull-left">
 											<a class="btn btn-default" type="button"
 												data-toggle="collapse" data-target=".coll-23"
-												href="javascript:void(0);"> <i class="fa fa-chevron-left"></i>Torna
-												al Metodo di Spedizione
+												href="javascript:void(0);"> <i
+												class="fa fa-chevron-left"></i>Torna al Metodo di Spedizione
 											</a>
 										</div>
 										<div class="pull-right">
@@ -374,8 +376,9 @@
 								id="orderReview">
 								<div class="col-md-12 clearfix" id="basket">
 									<ul class="nav nav-pills nav-justified">
-										<li class=""><a href="javascript:void(0);" data-toggle="collapse"
-											data-target=".coll-14"><i class="fa fa-map-marker"></i><br>Indirizzo</a></li>
+										<li class=""><a href="javascript:void(0);"
+											data-toggle="collapse" data-target=".coll-14"><i
+												class="fa fa-map-marker"></i><br>Indirizzo</a></li>
 										<li class=""><a href="javascript:void(0);"
 											data-toggle="collapse" data-target=".coll-24"><i
 												class="fa fa-truck"></i><br>Metodo di spedizione</a></li>
@@ -383,8 +386,8 @@
 											data-toggle="collapse" data-target=".coll-34"><i
 												class="glyphicon glyphicon-euro"></i><br>Metodo di
 												pagamento</a></li>
-										<li class="active"><a href="javascript:void(0);"><i class="fa fa-eye"></i><br>Resoconto
-												Ordine</a></li>
+										<li class="active"><a href="javascript:void(0);"><i
+												class="fa fa-eye"></i><br>Resoconto Ordine</a></li>
 									</ul>
 									<div class="table-responsive">
 										<table class="table">
@@ -400,8 +403,7 @@
 											<tbody th:each="cartItem : ${cartItemList}">
 												<tr>
 													<td><a
-														th:href="@{shop-detail(id=${cartItem.product.id})}">
-															<img
+														th:href="@{shop-detail(id=${cartItem.product.id})}"> <img
 															th:src="#{adminPath}+@{/image/product/}+
 														${cartItem.product.id}+'-1.png'">
 													</a></td>
@@ -432,7 +434,7 @@
 									<div class="pull-left">
 										<a class="btn btn-default" type="button"
 											data-toggle="collapse" data-target=".coll-34"
-											href="javascript:void(0);"> <i class="fa fa-chevron-left"></i>Torna 
+											href="javascript:void(0);"> <i class="fa fa-chevron-left"></i>Torna
 											al Metodo di Pagamento
 										</a>
 									</div>
@@ -471,19 +473,79 @@
 		<!-- /#content -->
 
 
-<!-- *** FOOTER ***
+		<!-- *** FOOTER ***
 _________________________________________________________ -->
 
-        <div th:replace="common/footer :: footer">
-        </div>
-<!-- *** FOOTER END *** -->
+		<div th:replace="common/footer :: footer"></div>
+		<!-- *** FOOTER END *** -->
 
 	</div>
 	<!-- /#all -->
 
 	<!-- #### JAVASCRIPT FILES ### -->
 	<div th:replace="common/header :: body-bottom-scripts"></div>
-	
+	<script th:inline="javascript">
+	paypal.Button.render({
+
+	    env: 'sandbox', // sandbox | production
+
+	    // Show the buyer a 'Pay Now' button in the checkout flow
+	    commit: true,
+
+	    // payment() is called when the button is clicked
+	    payment: function() {
+
+	        // Set up a url on your server to create the payment
+	        var CREATE_URL = 'http://localhost:8080/paymentWithPaypal/';
+	        
+	        /*<![CDATA[*/
+	        	var shippingAddress = JSON.stringify([[${shippingAddress}]]).replace(new RegExp('null', 'g'), '""');
+	        	var billingAddress = JSON.stringify([[${billingAddress}]]).replace(new RegExp('null', 'g'), '""');
+	        	var billingSameAsShipping = JSON.stringify([[${billingSameAsShipping}]]).replace(new RegExp('null', 'g'), '""');
+	        /*]]>*/
+	        
+			var shippingMethod = JSON.stringify(document.querySelector('input[name="shippingMethod"]:checked').value);
+	        
+	        var data = {
+	        		shippingAddress: shippingAddress,
+	        		billingAddress: billingAddress,
+	        		billingSameAsShipping: billingSameAsShipping,
+	        		shippingMethod: shippingMethod
+	        }
+	        
+	        return paypal.request.post(CREATE_URL, data)
+            .then(function(res) {
+            	if(res.missField=='true'){
+            		window.location.replace("http://localhost:8080"+res.errPath);
+            	}
+                return res.paymentID;
+            });
+
+	    },
+
+	    // onAuthorize() is called when the buyer approves the payment
+	    onAuthorize: function(data, actions) {
+
+	        // Set up a url on your server to execute the payment
+	        var EXECUTE_URL = 'http://localhost:8080/paymentWithPaypal/';
+
+	        // Set up the data you need to pass to your server
+	        var data = {
+	            paymentID: data.paymentID,
+	            payerID: data.payerID
+	        };
+
+	        // Make a call to your server to execute the payment
+	        return paypal.request.post(EXECUTE_URL, data)
+	            .then(function (res) {
+	            	window.alert("pagamento completato");
+//	            	post('/paypalToPopeye/', res);
+	            });
+	    }
+
+	}, '#paypal-button-container');
+	</script>
+
 </body>
 
 </html>

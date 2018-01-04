@@ -113,9 +113,6 @@ public class User implements UserDetails{
 	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}
-	
-	
-	
 	public List<UserShipping> getUserShippingList() {
 		return userShippingList;
 	}
@@ -156,18 +153,6 @@ public class User implements UserDetails{
 		return enabled;
 	}
 	
-	public void setShoppingCart(ShoppingCart shoppingCart) {
-		this.shoppingCart = shoppingCart;
-	}
-	
-	public void setUserShippingList(ArrayList<UserShipping> arrayList) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void setUserPaymentList(ArrayList<UserPayment> arrayList) {
-		// TODO Auto-generated method stub
-		
-	}
 	public ShoppingCart getShoppingCart() {
 		return shoppingCart;
 	}
@@ -175,6 +160,11 @@ public class User implements UserDetails{
 	public List<Order> getOrderList() {
 		return orderList;
 	}
-	
+	public void setOrderList(List<Order> orderList) {
+		this.orderList = orderList;
+	}
+	public void setShoppingCart(ShoppingCart shoppingCart) {
+		this.shoppingCart = shoppingCart;
+	}
 	
 }
