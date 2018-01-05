@@ -30,6 +30,7 @@ import static com.popeye.paypal.api.payments.util.SampleConstants.clientSecret;
 import static com.popeye.paypal.api.payments.util.SampleConstants.mode;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -183,7 +184,7 @@ public class CheckoutController {
 		model.addAttribute("cartItemList", cartItemList);
 		model.addAttribute("shoppingCart", user.getShoppingCart());
 
-		List<String> stateList = ITConstants.listOfITStatesName;
+		List<String> stateList = ITConstants.listOfITStatesCode;
 		Collections.sort(stateList);
 		model.addAttribute("stateList", stateList);
 
@@ -196,101 +197,6 @@ public class CheckoutController {
 		return "shop-checkout1";
 	}
 
-//	@RequestMapping(value = "/createPayment", method = RequestMethod.POST)
-//	@ResponseBody
-//	public String createPayment(HttpServletRequest req, HttpServletResponse resp) {
-//		apiContext = new APIContext(clientID, clientSecret, mode);
-//		
-//		// Set payer details
-//		Payer payer = new Payer();
-//		payer.setPaymentMethod("paypal");
-//
-//		// Set redirect URLs
-//		RedirectUrls redirectUrls = new RedirectUrls();
-//		redirectUrls.setCancelUrl("http://localhost:8080");
-//		redirectUrls.setReturnUrl("http://localhost:8080");
-//
-//		// Set payment details
-//		Details details = new Details();
-//		details.setShipping("1");
-//		details.setSubtotal("5");
-//		details.setTax("1");
-//
-//		// Payment amount
-//		Amount amount = new Amount();
-//		amount.setCurrency("USD");
-//		// Total must be equal to sum of shipping, tax and subtotal.
-//		amount.setTotal("7");
-//		amount.setDetails(details);
-//
-//		// Transaction information
-//		Transaction transaction = new Transaction();
-//		transaction.setAmount(amount);
-//		transaction
-//		  .setDescription("This is the payment transaction description.");
-//
-//		// Add transaction to a list
-//		List<Transaction> transactions = new ArrayList<Transaction>();
-//		transactions.add(transaction);
-//
-//		// Add payment details
-//		Payment payment = new Payment();
-//		payment.setIntent("sale");
-//		payment.setPayer(payer);
-//		payment.setRedirectUrls(redirectUrls);
-//		payment.setTransactions(transactions);
-		
-		// Shipping Address
-//        ShippingAddress address = new ShippingAddress();
-//        address.setRecipientName("Jay Patel")
-//                .setLine1("111 First Street")
-//                .setCity("Saratoga")
-//                .setState("CA")
-//                .setPostalCode("95070")
-//                .setCountryCode("US");
-		
-		// Create payment
-//		try {
-//		  Payment createdPayment = payment.create(apiContext);
-//
-//		  Iterator links = createdPayment.getLinks().iterator();
-//		  while (links.hasNext()) {
-//		    Links link = (Links) links.next();
-//		    if (link.getRel().equalsIgnoreCase("approval_url")) {
-//		      // REDIRECT USER TO link.getHref()
-////				req.setAttribute("redirectURL", link.getHref());
-//		    }
-//		  }
-//		  
-//		  return "{\"paymentID\":\"" + createdPayment.getId()+"\"}";
-//		} catch (PayPalRESTException e) {
-//		    System.err.println(e.getDetails());
-//		}
-//		return "";
-//	} 
-
-//	@RequestMapping(value = "/executePayment", method = RequestMethod.POST)
-//	@ResponseBody
-//	public String executePayment(Model model, 
-//			@RequestParam("paymentID") String paymentId, @RequestParam("payerID") String payerId) {
-//		Payment payment = new Payment();
-//		payment.setId(paymentId);
-//
-//		PaymentExecution paymentExecution = new PaymentExecution();
-//		paymentExecution.setPayerId(payerId);
-//		try {
-//		  Payment createdPayment = payment.execute(apiContext, paymentExecution);
-//		  System.out.println(createdPayment);
-//		  
-//		  
-//		  return "";
-//
-//		} catch (PayPalRESTException e) {
-//		  System.err.println(e.getDetails());
-//		}
-//		
-//		return "";
-//	}
 	
 	@RequestMapping(value = "/paymentWithPaypal", method = RequestMethod.POST)
 	@ResponseBody
@@ -352,7 +258,7 @@ public class CheckoutController {
 						billingAddress.setBillingAddressCountry(shippingAddress.getShippingAddressCountry());
 						billingAddress.setBillingAddressZipcode(shippingAddress.getShippingAddressZipcode());
 					}
-				
+									
 					if (shippingAddress.getShippingAddressStreet1().isEmpty() || shippingAddress.getShippingAddressCity().isEmpty()
 							|| shippingAddress.getShippingAddressState().isEmpty()
 							|| shippingAddress.getShippingAddressName().isEmpty()
@@ -378,15 +284,18 @@ public class CheckoutController {
 			// Let's you specify details of a payment amount.
 			Details details = new Details();
 			details.setShipping("1");
-			details.setSubtotal("5");
-			details.setTax("1");
+			details.setSubtotal(String.valueOf(shoppingCart.getGrandTotal()));
+			details.setTax(String.valueOf(shoppingCart.getGrandTotal().multiply(new BigDecimal(0.06))
+					.setScale(2, BigDecimal.ROUND_HALF_UP)));
 
 			// ###Amount
 			// Let's you specify a payment amount.
 			Amount amount = new Amount();
-			amount.setCurrency("USD");
+			amount.setCurrency("EUR");
 			// Total must be equal to sum of shipping, tax and subtotal.
-			amount.setTotal("7");
+			amount.setTotal(String.valueOf(shoppingCart.getGrandTotal()
+					.add(shoppingCart.getGrandTotal().multiply(new BigDecimal(0.06))).add(new BigDecimal(1))
+					.setScale(2, BigDecimal.ROUND_HALF_UP)));
 			amount.setDetails(details);
 
 			// ###Transaction
@@ -397,14 +306,18 @@ public class CheckoutController {
 			Transaction transaction = new Transaction();
 			transaction.setAmount(amount);
 			transaction
-					.setDescription("This is the payment transaction description.");
+					.setDescription("Questa è la descrizione della transazione del pagamento.");
 
 			// ### Items
-			Item item = new Item();
-			item.setName("Ground Coffee 40 oz").setQuantity("1").setCurrency("USD").setPrice("5");
 			ItemList itemList = new ItemList();
 			List<Item> items = new ArrayList<Item>();
-			items.add(item);
+			for(CartItem cartItem: shoppingCart.getCartItemList()){
+				Item item = new Item();
+				item.setName(cartItem.getProduct().getName())
+						.setQuantity(String.valueOf(cartItem.getQty())).setCurrency("EUR")
+						.setPrice(String.valueOf(cartItem.getSubtotal()));
+				items.add(item);
+			}
 			itemList.setItems(items);
 			
 			transaction.setItemList(itemList);

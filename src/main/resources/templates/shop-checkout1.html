@@ -93,7 +93,7 @@
 												th:value="${shippingAddress.shippingAddressStreet1}" />
 										</div>
 										<div class="form-group">
-											<input type="text" class="form-control"
+											<input type="text" class="form-control" id="shippingAddress2"
 												placeholder="Indirizzo di Spedizione Alternativo"
 												name="shippingAddressStreet2"
 												th:value="${shippingAddress.shippingAddressStreet2}" />
@@ -505,7 +505,27 @@ _________________________________________________________ -->
 	        /*]]>*/
 	        
 			var shippingMethod = JSON.stringify(document.querySelector('input[name="shippingMethod"]:checked').value);
-	        
+			
+	        var jsonShippingAddress = JSON.parse(shippingAddress);
+			jsonShippingAddress["shippingAddressName"] = document.getElementById("shippingName").value;
+			jsonShippingAddress["shippingAddressStreet1"] = document.getElementById("shippingAddress1").value;
+			jsonShippingAddress["shippingAddressStreet2"] = document.getElementById("shippingAddress2").value;
+			jsonShippingAddress["shippingAddressCity"] = document.getElementById("shippingCity").value;
+			jsonShippingAddress["shippingAddressState"] = document.getElementById("shippingState").value;
+			jsonShippingAddress["shippingAddressZipcode"] = document.getElementById("shippingZipcode").value;
+			jsonShippingAddress["shippingAddressCountry"] = "IT";
+			shippingAddress = JSON.stringify(jsonShippingAddress);
+			
+			var jsonShippingAddress = JSON.parse(billingAddress);
+			jsonShippingAddress["billingAddressName"] = document.getElementById("billingName").value;
+			jsonShippingAddress["billingAddressStreet1"] = document.getElementById("billingAddress1").value;
+			jsonShippingAddress["billingAddressStreet2"] = document.getElementById("billingAddress2").value;
+			jsonShippingAddress["billingAddressCity"] = document.getElementById("billingCity").value;
+			jsonShippingAddress["billingAddressState"] = document.getElementById("billingState").value;
+			jsonShippingAddress["billingAddressZipcode"] = document.getElementById("billingZipcode").value;
+			jsonShippingAddress["billingAddressCountry"] = "IT";
+			billingAddress = JSON.stringify(jsonShippingAddress);
+
 	        var data = {
 	        		shippingAddress: shippingAddress,
 	        		billingAddress: billingAddress,
