@@ -78,9 +78,9 @@
 												th:name="qty"
 												th:value="${cartItem.qty}" min="1" max="9"
 												th:form="'update-item-'+${cartItem.id}" /></td>
-											<td>$ <span th:text="${cartItem.product.listPrice}"></span></td>
-											<td>$ <span th:if="${cartItem.product.ourPrice}!=0.0" th:text="${cartItem.product.ourPrice}"></span>
-											      <span th:if="${cartItem.product.ourPrice}==0.0" th:text="${cartItem.product.listPrice}"></span></td>
+											<td>$ <span th:text="${#numbers.formatDecimal(cartItem.product.listPrice, 1 ,2)}"></span></td>
+											<td>$ <span th:if="${cartItem.product.ourPrice}!=0.0" th:text="${#numbers.formatDecimal(cartItem.product.ourPrice, 1 ,2)}"></span>
+											      <span th:if="${cartItem.product.ourPrice}==0.0" th:text="${#numbers.formatDecimal(cartItem.product.listPrice, 1 ,2)}"></span></td>
 											<td>$ <span
 												th:text="${#numbers.formatDecimal(cartItem.qty * cartItem.product.ourPrice,1,2)}"></span></td>
 											<td><a
@@ -96,7 +96,7 @@
 										<tr>
 											<th colspan="5">Totale</th>
 											<th colspan="2">$ <span
-												th:text="${shoppingCart.grandTotal}"></span></th>
+												th:text="${#numbers.formatDecimal(shoppingCart.grandTotal, 1 ,2)}"></span></th>
 										</tr>
 									</tfoot>
 								</table>

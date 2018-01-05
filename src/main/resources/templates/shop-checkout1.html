@@ -413,10 +413,10 @@
 													<td><input type="number" class="form-control"
 														th:id="${cartItem.id}" th:name="qty" th:disabled="true"
 														th:value="${cartItem.qty}" /></td>
-													<td>$ <span th:text="${cartItem.product.listPrice}"></span></td>
-													<td>$ <span th:text="${cartItem.product.ourPrice}"></span></td>
+													<td>$ <span th:text="${#numbers.formatDecimal(cartItem.product.listPrice, 1 ,2)}"></span></td>
+													<td>$ <span th:text="${#numbers.formatDecimal(cartItem.product.ourPrice, 1 ,2)}"></span></td>
 													<td>$ <span
-														th:text="${cartItem.qty * cartItem.product.ourPrice}"></span></td>
+														th:text="${#numbers.formatDecimal(cartItem.qty * cartItem.product.ourPrice, 1 ,2)}"></span></td>
 												</tr>
 											</tbody>
 
@@ -424,7 +424,7 @@
 												<tr>
 													<th colspan="5">Totale</th>
 													<th colspan="2">$ <span
-														th:text="${shoppingCart.grandTotal}"></span></th>
+														th:text="${#numbers.formatDecimal(shoppingCart.grandTotal, 1 ,2)}"></span></th>
 												</tr>
 											</tfoot>
 
@@ -526,6 +526,8 @@ _________________________________________________________ -->
 			jsonShippingAddress["billingAddressCountry"] = "IT";
 			billingAddress = JSON.stringify(jsonShippingAddress);
 
+			billingSameAsShipping = JSON.stringify(document.getElementById("theSameAsShippingAddress").checked);
+			
 	        var data = {
 	        		shippingAddress: shippingAddress,
 	        		billingAddress: billingAddress,

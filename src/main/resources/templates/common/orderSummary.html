@@ -14,7 +14,7 @@
 				<tbody>
 					<tr>
 						<td>Subtotale dell'ordine</td>
-						<th th:text="'$'+${session.shoppingCart.grandTotal}"></th>
+						<th th:text="'$'+${#numbers.formatDecimal(session.shoppingCart.grandTotal, 1, 2)}"></th>
 
 					</tr>
 

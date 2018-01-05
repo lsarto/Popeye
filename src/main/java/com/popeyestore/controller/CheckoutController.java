@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.paypal.api.payments.Amount;
+import com.paypal.api.payments.BillingInfo;
 import com.paypal.api.payments.Details;
 import com.paypal.api.payments.Item;
 import com.paypal.api.payments.ItemList;
@@ -38,6 +39,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
@@ -203,6 +205,8 @@ public class CheckoutController {
 	public String paymentWithPaypal(Principal principal, HttpServletRequest req, HttpServletResponse resp) {
 		Map<String, String> map = new HashMap<String, String>();
 		Payment createdPayment = null;
+		String shippingMethod = "";
+		ShoppingCart shoppingCart = null;
 
 		// ### Api Context
 		// Pass in a `ApiContext` object to authenticate
@@ -219,16 +223,54 @@ public class CheckoutController {
 			PaymentExecution paymentExecution = new PaymentExecution();
 			paymentExecution.setPayerId(req.getParameter("payerID"));
 			try {
-				
 				createdPayment = payment.execute(apiContext, paymentExecution);
 				ResultPrinter.addResult(req, resp, "Executed The Payment", Payment.getLastRequest(), Payment.getLastResponse(), null);
+				LOGGER.info("Executed payment with id = "
+						+ createdPayment.getId() + " and status = "
+						+ createdPayment.getState() + "and created time = "
+						+ createdPayment.getCreateTime());
+				
+				shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
+				ObjectMapper mapper = new ObjectMapper();
+				ListIterator<Transaction> iteratorTransaction = createdPayment.getTransactions().listIterator();
+				Transaction transaction = iteratorTransaction.next();
+				com.paypal.api.payments.ShippingAddress paypalShippingAddress = 
+											transaction.getItemList().getShippingAddress();
+
+				shippingAddress.setShippingAddressStreet1(paypalShippingAddress.getLine1());
+				shippingAddress.setShippingAddressStreet2(paypalShippingAddress.getLine2());
+				shippingAddress.setShippingAddressZipcode(paypalShippingAddress.getPostalCode());
+				shippingAddress.setShippingAddressState(paypalShippingAddress.getState());
+				shippingAddress.setShippingAddressCountry(paypalShippingAddress.getCountryCode());
+				shippingAddress.setShippingAddressName(paypalShippingAddress.getRecipientName());
+				shippingAddress.setShippingAddressCity(paypalShippingAddress.getCity());
+				
+				User user = userService.findByUsername(principal.getName());
+				Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, shippingMethod, user);
+				mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ITALY));
+				shoppingCartService.clearShoppingCart(shoppingCart);
+				LocalDate today = LocalDate.now();
+				LocalDate estimatedDeliveryDate;
+
+				if (shippingMethod.equals("groundShipping")) {
+					estimatedDeliveryDate = today.plusDays(5);
+				} else {
+					estimatedDeliveryDate = today.plusDays(3);
+				}
+					
+				serialized = "{\"cartItemList\":\""+mapper.writeValueAsString(shoppingCart.getCartItemList())+"\"}";
+				System.out.println("serialized: "+serialized);
+
+				
 			} catch (PayPalRESTException e) {
 				ResultPrinter.addResult(req, resp, "Executed The Payment", Payment.getLastRequest(), null, e.getMessage());
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		} else {
-			
-			ShoppingCart shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
-			
+				
+			shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
 			ObjectMapper mapper = new ObjectMapper();
 			
 			String shippingAddressString = req.getParameter("shippingAddress");
@@ -247,7 +289,7 @@ public class CheckoutController {
 					ShippingAddress shippingAddress = mapper.readValue(shippingAddressString, ShippingAddress.class);
 					BillingAddress billingAddress = mapper.readValue(billingAddressString, BillingAddress.class);
 					Boolean billingSameAsShipping = mapper.readValue(billingSameAsShippingString, Boolean.class);
-					String shippingMethod = mapper.readValue(shippingMethodString, String.class);
+					shippingMethod = mapper.readValue(shippingMethodString, String.class);
 					
 					if (billingSameAsShipping!=null && billingSameAsShipping.equals("true")) {
 						billingAddress.setBillingAddressName(shippingAddress.getShippingAddressName());
@@ -263,11 +305,14 @@ public class CheckoutController {
 							|| shippingAddress.getShippingAddressState().isEmpty()
 							|| shippingAddress.getShippingAddressName().isEmpty()
 							|| shippingAddress.getShippingAddressZipcode().isEmpty()
+							|| shippingAddress.getShippingAddressCountry().isEmpty()
 							|| billingAddress.getBillingAddressStreet1().isEmpty()
 							|| billingAddress.getBillingAddressCity().isEmpty() || billingAddress.getBillingAddressState().isEmpty()
 							|| billingAddress.getBillingAddressName().isEmpty()
-							|| billingAddress.getBillingAddressZipcode().isEmpty())
-						return "{\"missField\":\"true\", \"errPath\":\"/checkout?id=" + shoppingCart.getId() + "&missingRequiredField=true\"}"; 
+							|| billingAddress.getBillingAddressCountry().isEmpty()
+							|| billingAddress.getBillingAddressZipcode().isEmpty()) {
+						return "{\"missField\":\"true\", \"errPath\":\"/checkout?id=" + shoppingCart.getId() + "&missingRequiredField=true\"}";
+					}
 				}
 			} catch (JsonParseException e1) {
 				// TODO Auto-generated catch block
@@ -287,15 +332,20 @@ public class CheckoutController {
 			details.setSubtotal(String.valueOf(shoppingCart.getGrandTotal()));
 			details.setTax(String.valueOf(shoppingCart.getGrandTotal().multiply(new BigDecimal(0.06))
 					.setScale(2, BigDecimal.ROUND_HALF_UP)));
+			System.out.println("grand total: "+shoppingCart.getGrandTotal());
 
 			// ###Amount
 			// Let's you specify a payment amount.
 			Amount amount = new Amount();
 			amount.setCurrency("EUR");
 			// Total must be equal to sum of shipping, tax and subtotal.
-			amount.setTotal(String.valueOf(shoppingCart.getGrandTotal()
-					.add(shoppingCart.getGrandTotal().multiply(new BigDecimal(0.06))).add(new BigDecimal(1))
-					.setScale(2, BigDecimal.ROUND_HALF_UP)));
+			amount.setTotal("265.70");
+//			amount.setTotal(String.valueOf(shoppingCart.getGrandTotal()
+//					.add(shoppingCart.getGrandTotal().multiply(new BigDecimal(0.06)).setScale(2, BigDecimal.ROUND_HALF_UP))
+//					.add(new BigDecimal(1)).setScale(2, BigDecimal.ROUND_HALF_UP)));
+//			System.out.println("currency amount:" + String.valueOf(shoppingCart.getGrandTotal()
+//					.add(shoppingCart.getGrandTotal().multiply(new BigDecimal(0.06)).setScale(2, BigDecimal.ROUND_HALF_UP))
+//					.add(new BigDecimal(1)).setScale(2, BigDecimal.ROUND_HALF_UP)));
 			amount.setDetails(details);
 
 			// ###Transaction
@@ -315,7 +365,8 @@ public class CheckoutController {
 				Item item = new Item();
 				item.setName(cartItem.getProduct().getName())
 						.setQuantity(String.valueOf(cartItem.getQty())).setCurrency("EUR")
-						.setPrice(String.valueOf(cartItem.getSubtotal()));
+						.setPrice(String.valueOf(cartItem.getProduct().getOurPrice()));
+				System.out.println("item price: "+String.valueOf(cartItem.getSubtotal()));
 				items.add(item);
 			}
 			itemList.setItems(items);
@@ -378,17 +429,6 @@ public class CheckoutController {
 			} catch (PayPalRESTException e) {
 				ResultPrinter.addResult(req, resp, "Payment with PayPal", Payment.getLastRequest(), null, e.getMessage());
 			}
-		}
-		
-		try {
-			ObjectMapper objectMapper = new ObjectMapper();
-			objectMapper.setSerializationInclusion(Include.NON_NULL);
-
-			serialized = objectMapper.writeValueAsString(createdPayment);
-			System.out.println("serialized: "+serialized);
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		return serialized;
