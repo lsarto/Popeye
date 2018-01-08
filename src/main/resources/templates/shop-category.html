@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
 
 <head th:replace="common/header :: common-header" />
+<meta charset="ISO-8859-1">
 
 <body>
 
@@ -34,7 +35,73 @@
 
 					<div class="col-sm-9">
 						<div id="shop-category-call">
-							<div th:replace="common/categorieFragment :: listFragment"></div>
+							<div th:if="${emptyList}">
+								<h5 style="font-style: italic;">Oops, nessun risultato
+									trovato. Riprova pi&ugrave; tardi o prova qualcos'altro.</h5>
+							</div>
+
+							<table border="0" id="productList">
+								<thead>
+									<tr>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="product-item" class="col-md-4 col-sm-6"
+										data-th-each="product : ${productList}">
+										<td>
+											<div th:if="${product != null}">
+												<div class="product">
+													<div class="image crop">
+														<a th:href="@{/shop-detail?id=}+${product.id}"> <img
+															th:src="#{adminPath}+@{/image/product/}+${product.id}+'-1.png'"
+															alt="" class="img-responsive image1">
+														</a>
+													</div>
+													<!-- /.image -->
+													<div class="text">
+														<h3>
+															<a th:href="@{/shop-detail?id=}+${product.id}"> <span
+																th:text="${product.name}"> </span>
+															</a>
+														</h3>
+														<p class="price">
+															<del>
+																<span th:if="${product.ourPrice}!=${product.listPrice}"
+																	th:text="${#numbers.formatDecimal(product.listPrice, 0 , 'COMMA', 2, 'POINT')}"></span>
+																<span th:if="${product.ourPrice}!=${product.listPrice}">
+																	€</span>
+															</del>
+															<span
+																th:text="${#strings.abbreviate(product.ourPrice, 500)}"></span>
+															€
+														</p>
+														<p class="buttons">
+															<a th:href="@{/shop-detail?id=}+${product.id}"
+																class="btn btn-default">View detail</a> <a
+																href="shop-basket.html" class="btn btn-template-main"><i
+																class="fa fa-shopping-cart"></i>Add to cart</a>
+														</p>
+													</div>
+													<!-- /.text -->
+
+													<div th:if="${product.sale}" class="ribbon sale">
+														<div class="theribbon">SALE</div>
+														<div class="ribbon-background"></div>
+													</div>
+													<!-- /.ribbon -->
+
+													<div th:if="${product.newProduct}" class="ribbon new">
+														<div class="theribbon">NEW</div>
+														<div class="ribbon-background"></div>
+													</div>
+													<!-- /.ribbon -->
+												</div>
+												<!-- /.product -->
+											</div>
+										</td>
+								</tbody>
+							</table>
 						</div>
 
 						<div id="div-elementi-categoria"></div>
