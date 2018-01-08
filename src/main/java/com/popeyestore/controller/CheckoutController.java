@@ -260,7 +260,8 @@ public class CheckoutController {
 				Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, shippingMethod, user);
 				mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ITALY));
 				shoppingCartService.clearShoppingCart(shoppingCart);
-				
+				shippingAddress = new ShippingAddress();
+				billingAddress = new BillingAddress();
 				
 			} catch (PayPalRESTException e) {
 				e.printStackTrace();
@@ -288,7 +289,7 @@ public class CheckoutController {
 					Boolean billingSameAsShipping = mapper.readValue(billingSameAsShippingString, Boolean.class);
 					shippingMethod = mapper.readValue(shippingMethodString, String.class);
 					
-					if (billingSameAsShipping!=null && billingSameAsShipping.equals("true")) {
+					if (billingSameAsShipping!=null && billingSameAsShipping.equals(new Boolean(true))) {
 						billingAddress.setBillingAddressName(shippingAddress.getShippingAddressName());
 						billingAddress.setBillingAddressStreet1(shippingAddress.getShippingAddressStreet1());
 						billingAddress.setBillingAddressStreet2(shippingAddress.getShippingAddressStreet2());

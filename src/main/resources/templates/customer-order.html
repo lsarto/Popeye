@@ -67,8 +67,8 @@
 														${cartItem.product.id}+'-1.png'"></a></td>
 											<td data-th-text="${cartItem.product.name}"></td>
 											<td data-th-text="${cartItem.qty}"></td>
-											<td data-th-text="${cartItem.product.ourPrice}+' €'"></td>
-											<td data-th-text="${cartItem.subtotal}+' €'"></td>
+											<td data-th-text="${#numbers.formatDecimal(cartItem.product.ourPrice, 1, 2)}+' €'"></td>
+											<td data-th-text="${#numbers.formatDecimal(cartItem.subtotal, 1, 2)}+' €'"></td>
 										</tr>
 									</tbody>
 									<tfoot>
@@ -80,9 +80,19 @@
 												th:text="${#numbers.formatDecimal(tax, 1 ,2)}+' €'"></th>
 										</tr>
 										<tr>
+											<th colspan="5" class="text-right">Spedizione</th>
+											<th th:if="${order.shippingMethod}=='groundShipping'"
+												th:text="${#numbers.formatDecimal(3, 1 ,2)}+' €'"></th>
+											<th th:if="${order.shippingMethod}=='premiumShipping'"
+												th:text="${#numbers.formatDecimal(5, 1 ,2)}+' €'"></th>
+										</tr>
+										<tr>
 											<th colspan="5" class="text-right">Totale</th>
-											<th
-												th:with="total=${order.orderTotal+order.orderTotal*0.06}"
+											<th th:if="${order.shippingMethod}=='groundShipping'"
+												th:with="total=${order.orderTotal+order.orderTotal*0.06+3}"
+												th:text="${#numbers.formatDecimal(total, 1 ,2)}+' €'"></th>
+											<th th:if="${order.shippingMethod}=='premiumShipping'"
+												th:with="total=${order.orderTotal+order.orderTotal*0.06+5}"
 												th:text="${#numbers.formatDecimal(total, 1 ,2)}+' €'"></th>
 										</tr>
 									</tfoot>
@@ -137,7 +147,7 @@
 						<div class="panel panel-default sidebar-menu">
 
 							<div class="panel-heading">
-								<h3 class="panel-title">Customer section</h3>
+								<h3 class="panel-title">Area Personale</h3>
 							</div>
 
 							<div class="panel-body">

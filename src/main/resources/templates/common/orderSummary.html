@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
 	xmlns:sec="http://www.w3.org/1999/xhtml">
+<meta charset="ISO-8859-1">
+	
 
 <body>
 	<div th:fragment="orderSummary" class="box" id="order-summary">
@@ -14,7 +16,7 @@
 				<tbody>
 					<tr>
 						<td>Subtotale dell'ordine</td>
-						<th th:text="'$'+${#numbers.formatDecimal(session.shoppingCart.grandTotal, 1, 2)}"></th>
+						<th th:text="${#numbers.formatDecimal(session.shoppingCart.grandTotal, 1, 2)}+' €'"></th>
 
 					</tr>
 
@@ -28,13 +30,13 @@
 					<tr>
 						<td>Tasse</td>
 						<th th:with="tax=${session.shoppingCart.grandTotal*0.06}"
-							th:text="'$'+${#numbers.formatDecimal(tax, 1 ,2)}"></th>
+							th:text="${#numbers.formatDecimal(tax, 1 ,2)}+' €'"></th>
 					</tr>
 					<tr class="total">
 						<td>Totale</td>
 						<th
 							th:with="total=${session.shoppingCart.grandTotal+session.shoppingCart.grandTotal*0.06}"
-							th:text="'$'+${#numbers.formatDecimal(total, 1 ,2)}"></th>
+							th:text="${#numbers.formatDecimal(total, 1 ,2)}+' €'"></th>
 					</tr>
 				</tbody>
 			</table>

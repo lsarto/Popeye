@@ -12,6 +12,8 @@
 <!-- Custom styles for this template -->
 <link href="/css/style.css" rel="stylesheet" />
 
+<meta charset="UTF-8">
+
 <style>
 table {
 	border-collapse: collapse;
@@ -76,29 +78,43 @@ table, th, td {
 			<tr th:each="cartItem : ${cartItemList}">
 				<td><span data-th-text="${cartItem.product.name}"></span></td>
 				<td class="text-center"
-					data-th-text="${cartItem.product.ourPrice}"></td>
+					data-th-text="${#numbers.formatDecimal(cartItem.product.ourPrice, 1, 2)}+' €'"></td>
 				<td class="text-center" data-th-text="${cartItem.qty}"></td>
-				<td class="text-right" data-th-text="${cartItem.subtotal}"></td>
+				<td class="text-right" data-th-text="${#numbers.formatDecimal(cartItem.subtotal, 1, 2)}+' €'"></td>
 			</tr>
 			<tr>
 				<td class="highrow"></td>
 				<td class="highrow"></td>
 				<td class="highrow text-center"><strong>Subtotale</strong></td>
-				<td class="highrow text-right" data-th-text="${order.orderTotal}"></td>
+				<td class="highrow text-right" data-th-text="${#numbers.formatDecimal(order.orderTotal, 1, 2)}+' €'"></td>
 			</tr>
 			<tr>
 				<td class="emptyrow"></td>
 				<td class="emptyrow"></td>
 				<td class="emptyrow text-center"><strong>Tassa</strong></td>
 				<td class="emptyrow text-right"
-					data-th-text="${#numbers.formatDecimal(order.orderTotal*0.06,1,2)}"></td>
+					data-th-text="${#numbers.formatDecimal(order.orderTotal*0.06,1,2)}+' €'"></td>
+			</tr>
+			<tr>
+				<td class="emptyrow"></td>
+				<td class="emptyrow"></td>
+				<td class="emptyrow text-center"><strong>Spedizione</strong></td>
+				<td class="emptyrow text-right" th:if="${order.shippingMethod}=='groundShipping'"
+					data-th-text="${#numbers.formatDecimal(3,1,2)}+' €'"></td>
+				<td class="emptyrow text-right" th:if="${order.shippingMethod}=='premiumShipping'"
+					data-th-text="${#numbers.formatDecimal(5,1,2)}+' €'"></td>
 			</tr>
 			<tr>
 				<td class="emptyrow"><i class="fa fa-barcode iconbig"></i></td>
 				<td class="emptyrow"></td>
 				<td class="emptyrow text-center"><strong>Totale</strong></td>
-				<td th:with="total=${order.orderTotal+order.orderTotal*0.06}"
-					data-th-text="${#numbers.formatDecimal(total, 0, 2)}"
+				<td th:if="${order.shippingMethod}=='groundShipping'"
+					th:with="total=${order.orderTotal+order.orderTotal*0.06+3}"
+					data-th-text="${#numbers.formatDecimal(total, 0, 2)}+' €'"
+					class="emptyrow text-right"></td>
+				<td th:if="${order.shippingMethod}=='premiumShipping'"
+					th:with="total=${order.orderTotal+order.orderTotal*0.06+5}"
+					data-th-text="${#numbers.formatDecimal(total, 0, 2)}+' €'"
 					class="emptyrow text-right"></td>
 			</tr>
 		</tbody>

@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
 
 <head th:replace="common/header :: common-header" />
+<meta charset="ISO-8859-1">
 
 <body>
 
@@ -78,11 +79,11 @@
 
 										</div>
 
-										<p class="price">$
+										<p class="price">
 											<span th:if="${product.ourPrice}!=0.0"
 												th:text="${#strings.abbreviate(product.ourPrice, 500)}"></span>
 											<span th:if="${product.ourPrice}==0.0"
-												th:text="${#strings.abbreviate(product.listPrice, 500)}"></span>
+												th:text="${#strings.abbreviate(product.listPrice, 500)}"></span> €
 										</p>
 
 										<p class="text-center">
