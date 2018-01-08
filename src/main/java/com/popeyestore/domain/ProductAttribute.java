@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ProductAttribute {
 	
@@ -19,6 +21,7 @@ public class ProductAttribute {
 	private String value;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "product_id")
 	private Product product;
 	

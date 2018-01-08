@@ -1,16 +1,14 @@
 package com.popeyestore.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.CollectionType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 import com.paypal.api.payments.Amount;
-import com.paypal.api.payments.BillingInfo;
 import com.paypal.api.payments.Details;
 import com.paypal.api.payments.Item;
 import com.paypal.api.payments.ItemList;
@@ -22,7 +20,6 @@ import com.paypal.api.payments.RedirectUrls;
 import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
-import com.popeye.paypal.api.payments.util.ResultPrinter;
 
 import org.apache.log4j.Logger;
 
@@ -34,6 +31,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -44,7 +42,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -77,6 +74,7 @@ import com.popeyestore.service.UserPaymentService;
 import com.popeyestore.service.UserService;
 import com.popeyestore.service.UserShippingService;
 import com.popeyestore.utility.MailConstructor;
+
 import com.popeyestore.utility.ITConstants;
 
 @Controller
@@ -87,7 +85,7 @@ public class CheckoutController {
 	private ShippingAddress shippingAddress = new ShippingAddress();
 	private BillingAddress billingAddress = new BillingAddress();
 	private com.popeyestore.domain.Payment payment = new com.popeyestore.domain.Payment();
-	private APIContext apiContext;
+	String shippingMethod = "";
 	
 	private String serialized;
 
@@ -205,7 +203,6 @@ public class CheckoutController {
 	public String paymentWithPaypal(Principal principal, HttpServletRequest req, HttpServletResponse resp) {
 		Map<String, String> map = new HashMap<String, String>();
 		Payment createdPayment = null;
-		String shippingMethod = "";
 		ShoppingCart shoppingCart = null;
 
 		// ### Api Context
@@ -224,10 +221,9 @@ public class CheckoutController {
 			paymentExecution.setPayerId(req.getParameter("payerID"));
 			try {
 				createdPayment = payment.execute(apiContext, paymentExecution);
-				ResultPrinter.addResult(req, resp, "Executed The Payment", Payment.getLastRequest(), Payment.getLastResponse(), null);
 				LOGGER.info("Executed payment with id = "
 						+ createdPayment.getId() + " and status = "
-						+ createdPayment.getState() + "and created time = "
+						+ createdPayment.getState() + " and created time = "
 						+ createdPayment.getCreateTime());
 				
 				shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
@@ -245,49 +241,50 @@ public class CheckoutController {
 				shippingAddress.setShippingAddressName(paypalShippingAddress.getRecipientName());
 				shippingAddress.setShippingAddressCity(paypalShippingAddress.getCity());
 				
-				User user = userService.findByUsername(principal.getName());
-				Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, shippingMethod, user);
-				mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ITALY));
-				shoppingCartService.clearShoppingCart(shoppingCart);
 				LocalDate today = LocalDate.now();
 				LocalDate estimatedDeliveryDate;
+				mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
 				if (shippingMethod.equals("groundShipping")) {
 					estimatedDeliveryDate = today.plusDays(5);
 				} else {
 					estimatedDeliveryDate = today.plusDays(3);
 				}
-					
-				serialized = "{\"cartItemList\":\""+mapper.writeValueAsString(shoppingCart.getCartItemList())+"\"}";
-				System.out.println("serialized: "+serialized);
+				
+				String formattedStringDate = estimatedDeliveryDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
 
+				serialized = "{\"cartItemList\":"+mapper.writeValueAsString(shoppingCart.getCartItemList())+
+						", \"estimatedDeliveryDate\":"+mapper.writeValueAsString(formattedStringDate)+"}";
+				
+				User user = userService.findByUsername(principal.getName());
+				Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, shippingMethod, user);
+				mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ITALY));
+				shoppingCartService.clearShoppingCart(shoppingCart);
+				
 				
 			} catch (PayPalRESTException e) {
-				ResultPrinter.addResult(req, resp, "Executed The Payment", Payment.getLastRequest(), null, e.getMessage());
+				e.printStackTrace();
 			} catch (JsonProcessingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} 
+			
 		} else {
 				
 			shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
 			ObjectMapper mapper = new ObjectMapper();
 			
 			String shippingAddressString = req.getParameter("shippingAddress");
-			System.out.println("shippingAddress: "+shippingAddressString);
 			String billingAddressString = req.getParameter("billingAddress");
-			System.out.println("billingAddress: "+billingAddressString);
 			String billingSameAsShippingString = req.getParameter("billingSameAsShipping");
-			System.out.println("billingSameAsShipping: "+billingSameAsShippingString);
 			String shippingMethodString = req.getParameter("shippingMethod");
-			System.out.println("shippingMethod: "+shippingMethodString);
 			
 			//JSON from String to Object
 			try {
 				if(shippingAddressString!=null && billingAddressString!=null && billingSameAsShippingString!=null
 						&& shippingMethodString!=null){
-					ShippingAddress shippingAddress = mapper.readValue(shippingAddressString, ShippingAddress.class);
-					BillingAddress billingAddress = mapper.readValue(billingAddressString, BillingAddress.class);
+					shippingAddress = mapper.readValue(shippingAddressString, ShippingAddress.class);
+					billingAddress = mapper.readValue(billingAddressString, BillingAddress.class);
 					Boolean billingSameAsShipping = mapper.readValue(billingSameAsShippingString, Boolean.class);
 					shippingMethod = mapper.readValue(shippingMethodString, String.class);
 					
@@ -332,20 +329,15 @@ public class CheckoutController {
 			details.setSubtotal(String.valueOf(shoppingCart.getGrandTotal()));
 			details.setTax(String.valueOf(shoppingCart.getGrandTotal().multiply(new BigDecimal(0.06))
 					.setScale(2, BigDecimal.ROUND_HALF_UP)));
-			System.out.println("grand total: "+shoppingCart.getGrandTotal());
 
 			// ###Amount
 			// Let's you specify a payment amount.
 			Amount amount = new Amount();
 			amount.setCurrency("EUR");
 			// Total must be equal to sum of shipping, tax and subtotal.
-			amount.setTotal("265.70");
-//			amount.setTotal(String.valueOf(shoppingCart.getGrandTotal()
-//					.add(shoppingCart.getGrandTotal().multiply(new BigDecimal(0.06)).setScale(2, BigDecimal.ROUND_HALF_UP))
-//					.add(new BigDecimal(1)).setScale(2, BigDecimal.ROUND_HALF_UP)));
-//			System.out.println("currency amount:" + String.valueOf(shoppingCart.getGrandTotal()
-//					.add(shoppingCart.getGrandTotal().multiply(new BigDecimal(0.06)).setScale(2, BigDecimal.ROUND_HALF_UP))
-//					.add(new BigDecimal(1)).setScale(2, BigDecimal.ROUND_HALF_UP)));
+			amount.setTotal(String.valueOf(shoppingCart.getGrandTotal()
+					.add(shoppingCart.getGrandTotal().multiply(new BigDecimal(0.06)).setScale(2, BigDecimal.ROUND_HALF_UP))
+					.add(new BigDecimal(1)).setScale(2, BigDecimal.ROUND_HALF_UP)));
 			amount.setDetails(details);
 
 			// ###Transaction
@@ -366,10 +358,20 @@ public class CheckoutController {
 				item.setName(cartItem.getProduct().getName())
 						.setQuantity(String.valueOf(cartItem.getQty())).setCurrency("EUR")
 						.setPrice(String.valueOf(cartItem.getProduct().getOurPrice()));
-				System.out.println("item price: "+String.valueOf(cartItem.getSubtotal()));
 				items.add(item);
 			}
 			itemList.setItems(items);
+			com.paypal.api.payments.ShippingAddress paypalShippingAddress = 
+					new com.paypal.api.payments.ShippingAddress();
+			paypalShippingAddress.setLine1(shippingAddress.getShippingAddressStreet1());
+			paypalShippingAddress.setLine2(shippingAddress.getShippingAddressStreet2());
+			paypalShippingAddress.setPostalCode(shippingAddress.getShippingAddressZipcode());
+			paypalShippingAddress.setState(shippingAddress.getShippingAddressState());
+			paypalShippingAddress.setCountryCode(shippingAddress.getShippingAddressCountry());
+			paypalShippingAddress.setRecipientName(shippingAddress.getShippingAddressName());
+			paypalShippingAddress.setCity(shippingAddress.getShippingAddressCity());
+			
+			itemList.setShippingAddress(paypalShippingAddress);
 			
 			transaction.setItemList(itemList);
 			
@@ -413,7 +415,8 @@ public class CheckoutController {
 				createdPayment = payment.create(apiContext);
 				LOGGER.info("Created payment with id = "
 						+ createdPayment.getId() + " and status = "
-						+ createdPayment.getState());
+						+ createdPayment.getState() + " and created time = "
+						+ createdPayment.getCreateTime());
 				// ###Payment Approval Url
 				Iterator<Links> links = createdPayment.getLinks().iterator();
 				while (links.hasNext()) {
@@ -422,70 +425,48 @@ public class CheckoutController {
 						req.setAttribute("redirectURL", link.getHref());
 					}
 				}
-				ResultPrinter.addResult(req, resp, "Payment with PayPal", Payment.getLastRequest(), Payment.getLastResponse(), null);
 				map.put(guid, createdPayment.getId());
 				return "{\"paymentID\":\"" + createdPayment.getId()+"\"}";
 
 			} catch (PayPalRESTException e) {
-				ResultPrinter.addResult(req, resp, "Payment with PayPal", Payment.getLastRequest(), null, e.getMessage());
+				e.printStackTrace();
 			}
 		}
 		
 		return serialized;
 	}
 	
-
-	@RequestMapping(value = "/checkout", method = RequestMethod.POST)
-	public String checkoutPost(@ModelAttribute("shippingAddress") ShippingAddress shippingAddress,
-			@ModelAttribute("billingAddress") BillingAddress billingAddress,
-			@ModelAttribute("billingSameAsShipping") String billingSameAsShipping,
-			@ModelAttribute("shippingMethod") String shippingMethod, Principal principal, Model model) {
-		ShoppingCart shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
-
-		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+	@RequestMapping(value = "/orderSubmittedPage", method = RequestMethod.POST)
+	public String orderSubmittedPage(@ModelAttribute("cartItemList") String cartItemListString,
+			@ModelAttribute("estimatedDeliveryDate") String estimatedDeliveryDateString, 
+			Principal principal, Model model) {
+		ObjectMapper mapper = new ObjectMapper();
+		JavaType listType = mapper
+			    .getTypeFactory()
+			    .constructCollectionType(List.class, CartItem.class);
+		List<CartItem> cartItemList = null;
+		String formattedStringDate = null;
+		try {
+			cartItemList = mapper.readValue(cartItemListString, listType);
+			formattedStringDate = mapper.readValue(estimatedDeliveryDateString, String.class);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		LocalDate estimatedDeliveryDate = LocalDate.parse(formattedStringDate);
+		
 		model.addAttribute("cartItemList", cartItemList);
-
-		if (billingSameAsShipping.equals("true")) {
-			billingAddress.setBillingAddressName(shippingAddress.getShippingAddressName());
-			billingAddress.setBillingAddressStreet1(shippingAddress.getShippingAddressStreet1());
-			billingAddress.setBillingAddressStreet2(shippingAddress.getShippingAddressStreet2());
-			billingAddress.setBillingAddressCity(shippingAddress.getShippingAddressCity());
-			billingAddress.setBillingAddressState(shippingAddress.getShippingAddressState());
-			billingAddress.setBillingAddressCountry(shippingAddress.getShippingAddressCountry());
-			billingAddress.setBillingAddressZipcode(shippingAddress.getShippingAddressZipcode());
-		}
-
-		if (shippingAddress.getShippingAddressStreet1().isEmpty() || shippingAddress.getShippingAddressCity().isEmpty()
-				|| shippingAddress.getShippingAddressState().isEmpty()
-				|| shippingAddress.getShippingAddressName().isEmpty()
-				|| shippingAddress.getShippingAddressZipcode().isEmpty()
-				|| billingAddress.getBillingAddressStreet1().isEmpty()
-				|| billingAddress.getBillingAddressCity().isEmpty() || billingAddress.getBillingAddressState().isEmpty()
-				|| billingAddress.getBillingAddressName().isEmpty()
-				|| billingAddress.getBillingAddressZipcode().isEmpty())
-			return "redirect:/checkout?id=" + shoppingCart.getId() + "&missingRequiredField=true";
-
-		User user = userService.findByUsername(principal.getName());
-
-		Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, shippingMethod, user);
-
-		mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ITALY));
-
-		shoppingCartService.clearShoppingCart(shoppingCart);
-
-		LocalDate today = LocalDate.now();
-		LocalDate estimatedDeliveryDate;
-
-		if (shippingMethod.equals("groundShipping")) {
-			estimatedDeliveryDate = today.plusDays(5);
-		} else {
-			estimatedDeliveryDate = today.plusDays(3);
-		}
-
 		model.addAttribute("estimatedDeliveryDate", estimatedDeliveryDate);
-
+		
 		return "orderSubmittedPage";
 	}
+
 
 	@RequestMapping("/setShippingAddress")
 	public String setShippingAddress(@RequestParam("userShippingId") Long userShippingId, Principal principal,

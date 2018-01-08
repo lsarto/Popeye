@@ -547,6 +547,29 @@ _________________________________________________________ -->
 
 	    // onAuthorize() is called when the buyer approves the payment
 	    onAuthorize: function(data, actions) {
+	    	function post(path, params, method) {
+	    	    method = method || "post"; // Set method to post by default if not specified.
+
+	    	    // The rest of this code assumes you are not using a library.
+	    	    // It can be made less wordy if you use one.
+	    	    var form = document.createElement("form");
+	    	    form.setAttribute("method", method);
+	    	    form.setAttribute("action", path);
+
+	    	    for(var key in params) {
+	    	        if(params.hasOwnProperty(key)) {
+	    	            var hiddenField = document.createElement("input");
+	    	            hiddenField.setAttribute("type", "hidden");
+	    	            hiddenField.setAttribute("name", key);
+	    	            hiddenField.setAttribute("value", params[key]);
+
+	    	            form.appendChild(hiddenField);
+	    	        }
+	    	    }
+
+	    	    document.body.appendChild(form);
+	    	    form.submit();
+	    	}
 
 	        // Set up a url on your server to execute the payment
 	        var EXECUTE_URL = 'http://localhost:8080/paymentWithPaypal/';
@@ -560,8 +583,10 @@ _________________________________________________________ -->
 	        // Make a call to your server to execute the payment
 	        return paypal.request.post(EXECUTE_URL, data)
 	            .then(function (res) {
-	            	window.alert("pagamento completato");
-//	            	post('/paypalToPopeye/', res);
+	  //          	window.alert("pagamento completato");
+
+					var url = 'http://localhost:8080/orderSubmittedPage/';
+					post(url, {cartItemList: JSON.stringify(res.cartItemList), estimatedDeliveryDate: JSON.stringify(res.estimatedDeliveryDate)});
 	            });
 	    }
 

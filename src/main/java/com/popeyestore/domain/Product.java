@@ -37,9 +37,11 @@ public class Product {
 	private List<ProductAttribute> productAttributes;
 	
 	@ManyToOne
+	@JsonIgnore
 	private Category category;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
+	@JsonIgnore
 	private Type type;
 	
 	@Column(columnDefinition="text")

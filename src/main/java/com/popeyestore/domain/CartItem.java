@@ -31,10 +31,12 @@ public class CartItem {
 	private List<ProductToCartItem> productToCartItemList;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="shopping_cart_id")
 	private ShoppingCart shoppingCart;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="order_id")
 	private Order order;
 
