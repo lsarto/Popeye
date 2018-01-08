@@ -39,20 +39,6 @@
 
 						<div id="div-elementi-categoria"></div>
 
-						<div class="pages">
-
-							<ul class="pagination">
-								<li><a href="#">&laquo;</a></li>
-								<li class="active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">&raquo;</a></li>
-							</ul>
-						</div>
-
-
 					</div>
 					<!-- /.col-md-9 -->
 
@@ -83,13 +69,12 @@
 		</div>
 		<!-- /#content -->
 
-		 <!-- *** FOOTER ***
+		<!-- *** FOOTER ***
 _________________________________________________________ -->
 
-        <div th:replace="common/footer :: footer">
-        </div>
-        <!-- *** FOOTER END *** -->
-        
+		<div th:replace="common/footer :: footer"></div>
+		<!-- *** FOOTER END *** -->
+
 	</div>
 	<!-- /#all -->
 
@@ -97,6 +82,24 @@ _________________________________________________________ -->
 	<!-- #### JAVASCRIPT FILES ### -->
 
 	<div th:replace="common/header :: body-bottom-scripts"></div>
+	<script>
+		$(document).ready(
+				function() {
+					$('#productList').DataTable(
+							{
+								"lengthMenu" : [ [ 5, 10, 15, 20, -1 ],
+										[ 5, 10, 15, 20, "All" ] ],
+								"ordering" : false,
+								stateSave : true
+							});
+
+					$("#productList").on('page.dt', function() {
+						$('html, body').animate({
+							scrollTop : $('#productList').offset().top
+						}, 200);
+					});
+				});
+	</script>
 </body>
 
 </html>

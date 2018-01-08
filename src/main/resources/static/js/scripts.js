@@ -105,5 +105,5 @@ $(".category-ajax").click(function(e) {
 
 	// chiamata ajax-jquery
 	$("#div-elementi-categoria").load("/searchByCategoryAjax?category="+id);
-
+	
 });
