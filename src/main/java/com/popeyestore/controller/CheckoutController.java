@@ -140,11 +140,19 @@ public class CheckoutController {
 			return "forward:/shoppingCart/cart";
 		}
 
+		List<Integer> toRemove = new ArrayList<>();
+		Integer i=0;
 		for (CartItem cartItem : cartItemList) {
-			if (cartItem.getProduct().getInStockNumber() < cartItem.getQty()) {
+			if(!cartItem.getProduct().isActive()){
+				toRemove.add(i);
+			} else if(cartItem.getProduct().getInStockNumber() < cartItem.getQty()) {
 				model.addAttribute("notEnoughStock", true);
 				return "forward:/shoppingCart/cart";
 			}
+			i++;
+		}	
+		for(Integer rmvIndx: toRemove){
+			cartItemList.remove(rmvIndx.intValue());
 		}
 
 		List<UserShipping> userShippingList = user.getUserShippingList();
@@ -252,8 +260,22 @@ public class CheckoutController {
 				}
 				
 				String formattedStringDate = estimatedDeliveryDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
+				
+				List<CartItem> cartItemList = shoppingCart.getCartItemList();
+				List<Integer> toRemove = new ArrayList<>();
+				Integer i=0;
+				for (CartItem cartItem : cartItemList) {
+					if(!cartItem.getProduct().isActive()){
+						toRemove.add(i);
+					}
+					
+					i++;
+				}	
+				for(Integer rmvIndx: toRemove){
+					cartItemList.remove(rmvIndx.intValue());
+				}
 
-				serialized = "{\"cartItemList\":"+mapper.writeValueAsString(shoppingCart.getCartItemList())+
+				serialized = "{\"cartItemList\":"+mapper.writeValueAsString(cartItemList)+
 						", \"estimatedDeliveryDate\":"+mapper.writeValueAsString(formattedStringDate)+"}";
 				
 				User user = userService.findByUsername(principal.getName());
@@ -355,11 +377,13 @@ public class CheckoutController {
 			ItemList itemList = new ItemList();
 			List<Item> items = new ArrayList<Item>();
 			for(CartItem cartItem: shoppingCart.getCartItemList()){
-				Item item = new Item();
-				item.setName(cartItem.getProduct().getName())
+				if(cartItem.getProduct().isActive()){
+					Item item = new Item();
+					item.setName(cartItem.getProduct().getName())
 						.setQuantity(String.valueOf(cartItem.getQty())).setCurrency("EUR")
 						.setPrice(String.valueOf(cartItem.getProduct().getOurPrice()));
-				items.add(item);
+					items.add(item);
+				}
 			}
 			itemList.setItems(items);
 			com.paypal.api.payments.ShippingAddress paypalShippingAddress = 
@@ -481,6 +505,18 @@ public class CheckoutController {
 			shippingAddressService.setByUserShipping(userShipping, shippingAddress);
 
 			List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
+			List<Integer> toRemove = new ArrayList<>();
+			Integer i=0;
+			for (CartItem cartItem : cartItemList) {
+				if(!cartItem.getProduct().isActive()){
+					toRemove.add(i);
+				}
+				
+				i++;
+			}	
+			for(Integer rmvIndx: toRemove){
+				cartItemList.remove(rmvIndx.intValue());
+			}
 
 			model.addAttribute("shippingAddress", shippingAddress);
 			model.addAttribute("payment", payment);
@@ -527,6 +563,18 @@ public class CheckoutController {
 			paymentService.setByUserPayment(userPayment, payment);
 
 			List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
+			List<Integer> toRemove = new ArrayList<>();
+			Integer i=0;
+			for (CartItem cartItem : cartItemList) {
+				if(!cartItem.getProduct().isActive()){
+					toRemove.add(i);
+				}
+				
+				i++;
+			}	
+			for(Integer rmvIndx: toRemove){
+				cartItemList.remove(rmvIndx.intValue());
+			}
 
 			billingAddressService.setByUserBilling(userBilling, billingAddress);
 

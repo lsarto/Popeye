@@ -1,6 +1,7 @@
 package com.popeyestore.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
@@ -110,6 +111,18 @@ public class HomeController {
 	@RequestMapping("/")
 	public String index(Model model, HttpSession session) {
 		List<Product> productList = productService.findLatest();
+		List<Integer> toRemove = new ArrayList<>();
+		Integer i=0;
+		for (Product product : productList) {
+			if(!product.isActive()){
+				toRemove.add(i);
+			}
+			
+			i++;
+		}	
+		for(Integer rmvIndx: toRemove){
+			productList.remove(rmvIndx.intValue());
+		}
 		model.addAttribute("productList", productList);
 		model.addAttribute("home", true);
 		return "index5";

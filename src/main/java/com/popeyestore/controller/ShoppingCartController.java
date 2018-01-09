@@ -47,16 +47,22 @@ public class ShoppingCartController {
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 		
 		shoppingCartService.updateShoppingCart(shoppingCart);
+		int numItems=0;
 		
 		if(cartItemList!=null && !cartItemList.isEmpty()){
 			BigDecimal grandTotal = new BigDecimal(0);
 			for(CartItem cartItem: cartItemList){
-				BigDecimal bigDecimal = new BigDecimal(cartItem.getProduct().getOurPrice()).multiply(new BigDecimal(cartItem.getQty()));
-				bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
-				grandTotal = grandTotal.add(bigDecimal);
+				if(cartItem.getProduct().isActive()){
+					numItems++;
+					BigDecimal bigDecimal = new BigDecimal(cartItem.getProduct().getOurPrice()).multiply(new BigDecimal(cartItem.getQty()));
+					bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
+					grandTotal = grandTotal.add(bigDecimal);
+				}
 			}
 			if(!grandTotal.equals(shoppingCart.getGrandTotal())){
 				model.addAttribute("notEnoughStock", true);
+			} else if(grandTotal.equals(new BigDecimal(0))){
+				model.addAttribute("emptyCart", true);
 			}
 		}
 		
@@ -64,7 +70,7 @@ public class ShoppingCartController {
 		session.setAttribute("cartItemList", cartItemList);
 		model.addAttribute("shoppingCart", shoppingCart);
 		session.setAttribute("shoppingCart", shoppingCart);
-		model.addAttribute("numItems", cartItemList.size());
+		model.addAttribute("numItems", numItems);
 		
 		model.addAttribute("carrello", true);
 		

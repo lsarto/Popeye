@@ -1,5 +1,6 @@
 package com.popeyestore.service.impl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -39,6 +40,18 @@ public class OrderServiceImpl implements OrderService{
 		order.setShippingMethod(shippingMethod);
 		
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		List<Integer> toRemove = new ArrayList<>();
+		Integer i=0;
+		for (CartItem cartItem : cartItemList) {
+			if(!cartItem.getProduct().isActive()){
+				toRemove.add(i);
+			}
+			
+			i++;
+		}	
+		for(Integer rmvIndx: toRemove){
+			cartItemList.remove(rmvIndx.intValue());
+		}
 		
 		for(CartItem cartItem : cartItemList) {
 			Product product = cartItem.getProduct();
