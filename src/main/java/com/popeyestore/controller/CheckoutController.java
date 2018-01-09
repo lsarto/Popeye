@@ -301,6 +301,7 @@ public class CheckoutController {
 			String billingAddressString = req.getParameter("billingAddress");
 			String billingSameAsShippingString = req.getParameter("billingSameAsShipping");
 			String shippingMethodString = req.getParameter("shippingMethod");
+			BigDecimal shipping = null;
 			
 			//JSON from String to Object
 			try {
@@ -310,6 +311,12 @@ public class CheckoutController {
 					billingAddress = mapper.readValue(billingAddressString, BillingAddress.class);
 					Boolean billingSameAsShipping = mapper.readValue(billingSameAsShippingString, Boolean.class);
 					shippingMethod = mapper.readValue(shippingMethodString, String.class);
+					
+					if (shippingMethod.equals("groundShipping")) {
+						shipping = new BigDecimal(3);
+					} else {
+						shipping = new BigDecimal(5);
+					}
 					
 					if (billingSameAsShipping!=null && billingSameAsShipping.equals(new Boolean(true))) {
 						billingAddress.setBillingAddressName(shippingAddress.getShippingAddressName());
@@ -348,7 +355,7 @@ public class CheckoutController {
 			// ###Details
 			// Let's you specify details of a payment amount.
 			Details details = new Details();
-			details.setShipping("1");
+			details.setShipping(shipping.setScale(2, BigDecimal.ROUND_HALF_UP).toString());
 			details.setSubtotal(String.valueOf(shoppingCart.getGrandTotal()));
 			details.setTax(String.valueOf(shoppingCart.getGrandTotal().multiply(new BigDecimal(0.06))
 					.setScale(2, BigDecimal.ROUND_HALF_UP)));
@@ -360,7 +367,7 @@ public class CheckoutController {
 			// Total must be equal to sum of shipping, tax and subtotal.
 			amount.setTotal(String.valueOf(shoppingCart.getGrandTotal()
 					.add(shoppingCart.getGrandTotal().multiply(new BigDecimal(0.06)).setScale(2, BigDecimal.ROUND_HALF_UP))
-					.add(new BigDecimal(1)).setScale(2, BigDecimal.ROUND_HALF_UP)));
+					.add(shipping.setScale(2, BigDecimal.ROUND_HALF_UP)).setScale(2, BigDecimal.ROUND_HALF_UP)));
 			amount.setDetails(details);
 
 			// ###Transaction
@@ -376,6 +383,7 @@ public class CheckoutController {
 			// ### Items
 			ItemList itemList = new ItemList();
 			List<Item> items = new ArrayList<Item>();
+			boolean emptyCart=true;
 			for(CartItem cartItem: shoppingCart.getCartItemList()){
 				if(cartItem.getProduct().isActive()){
 					Item item = new Item();
@@ -383,7 +391,11 @@ public class CheckoutController {
 						.setQuantity(String.valueOf(cartItem.getQty())).setCurrency("EUR")
 						.setPrice(String.valueOf(cartItem.getProduct().getOurPrice()));
 					items.add(item);
+					emptyCart=false;
 				}
+			}
+			if(emptyCart){
+				return "{\"emptyCart\":\"true\", \"errPath\":\"/shoppingCart/cart\"}";
 			}
 			itemList.setItems(items);
 			com.paypal.api.payments.ShippingAddress paypalShippingAddress = 

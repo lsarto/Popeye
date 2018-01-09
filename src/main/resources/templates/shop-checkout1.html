@@ -539,6 +539,9 @@ _________________________________________________________ -->
             	if(res.missField=='true'){
             		window.location.replace("http://localhost:8080"+res.errPath);
             	}
+            	if(res.emptyCart=='true'){
+            		window.location.replace("http://localhost:8080"+res.errPath);
+            	}
                 return res.paymentID;
             });
 
