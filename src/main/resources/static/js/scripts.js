@@ -92,7 +92,7 @@ $(".category-ajax").click(function(e) {
 	// ripulisco i prodotti caricati precedentemente
 	$("#shop-category-call").empty();
 	$("#div-elementi-categoria").empty();
-	
+
 	// rendo attivo il bottone della categoria selezionata, e non attivo
 	// tutti gli altri
 	$(".category-ajax").each(function(i, obj) {

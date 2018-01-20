@@ -78,8 +78,8 @@ ________________________________________________________ -->
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-5 contact">
-							<p class="hidden-sm hidden-xs">Contatti: +39 333 33 33 333,
-								hello@universal.com.</p>
+							<p class="hidden-sm hidden-xs">Contatti: +39 393 09 61 403,
+								lino.sarto@gmail.com</p>
 							<p class="hidden-md hidden-lg">
 								<a href="#" data-animate-hover="pulse"><i
 									class="fa fa-phone"></i></a> <a href="#" data-animate-hover="pulse"><i
@@ -131,11 +131,10 @@ ________________________________________________________ -->
 						<div class="navbar-header">
 
 							<a class="navbar-brand home" th:href="@{/}"> <img
-								src="/image/logo.png" alt="Universal logo"
-								class="hidden-xs hidden-sm"> <img
-								src="/image/logo.png" alt="Universal logo"
-								class="visible-xs visible-sm"><span class="sr-only">Universal
-									- go to homepage</span>
+								src="/image/logo-my.jpg" alt="Universal logo"
+								class="hidden-xs hidden-sm"> <img src="/image/logo-my-small.jpg"
+								alt="Universal logo" class="visible-xs visible-sm"><span
+								class="sr-only">Universal - go to homepage</span>
 							</a>
 							<div class="navbar-buttons">
 								<button type="button" class="navbar-toggle btn-template-main"
@@ -165,31 +164,21 @@ ________________________________________________________ -->
 
 						<div class="navbar-collapse collapse nav-col" id="navigation">
 							<ul class="nav navbar-nav navbar-right">
-								<li th:classappend="${home}? 'active dropdown'"><a href="#"
-									class="dropdown-toggle" th:href="@{/}"><span
-										class="glyphicon glyphicon-home"></span> Home</a></li>
 								<li th:each="type: ${session.types}" class="dropdown"><a
 									href="#" class="dropdown-toggle" href="#"
 									data-toggle="dropdown"> <span class="dropdown-toggle"
 										th:text="${type.getName()}" th:remove="tag"></span> <b
 										class="caret"></b></a>
 									<ul class="dropdown-menu">
-										<li th:each="category: ${type.categories}">
-											<a th:href="@{/searchByCategory(category=${category.name})}"
-											 th:text="${category.name}"></a>
-										</li>
+										<li th:each="category: ${type.categories}"><a
+											th:href="@{/searchByCategory(category=${category.id})}"
+											th:text="${category.name}"></a></li>
 									</ul></li>
-								<li th:classappend="${negozio}? 'active dropdown'"><a
-									class="dropdown-toggle" th:href="@{/shop-category}"><span
-										class="glyphicon glyphicon-gift"></span> Negozio</a></li>
-
 								<li th:classappend="${carrello}? 'active dropdown'"><a
 									th:href="@{/shoppingCart/cart}" href="#"
 									class="dropdown-toggle"><span
 										class="glyphicon glyphicon-shopping-cart"></span> Carrello</a></li>
-								<li th:classappend="${contatti}? 'active dropdown'"><a
-									th:href="@{/contact}" class="dropdown-toggle"><span
-										class="glyphicon glyphicon-envelope"></span> Contatti<b></b></a></li>
+
 							</ul>
 							<div class="clearfix" id="search">
 								<form class="navbar-form navbar-right" role="search"
@@ -263,9 +252,9 @@ _________________________________________________________ -->
 
 						<p class="text-center text-muted">Non sei ancora registrato?</p>
 						<p class="text-center text-muted">
-							<a th:href="@{/login}"><strong>Registrati
-									ora</strong></a>! E' facile e lo fai in 1&nbsp;minuto. Accedi subito
-									ai nostri sconti e molto altro!
+							<a th:href="@{/login}"><strong>Registrati ora</strong></a>! E'
+							facile e lo fai in 1&nbsp;minuto. Accedi subito ai nostri sconti
+							e molto altro!
 						</p>
 
 					</div>
@@ -292,17 +281,17 @@ _________________________________________________________ -->
 		<script src="/js/jquery.counterup.min.js"></script>
 		<script src="/js/jquery.parallax-1.1.3.js"></script>
 		<script src="/js/front.js"></script>
-		
+
 		<!-- paypal -->
 		<script src="https://www.paypalobjects.com/api/checkout.js"></script>
 		<script th:src="@{/js/paypal-scripts.js}"></script>
-		
+
 		<!-- owl script -->
 		<script th:src="@{/js/scripts.js}"></script>
 
 		<!-- owl carousel -->
 		<script src="/js/owl.carousel.min.js"></script>
-		
+
 		<!-- data table -->
 		<script th:src="@{/js/jquery.dataTables.min.js}"></script>
 		<script th:src="@{/js/dataTables.bootstrap.min.js}"></script>

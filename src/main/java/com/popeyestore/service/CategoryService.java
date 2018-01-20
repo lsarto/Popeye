@@ -14,4 +14,6 @@ public interface CategoryService {
 	Category createCategory(Category category, Type type);
 
 	Category save(Category category);
+
+	Category findOne(Long idCategory);
 }

@@ -17,16 +17,16 @@
 					class="nav nav-pills nav-stacked category-menu">
 					<li class="active"><a href="#" th:text="${type.name}"></a>
 						<ul>
-							<li th:classappend="${activeCategory}=='all'+${type.name}? 'active btn-default'" 
-								th:id="'all'+${type.name}+'-list-item'"><a
-								th:href="@{/searchByCategory(category='all'+${type.name})}" 
+							<li th:classappend="${activeCategory}=='all'+${type.id}? 'active btn-default'" 
+								th:id="'all'+${type.id}+'-list-item'"><a
+								th:href="@{/searchByCategory(category='all'+${type.id})}" 
 								class="category-ajax" 
-								th:id="'all'+${type.name}">All</a></li>
-							<li th:each="category: ${type.categories}" th:id="${category.name}+'-list-item'"
-								th:classappend="(${activeCategory}==${category.name})? 'active btn-default'">
-								<a th:href="@{/searchByCategory(category=${category.name})}"
+								th:id="'all'+${type.id}">All</a></li>
+							<li th:each="category: ${type.categories}" th:id="${category.id}+'-category-list-item'"
+								th:classappend="(${activeCategory}==${category.id})? 'active btn-default'">
+								<a th:href="@{/searchByCategory(category=${category.id})}"
 								class="category-ajax"
-								th:id="${category.name}"
+								th:id="${category.id}+'-category'"
 								th:inline="text">[[${category.name}]] <span
 									class="badge pull-right" th:text="${category.qty}"></span></a>
 							</li>

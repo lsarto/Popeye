@@ -81,9 +81,9 @@
 
 										<p class="price">
 											<span th:if="${product.ourPrice}!=0.0"
-												th:text="${#strings.abbreviate(product.ourPrice, 500)}"></span>
+												th:text="${#numbers.formatDecimal(product.ourPrice,1,2)}"></span>
 											<span th:if="${product.ourPrice}==0.0"
-												th:text="${#strings.abbreviate(product.listPrice, 500)}"></span> €
+												th:text="${#numbers.formatDecimal(product.listPrice,1,2)}"></span> €
 										</p>
 
 										<p class="text-center">
@@ -160,10 +160,10 @@
 									<li class="active"><a href="#" th:text="${type.name}"></a>
 										<ul>
 											<li th:classappend="${activeAll}? 'active btn-default'"><a
-												th:href="@{/searchByCategory(category='all'+${type.name})}">All</a></li>
+												th:href="@{/searchByCategory(category='all'+${type.id})}">All</a></li>
 											<li th:each="category: ${type.categories}" 
-												th:classappend="(${activeCategory}==${category.name})? 'active btn-default'">
-												<a th:href="@{/searchByCategory(category=${category.name})}" 
+												th:classappend="(${activeCategory}==${category.id})? 'active btn-default'">
+												<a th:href="@{/searchByCategory(category=${category.id})}" 
 													th:inline="text">[[${category.name}]]
 													<span class="badge pull-right" th:text="${category.qty}"></span></a>
 											</li>

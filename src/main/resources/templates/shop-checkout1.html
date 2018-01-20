@@ -89,13 +89,13 @@
 										<div class="form-group">
 											<label for="shippingAddress">* Indirizzo</label> <input
 												type="text" class="form-control" id="shippingAddress1"
-												placeholder="Indirizzo di Spedizione"
+												placeholder="Indirizzo di Spedizione Linea 1"
 												name="shippingAddressStreet1" required="required"
 												th:value="${shippingAddress.shippingAddressStreet1}" />
 										</div>
 										<div class="form-group">
 											<input type="text" class="form-control" id="shippingAddress2"
-												placeholder="Indirizzo di Spedizione Alternativo"
+												placeholder="Indirizzo di Spedizione Linea 2"
 												name="shippingAddressStreet2"
 												th:value="${shippingAddress.shippingAddressStreet2}" />
 										</div>
@@ -142,13 +142,13 @@
 										<div class="checkbox">
 											<label> <input id="theSameAsShippingAddress"
 												type="checkbox" name="billingSameAsShipping" value="true" />
-												Lo stesso di quello di spedizione
+												Usa lo stesso di quello di spedizione
 											</label>
 										</div>
 										<table class="table" th:if="${not emptyPaymentList}">
 											<thead>
 												<tr>
-													<th>Fatturazioni Disponibili</th>
+													<th>Indirizzi Disponibili</th>
 													<th>Operazioni</th>
 												</tr>
 											</thead>
@@ -157,7 +157,7 @@
 													<td th:text="${userPayment.userBilling.userBillingName}"></td>
 													<td><a
 														th:href="@{/setPaymentMethod(userPaymentId=${userPayment.id})}">usa
-															questo pagamento</a></td>
+															questo indirizzo</a></td>
 												</tr>
 											</tbody>
 										</table>
@@ -172,14 +172,14 @@
 										<div class="form-group">
 											<label for="billingAddress">* Indirizzo</label> <input
 												type="text" class="form-control billingAddress"
-												id="billingAddress1" placeholder="Indirizzo Fatturazione"
+												id="billingAddress1" placeholder="Indirizzo Fatturazione Linea 1"
 												th:name="billingAddressStreet1" required="required"
 												th:value="${billingAddress.billingAddressStreet1}" />
 										</div>
 										<div class="form-group">
 											<input type="text" class="form-control billingAddress"
 												id="billingAddress2"
-												placeholder="Indirizzo Fatturazione Alternativo"
+												placeholder="Indirizzo Fatturazione Linea 2"
 												th:name="billingAddressStreet2"
 												th:value="${billingAddress.billingAddressStreet2}" />
 										</div>
@@ -396,7 +396,7 @@
 												<tr>
 													<th colspan="2">Prodotto</th>
 													<th>Quantità </th>
-													<th>Prezzo Lista</th>
+													<th>Prezzo Listino</th>
 													<th>Prezzo Scontato</th>
 													<th colspan="2">Totale</th>
 												</tr>

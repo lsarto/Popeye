@@ -96,7 +96,6 @@ public class ITConstants {
             put("RE", "Reggio-Emilia");
             put("RI", "Rieti");
             put("RN", "Rimini");
-            put("Roma", "Roma");
             put("RO", "Rovigo");
             put("SA", "Salerno");
             put("SS", "Sassari");

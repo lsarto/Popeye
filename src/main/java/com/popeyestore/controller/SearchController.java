@@ -34,7 +34,7 @@ public class SearchController {
 	private TypeService typeService;
 
 	@RequestMapping("/searchByCategory")
-	public String searchByCategory(@RequestParam("category") String category, Model model, Principal principal) {
+	public String searchByCategory(@RequestParam("category") String idCategory, Model model, Principal principal) {
 		if (principal != null) {
 			String username = principal.getName();
 			User user = userService.findByUsername(username);
@@ -45,7 +45,7 @@ public class SearchController {
 //		classActiveCategory = classActiveCategory.replaceAll("\\s+", "");
 //		classActiveCategory = classActiveCategory.replaceAll("&", "");
 //		model.addAttribute(classActiveCategory, true);
-		model.addAttribute("activeCategory", category);
+		model.addAttribute("activeCategory", idCategory);
 		
 		List<Type> types = typeService.findAll();
 		model.addAttribute("types", types);
@@ -53,19 +53,19 @@ public class SearchController {
 		List<Product> productList=null;
 		Category categoryFound;
 
-		if(category=="all"){
-			categoryFound = categoryService.findByName(category);
+		if(idCategory=="all"){
+			categoryFound = categoryService.findByName(idCategory);
 			productList = categoryFound.getProducts();
 		}
-		else if(category.startsWith("all")){
+		else if(idCategory.startsWith("all")){
 			for(Type type: types){
-				if(category.equals("all"+type.getName())){
+				if(idCategory.equals("all"+type.getId())){
 					productList = productService.findByType(type);
 					break;
 				}
 			}
 		} else {
-			categoryFound = categoryService.findByName(category);
+			categoryFound = categoryService.findOne(Long.decode(idCategory.replace("-category", "")));
 			productList = categoryFound.getProducts();
 		}
 		
@@ -92,18 +92,19 @@ public class SearchController {
 	}
 
 	@RequestMapping("/searchByCategoryAjax")
-	public String searchByCategoryAjax(@RequestParam("category") String category, Model model, Principal principal) {
+	public String searchByCategoryAjax(@RequestParam("category") String idCategory, Model model, Principal principal) {
 		if (principal != null) {
 			String username = principal.getName();
 			User user = userService.findByUsername(username);
 			model.addAttribute("user", user);
 		}
 
+
 //		String classActiveCategory = "active" + category;
 //		classActiveCategory = classActiveCategory.replaceAll("\\s+", "");
 //		classActiveCategory = classActiveCategory.replaceAll("&", "");
 //		model.addAttribute(classActiveCategory, true);
-		model.addAttribute("activeCategory", category);
+		model.addAttribute("activeCategory", idCategory);
 		
 		List<Type> types = typeService.findAll();
 		model.addAttribute("types", types);
@@ -111,19 +112,19 @@ public class SearchController {
 		List<Product> productList = null;
 		Category categoryFound;
 		
-		if(category=="all"){
-			categoryFound = categoryService.findByName(category);
+		if(idCategory=="all"){
+			categoryFound = categoryService.findByName(idCategory);
 			productList = categoryFound.getProducts();
 		}
-		else if(category.startsWith("all")){
+		else if(idCategory.startsWith("all")){
 			for(Type type: types){
-				if(category.equals("all"+type.getName())){
+				if(idCategory.equals("all"+type.getId())){
 					productList = productService.findByType(type);
 					break;
 				}
 			}
 		} else {
-			categoryFound = categoryService.findByName(category);
+			categoryFound = categoryService.findOne(Long.decode(idCategory.replace("-category", "")));
 			productList = categoryFound.getProducts();
 		}
 		
