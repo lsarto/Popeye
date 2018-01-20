@@ -63,13 +63,14 @@
 							<input type="text"
 								th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].name}"
 								class="form-control" placeholder="Nome Attributo" /> 
-							<input type="text"
-								th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].value}"
-								class="form-control" placeholder="Valore Attributo" /> 
+							<textarea th:field="*{dataTransfer.product.productAttributes[__${attributeStat.index}__].value}" rows="5"
+								class="form-control" 
+								placeholder="Valore Attrivuto" />
+							<span class="help-block">Valore Attributo</span>
 							<span class="help-block"> Aggiungi (opzionalmente) un nome e
 								una descrizione di una caratteristica del prodotto</span>
 							<button type="button" th:id="'button-del-attr-'+${__${attributeStat.index}__}" 
-								class="btn btn-danger" style="margin-bottom:15px;">Delete</button>
+								class="btn btn-danger" style="margin-bottom:15px;">Delete Attributo</button>
 						</div>
 					</div>
 

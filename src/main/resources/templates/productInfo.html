@@ -30,7 +30,7 @@
 						<p><strong>Tipo: </strong><span th:text="${product.type.name}"></span></p>
 						<p><strong>Categoria: </strong><span th:text="${product.category.name}"></span></p>
 						<p th:each="attribute: ${product.productAttributes}"><strong>Nome Attributo: </strong><span th:text="${attribute.name}"></span>
-						<strong>; Valore Attributo: </strong><span th:text="${attribute.value}"></span></p>
+						<strong>; Valore Attributo: </strong><span th:utext="${attribute.value}"></span></p>
 					</div>
 					<div class="col-xs-6">
 						<p><strong>Peso di spedzione: </strong><span th:text="${product.shippingWeight}"></span></p>

@@ -157,15 +157,15 @@ $(document).ready(function(){
 							'<input type="text" class="form-control" name="product.productAttributes['+i+'].name"' +
 								'id="product.productAttributes'+i+'.name"' +
 								'placeholder="Nome Attributo" />' +
-							'<input type="text" class="form-control" name="product.productAttributes['+i+'].value"' +
+							'<textarea type="text" class="form-control" name="product.productAttributes['+i+'].value"' +
 								'id="product.productAttributes'+i+'.value"' + 
 								'placeholder="Valore Attributo" /> <span class="help-block">' +
 								'Aggiungi (opzionalmente) un nome e una descrizione di una caratteristica del prodotto</span>' +
 							'<button type="button" id="button-del-attr-'+i+'" class="btn btn-danger " ' +
-								'style="margin-bottom:15px;">Delete</button>' +
+								'style="margin-bottom:15px;">Delete Attributo</button>' +
 						'</div>' +
 					'</div>');
-       
+        tinymce.init({ selector:'textarea' });
         
         $('#button-del-attr-'+i).click(function() {
 //        	alert( this.id );

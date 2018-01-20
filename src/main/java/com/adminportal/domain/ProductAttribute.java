@@ -1,5 +1,6 @@
 package com.adminportal.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,8 @@ public class ProductAttribute {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String name;
+	
+	@Column(columnDefinition="text")
 	private String value;
 	
 	@ManyToOne
