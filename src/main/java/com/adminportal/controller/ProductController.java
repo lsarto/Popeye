@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,12 +34,15 @@ import com.adminportal.service.AttributeService;
 import com.adminportal.service.CategoryService;
 import com.adminportal.service.ProductService;
 import com.adminportal.service.TypeService;
+import com.adminportal.utility.ImageUtility;
 
 @Controller
 @RequestMapping("/product")
 public class ProductController {
 	private static final Logger LOG = LoggerFactory.getLogger(ProductController.class);
 
+	private final int IMAGE_WIDTH = 1000;
+	private final int IMAGE_HEIGHT = 1000;
 	@Autowired
 	private CategoryService categoryService;
 	@Autowired
@@ -49,6 +53,7 @@ public class ProductController {
 	private AttributeService attributeService;
 
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addProduct(@RequestParam("typeSelected") String typeName, Model model) {
 		Product product = new Product();
@@ -69,6 +74,7 @@ public class ProductController {
 		return "addProduct";
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addProductPost(@ModelAttribute("dataTransfer") DataTransfer dataTransfer, HttpServletRequest request) {
 		Product product = dataTransfer.getProduct();
@@ -141,36 +147,48 @@ public class ProductController {
 			byte[] bytes;
 			BufferedOutputStream stream;
 			String name;
+			String path;
+
 			
 			bytes = productCategory.getBytes();
 			name = product.getId() + "-1.png";
+			path = "src/main/resources/static/image/product/" + name;
 			stream = new BufferedOutputStream(
-					new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
+					new FileOutputStream(new File(path)));
 			stream.write(bytes);
+			ImageUtility.resize(path, path, IMAGE_WIDTH, IMAGE_HEIGHT);
 			
 		    bytes = productDetail1.getBytes();
 			name = product.getId() + "-2.png";
+			path = "src/main/resources/static/image/product/" + name;
 			stream = new BufferedOutputStream(
-					new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
+					new FileOutputStream(new File(path)));
 			stream.write(bytes);
+			ImageUtility.resize(path, path, IMAGE_WIDTH, IMAGE_HEIGHT);
 			
 			bytes = productDetail2.getBytes();
 			name = product.getId() + "-3.png";
+			path = "src/main/resources/static/image/product/" + name;
 			stream = new BufferedOutputStream(
-					new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
+					new FileOutputStream(new File(path)));
 			stream.write(bytes);
+			ImageUtility.resize(path, path, IMAGE_WIDTH, IMAGE_HEIGHT);
 			
 			bytes = productDetail3.getBytes();
 			name = product.getId() + "-4.png";
+			path = "src/main/resources/static/image/product/" + name;
 			stream = new BufferedOutputStream(
-					new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
+					new FileOutputStream(new File(path)));
 			stream.write(bytes);
+			ImageUtility.resize(path, path, IMAGE_WIDTH, IMAGE_HEIGHT);
 			
 			bytes = latestImage.getBytes();
 			name = product.getId() + "-5.png";
+			path = "src/main/resources/static/image/product/" + name;
 			stream = new BufferedOutputStream(
-					new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
+					new FileOutputStream(new File(path)));
 			stream.write(bytes);
+			ImageUtility.resize(path, path, IMAGE_WIDTH, IMAGE_HEIGHT);
 			
 			stream.close();
 		} catch (Exception e) {
@@ -180,6 +198,7 @@ public class ProductController {
 		return "redirect:productList";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping("/productList")
 	public String productListPage(Model model) {
 		List<Product> productList = productService.findAll();
@@ -189,7 +208,7 @@ public class ProductController {
 		
 	}
 
-	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping("/productInfo")
 	public String productInfo(@RequestParam("id") Long id, Model model) {
 		Product product = productService.findOne(id);
@@ -198,7 +217,7 @@ public class ProductController {
 		return "productInfo";
 	}
 	
-	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping("/updateProduct")
 	public String updateProduct(@RequestParam("id") Long id, Model model) {
 		Product product = productService.findOne(id);
@@ -212,7 +231,7 @@ public class ProductController {
 		return "updateProduct";
 	}
 	
-
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value="/updateProduct", method=RequestMethod.POST)
 	public String updateProductPost(@ModelAttribute("dataTransfer") DataTransfer dataTransfer, HttpServletRequest request) {
 		Product product = dataTransfer.getProduct();
@@ -296,12 +315,14 @@ public class ProductController {
 			try {
 				byte[] bytes = productCategory.getBytes();
 				String name = product.getId() + "-1.png";
+				String path = "src/main/resources/static/image/product/"+name;
 				
-				Files.delete(Paths.get("src/main/resources/static/image/product/"+name));
+				Files.delete(Paths.get(path));
 				
 				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
+						new FileOutputStream(new File(path)));
 				stream.write(bytes);
+				ImageUtility.resize(path, path, IMAGE_WIDTH, IMAGE_HEIGHT);
 				stream.close();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -312,12 +333,14 @@ public class ProductController {
 			try {
 				byte[] bytes = productDetail1.getBytes();
 				String name = product.getId() + "-2.png";
+				String path = "src/main/resources/static/image/product/"+name;
 				
-				Files.delete(Paths.get("src/main/resources/static/image/product/"+name));
+				Files.delete(Paths.get(path));
 				
 				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
+						new FileOutputStream(new File(path)));
 				stream.write(bytes);
+				ImageUtility.resize(path, path, IMAGE_WIDTH, IMAGE_HEIGHT);
 				stream.close();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -328,12 +351,14 @@ public class ProductController {
 			try {
 				byte[] bytes = productDetail2.getBytes();
 				String name = product.getId() + "-3.png";
+				String path = "src/main/resources/static/image/product/"+name;
 				
-				Files.delete(Paths.get("src/main/resources/static/image/product/"+name));
+				Files.delete(Paths.get(path));
 				
 				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
+						new FileOutputStream(new File(path)));
 				stream.write(bytes);
+				ImageUtility.resize(path, path, IMAGE_WIDTH, IMAGE_HEIGHT);
 				stream.close();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -344,12 +369,14 @@ public class ProductController {
 			try {
 				byte[] bytes = productDetail3.getBytes();
 				String name = product.getId() + "-4.png";
+				String path = "src/main/resources/static/image/product/"+name;
 				
-				Files.delete(Paths.get("src/main/resources/static/image/product/"+name));
+				Files.delete(Paths.get(path));
 				
 				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
+						new FileOutputStream(new File(path)));
 				stream.write(bytes);
+				ImageUtility.resize(path, path, IMAGE_WIDTH, IMAGE_HEIGHT);
 				stream.close();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -360,12 +387,14 @@ public class ProductController {
 			try {
 				byte[] bytes = latestImage.getBytes();
 				String name = product.getId() + "-5.png";
+				String path = "src/main/resources/static/image/product/"+name;
 				
-				Files.delete(Paths.get("src/main/resources/static/image/product/"+name));
+				Files.delete(Paths.get(path));
 				
 				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
+						new FileOutputStream(new File(path)));
 				stream.write(bytes);
+				ImageUtility.resize(path, path, IMAGE_WIDTH, IMAGE_HEIGHT);
 				stream.close();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -375,12 +404,13 @@ public class ProductController {
 		return "redirect:/product/productInfo?id="+product.getId();
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value="/remove", method=RequestMethod.POST)
 	public @ResponseBody Boolean remove(
 			@RequestBody String id, Model model) {
 		try {
-			productService.removeOne(Long.parseLong(id.substring(14)));
 			Product product = productService.findOne(Long.parseLong(id.substring(14)));
+			productService.removeOne(Long.parseLong(id.substring(14)));
 			Category category = product.getCategory();
 			category.setQty(category.getQty()-1);
 			categoryService.save(category);

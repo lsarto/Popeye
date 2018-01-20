@@ -3,6 +3,7 @@ package com.adminportal.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ public class ResourceController {
 	private CategoryService categoryService;
 	
 	@RequestMapping(value="/product/removeList", method=RequestMethod.POST)
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public boolean removeList(
 			@RequestBody ArrayList<String> productIdList, Model model
 			){
@@ -30,8 +32,8 @@ public class ResourceController {
 		for (String id : productIdList) {
 			String productId =id.substring(8);
 			try {
-				productService.removeOne(Long.parseLong(productId));
 				Product product = productService.findOne(Long.parseLong(productId));
+				productService.removeOne(Long.parseLong(productId));
 				Category category = product.getCategory();
 				category.setQty(category.getQty()-1);
 				categoryService.save(category);
