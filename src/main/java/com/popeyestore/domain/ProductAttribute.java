@@ -1,6 +1,7 @@
 package com.popeyestore.domain;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,8 @@ public class ProductAttribute {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String name;
+	
+	@Column(columnDefinition="text")
 	private String value;
 	
 	@ManyToOne

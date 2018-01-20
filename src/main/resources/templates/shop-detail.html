@@ -132,7 +132,7 @@
 							<p th:utext="${product.description}"></p>
 							<div th:each="attribute: ${product.productAttributes}">
 								<h4 th:text="${attribute.name}"></h4>
-								<p th:text="${attribute.value}"></p>
+								<p th:utext="${attribute.value}"></p>
 							</div>
 						</div>					
 					</div>
