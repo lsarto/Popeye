@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <interface id="1" language="java" name="com.popeyestore.service.CartItemService" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/CartItemService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="170" width="266" x="7492" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="2" language="java" name="com.popeyestore.PopeyestoreApplication" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/PopeyestoreApplication.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="98" width="159" x="5570" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="3" language="java" name="com.popeyestore.repository.ProductRepository" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/repository/ProductRepository.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="98" width="239" x="16798" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="4" language="java" name="com.popeyestore.service.impl.UserSecurityService" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/impl/UserSecurityService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="80" width="225" x="3269" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="5" language="java" name="com.popeyestore.repository.OrderRepository" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/repository/OrderRepository.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="44" width="118" x="884" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="6" language="java" name="com.popeyestore.repository.ShoppingCartRepository" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/repository/ShoppingCartRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="44" width="162" x="1783" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" language="java" name="com.popeyestore.domain.ShippingAddress" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/ShippingAddress.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="386" width="222" x="4405" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="8" language="java" name="com.popeyestore.service.BillingAddressService" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/BillingAddressService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="62" width="306" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="9" language="java" name="com.popeyestore.utility.ITConstants" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/utility/ITConstants.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="62" width="92" x="752" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.popeyestore.domain.security.Role" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/security/Role.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="170" width="194" x="8313" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="11" language="java" name="com.popeyestore.service.CategoryService" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/CategoryService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="134" width="225" x="15673" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="12" language="java" name="com.popeyestore.domain.Order" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/Order.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="422" width="238" x="4899" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="13" language="java" name="com.popeyestore.repository.CartItemRepository" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/repository/CartItemRepository.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="80" width="266" x="10079" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="14" language="java" name="com.popeyestore.service.impl.UserServiceImpl" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/impl/UserServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="260" width="292" x="14947" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="com.popeye.paypal.api.payments.util.SampleConstants" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeye/paypal/api/payments/util/SampleConstants.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="62" width="125" x="2856" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.popeyestore.service.impl.CategoryServiceImpl" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/impl/CategoryServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="152" width="225" x="9814" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="com.popeyestore.domain.UserShipping" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/UserShipping.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="422" width="208" x="3021" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="18" language="java" name="com.popeyestore.service.TypeService" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/TypeService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="98" width="146" x="5384" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="19" language="java" name="com.popeyestore.service.impl.PaymentServiceImpl" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/impl/PaymentServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="80" width="278" x="1282" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="com.popeyestore.utility.MailConstructor" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/utility/MailConstructor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="98" width="406" x="12637" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="com.popeyestore.controller.SearchController" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/controller/SearchController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="116" width="280" x="15938" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="22" language="java" name="com.popeyestore.service.UserPaymentService" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/UserPaymentService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="80" width="164" x="16594" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="23" language="java" name="com.popeyestore.config.SecurityConfig" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/config/SecurityConfig.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="98" width="277" x="8547" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="com.popeyestore.domain.ShoppingCart" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/ShoppingCart.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="206" width="196" x="10385" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="25" language="java" name="com.popeyestore.service.UserShippingService" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/UserShippingService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="80" width="164" x="5769" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="26" language="java" name="com.popeyestore.service.ShoppingCartService" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/ShoppingCartService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="80" width="265" x="1985" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="27" language="java" name="com.popeyestore.domain.UserBilling" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/UserBilling.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="386" width="200" x="1042" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="com.popeyestore.service.impl.ProductServiceImpl" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/impl/ProductServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="152" width="194" x="17077" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="com.popeyestore.service.impl.CartItemServiceImpl" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/impl/CartItemServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="188" width="266" x="11908" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="30" language="java" name="com.popeyestore.service.OrderService" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/OrderService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="80" width="404" x="13523" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="31" language="java" name="com.popeyestore.domain.Category" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/Category.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="242" width="181" x="3534" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="com.popeyestore.controller.ShoppingCartController" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/controller/ShoppingCartController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="134" width="261" x="11417" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="33" language="java" name="com.popeyestore.repository.TypeRepository" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/repository/TypeRepository.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="62" width="146" x="12451" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="34" language="java" name="com.popeyestore.service.impl.ShoppingCartServiceImpl" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/impl/ShoppingCartServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="98" width="265" x="5973" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="35" language="java" name="com.popeyestore.service.UserService" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/UserService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="242" width="292" x="14615" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="36" language="java" name="com.popeyestore.service.impl.ShippingAddressServiceImpl" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/impl/ShippingAddressServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="80" width="362" x="11015" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="com.popeyestore.domain.Payment" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/Payment.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="422" width="172" x="14169" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="38" language="java" name="com.popeyestore.service.PaymentService" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/PaymentService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="62" width="278" x="8864" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="39" language="java" name="com.popeyestore.service.impl.OrderServiceImpl" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/impl/OrderServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="98" width="404" x="9370" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="com.popeyestore.domain.CartItem" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/CartItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="314" width="292" x="2524" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="com.popeyestore.domain.Product" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/Product.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="782" width="292" x="17497" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="42" language="java" name="com.popeyestore.repository.UserPaymentRepository" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/repository/UserPaymentRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="44" width="162" x="13967" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="43" language="java" name="com.popeyestore.controller.HomeController" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/controller/HomeController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="512" width="413" x="6278" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="44" language="java" name="com.popeyestore.service.ProductService" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/ProductService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="134" width="194" x="2290" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="45" language="java" name="com.popeyestore.controller.CheckoutController" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/controller/CheckoutController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="152" width="400" x="13083" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="com.popeyestore.domain.security.UserRole" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/security/UserRole.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="188" width="148" x="9182" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="com.popeyestore.domain.security.Authority" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/security/Authority.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="80" width="124" x="387" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="com.popeyestore.domain.BillingAddress" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/BillingAddress.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="386" width="208" x="4157" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="com.popeyestore.domain.ProductToCartItem" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/ProductToCartItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="170" width="150" x="11718" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="com.popeyestore.utility.SecurityUtility" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/utility/SecurityUtility.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="98" width="250" x="7798" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="51" language="java" name="com.popeyestore.repository.UserShippingRepository" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/repository/UserShippingRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="44" width="161" x="551" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="52" language="java" name="com.popeyestore.service.impl.UserPaymentServiceImpl" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/impl/UserPaymentServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="98" width="168" x="15279" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="com.popeyestore.domain.Type" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/Type.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="206" width="197" x="12214" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="54" language="java" name="com.popeyestore.service.impl.UserShippingServiceImpl" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/impl/UserShippingServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="98" width="167" x="6731" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="55" language="java" name="com.popeyestore.domain.UserPayment" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/UserPayment.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="458" width="185" x="8088" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="56" language="java" name="com.popeyestore.service.impl.TypeServiceImpl" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/impl/TypeServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="116" width="146" x="15487" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="57" language="java" name="com.popeyestore.domain.security.PasswordResetToken" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/security/PasswordResetToken.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="296" width="194" x="14381" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="58" language="java" name="com.popeyestore.domain.User" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/User.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="602" width="296" x="16258" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="59" language="java" name="com.popeyestore.repository.RoleRepository" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/repository/RoleRepository.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="62" width="143" x="1600" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="60" language="java" name="com.popeyestore.repository.CategoryRepository" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/repository/CategoryRepository.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="62" width="167" x="5177" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="61" language="java" name="com.popeyestore.repository.UserRepository" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/repository/UserRepository.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="80" width="168" x="6938" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="62" language="java" name="com.popeyestore.service.impl.BillingAddressServiceImpl" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/impl/BillingAddressServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="80" width="306" x="7146" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="63" language="java" name="com.popeyestore.repository.ProductToCartItemRepository" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/repository/ProductToCartItemRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="62" width="192" x="4667" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="64" language="java" name="com.popeyestore.domain.ProductAttribute" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/domain/ProductAttribute.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="206" width="146" x="17311" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="65" language="java" name="com.popeyestore.service.ShippingAddressService" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/service/ShippingAddressService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="62" width="362" x="3755" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="66" language="java" name="com.popeyestore.repository.PasswordResetTokenRepository" project="Popeye" 
+    file="/Popeye/src/main/java/com/popeyestore/repository/PasswordResetTokenRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="116" width="354" x="10621" y="37"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <classifier-display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="false" package="false" protected="false" private="false" static="true"/>    
+    <operations public="true" package="false" protected="false" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="false" multiplicity="true"/>
+</class-diagram>
